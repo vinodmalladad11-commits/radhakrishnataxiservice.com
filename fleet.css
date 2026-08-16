@@ -1,0 +1,89 @@
+/* Vehicle fleet additions */
+.logo-image { width: 54px; height: 54px; object-fit: contain; background: transparent; }
+.fleet-grid { grid-template-columns: repeat(4, 1fr); }
+.fleet-card { height: 285px; }
+.fleet-card h3 { font-size: 22px; }
+.fleet-card .price { margin-top: 10px; color: #f9bd7f; font-size: 14px; }
+.service-areas { padding: 100px 0; background: #faf8f2; }
+.areas-inner { display: grid; grid-template-columns: .9fr 1.1fr; gap: 80px; align-items: center; }
+.service-areas h2 { font: 600 clamp(36px, 4.2vw, 55px)/1.05 'Playfair Display', serif; letter-spacing: -.04em; margin: 0; }
+.service-areas p:not(.eyebrow) { color: #52666a; }
+.areas-list { border-top: 1px solid var(--line); }
+.areas-list div { padding: 20px 0; border-bottom: 1px solid var(--line); }
+.areas-list h3 { margin: 0 0 7px; font-size: 21px; }
+.areas-list p { margin: 0; font-size: 14px; }
+.why-us { padding: 100px 0; background: var(--ink); color: #fff; }
+.why-us .section-heading > p { color: #c4d0cc; }
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
+.why-grid article { padding: 28px; background: rgba(255,255,255,.07); }
+.why-grid span { color: #f9bd7f; font-size: 12px; font-weight: 700; letter-spacing: .15em; }
+.why-grid h3 { margin: 30px 0 8px; }
+.why-grid p { margin: 0; color: #c4d0cc; font-size: 14px; }
+.faq { padding: 100px 0; background: #e7dbc6; }
+.faq-inner { display: grid; grid-template-columns: .8fr 1.2fr; gap: 80px; }
+.faq h2 { font: 600 clamp(36px, 4.2vw, 55px)/1.05 'Playfair Display', serif; letter-spacing: -.04em; margin: 0; }
+.faq-inner > div > p:not(.eyebrow) { color: #52666a; }
+.faq-list { border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); padding: 20px 0; }
+.faq summary { cursor: pointer; list-style: none; font: 600 20px 'Playfair Display', serif; display: flex; justify-content: space-between; gap: 20px; }
+.faq summary::after { content: '+'; color: var(--orange); font: 400 26px 'DM Sans', sans-serif; }
+.faq details[open] summary::after { content: '−'; }
+.faq details p { margin: 12px 28px 0 0; color: #52666a; font-size: 14px; }
+.travel-guide { padding: 100px 0; background: #faf8f2; }
+.guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
+.guide-grid article { padding: 28px; background: #fff; border-top: 3px solid var(--teal); }
+.guide-grid span { color: var(--orange); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; }
+.guide-grid h3 { margin: 12px 0 16px; }
+.guide-grid p { margin: 0 0 12px; color: #52666a; font-size: 14px; }
+.guide-grid p:last-child { margin-bottom: 0; }
+.guide-grid b { color: var(--ink); }
+.guide-button { margin-top: 36px; }
+.showroom { padding: 100px 0; background: #faf8f2; }
+.showroom-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
+.showroom figure { margin: 0; background: #fff; }
+.showroom img { width: 100%; aspect-ratio: 1.4; object-fit: cover; display: block; }
+.showroom figcaption { padding: 16px 18px; font: 600 20px 'Playfair Display', serif; }
+.destination-directory { padding: 100px 0; background: #e7dbc6; }
+.destination-directory h2 { font: 600 clamp(36px, 4.2vw, 55px)/1.05 'Playfair Display', serif; letter-spacing: -.04em; margin: 0; }
+.directory-intro { max-width: 620px; color: #52666a; }
+.destination-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 34px; margin-top: 36px; }
+.destination-list details { border-top: 1px solid var(--line); padding: 16px 0; }
+.destination-list summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 15px; font: 600 20px 'Playfair Display', serif; }
+.destination-list summary::after { content: '+'; color: var(--orange); font: 400 25px 'DM Sans', sans-serif; }
+.destination-list details[open] summary::after { content: '−'; }
+.destination-list p { margin: 10px 26px 0 0; color: #52666a; font-size: 14px; }
+.etios { background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80'); }
+.crysta { background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80'); }
+.ertiga { background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80'); }
+.urbania { background-image: url('https://images.unsplash.com/photo-1517999349371-c43520457b23?auto=format&fit=crop&w=800&q=80'); }
+.minibus { background-image: url('https://images.unsplash.com/photo-1544487924-6cf3d71b1a4e?auto=format&fit=crop&w=800&q=80'); }
+
+@media (max-width: 900px) and (min-width: 721px) {
+  .fleet-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.call-link { display: inline-block; margin-top: 16px; color: var(--teal); font-weight: 700; text-decoration: none; }
+.booking-form { padding: 32px; background: var(--teal); color: #fff; }
+.booking-form h3 { margin: 0 0 20px; }
+.booking-form label { display: block; margin: 0 0 13px; font-size: 12px; font-weight: 700; }
+.booking-form input, .booking-form select { display: block; width: 100%; margin-top: 5px; border: 0; border-radius: 2px; padding: 11px; color: var(--ink); font: 14px 'DM Sans', sans-serif; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.booking-form .button { width: 100%; margin-top: 5px; border: 0; cursor: pointer; }
+.form-note { margin: 14px 0 0; text-align: center; font-size: 12px; color: #d5e2df; }
+
+@media (max-width: 500px) { .form-row { grid-template-columns: 1fr; gap: 0; } }
+@media (max-width: 720px) { .areas-inner { grid-template-columns: 1fr; gap: 35px; } .service-areas { padding: 75px 0; } }
+@media (max-width: 720px) { .why-us { padding: 75px 0; } .why-grid { grid-template-columns: 1fr; margin-top: 35px; } }
+@media (max-width: 720px) { .faq { padding: 75px 0; } .faq-inner { grid-template-columns: 1fr; gap: 35px; } }
+@media (max-width: 720px) { .travel-guide { padding: 75px 0; } .guide-grid { grid-template-columns: 1fr; margin-top: 35px; } }
+@media (max-width: 720px) { .showroom { padding: 75px 0; } .showroom-grid { grid-template-columns: 1fr; margin-top: 35px; } }
+@media (max-width: 720px) { .destination-directory { padding: 75px 0; } .destination-list { grid-template-columns: 1fr; } }
+
+/* Showroom-reference imagery for the fleet cards */
+.fleet-card.sedan { background-image: url('https://gaadiwale.com/wp-content/uploads/2025/08/Maruti-Dzire-1-1280x720.jpg'); }
+.fleet-card.etios { background-image: url('https://www.team-bhp.com/sites/default/files/pictures/2026-03/PXL_20251206_132837630.MV-2861394.jpg'); }
+.fleet-card.suv, .fleet-card.crysta { background-image: url('https://motoroctane.com/wp-content/uploads/2024/04/3-28.jpg'); }
+.fleet-card.ertiga { background-image: url('https://www.joonsquare.com/usermanage/image/business/maruti-suzuki-arena-sri-amman-cars-krishnagiri-55720/maruti-suzuki-arena-sri-amman-cars-krishnagiri-maruti-suzuki-arena-sri-amman-cars-2.jpg'); }
+.fleet-card.urbania { background-image: url('https://forceurbania.co.in/wp-content/uploads/2022/12/STYLING-2.jpg'); }
+.fleet-card.van { background-image: url('https://bookyourwheels.com/images/model/gallery/force-tempo-traveller-3050-chauffeur-service-india_1776238397.webp'); }
+.fleet-card.minibus { background-image: url('https://www.team-bhp.com/sites/default/files/pictures2023-09/6_57.jpg'); }
