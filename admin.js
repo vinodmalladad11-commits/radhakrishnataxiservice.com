@@ -1,4 +1,4 @@
-// Local Storage Keys
+﻿// Local Storage Keys
 const STORAGE_KEYS = {
   BOOKINGS: 'taxi_bookings',
   VEHICLES: 'taxi_vehicles',
@@ -333,7 +333,7 @@ function loadBookingsPreview() {
     item.innerHTML = `
       <div>
         <div class="item-primary">${booking.name}</div>
-        <div class="item-secondary">${booking.pickup} → ${booking.destination}</div>
+        <div class="item-secondary">${booking.pickup} â†’ ${booking.destination}</div>
       </div>
       <span class="status-badge status-${booking.status}">${booking.status}</span>
     `;
@@ -357,7 +357,7 @@ function loadFleetPreview() {
     item.innerHTML = `
       <div>
         <div class="item-primary">${vehicle.model}</div>
-        <div class="item-secondary">Capacity: ${vehicle.capacity} | ₹${vehicle.price}/km</div>
+        <div class="item-secondary">Capacity: ${vehicle.capacity} | â‚¹${vehicle.price}/km</div>
       </div>
       <span class="status-badge status-${vehicle.status}">${vehicle.status}</span>
     `;
@@ -531,7 +531,7 @@ function loadFleet() {
       </div>
       <div class="vehicle-info">
         <div><strong>Capacity:</strong> <span>${vehicle.capacity} passengers</span></div>
-        <div><strong>Price:</strong> <span>₹${vehicle.price}/km</span></div>
+        <div><strong>Price:</strong> <span>â‚¹${vehicle.price}/km</span></div>
       </div>
       <div class="vehicle-actions">
         <button class="action-btn" onclick="openEditVehicleModal(${vehicle.id})">Edit</button>

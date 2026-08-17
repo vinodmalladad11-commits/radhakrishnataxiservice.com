@@ -1,4 +1,4 @@
-# Admin Panel - Radhakrishna Taxi Service
+﻿# Admin Panel - Radhakrishna Taxi Service
 
 A comprehensive admin panel for managing your taxi service business, including bookings, fleet, tours, and customer contacts.
 
@@ -10,7 +10,7 @@ A comprehensive admin panel for managing your taxi service business, including b
 
 ## Features
 
-### 📊 Dashboard
+### ðŸ“Š Dashboard
 - Overview of key metrics:
   - Total bookings for the month
   - Completed trips
@@ -19,7 +19,7 @@ A comprehensive admin panel for managing your taxi service business, including b
 - Recent bookings preview
 - Fleet status preview
 
-### 📅 Bookings Management
+### ðŸ“… Bookings Management
 - View all customer bookings
 - Search bookings by name or phone
 - Filter by status (Pending, Confirmed, Completed, Cancelled)
@@ -27,7 +27,7 @@ A comprehensive admin panel for managing your taxi service business, including b
 - Delete bookings
 - Quick access to customer phone numbers
 
-### 🚗 Fleet Management
+### ðŸš— Fleet Management
 - Add new vehicles to your fleet
 - Edit existing vehicle details:
   - Vehicle type and model
@@ -38,18 +38,18 @@ A comprehensive admin panel for managing your taxi service business, including b
 - Real-time status updates
 - Fleet preview on dashboard
 
-### 🗺️ Tours Management
+### ðŸ—ºï¸ Tours Management
 - View all available tours
 - Delete tour packages
 - Add tours (coming soon)
 
-### 👥 Contacts Management
+### ðŸ‘¥ Contacts Management
 - View all customer inquiries
 - Search contacts by name or phone
 - Delete contact messages
 - Easy phone number access
 
-### ⚙️ Settings
+### âš™ï¸ Settings
 - **Contact Information:**
   - Update phone number
   - Update WhatsApp number
@@ -88,7 +88,7 @@ The admin panel comes with sample data for demonstration:
 4. Click "Update Code"
 5. Your new code will be required for your next login
 
-⚠️ **Remember:** If you forget your admin code, you may need to clear browser data to reset it.
+âš ï¸ **Remember:** If you forget your admin code, you may need to clear browser data to reset it.
 
 ## Security Notes
 
@@ -124,7 +124,7 @@ A: All data is stored in your browser's local storage. It persists as long as yo
 A: Not with the current setup. For multi-device access, you'll need to integrate with a cloud database.
 
 **Q: Can I export my data?**
-A: You can copy data from browser DevTools → Application → Local Storage and export as JSON.
+A: You can copy data from browser DevTools â†’ Application â†’ Local Storage and export as JSON.
 
 ## Future Enhancements
 

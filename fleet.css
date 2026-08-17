@@ -1,4 +1,4 @@
-/* Vehicle fleet additions */
+﻿/* Vehicle fleet additions */
 .logo-image { width: 54px; height: 54px; object-fit: contain; background: transparent; }
 .fleet-grid { grid-template-columns: repeat(4, 1fr); }
 .fleet-card { height: 285px; }
@@ -27,7 +27,7 @@
 .faq details { border-bottom: 1px solid var(--line); padding: 20px 0; }
 .faq summary { cursor: pointer; list-style: none; font: 600 20px 'Playfair Display', serif; display: flex; justify-content: space-between; gap: 20px; }
 .faq summary::after { content: '+'; color: var(--orange); font: 400 26px 'DM Sans', sans-serif; }
-.faq details[open] summary::after { content: '−'; }
+.faq details[open] summary::after { content: 'âˆ’'; }
 .faq details p { margin: 12px 28px 0 0; color: #52666a; font-size: 14px; }
 .travel-guide { padding: 100px 0; background: #faf8f2; }
 .guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
@@ -50,7 +50,7 @@
 .destination-list details { border-top: 1px solid var(--line); padding: 16px 0; }
 .destination-list summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 15px; font: 600 20px 'Playfair Display', serif; }
 .destination-list summary::after { content: '+'; color: var(--orange); font: 400 25px 'DM Sans', sans-serif; }
-.destination-list details[open] summary::after { content: '−'; }
+.destination-list details[open] summary::after { content: 'âˆ’'; }
 .destination-list p { margin: 10px 26px 0 0; color: #52666a; font-size: 14px; }
 .etios { background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80'); }
 .crysta { background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80'); }
