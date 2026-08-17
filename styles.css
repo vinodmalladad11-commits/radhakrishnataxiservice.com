@@ -1,4 +1,4 @@
-﻿:root{--ink:#102d35;--cream:#f7f3ea;--sand:#e9ddc7;--orange:#ec6b38;--teal:#2a7071;--line:rgba(16,45,53,.14)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.6 'DM Sans',sans-serif}.container{width:min(1120px,calc(100% - 40px));margin:auto}.site-header{
+:root{--ink:#102d35;--cream:#f7f3ea;--sand:#e9ddc7;--orange:#ec6b38;--teal:#2a7071;--line:rgba(16,45,53,.14)}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.6 'DM Sans',sans-serif}.container{width:min(1120px,calc(100% - 40px));margin:auto}.site-header{
     position:absolute;
     top:0;
     left:0;
