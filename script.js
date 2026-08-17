@@ -1,22 +1,76 @@
-﻿const menuButton = document.querySelector('.menu-button');
-const navigation = document.querySelector('.nav-links');
+﻿document.addEventListener('DOMContentLoaded', () => {
 
-menuButton.addEventListener('click', () => {
-  const isOpen = navigation.classList.toggle('open');
-  menuButton.setAttribute('aria-expanded', isOpen);
-  menuButton.setAttribute('aria-label', isOpen ? 'Close navigation' : 'Open navigation');
-});
+  // =========================
+  // MOBILE NAVIGATION
+  // =========================
 
-navigation.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
-  navigation.classList.remove('open');
-  menuButton.setAttribute('aria-expanded', 'false');
-}));
+  const menuButton = document.querySelector('.menu-button');
+  const navigation = document.querySelector('.nav-links');
 
-document.querySelector('#year').textContent = new Date().getFullYear();
+  if (menuButton && navigation) {
 
-document.querySelector('#booking-form').addEventListener('submit', (event) => {
-  event.preventDefault();
-  const details = new FormData(event.currentTarget);
-  const message = `Hello Radhakrishna Taxi Service, I would like to book a taxi.\n\nName: ${details.get('name')}\nPhone: ${details.get('phone')}\nPickup: ${details.get('pickup')}\nDestination: ${details.get('destination')}\nTravel date: ${details.get('date')}\nVehicle: ${details.get('vehicle')}`;
-  window.open(`https://wa.me/918147771217?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+    menuButton.addEventListener('click', () => {
+      const isOpen = navigation.classList.toggle('open');
+
+      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.setAttribute(
+        'aria-label',
+        isOpen ? 'Close navigation' : 'Open navigation'
+      );
+    });
+
+    navigation.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        navigation.classList.remove('open');
+
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Open navigation');
+      });
+    });
+  }
+
+
+  // =========================
+  // FOOTER YEAR
+  // =========================
+
+  const yearElement = document.querySelector('#year');
+
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+
+
+  // =========================
+  // WHATSAPP BOOKING FORM
+  // =========================
+
+  const bookingForm = document.querySelector('#booking-form');
+
+  if (bookingForm) {
+
+    bookingForm.addEventListener('submit', (event) => {
+
+      event.preventDefault();
+
+      const details = new FormData(bookingForm);
+
+      const message =
+`Hello Radhakrishna Taxi Service, I would like to book a taxi.
+
+Name: ${details.get('name')}
+Phone: ${details.get('phone')}
+Pickup: ${details.get('pickup')}
+Destination: ${details.get('destination')}
+Travel date: ${details.get('date')}
+Vehicle: ${details.get('vehicle')}`;
+
+      const whatsappURL =
+        `https://wa.me/918147771217?text=${encodeURIComponent(message)}`;
+
+      window.open(whatsappURL, '_blank');
+    });
+
+  }
+
 });
