@@ -18,5 +18,5 @@ document.querySelector('#booking-form').addEventListener('submit', (event) => {
   event.preventDefault();
   const details = new FormData(event.currentTarget);
   const message = `Hello Radhakrishna Taxi Service, I would like to book a taxi.\n\nName: ${details.get('name')}\nPhone: ${details.get('phone')}\nPickup: ${details.get('pickup')}\nDestination: ${details.get('destination')}\nTravel date: ${details.get('date')}\nVehicle: ${details.get('vehicle')}`;
-  window.open(`https://wa.me/918861643998?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+  window.open(`https://wa.me/918147771217?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
 });

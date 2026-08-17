@@ -1,4 +1,4 @@
-# Google Business Profile Setup Guide
+﻿# Google Business Profile Setup Guide
 
 ## Step 1: Create/Claim Your Business Profile
 
@@ -10,7 +10,7 @@
 - **Business Name:** Radhakrishna Taxi Service
 - **Business Category:** Taxi Service
 - **Service Area:** Mangalore, Karnataka, India
-- **Phone:** +91 8861643998
+- **Phone:** +91 8147771217
 - **Email:** radhakrishnataximangalore@gmail.com
 - **Website:** https://radhakrishnataxiservice.com
 
@@ -152,30 +152,30 @@ Include in your profile and descriptions:
 
 ## Best Practices
 
-✅ **Keep Information Updated**
+âœ… **Keep Information Updated**
 - Update phone number
 - Update hours if they change
 - Add new services/vehicles
 
-✅ **Respond Promptly**
+âœ… **Respond Promptly**
 - Answer messages within 24 hours
 - Respond to all reviews (positive and negative)
 
-✅ **Post Regularly**
+âœ… **Post Regularly**
 - Add updates/promotions
 - Share seasonal offerings
 - Post new vehicle photos
 
-✅ **Collect Reviews**
+âœ… **Collect Reviews**
 - More reviews = higher ranking
 - Better visibility in local search
 
-✅ **Quality Photos**
+âœ… **Quality Photos**
 - Use professional, clear images
 - Show actual vehicles and service
 - Include recent photos
 
-❌ **Avoid**
+âŒ **Avoid**
 - Fake reviews
 - Misleading information
 - Excessive promotional posts
@@ -201,3 +201,4 @@ If you get stuck:
 **Ongoing Maintenance:** 15 minutes per week
 
 Your Google Business Profile will help customers find you locally and build trust with reviews!
+
