@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#102d35">
+  <meta name="description" content="Admin Panel - Radhakrishna Taxi Service">
+  <title>Admin Panel - Radhakrishna Taxi Service</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="icon" type="image/svg+xml" href="assets/radhakrishna-taxi-logo-pro.svg">
+</head>
+<body>
+  <!-- Login Screen -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-container">
+      <img class="login-logo" src="assets/radhakrishna-taxi-logo-pro.svg" alt="Radhakrishna Taxi Service">
+      <h1>Admin Panel</h1>
+      <form id="loginForm" class="login-form">
+        <label>
+          <span>Admin Code</span>
+          <input type="password" id="adminCode" placeholder="Enter admin code" required>
+        </label>
+        <button type="submit" class="button button-primary">Sign In</button>
+        <p class="login-hint">Use: <code>admin2024</code></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Admin Panel -->
+  <div class="admin-panel" id="adminPanel" style="display: none;">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img class="sidebar-logo" src="assets/radhakrishna-taxi-logo-pro.svg" alt="Logo">
+        <span>Radhakrishna Admin</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-section="dashboard">
+          <span class="icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item" data-section="bookings">
+          <span class="icon">📅</span>
+          <span>Bookings</span>
+        </a>
+        <a href="#" class="nav-item" data-section="fleet">
+          <span class="icon">🚗</span>
+          <span>Fleet Management</span>
+        </a>
+        <a href="#" class="nav-item" data-section="tours">
+          <span class="icon">🗺️</span>
+          <span>Tours</span>
+        </a>
+        <a href="#" class="nav-item" data-section="contacts">
+          <span class="icon">👥</span>
+          <span>Contacts</span>
+        </a>
+        <a href="#" class="nav-item" data-section="settings">
+          <span class="icon">⚙️</span>
+          <span>Settings</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="logoutBtn" class="logout-btn">🚪 Sign Out</button>
+      </div>
+    </aside>
+
+    <main class="admin-content">
+      <header class="admin-header">
+        <div class="header-title">
+          <h1 id="sectionTitle">Dashboard</h1>
+          <p id="sectionSubtitle">Overview of your taxi service</p>
+        </div>
+        <div class="header-user">
+          <span id="userName">Admin</span>
+          <button class="user-avatar">👤</button>
+        </div>
+      </header>
+
+      <div class="content-area">
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+          <div class="dashboard-grid">
+            <div class="stat-card">
+              <div class="stat-icon">📅</div>
+              <div class="stat-content">
+                <h3>Total Bookings</h3>
+                <p class="stat-number" id="totalBookings">0</p>
+                <small>This month</small>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">✅</div>
+              <div class="stat-content">
+                <h3>Completed</h3>
+                <p class="stat-number" id="completedBookings">0</p>
+                <small>Successful trips</small>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">⏳</div>
+              <div class="stat-content">
+                <h3>Pending</h3>
+                <p class="stat-number" id="pendingBookings">0</p>
+                <small>Awaiting confirmation</small>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-icon">🚗</div>
+              <div class="stat-content">
+                <h3>Available Vehicles</h3>
+                <p class="stat-number" id="availableVehicles">0</p>
+                <small>Ready for booking</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-section">
+            <div class="section-header">
+              <h2>Recent Bookings</h2>
+              <a href="#" class="text-link" onclick="showSection('bookings'); return false;">View all →</a>
+            </div>
+            <div class="bookings-preview" id="bookingsPreview"></div>
+          </div>
+
+          <div class="dashboard-section">
+            <div class="section-header">
+              <h2>Fleet Status</h2>
+              <a href="#" class="text-link" onclick="showSection('fleet'); return false;">Manage fleet →</a>
+            </div>
+            <div class="fleet-preview" id="fleetPreview"></div>
+          </div>
+        </section>
+
+        <!-- Bookings Section -->
+        <section id="bookings" class="section">
+          <div class="section-toolbar">
+            <div class="search-box">
+              <input type="text" id="bookingSearch" placeholder="Search bookings...">
+            </div>
+            <div class="filter-group">
+              <select id="bookingStatus">
+                <option value="">All statuses</option>
+                <option value="pending">Pending</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>Pickup</th>
+                  <th>Destination</th>
+                  <th>Date</th>
+                  <th>Vehicle</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="bookingsTable">
+                <!-- Populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Fleet Management Section -->
+        <section id="fleet" class="section">
+          <div class="section-toolbar">
+            <button class="button button-primary" id="addVehicleBtn">+ Add Vehicle</button>
+          </div>
+
+          <div class="fleet-management" id="fleetManagement">
+            <!-- Populated by JavaScript -->
+          </div>
+        </section>
+
+        <!-- Tours Section -->
+        <section id="tours" class="section">
+          <div class="section-toolbar">
+            <button class="button button-primary" id="addTourBtn">+ Add Tour</button>
+          </div>
+
+          <div class="tours-list" id="toursList">
+            <!-- Populated by JavaScript -->
+          </div>
+        </section>
+
+        <!-- Contacts Section -->
+        <section id="contacts" class="section">
+          <div class="section-toolbar">
+            <div class="search-box">
+              <input type="text" id="contactSearch" placeholder="Search contacts...">
+            </div>
+          </div>
+
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>Email</th>
+                  <th>Message</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="contactsTable">
+                <!-- Populated by JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings" class="section">
+          <div class="settings-container">
+            <div class="settings-group">
+              <h2>Contact Information</h2>
+              <form id="settingsForm" class="settings-form">
+                <label>
+                  <span>Phone Number</span>
+                  <input type="tel" id="phoneNumber" value="+918861643998">
+                </label>
+                <label>
+                  <span>WhatsApp Number</span>
+                  <input type="tel" id="whatsappNumber" value="+918861643998">
+                </label>
+                <label>
+                  <span>Email Address</span>
+                  <input type="email" id="emailAddress" placeholder="contact@radhakrishnataxiservice.com">
+                </label>
+                <label>
+                  <span>Service Area Description</span>
+                  <textarea id="serviceArea" placeholder="Describe your service area..."></textarea>
+                </label>
+                <button type="submit" class="button button-primary">Save Settings</button>
+              </form>
+            </div>
+
+            <div class="settings-group">
+              <h2>Admin Settings</h2>
+              <form id="adminSettingsForm" class="settings-form">
+                <label>
+                  <span>Change Admin Code</span>
+                  <input type="password" id="newAdminCode" placeholder="New admin code">
+                </label>
+                <button type="submit" class="button button-primary">Update Code</button>
+              </form>
+            </div>
+
+            <div class="settings-group danger">
+              <h2>Danger Zone</h2>
+              <button class="button button-danger" id="clearDataBtn">Clear All Data</button>
+              <p class="text-muted">This will delete all bookings and contacts. This action cannot be undone.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modals -->
+  <div class="modal" id="vehicleModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="vehicleModalTitle">Add Vehicle</h2>
+        <button class="modal-close" onclick="closeModal('vehicleModal')">&times;</button>
+      </div>
+      <form id="vehicleForm" class="modal-form">
+        <label>
+          <span>Vehicle Type</span>
+          <input type="text" id="vehicleType" placeholder="e.g., Sedan, SUV, Van" required>
+        </label>
+        <label>
+          <span>Model</span>
+          <input type="text" id="vehicleModel" placeholder="e.g., Maruti Dzire" required>
+        </label>
+        <label>
+          <span>Capacity (Passengers)</span>
+          <input type="number" id="vehicleCapacity" placeholder="4" required>
+        </label>
+        <label>
+          <span>Price per KM (₹)</span>
+          <input type="number" id="vehiclePrice" placeholder="13" required>
+        </label>
+        <label>
+          <span>Status</span>
+          <select id="vehicleStatus" required>
+            <option value="available">Available</option>
+            <option value="maintenance">Maintenance</option>
+            <option value="booked">Booked</option>
+          </select>
+        </label>
+        <div class="modal-actions">
+          <button type="submit" class="button button-primary">Save Vehicle</button>
+          <button type="button" class="button button-secondary" onclick="closeModal('vehicleModal')">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="bookingModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Booking Details</h2>
+        <button class="modal-close" onclick="closeModal('bookingModal')">&times;</button>
+      </div>
+      <div class="modal-body" id="bookingDetails"></div>
+      <div class="modal-actions">
+        <button type="button" class="button button-primary" id="confirmBookingBtn" onclick="confirmBooking()">Confirm</button>
+        <button type="button" class="button button-danger" id="cancelBookingBtn" onclick="cancelBooking()">Cancel Booking</button>
+        <button type="button" class="button button-secondary" onclick="closeModal('bookingModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>
