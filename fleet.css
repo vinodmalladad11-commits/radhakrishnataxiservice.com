@@ -1,80 +1,645 @@
 ﻿/* Vehicle fleet additions */
-.logo-image { width: 54px; height: 54px; object-fit: contain; background: transparent; }
-.fleet-grid { grid-template-columns: repeat(4, 1fr); }
-.fleet-card { height: 285px; }
-.fleet-card h3 { font-size: 22px; }
-.fleet-card .price { margin-top: 10px; color: #f9bd7f; font-size: 14px; }
-.service-areas { padding: 100px 0; background: #faf8f2; }
-.areas-inner { display: grid; grid-template-columns: .9fr 1.1fr; gap: 80px; align-items: center; }
-.service-areas h2 { font: 600 clamp(36px, 4.2vw, 55px)/1.05 'Playfair Display', serif; letter-spacing: -.04em; margin: 0; }
-.service-areas p:not(.eyebrow) { color: #52666a; }
-.areas-list { border-top: 1px solid var(--line); }
-.areas-list div { padding: 20px 0; border-bottom: 1px solid var(--line); }
-.areas-list h3 { margin: 0 0 7px; font-size: 21px; }
-.areas-list p { margin: 0; font-size: 14px; }
-.why-us { padding: 100px 0; background: var(--ink); color: #fff; }
-.why-us .section-heading > p { color: #c4d0cc; }
-.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
-.why-grid article { padding: 28px; background: rgba(255,255,255,.07); }
-.why-grid span { color: #f9bd7f; font-size: 12px; font-weight: 700; letter-spacing: .15em; }
-.why-grid h3 { margin: 30px 0 8px; }
-.why-grid p { margin: 0; color: #c4d0cc; font-size: 14px; }
-.faq { padding: 100px 0; background: #e7dbc6; }
-.faq-inner { display: grid; grid-template-columns: .8fr 1.2fr; gap: 80px; }
-.faq h2 { font: 600 clamp(36px, 4.2vw, 55px)/1.05 'Playfair Display', serif; letter-spacing: -.04em; margin: 0; }
-.faq-inner > div > p:not(.eyebrow) { color: #52666a; }
-.faq-list { border-top: 1px solid var(--line); }
-.faq details { border-bottom: 1px solid var(--line); padding: 20px 0; }
-.faq summary { cursor: pointer; list-style: none; font: 600 20px 'Playfair Display', serif; display: flex; justify-content: space-between; gap: 20px; }
-.faq summary::after { content: '+'; color: var(--orange); font: 400 26px 'DM Sans', sans-serif; }
-.faq details[open] summary::after { content: 'âˆ’'; }
-.faq details p { margin: 12px 28px 0 0; color: #52666a; font-size: 14px; }
-.travel-guide { padding: 100px 0; background: #faf8f2; }
-.guide-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
-.guide-grid article { padding: 28px; background: #fff; border-top: 3px solid var(--teal); }
-.guide-grid span { color: var(--orange); font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .12em; }
-.guide-grid h3 { margin: 12px 0 16px; }
-.guide-grid p { margin: 0 0 12px; color: #52666a; font-size: 14px; }
-.guide-grid p:last-child { margin-bottom: 0; }
-.guide-grid b { color: var(--ink); }
-.guide-button { margin-top: 36px; }
-  { padding: 100px 0; background: #faf8f2; }
- -grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
-  figure { margin: 0; background: #fff; }
-  img { width: 100%; aspect-ratio: 1.4; object-fit: cover; display: block; }
-  figcaption { padding: 16px 18px; font: 600 20px 'Playfair Display', serif; }
-.destination-directory { padding: 100px 0; background: #e7dbc6; }
-.destination-directory h2 { font: 600 clamp(36px, 4.2vw, 55px)/1.05 'Playfair Display', serif; letter-spacing: -.04em; margin: 0; }
-.directory-intro { max-width: 620px; color: #52666a; }
-.destination-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 34px; margin-top: 36px; }
-.destination-list details { border-top: 1px solid var(--line); padding: 16px 0; }
-.destination-list summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 15px; font: 600 20px 'Playfair Display', serif; }
-.destination-list summary::after { content: '+'; color: var(--orange); font: 400 25px 'DM Sans', sans-serif; }
-.destination-list details[open] summary::after { content: 'âˆ’'; }
-.destination-list p { margin: 10px 26px 0 0; color: #52666a; font-size: 14px; }
-.etios { background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=800&q=80'); }
-.crysta { background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80'); }
-.ertiga { background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80'); }
-.urbania { background-image: url('https://images.unsplash.com/photo-1517999349371-c43520457b23?auto=format&fit=crop&w=800&q=80'); }
-.minibus { background-image: url('https://images.unsplash.com/photo-1544487924-6cf3d71b1a4e?auto=format&fit=crop&w=800&q=80'); }
+/* =========================================================
+   RADHAKRISHNA TAXI SERVICE
+   FLEET + SUPPORTING PAGE STYLES
+   Photo-free vehicle card version
+   ========================================================= */
 
-@media (max-width: 900px) and (min-width: 721px) {
-  .fleet-grid { grid-template-columns: repeat(2, 1fr); }
+/* =========================
+   LOGO
+   ========================= */
+
+.logo-image {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  background: transparent;
 }
 
-.call-link { display: inline-block; margin-top: 16px; color: var(--teal); font-weight: 700; text-decoration: none; }
-.booking-form { padding: 32px; background: var(--teal); color: #fff; }
-.booking-form h3 { margin: 0 0 20px; }
-.booking-form label { display: block; margin: 0 0 13px; font-size: 12px; font-weight: 700; }
-.booking-form input, .booking-form select { display: block; width: 100%; margin-top: 5px; border: 0; border-radius: 2px; padding: 11px; color: var(--ink); font: 14px 'DM Sans', sans-serif; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.booking-form .button { width: 100%; margin-top: 5px; border: 0; cursor: pointer; }
-.form-note { margin: 14px 0 0; text-align: center; font-size: 12px; color: #d5e2df; }
 
-@media (max-width: 500px) { .form-row { grid-template-columns: 1fr; gap: 0; } }
-@media (max-width: 720px) { .areas-inner { grid-template-columns: 1fr; gap: 35px; } .service-areas { padding: 75px 0; } }
-@media (max-width: 720px) { .why-us { padding: 75px 0; } .why-grid { grid-template-columns: 1fr; margin-top: 35px; } }
-@media (max-width: 720px) { .faq { padding: 75px 0; } .faq-inner { grid-template-columns: 1fr; gap: 35px; } }
-@media (max-width: 720px) { .travel-guide { padding: 75px 0; } .guide-grid { grid-template-columns: 1fr; margin-top: 35px; } }
-@media (max-width: 720px) {   { padding: 75px 0; }  -grid { grid-template-columns: 1fr; margin-top: 35px; } }
-@media (max-width: 720px) { .destination-directory { padding: 75px 0; } .destination-list { grid-template-columns: 1fr; } }
+/* =========================
+   FLEET
+   ========================= */
+
+.fleet {
+  background: var(--ink);
+  color: #fff;
+  padding: 100px 0;
+}
+
+.fleet .section-heading > p {
+  color: #c4d0cc;
+}
+
+.fleet-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  margin-top: 48px;
+}
+
+
+/* =========================
+   VEHICLE CARDS
+   ========================= */
+
+.vehicle-card {
+  min-height: 285px;
+  padding: 28px;
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid rgba(16, 45, 53, 0.10);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease,
+    border-color .2s ease;
+}
+
+.vehicle-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 35px rgba(0, 0, 0, .18);
+  border-color: rgba(236, 107, 56, .35);
+}
+
+
+/* Vehicle icon */
+
+.vehicle-icon {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  background: #f7f3ea;
+  border-radius: 50%;
+  font-size: 28px;
+  margin-bottom: 22px;
+}
+
+
+/* Vehicle category */
+
+.vehicle-card > span {
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+
+/* Vehicle name */
+
+.vehicle-card h3 {
+  margin: 8px 0 6px;
+  font: 600 23px/1.15 'Playfair Display', serif;
+  color: var(--ink);
+}
+
+
+/* Vehicle description */
+
+.vehicle-card p {
+  margin: 0;
+  color: #52666a;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+
+/* Vehicle price */
+
+.vehicle-card .price {
+  display: block;
+  margin-top: 12px;
+  color: var(--teal);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+/* =========================
+   VEHICLE BUTTONS
+   ========================= */
+
+.vehicle-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.vehicle-buttons a {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 8px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  transition:
+    transform .2s ease,
+    opacity .2s ease,
+    background .2s ease;
+}
+
+.vehicle-buttons a:hover {
+  transform: translateY(-1px);
+  opacity: .92;
+}
+
+.vehicle-buttons a:first-child {
+  background: var(--teal);
+  color: #fff;
+}
+
+.vehicle-buttons a:last-child {
+  border: 1px solid var(--teal);
+  color: var(--teal);
+  background: transparent;
+}
+
+
+/* =========================
+   SERVICE AREAS
+   ========================= */
+
+.service-areas {
+  padding: 100px 0;
+  background: #faf8f2;
+}
+
+.areas-inner {
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.service-areas h2 {
+  font:
+    600 clamp(36px, 4.2vw, 55px)/1.05
+    'Playfair Display',
+    serif;
+  letter-spacing: -.04em;
+  margin: 0;
+}
+
+.service-areas p:not(.eyebrow) {
+  color: #52666a;
+}
+
+.areas-list {
+  border-top: 1px solid var(--line);
+}
+
+.areas-list div {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.areas-list h3 {
+  margin: 0 0 7px;
+  font-size: 21px;
+}
+
+.areas-list p {
+  margin: 0;
+  font-size: 14px;
+}
+
+
+/* =========================
+   WHY US
+   ========================= */
+
+.why-us {
+  padding: 100px 0;
+  background: var(--ink);
+  color: #fff;
+}
+
+.why-us .section-heading > p {
+  color: #c4d0cc;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 48px;
+}
+
+.why-grid article {
+  padding: 28px;
+  background: rgba(255, 255, 255, .07);
+}
+
+.why-grid span {
+  color: #f9bd7f;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .15em;
+}
+
+.why-grid h3 {
+  margin: 30px 0 8px;
+}
+
+.why-grid p {
+  margin: 0;
+  color: #c4d0cc;
+  font-size: 14px;
+}
+
+
+/* =========================
+   FAQ
+   ========================= */
+
+.faq {
+  padding: 100px 0;
+  background: #e7dbc6;
+}
+
+.faq-inner {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 80px;
+}
+
+.faq h2 {
+  font:
+    600 clamp(36px, 4.2vw, 55px)/1.05
+    'Playfair Display',
+    serif;
+  letter-spacing: -.04em;
+  margin: 0;
+}
+
+.faq-inner > div > p:not(.eyebrow) {
+  color: #52666a;
+}
+
+.faq-list {
+  border-top: 1px solid var(--line);
+}
+
+.faq details {
+  border-bottom: 1px solid var(--line);
+  padding: 20px 0;
+}
+
+.faq summary {
+  cursor: pointer;
+  list-style: none;
+  font:
+    600 20px
+    'Playfair Display',
+    serif;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: '+';
+  color: var(--orange);
+  font:
+    400 26px
+    'DM Sans',
+    sans-serif;
+}
+
+.faq details[open] summary::after {
+  content: '−';
+}
+
+.faq details p {
+  margin: 12px 28px 0 0;
+  color: #52666a;
+  font-size: 14px;
+}
+
+
+/* =========================
+   TRAVEL GUIDE
+   ========================= */
+
+.travel-guide {
+  padding: 100px 0;
+  background: #faf8f2;
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 48px;
+}
+
+.guide-grid article {
+  padding: 28px;
+  background: #fff;
+  border-top: 3px solid var(--teal);
+}
+
+.guide-grid span {
+  color: var(--orange);
+  font-weight: 700;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+
+.guide-grid h3 {
+  margin: 12px 0 16px;
+}
+
+.guide-grid p {
+  margin: 0 0 12px;
+  color: #52666a;
+  font-size: 14px;
+}
+
+.guide-grid p:last-child {
+  margin-bottom: 0;
+}
+
+.guide-grid b {
+  color: var(--ink);
+}
+
+.guide-button {
+  margin-top: 36px;
+}
+
+
+/* =========================
+   DESTINATION DIRECTORY
+   ========================= */
+
+.destination-directory {
+  padding: 100px 0;
+  background: #e7dbc6;
+}
+
+.destination-directory h2 {
+  font:
+    600 clamp(36px, 4.2vw, 55px)/1.05
+    'Playfair Display',
+    serif;
+  letter-spacing: -.04em;
+  margin: 0;
+}
+
+.directory-intro {
+  max-width: 620px;
+  color: #52666a;
+}
+
+.destination-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 34px;
+  margin-top: 36px;
+}
+
+.destination-list details {
+  border-top: 1px solid var(--line);
+  padding: 16px 0;
+}
+
+.destination-list summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  font:
+    600 20px
+    'Playfair Display',
+    serif;
+}
+
+.destination-list summary::-webkit-details-marker {
+  display: none;
+}
+
+.destination-list summary::after {
+  content: '+';
+  color: var(--orange);
+  font:
+    400 25px
+    'DM Sans',
+    sans-serif;
+}
+
+.destination-list details[open] summary::after {
+  content: '−';
+}
+
+.destination-list p {
+  margin: 10px 26px 0 0;
+  color: #52666a;
+  font-size: 14px;
+}
+
+
+/* =========================
+   BOOKING
+   ========================= */
+
+.call-link {
+  display: inline-block;
+  margin-top: 16px;
+  color: var(--teal);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.booking-form {
+  padding: 32px;
+  background: var(--teal);
+  color: #fff;
+}
+
+.booking-form h3 {
+  margin: 0 0 20px;
+}
+
+.booking-form label {
+  display: block;
+  margin: 0 0 13px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.booking-form input,
+.booking-form select {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  border: 0;
+  border-radius: 2px;
+  padding: 11px;
+  color: var(--ink);
+  font:
+    14px
+    'DM Sans',
+    sans-serif;
+}
+
+.booking-form input:focus,
+.booking-form select:focus {
+  outline: 2px solid rgba(255, 255, 255, .45);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.booking-form .button {
+  width: 100%;
+  margin-top: 5px;
+  border: 0;
+  cursor: pointer;
+}
+
+.form-note {
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: 12px;
+  color: #d5e2df;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 1100px) {
+
+  .fleet-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+}
+
+
+@media (max-width: 900px) {
+
+  .fleet-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .areas-inner {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .faq-inner {
+    grid-template-columns: 1fr;
+    gap: 45px;
+  }
+
+  .guide-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 720px) {
+
+  .fleet {
+    padding: 75px 0;
+  }
+
+  .fleet-grid {
+    grid-template-columns: 1fr;
+    margin-top: 35px;
+  }
+
+  .vehicle-card {
+    min-height: auto;
+  }
+
+  .service-areas {
+    padding: 75px 0;
+  }
+
+  .areas-inner {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .why-us {
+    padding: 75px 0;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+    margin-top: 35px;
+  }
+
+  .faq {
+    padding: 75px 0;
+  }
+
+  .faq-inner {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .travel-guide {
+    padding: 75px 0;
+  }
+
+  .guide-grid {
+    grid-template-columns: 1fr;
+    margin-top: 35px;
+  }
+
+  .destination-directory {
+    padding: 75px 0;
+  }
+
+  .destination-list {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 500px) {
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .vehicle-buttons {
+    flex-direction: column;
+  }
+
+  .vehicle-buttons a {
+    width: 100%;
+  }
+
+}
