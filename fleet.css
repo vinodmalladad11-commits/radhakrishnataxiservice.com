@@ -38,11 +38,11 @@
 .guide-grid p:last-child { margin-bottom: 0; }
 .guide-grid b { color: var(--ink); }
 .guide-button { margin-top: 36px; }
-.showroom { padding: 100px 0; background: #faf8f2; }
-.showroom-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
-.showroom figure { margin: 0; background: #fff; }
-.showroom img { width: 100%; aspect-ratio: 1.4; object-fit: cover; display: block; }
-.showroom figcaption { padding: 16px 18px; font: 600 20px 'Playfair Display', serif; }
+  { padding: 100px 0; background: #faf8f2; }
+ -grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
+  figure { margin: 0; background: #fff; }
+  img { width: 100%; aspect-ratio: 1.4; object-fit: cover; display: block; }
+  figcaption { padding: 16px 18px; font: 600 20px 'Playfair Display', serif; }
 .destination-directory { padding: 100px 0; background: #e7dbc6; }
 .destination-directory h2 { font: 600 clamp(36px, 4.2vw, 55px)/1.05 'Playfair Display', serif; letter-spacing: -.04em; margin: 0; }
 .directory-intro { max-width: 620px; color: #52666a; }
@@ -76,5 +76,5 @@
 @media (max-width: 720px) { .why-us { padding: 75px 0; } .why-grid { grid-template-columns: 1fr; margin-top: 35px; } }
 @media (max-width: 720px) { .faq { padding: 75px 0; } .faq-inner { grid-template-columns: 1fr; gap: 35px; } }
 @media (max-width: 720px) { .travel-guide { padding: 75px 0; } .guide-grid { grid-template-columns: 1fr; margin-top: 35px; } }
-@media (max-width: 720px) { .showroom { padding: 75px 0; } .showroom-grid { grid-template-columns: 1fr; margin-top: 35px; } }
+@media (max-width: 720px) {   { padding: 75px 0; }  -grid { grid-template-columns: 1fr; margin-top: 35px; } }
 @media (max-width: 720px) { .destination-directory { padding: 75px 0; } .destination-list { grid-template-columns: 1fr; } }
