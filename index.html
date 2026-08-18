@@ -29,34 +29,39 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
     rel="stylesheet">
 
-  <!-- CSS -->
+  <!-- Main CSS -->
   <link rel="stylesheet" href="styles.css">
+
+  <!-- Fleet CSS -->
   <link rel="stylesheet" href="fleet.css">
 
   <!-- Website Logo -->
-  <link rel="icon"
+  <link
+    rel="icon"
     type="image/png"
     href="assets/radhakrishna-taxi-logo.png">
 
   <!-- SEO Schema -->
   <script type="application/ld+json">
   {
-    "@context":"https://schema.org",
-    "@type":"TaxiService",
-    "name":"Radhakrishna Taxi Service",
-    "url":"https://radhakrishnataxiservice.com",
-    "telephone":"+918147771217",
-    "areaServed":"Mangalore, Karnataka",
-    "founder":{
-      "@type":"Person",
-      "name":"Vinod Malladad"
+    "@context": "https://schema.org",
+    "@type": "TaxiService",
+    "name": "Radhakrishna Taxi Service",
+    "url": "https://radhakrishnataxiservice.com",
+    "telephone": "+918147771217",
+    "areaServed": "Mangalore, Karnataka",
+    "founder": {
+      "@type": "Person",
+      "name": "Vinod Malladad"
     },
-    "description":"Local taxi, airport transfer, outstation taxi and Karnataka tour service."
+    "description": "Local taxi, airport transfer, outstation taxi and Karnataka tour service."
   }
   </script>
+
 </head>
 
 <body>
@@ -69,9 +74,10 @@
 
   <div class="container nav">
 
-    <a class="brand"
-       href="#home"
-       aria-label="Radhakrishna Taxi Service home">
+    <a
+      class="brand"
+      href="#home"
+      aria-label="Radhakrishna Taxi Service home">
 
       <img
         class="logo-image"
@@ -85,12 +91,17 @@
 
     </a>
 
+
     <button
       class="menu-button"
       aria-label="Open navigation"
-      aria-expanded="false">
+      aria-expanded="false"
+      type="button">
+
       ☰
+
     </button>
+
 
     <nav
       class="nav-links"
@@ -102,14 +113,16 @@
 
       <a href="#fleet">Fleet</a>
 
-      <a href="contact.html">Contact</a>
+      <a href="#contact">Contact</a>
 
       <a
         class="nav-book"
         href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20book%20a%20taxi."
         target="_blank"
         rel="noopener">
+
         Book now
+
       </a>
 
     </nav>
@@ -125,6 +138,7 @@
 
 <main>
 
+
 <!-- =====================================================
      HERO
 ===================================================== -->
@@ -137,15 +151,18 @@
       Mangalore • Karnataka
     </p>
 
+
     <h1>
       Your journey begins<br>
       <em>with trust.</em>
     </h1>
 
+
     <p class="hero-copy">
       Comfortable local rides, dependable airport transfers
       and memorable coastal Karnataka tours—driven with care.
     </p>
+
 
     <div class="hero-actions">
 
@@ -160,6 +177,7 @@
 
       </a>
 
+
       <a
         class="button button-outline"
         href="tel:+918147771217">
@@ -169,6 +187,7 @@
       </a>
 
     </div>
+
 
     <div
       class="hero-contact"
@@ -183,6 +202,7 @@
       </a>
 
     </div>
+
 
     <div class="hero-trust">
 
@@ -203,18 +223,21 @@
      VEHICLE IMAGE SLIDER
 ===================================================== -->
 
-<section class="vehicle-slider"
-         aria-label="Our vehicles">
+<section
+  class="vehicle-slider"
+  aria-label="Our vehicles">
 
   <div class="slider-track">
 
-    <!-- dzire -->
+
+    <!-- DZIRE -->
 
     <div class="slide">
 
       <img
         src="assets/dzire.jpg"
-        alt="Maruti Dzire taxi">
+        alt="Maruti Dzire taxi"
+        loading="lazy">
 
       <div class="slide-caption">
 
@@ -231,57 +254,83 @@
 
     </div>
 
+
+    <!-- ETIOS -->
+
+    <div class="slide">
+
+      <img
+        src="assets/etios.jpg"
+        alt="Toyota Etios taxi"
+        loading="lazy">
+
+      <div class="slide-caption">
+
+        <span>COMFORT SEDAN</span>
+
+        <h3>Toyota Etios</h3>
+
+        <p>
+          Comfortable and reliable for
+          city and outstation travel.
+        </p>
+
+      </div>
+
+    </div>
+
+
     <!-- PREMIUM SEDAN -->
 
     <div class="slide">
 
-  <img
-    src="assets/premium-sedan.jpg"
-    alt="Premium Sedan taxi">
+      <img
+        src="assets/premium-sedan.jpg"
+        alt="Premium Sedan taxi"
+        loading="lazy">
 
-  <div class="slide-caption">
+      <div class="slide-caption">
 
-    <span>PREMIUM SEDAN</span>
+        <span>PREMIUM SEDAN</span>
 
-    <h3>Premium Sedan</h3>
+        <h3>Premium Sedan</h3>
 
-    <p>
-      Stylish and comfortable travel for
-      airport transfers, business trips and outstation journeys.
-    </p>
+        <p>
+          Stylish and comfortable travel for
+          airport transfers, business trips
+          and outstation journeys.
+        </p>
 
-  </div>
-
-</div>
-
-<!-- RENAULT SCALA -->
-
-<div class="slide">
-
-  <img
-    src="assets/renault-scala.jpg"
-    alt="Renault Scala taxi">
-
-  <div class="slide-caption">
-
-    <span>PREMIUM SEDAN</span>
-
-    <h3>Renault Scala</h3>
-
-    <p>
-      Comfortable and stylish sedan for
-      airport transfers, business travel and outstation journeys.
-    </p>
-
-  </div>
-
-</div>
-
-      <strong class="price">
-        Price on request
-      </strong>
+      </div>
 
     </div>
+
+
+    <!-- RENAULT SCALA -->
+
+    <div class="slide">
+
+      <img
+        src="assets/renault-scala.jpg"
+        alt="Renault Scala premium sedan taxi"
+        loading="lazy">
+
+      <div class="slide-caption">
+
+        <span>PREMIUM SEDAN</span>
+
+        <h3>Renault Scala</h3>
+
+        <p>
+          Comfortable and stylish sedan for
+          airport transfers, business travel
+          and outstation journeys.
+        </p>
+
+      </div>
+
+    </div>
+
 
     <!-- ERTIGA -->
 
@@ -289,7 +338,8 @@
 
       <img
         src="assets/ertiga.jpg"
-        alt="Maruti Ertiga taxi">
+        alt="Maruti Ertiga taxi"
+        loading="lazy">
 
       <div class="slide-caption">
 
@@ -313,7 +363,8 @@
 
       <img
         src="assets/innova.jpg"
-        alt="Toyota Innova taxi">
+        alt="Toyota Innova taxi"
+        loading="lazy">
 
       <div class="slide-caption">
 
@@ -337,7 +388,8 @@
 
       <img
         src="assets/crysta.jpg"
-        alt="Toyota Innova Crysta taxi">
+        alt="Toyota Innova Crysta taxi"
+        loading="lazy">
 
       <div class="slide-caption">
 
@@ -361,7 +413,8 @@
 
       <img
         src="assets/urbania.jpg"
-        alt="Force Urbania">
+        alt="Force Urbania"
+        loading="lazy">
 
       <div class="slide-caption">
 
@@ -385,7 +438,8 @@
 
       <img
         src="assets/tempo.jpg"
-        alt="Tempo Traveller">
+        alt="Tempo Traveller"
+        loading="lazy">
 
       <div class="slide-caption">
 
@@ -402,6 +456,32 @@
 
     </div>
 
+
+    <!-- MINI BUS -->
+
+    <div class="slide">
+
+      <img
+        src="assets/minibus.jpg"
+        alt="Mini Bus"
+        loading="lazy">
+
+      <div class="slide-caption">
+
+        <span>LARGE GROUP TRAVEL</span>
+
+        <h3>Mini Bus</h3>
+
+        <p>
+          Comfortable transportation
+          for large groups and events.
+        </p>
+
+      </div>
+
+    </div>
+
+
   </div>
 
 
@@ -411,7 +491,9 @@
     class="slider-btn slider-prev"
     type="button"
     aria-label="Previous vehicle">
+
     ‹
+
   </button>
 
 
@@ -421,7 +503,9 @@
     class="slider-btn slider-next"
     type="button"
     aria-label="Next vehicle">
+
     ›
+
   </button>
 
 
@@ -445,6 +529,7 @@
     Travel made easy
   </p>
 
+
   <div class="section-heading">
 
     <h2>
@@ -459,6 +544,7 @@
     </p>
 
   </div>
+
 
   <div class="stats">
 
@@ -496,12 +582,15 @@
       What we do
     </p>
 
+
     <h2>
       Made for every
       <em>kind of journey.</em>
     </h2>
 
+
     <div class="service-grid">
+
 
       <article>
 
@@ -563,6 +652,7 @@
 
       </article>
 
+
     </div>
 
   </div>
@@ -582,6 +672,7 @@
       Why choose us
     </p>
 
+
     <div class="section-heading">
 
       <h2>
@@ -596,7 +687,9 @@
 
     </div>
 
+
     <div class="why-grid">
+
 
       <article>
 
@@ -608,8 +701,8 @@
 
         <p>
           Choose from comfortable sedans, premium sedans,
-  SUVs, premium group
-          vehicles, Tempo Travellers and Mini Buses.
+          SUVs, premium group vehicles, Tempo Travellers
+          and Mini Buses.
         </p>
 
       </article>
@@ -646,6 +739,7 @@
 
       </article>
 
+
     </div>
 
   </div>
@@ -660,6 +754,7 @@
 <section class="service-areas">
 
   <div class="container areas-inner">
+
 
     <div>
 
@@ -677,6 +772,7 @@
         ride with Radhakrishna Taxi Service.
       </p>
 
+
       <a
         class="text-link"
         href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20check%20taxi%20availability."
@@ -691,6 +787,7 @@
 
 
     <div class="areas-list">
+
 
       <div>
 
@@ -734,6 +831,7 @@
 
       </div>
 
+
     </div>
 
   </div>
@@ -749,11 +847,13 @@
   class="tours container"
   id="tours">
 
+
   <div
     class="tour-image"
     role="img"
     aria-label="Coastal Karnataka landscape">
   </div>
+
 
   <div class="tour-content">
 
@@ -761,16 +861,19 @@
       Discover Karnataka
     </p>
 
+
     <h2>
       Leave the planning<br>
       to <em>us.</em>
     </h2>
+
 
     <p>
       See the coast, temples, hills and hidden gems
       at your own pace. Tell us where you want to go
       and we’ll help you plan a comfortable road trip.
     </p>
+
 
     <ul>
 
@@ -791,6 +894,7 @@
       </li>
 
     </ul>
+
 
     <a
       class="text-link"
@@ -820,6 +924,7 @@
     <p class="eyebrow">
       Travel in comfort
     </p>
+
 
     <div class="section-heading">
 
@@ -885,49 +990,51 @@
 
       </div>
 
+
       <!-- PREMIUM SEDAN -->
 
-<div class="fleet-card premium-sedan">
+      <div class="fleet-card premium-sedan">
 
-  <span>
-    Premium sedan
-  </span>
+        <span>
+          Premium sedan
+        </span>
 
-  <h3>
-    Premium Sedan
-  </h3>
+        <h3>
+          Premium Sedan
+        </h3>
 
-  <p>
-    Ideal for 1–4 passengers
-  </p>
+        <p>
+          Ideal for 1–4 passengers
+        </p>
 
-  <strong class="price">
-    Price on request
-  </strong>
+        <strong class="price">
+          Price on request
+        </strong>
 
-</div>
+      </div>
 
-<!-- RENAULT SCALA -->
 
-<div class="fleet-card premium-sedan">
+      <!-- RENAULT SCALA -->
 
-  <span>
-    Premium sedan
-  </span>
+      <div class="fleet-card premium-sedan">
 
-  <h3>
-    Renault Scala
-  </h3>
+        <span>
+          Premium sedan
+        </span>
 
-  <p>
-    Ideal for 1–4 passengers
-  </p>
+        <h3>
+          Renault Scala
+        </h3>
 
-  <strong class="price">
-    Price on request
-  </strong>
+        <p>
+          Ideal for 1–4 passengers
+        </p>
 
-</div>
+        <strong class="price">
+          Price on request
+        </strong>
+
+      </div>
 
 
       <!-- INNOVA -->
@@ -1067,6 +1174,7 @@
 
       </div>
 
+
     </div>
 
   </div>
@@ -1086,6 +1194,7 @@
       Explore with us
     </p>
 
+
     <div class="section-heading">
 
       <h2>
@@ -1103,6 +1212,7 @@
 
 
     <div class="guide-grid">
+
 
       <article>
 
@@ -1273,6 +1383,7 @@
 
       </article>
 
+
     </div>
 
 
@@ -1304,10 +1415,12 @@
       Destination directory
     </p>
 
+
     <h2>
       Every stop has<br>
       <em>a story.</em>
     </h2>
+
 
     <p class="directory-intro">
       Tap a destination for a quick idea of what to see there.
@@ -1316,6 +1429,7 @@
 
 
     <div class="destination-list">
+
 
       <details>
         <summary>Mangalore</summary>
@@ -1517,6 +1631,7 @@
         </p>
       </details>
 
+
     </div>
 
   </div>
@@ -1531,6 +1646,7 @@
 <section class="faq">
 
   <div class="container faq-inner">
+
 
     <div>
 
@@ -1552,6 +1668,7 @@
 
 
     <div class="faq-list">
+
 
       <details>
 
@@ -1612,6 +1729,7 @@
 
       </details>
 
+
     </div>
 
   </div>
@@ -1629,6 +1747,7 @@
 
   <div class="container booking-inner">
 
+
     <div>
 
       <p class="eyebrow">
@@ -1645,6 +1764,7 @@
         directly to us on WhatsApp. We’ll confirm
         availability and the fare shortly.
       </p>
+
 
       <div
         style="display:flex;gap:20px;flex-wrap:wrap;">
@@ -1748,40 +1868,39 @@
               Select vehicle
             </option>
 
-            <option>
-            <option>
+            <option value="Maruti Dzire / Toyota Etios">
               Dzire / Etios
             </option>
 
-            <option>
+            <option value="Premium Sedan">
               Premium Sedan
             </option>
 
-            <option>
-             Renault Scala
+            <option value="Renault Scala">
+              Renault Scala
             </option>
 
-            <option>
+            <option value="Maruti Ertiga">
               Ertiga
             </option>
 
-            <option>
+            <option value="Toyota Innova">
               Innova
             </option>
 
-            <option>
+            <option value="Innova Crysta">
               Innova Crysta
             </option>
 
-            <option>
+            <option value="Force Urbania">
               Force Urbania
             </option>
 
-            <option>
+            <option value="Tempo Traveller">
               Tempo Traveller
             </option>
 
-            <option>
+            <option value="Mini Bus">
               Mini Bus
             </option>
 
@@ -1814,6 +1933,7 @@
 
 </section>
 
+
 </main>
 
 
@@ -1824,6 +1944,7 @@
 <footer>
 
   <div class="container footer-inner">
+
 
     <a
       class="brand"
@@ -1860,7 +1981,9 @@
 
       </a>
 
-      |
+
+      <span>|</span>
+
 
       <a
         href="mailto:radhakrishnataximangalore@gmail.com"
