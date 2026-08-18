@@ -152,3 +152,18 @@
     }
 
 }
+/* PREMIUM SEDAN */
+.fleet-card.premium-sedan {
+  background-image: url("assets/premium-sedan.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* RENAULT SCALA */
+.fleet-card.renault-scala {
+  background-image: url("assets/renault-scala.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
