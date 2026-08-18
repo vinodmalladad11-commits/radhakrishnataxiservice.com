@@ -78,12 +78,3 @@
 @media (max-width: 720px) { .travel-guide { padding: 75px 0; } .guide-grid { grid-template-columns: 1fr; margin-top: 35px; } }
 @media (max-width: 720px) { .showroom { padding: 75px 0; } .showroom-grid { grid-template-columns: 1fr; margin-top: 35px; } }
 @media (max-width: 720px) { .destination-directory { padding: 75px 0; } .destination-list { grid-template-columns: 1fr; } }
-
-/* Showroom-reference imagery for the fleet cards */
-.fleet-card.sedan { background-image: url('https://gaadiwale.com/wp-content/uploads/2025/08/Maruti-Dzire-1-1280x720.jpg'); }
-.fleet-card.etios { background-image: url('https://www.team-bhp.com/sites/default/files/pictures/2026-03/PXL_20251206_132837630.MV-2861394.jpg'); }
-.fleet-card.suv, .fleet-card.crysta { background-image: url('https://motoroctane.com/wp-content/uploads/2024/04/3-28.jpg'); }
-.fleet-card.ertiga { background-image: url('https://www.joonsquare.com/usermanage/image/business/maruti-suzuki-arena-sri-amman-cars-krishnagiri-55720/maruti-suzuki-arena-sri-amman-cars-krishnagiri-maruti-suzuki-arena-sri-amman-cars-2.jpg'); }
-.fleet-card.urbania { background-image: url('https://forceurbania.co.in/wp-content/uploads/2022/12/STYLING-2.jpg'); }
-.fleet-card.van { background-image: url('https://bookyourwheels.com/images/model/gallery/force-tempo-traveller-3050-chauffeur-service-india_1776238397.webp'); }
-.fleet-card.minibus { background-image: url('https://www.team-bhp.com/sites/default/files/pictures2023-09/6_57.jpg'); }
