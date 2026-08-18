@@ -10,23 +10,41 @@ document.addEventListener('DOMContentLoaded', () => {
   if (menuButton && navigation) {
 
     menuButton.addEventListener('click', () => {
+
       const isOpen = navigation.classList.toggle('open');
 
-      menuButton.setAttribute('aria-expanded', String(isOpen));
+      menuButton.setAttribute(
+        'aria-expanded',
+        String(isOpen)
+      );
+
       menuButton.setAttribute(
         'aria-label',
         isOpen ? 'Close navigation' : 'Open navigation'
       );
+
     });
 
     navigation.querySelectorAll('a').forEach((link) => {
+
       link.addEventListener('click', () => {
+
         navigation.classList.remove('open');
 
-        menuButton.setAttribute('aria-expanded', 'false');
-        menuButton.setAttribute('aria-label', 'Open navigation');
+        menuButton.setAttribute(
+          'aria-expanded',
+          'false'
+        );
+
+        menuButton.setAttribute(
+          'aria-label',
+          'Open navigation'
+        );
+
       });
+
     });
+
   }
 
 
@@ -63,116 +81,181 @@ Phone: ${details.get('phone')}
 Pickup: ${details.get('pickup')}
 Destination: ${details.get('destination')}
 Travel date: ${details.get('date')}
-Vehicle: ${details.get('vehicle')}`;
+Vehicle: ${details.get('vehicle')}
+
+Please confirm availability and fare.
+
+Thank you,
+Radhakrishna Taxi Service`;
 
       const whatsappURL =
         `https://wa.me/918147771217?text=${encodeURIComponent(message)}`;
 
       window.open(whatsappURL, '_blank');
+
     });
 
   }
 
-});
-/* =========================
-   VEHICLE IMAGE SLIDER
-   ========================= */
 
-document.addEventListener("DOMContentLoaded", function () {
+  // =========================
+  // VEHICLE IMAGE SLIDER
+  // =========================
 
-    const slider = document.querySelector(".vehicle-slider");
+  const slider = document.querySelector('.vehicle-slider');
 
-    if (!slider) return;
+  if (slider) {
 
-    const track = slider.querySelector(".slider-track");
-    const slides = slider.querySelectorAll(".slide");
-    const nextBtn = slider.querySelector(".slider-next");
-    const prevBtn = slider.querySelector(".slider-prev");
-    const dotsContainer = slider.querySelector(".slider-dots");
+    const track = slider.querySelector('.slider-track');
+    const slides = slider.querySelectorAll('.slide');
+    const nextBtn = slider.querySelector('.slider-next');
+    const prevBtn = slider.querySelector('.slider-prev');
+    const dotsContainer = slider.querySelector('.slider-dots');
 
-    let currentSlide = 0;
-    let autoSlide;
+    if (
+      track &&
+      slides.length > 0 &&
+      nextBtn &&
+      prevBtn &&
+      dotsContainer
+    ) {
 
-    /* CREATE DOTS */
+      let currentSlide = 0;
+      let autoSlide;
 
-    slides.forEach(function (_, index) {
 
-        const dot = document.createElement("button");
+      // =========================
+      // CREATE SLIDER DOTS
+      // =========================
 
-        dot.className = "slider-dot";
+      slides.forEach((slide, index) => {
+
+        const dot = document.createElement('button');
+
+        dot.className = 'slider-dot';
 
         dot.setAttribute(
-            "aria-label",
-            "Go to slide " + (index + 1)
+          'aria-label',
+          `Go to slide ${index + 1}`
         );
 
-        dot.addEventListener("click", function () {
-            showSlide(index);
-            restartAutoSlide();
+        dot.addEventListener('click', () => {
+
+          showSlide(index);
+          restartAutoSlide();
+
         });
 
         dotsContainer.appendChild(dot);
-    });
 
-    const dots = dotsContainer.querySelectorAll(".slider-dot");
+      });
 
-    /* SHOW SLIDE */
 
-    function showSlide(index) {
+      const dots =
+        dotsContainer.querySelectorAll('.slider-dot');
+
+
+      // =========================
+      // SHOW SLIDE
+      // =========================
+
+      function showSlide(index) {
 
         if (index >= slides.length) {
-            currentSlide = 0;
+
+          currentSlide = 0;
+
         } else if (index < 0) {
-            currentSlide = slides.length - 1;
+
+          currentSlide = slides.length - 1;
+
         } else {
-            currentSlide = index;
+
+          currentSlide = index;
+
         }
 
+
         track.style.transform =
-            "translateX(-" + (currentSlide * 100) + "%)";
+          `translateX(-${currentSlide * 100}%)`;
 
-        dots.forEach(function (dot, i) {
-            dot.classList.toggle(
-                "active",
-                i === currentSlide
-            );
+
+        dots.forEach((dot, i) => {
+
+          dot.classList.toggle(
+            'active',
+            i === currentSlide
+          );
+
         });
-    }
 
-    /* NEXT */
+      }
 
-    nextBtn.addEventListener("click", function () {
+
+      // =========================
+      // NEXT BUTTON
+      // =========================
+
+      nextBtn.addEventListener('click', () => {
+
         showSlide(currentSlide + 1);
+
         restartAutoSlide();
-    });
 
-    /* PREVIOUS */
+      });
 
-    prevBtn.addEventListener("click", function () {
+
+      // =========================
+      // PREVIOUS BUTTON
+      // =========================
+
+      prevBtn.addEventListener('click', () => {
+
         showSlide(currentSlide - 1);
+
         restartAutoSlide();
-    });
 
-    /* AUTOMATIC SLIDE */
+      });
 
-    function startAutoSlide() {
 
-        autoSlide = setInterval(function () {
-            showSlide(currentSlide + 1);
+      // =========================
+      // AUTOMATIC SLIDE
+      // =========================
+
+      function startAutoSlide() {
+
+        autoSlide = setInterval(() => {
+
+          showSlide(currentSlide + 1);
+
         }, 4000);
 
-    }
+      }
 
-    function restartAutoSlide() {
+
+      // =========================
+      // RESTART AUTO SLIDE
+      // =========================
+
+      function restartAutoSlide() {
 
         clearInterval(autoSlide);
+
         startAutoSlide();
+
+      }
+
+
+      // =========================
+      // START SLIDER
+      // =========================
+
+      showSlide(0);
+
+      startAutoSlide();
 
     }
 
-    /* START */
-
-    showSlide(0);
-    startAutoSlide();
+  }
 
 });

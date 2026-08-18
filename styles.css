@@ -68,16 +68,6 @@ body{
     font-weight:700
 }
 
-.brand-mark{
-    display:grid;
-    place-items:center;
-    width:35px;
-    height:35px;
-    border:1px solid currentColor;
-    border-radius:50%;
-    font:700 20px 'Playfair Display',serif
-}
-
 .logo-image{
     width:54px;
     height:54px;
@@ -286,6 +276,160 @@ em{
     color:rgba(255,255,255,.9)
 }
 
+
+/* =========================================================
+   VEHICLE IMAGE SLIDER
+   ========================================================= */
+
+.vehicle-slider{
+    position:relative;
+    width:100%;
+    height:520px;
+    overflow:hidden;
+    background:#101719;
+}
+
+.slider-track{
+    display:flex;
+    width:100%;
+    height:100%;
+    transition:transform .7s ease;
+}
+
+.slide{
+    position:relative;
+    flex:0 0 100%;
+    width:100%;
+    height:520px;
+    overflow:hidden;
+    background:#111;
+}
+
+.slide img{
+    display:block;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+}
+
+/* dark gradient over image */
+
+.slide::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            to top,
+            rgba(0,0,0,.78) 0%,
+            rgba(0,0,0,.30) 38%,
+            rgba(0,0,0,.05) 70%
+        );
+    pointer-events:none;
+}
+
+/* caption */
+
+.slide-caption{
+    position:absolute;
+    left:7%;
+    bottom:70px;
+    z-index:2;
+    max-width:560px;
+    color:#fff;
+}
+
+.slide-caption span{
+    display:block;
+    margin-bottom:8px;
+    color:#f9bd7f;
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+}
+
+.slide-caption h3{
+    margin:0 0 8px;
+    color:#fff;
+    font:600 clamp(32px,4vw,52px)/1.1 'Playfair Display',serif;
+}
+
+.slide-caption p{
+    margin:0;
+    max-width:520px;
+    color:rgba(255,255,255,.88);
+    font-size:15px;
+}
+
+/* slider arrows */
+
+.slider-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    z-index:5;
+    width:52px;
+    height:52px;
+    border:1px solid rgba(255,255,255,.45);
+    border-radius:50%;
+    background:rgba(0,0,0,.35);
+    backdrop-filter:blur(8px);
+    color:#fff;
+    font-size:38px;
+    line-height:42px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.25s;
+}
+
+.slider-btn:hover{
+    background:rgba(236,107,56,.9);
+    border-color:var(--orange);
+}
+
+.slider-prev{
+    left:25px;
+}
+
+.slider-next{
+    right:25px;
+}
+
+/* dots */
+
+.slider-dots{
+    position:absolute;
+    z-index:6;
+    left:50%;
+    bottom:22px;
+    transform:translateX(-50%);
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+.slider-dot{
+    width:9px;
+    height:9px;
+    padding:0;
+    border:0;
+    border-radius:50%;
+    background:rgba(255,255,255,.45);
+    cursor:pointer;
+    transition:.25s;
+}
+
+.slider-dot.active{
+    width:28px;
+    border-radius:10px;
+    background:var(--orange);
+}
+
+
 /* =========================
    INTRO
    ========================= */
@@ -344,6 +488,7 @@ em{
     color:#52666a
 }
 
+
 /* =========================
    SERVICES
    ========================= */
@@ -395,6 +540,7 @@ h3{
     text-decoration:none
 }
 
+
 /* =========================
    TOURS
    ========================= */
@@ -433,8 +579,9 @@ h3{
     padding-right:9px
 }
 
+
 /* =========================
-   FLEET - PHOTO FREE VEHICLE CARDS
+   FLEET
    ========================= */
 
 .fleet{
@@ -545,6 +692,7 @@ h3{
     opacity:.85
 }
 
+
 /* =========================
    SERVICE AREAS
    ========================= */
@@ -590,6 +738,7 @@ h3{
     font-size:14px
 }
 
+
 /* =========================
    WHY US
    ========================= */
@@ -632,6 +781,7 @@ h3{
     color:#c4d0cc;
     font-size:14px
 }
+
 
 /* =========================
    TRAVEL GUIDE
@@ -684,6 +834,7 @@ h3{
 .guide-button{
     margin-top:36px
 }
+
 
 /* =========================
    DESTINATION DIRECTORY
@@ -745,6 +896,7 @@ h3{
     color:#52666a;
     font-size:14px
 }
+
 
 /* =========================
    FAQ
@@ -809,6 +961,7 @@ h3{
     font-size:14px
 }
 
+
 /* =========================
    BOOKING
    ========================= */
@@ -832,41 +985,6 @@ h3{
 .booking-inner>div>p:not(.eyebrow){
     max-width:440px;
     color:#52666a
-}
-
-.contact-card{
-    padding:38px;
-    background:var(--teal);
-    color:#fff
-}
-
-.contact-card a:first-child{
-    color:#fff;
-    text-decoration:none;
-    display:block;
-    margin-bottom:28px
-}
-
-.contact-card small{
-    display:block;
-    letter-spacing:.13em;
-    font-weight:700;
-    font-size:10px
-}
-
-.contact-card strong{
-    font:600 27px 'Playfair Display',serif
-}
-
-.contact-card .button{
-    width:100%
-}
-
-.contact-card p{
-    font-size:13px;
-    text-align:center;
-    margin:20px 0 0;
-    color:#d5e2df
 }
 
 .call-link{
@@ -926,6 +1044,7 @@ h3{
     color:#d5e2df
 }
 
+
 /* =========================
    FOOTER
    ========================= */
@@ -954,6 +1073,7 @@ footer{
     text-decoration:none
 }
 
+
 /* =========================
    WHATSAPP FLOAT
    ========================= */
@@ -975,6 +1095,7 @@ footer{
     z-index:8
 }
 
+
 /* =========================
    TABLET
    ========================= */
@@ -987,6 +1108,7 @@ footer{
 
 }
 
+
 /* =========================
    TABLET
    ========================= */
@@ -997,7 +1119,16 @@ footer{
         grid-template-columns:repeat(2,1fr)
     }
 
+    .vehicle-slider{
+        height:450px;
+    }
+
+    .slide{
+        height:450px;
+    }
+
 }
+
 
 /* =========================
    MOBILE
@@ -1085,6 +1216,64 @@ footer{
         gap:8px
     }
 
+
+    /* MOBILE VEHICLE SLIDER */
+
+    .vehicle-slider{
+        height:380px;
+    }
+
+    .slide{
+        height:380px;
+    }
+
+    .slide img{
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        object-position:center;
+    }
+
+    .slide-caption{
+        left:25px;
+        right:25px;
+        bottom:55px;
+        max-width:none;
+    }
+
+    .slide-caption span{
+        font-size:10px;
+    }
+
+    .slide-caption h3{
+        font-size:34px;
+        margin-bottom:5px;
+    }
+
+    .slide-caption p{
+        font-size:13px;
+        line-height:1.45;
+    }
+
+    .slider-btn{
+        width:42px;
+        height:42px;
+        font-size:30px;
+    }
+
+    .slider-prev{
+        left:12px;
+    }
+
+    .slider-next{
+        right:12px;
+    }
+
+    .slider-dots{
+        bottom:16px;
+    }
+
+
     .intro,
     .tours{
         padding:75px 0
@@ -1154,10 +1343,6 @@ footer{
         margin-top:35px
     }
 
-    .contact-card{
-        margin-top:35px
-    }
-
     .areas-inner{
         grid-template-columns:1fr;
         gap:35px
@@ -1224,6 +1409,7 @@ footer{
 
 }
 
+
 /* =========================
    SMALL MOBILE
    ========================= */
@@ -1273,6 +1459,48 @@ footer{
 
     .stats div:last-child{
         border-bottom:0
+    }
+
+    /* SMALL PHONE SLIDER */
+
+    .vehicle-slider{
+        height:320px;
+    }
+
+    .slide{
+        height:320px;
+    }
+
+    .slide img{
+        object-fit:cover;
+    }
+
+    .slide-caption{
+        left:20px;
+        right:20px;
+        bottom:48px;
+    }
+
+    .slide-caption h3{
+        font-size:29px;
+    }
+
+    .slide-caption p{
+        font-size:12px;
+    }
+
+    .slider-btn{
+        width:38px;
+        height:38px;
+        font-size:27px;
+    }
+
+    .slider-prev{
+        left:9px;
+    }
+
+    .slider-next{
+        right:9px;
     }
 
     .booking-form{
