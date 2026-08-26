@@ -1,4 +1,4 @@
-﻿// Local Storage Keys
+// Local Storage Keys
 const STORAGE_KEYS = {
   BOOKINGS: 'taxi_bookings',
   VEHICLES: 'taxi_vehicles',

@@ -1,4 +1,4 @@
-﻿# Admin Panel Setup Guide
+# Admin Panel Setup Guide
 
 ## What's Been Created
 
