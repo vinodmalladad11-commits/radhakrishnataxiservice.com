@@ -55,344 +55,212 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =======================================================
-     VEHICLE SLIDER
-     ======================================================= */
+   VEHICLE SLIDER — STABLE RESPONSIVE VERSION
+   ======================================================= */
 
+(() => {
   const slider = document.querySelector(".vehicle-slider");
-  const track = document.querySelector(".slider-track");
-  const slides = document.querySelectorAll(".slide");
-  const prevButton = document.querySelector(".slider-prev");
-  const nextButton = document.querySelector(".slider-next");
-  const dotsContainer = document.querySelector(".slider-dots");
 
-  if (
-    slider &&
-    track &&
-    slides.length > 0 &&
-    prevButton &&
-    nextButton
-  ) {
+  if (!slider) return;
 
-    let currentSlide = 0;
-    let autoSlide;
+  const track = slider.querySelector(".slider-track");
+  const slides = Array.from(slider.querySelectorAll(".slide"));
+  const prevBtn = slider.querySelector(".slider-prev");
+  const nextBtn = slider.querySelector(".slider-next");
+  const dotsWrap = slider.querySelector(".slider-dots");
 
-    /* -------------------------------------------------------
-       Create dots
-       ------------------------------------------------------- */
+  if (!track || slides.length === 0) return;
 
-    if (dotsContainer) {
+  let currentIndex = 0;
+  let autoplayTimer = null;
+  let startX = 0;
+  let isDragging = false;
 
-      dotsContainer.innerHTML = "";
+  /* -----------------------------------------------
+     CREATE DOTS
+  ----------------------------------------------- */
 
-      slides.forEach((slide, index) => {
+  if (dotsWrap) {
+    dotsWrap.innerHTML = "";
 
-        const dot = document.createElement("button");
+    slides.forEach((_, index) => {
+      const dot = document.createElement("button");
 
-        dot.type = "button";
+      dot.type = "button";
+      dot.className = "slider-dot";
+      dot.setAttribute("aria-label", `Go to slide ${index + 1}`);
 
-        dot.className = "slider-dot";
-
-        dot.setAttribute(
-          "aria-label",
-          `Go to vehicle ${index + 1}`
-        );
-
-        dot.addEventListener("click", () => {
-
-          currentSlide = index;
-
-          updateSlider();
-
-          restartAutoSlide();
-
-        });
-
-        dotsContainer.appendChild(dot);
-
+      dot.addEventListener("click", () => {
+        goToSlide(index);
+        restartAutoplay();
       });
 
-    }
-
-
-    /* -------------------------------------------------------
-       Update slider
-       ------------------------------------------------------- */
-
-    function updateSlider() {
-
-      const slideWidth = slides[0].getBoundingClientRect().width;
-
-      const gap = parseFloat(
-        getComputedStyle(track).gap || "0"
-      );
-
-      const moveAmount =
-        currentSlide * (slideWidth + gap);
-
-      track.style.transform =
-        `translateX(-${moveAmount}px)`;
-
-
-      // Active slide
-      slides.forEach((slide, index) => {
-
-        slide.classList.toggle(
-          "active",
-          index === currentSlide
-        );
-
-      });
-
-
-      // Active dots
-      if (dotsContainer) {
-
-        const dots =
-          dotsContainer.querySelectorAll(".slider-dot");
-
-        dots.forEach((dot, index) => {
-
-          dot.classList.toggle(
-            "active",
-            index === currentSlide
-          );
-
-        });
-
-      }
-
-    }
-
-
-    /* -------------------------------------------------------
-       Next
-       ------------------------------------------------------- */
-
-    function nextSlide() {
-
-      currentSlide++;
-
-      if (currentSlide >= slides.length) {
-        currentSlide = 0;
-      }
-
-      updateSlider();
-
-    }
-
-
-    /* -------------------------------------------------------
-       Previous
-       ------------------------------------------------------- */
-
-    function previousSlide() {
-
-      currentSlide--;
-
-      if (currentSlide < 0) {
-        currentSlide = slides.length - 1;
-      }
-
-      updateSlider();
-
-    }
-
-
-    /* -------------------------------------------------------
-       Buttons
-       ------------------------------------------------------- */
-
-    nextButton.addEventListener(
-      "click",
-      () => {
-
-        nextSlide();
-
-        restartAutoSlide();
-
-      }
-    );
-
-
-    prevButton.addEventListener(
-      "click",
-      () => {
-
-        previousSlide();
-
-        restartAutoSlide();
-
-      }
-    );
-
-
-    /* -------------------------------------------------------
-       Automatic sliding
-       ------------------------------------------------------- */
-
-    function startAutoSlide() {
-
-      autoSlide = setInterval(() => {
-
-        nextSlide();
-
-      }, 5000);
-
-    }
-
-
-    function stopAutoSlide() {
-
-      clearInterval(autoSlide);
-
-    }
-
-
-    function restartAutoSlide() {
-
-      stopAutoSlide();
-
-      startAutoSlide();
-
-    }
-
-
-    /* -------------------------------------------------------
-       Pause when mouse is over slider
-       ------------------------------------------------------- */
-
-    slider.addEventListener(
-      "mouseenter",
-      stopAutoSlide
-    );
-
-
-    slider.addEventListener(
-      "mouseleave",
-      startAutoSlide
-    );
-
-
-    /* -------------------------------------------------------
-       Touch / swipe support
-       ------------------------------------------------------- */
-
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-
-    slider.addEventListener(
-      "touchstart",
-      event => {
-
-        touchStartX =
-          event.changedTouches[0].screenX;
-
-        stopAutoSlide();
-
-      },
-      { passive: true }
-    );
-
-
-    slider.addEventListener(
-      "touchend",
-      event => {
-
-        touchEndX =
-          event.changedTouches[0].screenX;
-
-        handleSwipe();
-
-        startAutoSlide();
-
-      },
-      { passive: true }
-    );
-
-
-    function handleSwipe() {
-
-      const difference =
-        touchStartX - touchEndX;
-
-      // Minimum swipe distance
-      if (Math.abs(difference) < 50) {
-        return;
-      }
-
-      if (difference > 0) {
-
-        nextSlide();
-
-      } else {
-
-        previousSlide();
-
-      }
-
-    }
-
-
-    /* -------------------------------------------------------
-       Keyboard support
-       ------------------------------------------------------- */
-
-    slider.addEventListener(
-      "keydown",
-      event => {
-
-        if (event.key === "ArrowRight") {
-
-          nextSlide();
-
-          restartAutoSlide();
-
-        }
-
-        if (event.key === "ArrowLeft") {
-
-          previousSlide();
-
-          restartAutoSlide();
-
-        }
-
-      }
-    );
-
-
-    /* -------------------------------------------------------
-       Resize handling
-       ------------------------------------------------------- */
-
-    let resizeTimer;
-
-    window.addEventListener(
-      "resize",
-      () => {
-
-        clearTimeout(resizeTimer);
-
-        resizeTimer = setTimeout(() => {
-
-          updateSlider();
-
-        }, 150);
-
-      }
-    );
-
-
-    /* -------------------------------------------------------
-       Initial setup
-       ------------------------------------------------------- */
-
-    updateSlider();
-
-    startAutoSlide();
-
+      dotsWrap.appendChild(dot);
+    });
   }
+
+  const dots = dotsWrap
+    ? Array.from(dotsWrap.querySelectorAll(".slider-dot"))
+    : [];
+
+  /* -----------------------------------------------
+     MOVE SLIDER
+  ----------------------------------------------- */
+
+  function goToSlide(index) {
+    currentIndex =
+      (index + slides.length) % slides.length;
+
+    track.style.transform =
+      `translateX(-${currentIndex * 100}%)`;
+
+    updateDots();
+  }
+
+  /* -----------------------------------------------
+     UPDATE DOTS
+  ----------------------------------------------- */
+
+  function updateDots() {
+    dots.forEach((dot, index) => {
+      const active = index === currentIndex;
+
+      dot.classList.toggle("active", active);
+      dot.setAttribute("aria-current", active ? "true" : "false");
+    });
+  }
+
+  /* -----------------------------------------------
+     NEXT / PREVIOUS
+  ----------------------------------------------- */
+
+  function nextSlide() {
+    goToSlide(currentIndex + 1);
+  }
+
+  function previousSlide() {
+    goToSlide(currentIndex - 1);
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      nextSlide();
+      restartAutoplay();
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      previousSlide();
+      restartAutoplay();
+    });
+  }
+
+  /* -----------------------------------------------
+     AUTOPLAY
+  ----------------------------------------------- */
+
+  function startAutoplay() {
+    stopAutoplay();
+
+    autoplayTimer = setInterval(() => {
+      nextSlide();
+    }, 5000);
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  }
+
+  function restartAutoplay() {
+    startAutoplay();
+  }
+
+  /* -----------------------------------------------
+     PAUSE WHEN MOUSE IS OVER SLIDER
+  ----------------------------------------------- */
+
+  slider.addEventListener("mouseenter", stopAutoplay);
+
+  slider.addEventListener("mouseleave", startAutoplay);
+
+  /* -----------------------------------------------
+     MOBILE SWIPE
+  ----------------------------------------------- */
+
+  slider.addEventListener(
+    "touchstart",
+    (event) => {
+      if (!event.touches.length) return;
+
+      startX = event.touches[0].clientX;
+      isDragging = true;
+
+      stopAutoplay();
+    },
+    { passive: true }
+  );
+
+  slider.addEventListener(
+    "touchend",
+    (event) => {
+      if (!isDragging || !event.changedTouches.length) return;
+
+      const endX = event.changedTouches[0].clientX;
+      const distance = endX - startX;
+
+      isDragging = false;
+
+      if (Math.abs(distance) > 50) {
+        if (distance < 0) {
+          nextSlide();
+        } else {
+          previousSlide();
+        }
+      }
+
+      startAutoplay();
+    },
+    { passive: true }
+  );
+
+  /* -----------------------------------------------
+     KEYBOARD CONTROL
+  ----------------------------------------------- */
+
+  document.addEventListener("keydown", (event) => {
+    if (!slider.matches(":hover")) return;
+
+    if (event.key === "ArrowRight") {
+      nextSlide();
+      restartAutoplay();
+    }
+
+    if (event.key === "ArrowLeft") {
+      previousSlide();
+      restartAutoplay();
+    }
+  });
+
+  /* -----------------------------------------------
+     RESIZE SAFETY
+  ----------------------------------------------- */
+
+  window.addEventListener("resize", () => {
+    goToSlide(currentIndex);
+  });
+
+  /* -----------------------------------------------
+     INITIALIZE
+  ----------------------------------------------- */
+
+  goToSlide(0);
+  startAutoplay();
+
+})();
 
 
   /* =======================================================
