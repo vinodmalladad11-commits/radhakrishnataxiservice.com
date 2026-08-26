@@ -1432,3 +1432,155 @@ footer span {
     min-height: 590px;
   }
 }
+
+/* =====================================================
+   POPULAR TAXI ROUTES
+===================================================== */
+
+.popular-routes {
+  padding: 100px 0;
+  background: #f7f5f0;
+}
+
+.popular-routes .eyebrow {
+  margin-bottom: 14px;
+}
+
+.popular-routes h2 {
+  margin: 0;
+  max-width: 700px;
+}
+
+.popular-routes h2 em {
+  font-style: normal;
+}
+
+.popular-routes .section-intro {
+  max-width: 680px;
+  margin: 20px 0 48px;
+  color: #5f6b6f;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+
+/* ROUTES GRID */
+
+.routes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+
+/* ROUTE CARD */
+
+.route-card {
+  position: relative;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid rgba(16, 45, 53, 0.08);
+  box-shadow: 0 10px 30px rgba(16, 45, 53, 0.06);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.route-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 38px rgba(16, 45, 53, 0.10);
+  border-color: rgba(16, 45, 53, 0.16);
+}
+
+
+/* ROUTE TITLE */
+
+.route-card h3 {
+  margin: 0 0 14px;
+  color: #102d35;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+
+/* ROUTE DESCRIPTION */
+
+.route-card p {
+  margin: 0 0 22px;
+  color: #667277;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+
+/* ROUTE LINK */
+
+.route-card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--orange);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: gap 0.2s ease;
+}
+
+.route-card a:hover {
+  gap: 10px;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .popular-routes {
+    padding: 80px 0;
+  }
+
+  .routes-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+  .popular-routes {
+    padding: 70px 0;
+  }
+
+  .popular-routes .section-intro {
+    margin-bottom: 34px;
+    font-size: 15px;
+  }
+
+  .routes-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .route-card {
+    padding: 24px;
+  }
+
+  .route-card h3 {
+    font-size: 18px;
+  }
+
+  .route-card p {
+    font-size: 14px;
+  }
+
+}
