@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
 
-Disallow: /admin.html
-
 Sitemap: https://radhakrishnataxiservice.com/sitemap.xml
