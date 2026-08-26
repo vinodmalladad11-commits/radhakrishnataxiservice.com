@@ -133,4 +133,4 @@ Questions? Check the troubleshooting section in the guide.
 
 ---
 
-**Ready to use!** Open admin.html and login with code: `admin2024`
+ 
