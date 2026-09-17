@@ -1584,3 +1584,275 @@ footer span {
   }
 
 }
+
+/* =========================================================
+   PACKAGE TOURS NAVIGATION
+   ========================================================= */
+
+.nav-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.dropdown-arrow {
+  font-size: 13px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.nav-dropdown:hover .dropdown-arrow,
+.nav-dropdown:focus-within .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+
+/* DROPDOWN BOX */
+
+.package-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+
+  width: 620px;
+  max-width: 92vw;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+
+  padding: 12px;
+
+  background: #ffffff;
+  border: 1px solid rgba(16, 45, 53, 0.10);
+  border-radius: 14px;
+
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
+
+  z-index: 1000;
+}
+
+
+/* SMALL ARROW ABOVE MENU */
+
+.package-menu::before {
+  content: "";
+
+  position: absolute;
+  top: -7px;
+  left: 50%;
+
+  width: 14px;
+  height: 14px;
+
+  background: #ffffff;
+
+  border-left: 1px solid rgba(16, 45, 53, 0.10);
+  border-top: 1px solid rgba(16, 45, 53, 0.10);
+
+  transform: translateX(-50%) rotate(45deg);
+}
+
+
+/* SHOW DROPDOWN */
+
+.nav-dropdown:hover .package-menu,
+.nav-dropdown:focus-within .package-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+
+  transform: translateX(-50%) translateY(0);
+}
+
+
+/* EACH CATEGORY */
+
+.package-column {
+  padding: 14px 16px;
+
+  border-radius: 10px;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.package-column:hover {
+  background: rgba(16, 45, 53, 0.04);
+}
+
+
+/* CATEGORY TITLE */
+
+.package-column h3 {
+  margin: 0 0 5px;
+
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+
+  color: #102d35;
+}
+
+
+/* PACKAGE LINK */
+
+.package-column a {
+  display: block;
+
+  color: #5b686c;
+
+  font-size: 13px;
+  line-height: 1.4;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.package-column a:hover {
+  color: #102d35;
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .package-menu {
+    width: 560px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  .nav-dropdown {
+    display: block;
+    width: 100%;
+  }
+
+  .nav-dropdown-toggle {
+    width: 100%;
+    justify-content: space-between;
+
+    padding: 12px 0;
+  }
+
+  .package-menu {
+
+    position: static;
+
+    width: 100%;
+    max-width: none;
+
+    display: none;
+
+    grid-template-columns: 1fr;
+
+    padding: 6px 0 8px 12px;
+
+    background: transparent;
+
+    border: 0;
+    border-radius: 0;
+
+    box-shadow: none;
+
+    transform: none;
+
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .package-menu::before {
+    display: none;
+  }
+
+  .nav-dropdown.open .package-menu {
+    display: grid;
+  }
+
+  .package-column {
+
+    padding: 9px 12px;
+
+    border-bottom: 1px solid rgba(16, 45, 53, 0.08);
+
+    border-radius: 0;
+  }
+
+  .package-column:last-child {
+    border-bottom: 0;
+  }
+
+  .package-column h3 {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .package-column a {
+    font-size: 13px;
+  }
+
+  .nav-dropdown.open .dropdown-arrow {
+    transform: rotate(180deg);
+  }
+
+}
+
+/* Popular Tour Badge */
+
+.popular-badge {
+  display: inline-block;
+  align-self: flex-start;
+
+  margin-bottom: 14px;
+  padding: 6px 11px;
+
+  border-radius: 20px;
+
+  background: #f4e7e7;
+  color: #a91515;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
