@@ -1697,8 +1697,9 @@ footer span {
   border-radius: 10px;
 
   transition:
-    background 0.2s ease,
-    transform 0.2s ease;
+    transition:
+  background 0.2s ease,
+  transform 0.2s ease;
 }
 
 .package-column:hover {
