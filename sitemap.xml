@@ -1,16 +1,135 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- Homepage -->
   <url>
     <loc>https://radhakrishnataxiservice.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
+  <!-- Contact -->
   <url>
     <loc>https://radhakrishnataxiservice.com/contact.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <!-- Airport Booking -->
+  <url>
+    <loc>https://radhakrishnataxiservice.com/airport-booking.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Popular Taxi Routes -->
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-udupi-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-goa-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-bangalore-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-gokarna-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-murudeshwar-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-dharmasthala-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-kukke-subramanya-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-kollur-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-coorg-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-chikkamagalur-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-mysore-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-sringeri-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-horanadu-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-ooty-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-wayanad-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-belur-halebidu-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-bekal-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://radhakrishnataxiservice.com/mangalore-to-dandeli-taxi.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
 
 </urlset>
