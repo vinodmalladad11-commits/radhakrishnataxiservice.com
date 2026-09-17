@@ -1,15 +1,28 @@
 /* =======================================================
+   RADHAKRISHNA TAXI SERVICE
+   MAIN JAVASCRIPT
+======================================================= */
+
+
+/* =======================================================
    MOBILE NAVIGATION
 ======================================================= */
 
-const menuButton = document.querySelector(".menu-button");
-const navLinks = document.querySelector(".nav-links");
+const menuButton =
+  document.querySelector(".menu-button");
+
+const navLinks =
+  document.querySelector(".nav-links");
 
 if (menuButton && navLinks) {
 
-  menuButton.addEventListener("click", () => {
+  menuButton.addEventListener("click", (event) => {
 
-    const isOpen = navLinks.classList.toggle("active");
+    event.preventDefault();
+    event.stopPropagation();
+
+    const isOpen =
+      navLinks.classList.toggle("active");
 
     menuButton.setAttribute(
       "aria-expanded",
@@ -18,31 +31,37 @@ if (menuButton && navLinks) {
 
     menuButton.setAttribute(
       "aria-label",
-      isOpen ? "Close navigation" : "Open navigation"
+      isOpen
+        ? "Close navigation"
+        : "Open navigation"
     );
 
   });
 
-  // Close menu after clicking a normal navigation link
-  navLinks.querySelectorAll("a").forEach(link => {
 
-    link.addEventListener("click", () => {
+  /* Close menu after clicking normal links */
 
-      navLinks.classList.remove("active");
+  navLinks
+    .querySelectorAll("a")
+    .forEach(link => {
 
-      menuButton.setAttribute(
-        "aria-expanded",
-        "false"
-      );
+      link.addEventListener("click", () => {
 
-      menuButton.setAttribute(
-        "aria-label",
-        "Open navigation"
-      );
+        navLinks.classList.remove("active");
+
+        menuButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+        menuButton.setAttribute(
+          "aria-label",
+          "Open navigation"
+        );
+
+      });
 
     });
-
-  });
 
 }
 
@@ -59,46 +78,63 @@ const packageToggle =
 
 if (packageDropdown && packageToggle) {
 
-  packageToggle.addEventListener("click", (event) => {
+  packageToggle.addEventListener(
+    "click",
+    (event) => {
 
-    event.preventDefault();
-    event.stopPropagation();
+      event.preventDefault();
+      event.stopPropagation();
 
-    const isOpen =
-      packageDropdown.classList.toggle("open");
+      /*
+       * On mobile, toggle the dropdown manually.
+       * On desktop, CSS hover handles the dropdown.
+       */
 
-    packageToggle.setAttribute(
-      "aria-expanded",
-      isOpen ? "true" : "false"
-    );
+      if (window.innerWidth <= 700) {
 
-  });
+        const isOpen =
+          packageDropdown.classList.toggle("open");
 
+        packageToggle.setAttribute(
+          "aria-expanded",
+          isOpen ? "true" : "false"
+        );
 
-  // Close dropdown when clicking outside
-
-  document.addEventListener("click", (event) => {
-
-    if (!packageDropdown.contains(event.target)) {
-
-      packageDropdown.classList.remove("open");
-
-      packageToggle.setAttribute(
-        "aria-expanded",
-        "false"
-      );
+      }
 
     }
+  );
 
-  });
+
+  /* Close dropdown when clicking outside */
+
+  document.addEventListener(
+    "click",
+    (event) => {
+
+      if (
+        window.innerWidth <= 700 &&
+        !packageDropdown.contains(event.target)
+      ) {
+
+        packageDropdown.classList.remove("open");
+
+        packageToggle.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+      }
+
+    }
+  );
 
 
-  // Prevent dropdown links from triggering
-  // the dropdown toggle
+  /* Close dropdown after selecting a package */
 
   packageDropdown
     .querySelectorAll(".package-menu a")
-    .forEach((link) => {
+    .forEach(link => {
 
       link.addEventListener("click", () => {
 
@@ -108,6 +144,28 @@ if (packageDropdown && packageToggle) {
           "aria-expanded",
           "false"
         );
+
+        /*
+         * Also close mobile navigation.
+         */
+
+        if (navLinks) {
+          navLinks.classList.remove("active");
+        }
+
+        if (menuButton) {
+
+          menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+          menuButton.setAttribute(
+            "aria-label",
+            "Open navigation"
+          );
+
+        }
 
       });
 
@@ -120,102 +178,209 @@ if (packageDropdown && packageToggle) {
    VEHICLE SLIDER
 ======================================================= */
 
-(() => {
+const sliderTrack =
+  document.querySelector(".slider-track");
 
-  const slider = document.querySelector(".vehicle-slider");
-  const cards = document.querySelectorAll(".vehicle-card");
-  const prevButton = document.querySelector(".vehicle-prev");
-  const nextButton = document.querySelector(".vehicle-next");
+const slides =
+  document.querySelectorAll(".slide");
 
-  if (!slider || !cards.length) {
+const prevButton =
+  document.querySelector(".slider-prev");
+
+const nextButton =
+  document.querySelector(".slider-next");
+
+const dots =
+  document.querySelectorAll(".slider-dots button");
+
+let currentSlide = 0;
+
+let sliderTimer = null;
+
+
+/* -------------------------------------------------------
+   UPDATE SLIDER
+------------------------------------------------------- */
+
+function updateSlider() {
+
+  if (!sliderTrack || !slides.length) {
     return;
   }
 
-  let currentIndex = 0;
+  /*
+   * Move the track one full slide at a time.
+   */
 
-  const getVisibleCards = () => {
-
-    if (window.innerWidth <= 650) {
-      return 1;
-    }
-
-    if (window.innerWidth <= 900) {
-      return 2;
-    }
-
-    return 3;
-
-  };
+  sliderTrack.style.transform =
+    `translateX(-${currentSlide * 100}%)`;
 
 
-  const updateSlider = () => {
+  /*
+   * Update active dot.
+   */
 
-    const visibleCards = getVisibleCards();
+  dots.forEach((dot, index) => {
 
-    const maxIndex =
-      Math.max(0, cards.length - visibleCards);
+    dot.classList.toggle(
+      "active",
+      index === currentSlide
+    );
 
-    currentIndex =
-      Math.min(currentIndex, maxIndex);
+  });
 
-    const cardWidth =
-      cards[0].getBoundingClientRect().width;
-
-    const gap =
-      parseFloat(
-        getComputedStyle(slider).gap || "0"
-      );
-
-    slider.style.transform =
-      `translateX(-${currentIndex * (cardWidth + gap)}px)`;
-
-  };
+}
 
 
-  if (prevButton) {
+/* -------------------------------------------------------
+   NEXT SLIDE
+------------------------------------------------------- */
 
-    prevButton.addEventListener("click", () => {
+function nextSlide() {
 
-      currentIndex--;
-
-      if (currentIndex < 0) {
-        currentIndex = 0;
-      }
-
-      updateSlider();
-
-    });
-
+  if (!slides.length) {
+    return;
   }
 
-
-  if (nextButton) {
-
-    nextButton.addEventListener("click", () => {
-
-      const visibleCards = getVisibleCards();
-
-      const maxIndex =
-        Math.max(0, cards.length - visibleCards);
-
-      currentIndex++;
-
-      if (currentIndex > maxIndex) {
-        currentIndex = maxIndex;
-      }
-
-      updateSlider();
-
-    });
-
-  }
-
-
-  window.addEventListener("resize", updateSlider);
+  currentSlide =
+    (currentSlide + 1) % slides.length;
 
   updateSlider();
 
-})();
+}
+
+
+/* -------------------------------------------------------
+   PREVIOUS SLIDE
+------------------------------------------------------- */
+
+function previousSlide() {
+
+  if (!slides.length) {
+    return;
+  }
+
+  currentSlide =
+    (currentSlide - 1 + slides.length) %
+    slides.length;
+
+  updateSlider();
+
+}
+
+
+/* -------------------------------------------------------
+   NEXT BUTTON
+------------------------------------------------------- */
+
+if (nextButton) {
+
+  nextButton.addEventListener(
+    "click",
+    () => {
+
+      nextSlide();
+
+      restartSlider();
+
+    }
+  );
+
+}
+
+
+/* -------------------------------------------------------
+   PREVIOUS BUTTON
+------------------------------------------------------- */
+
+if (prevButton) {
+
+  prevButton.addEventListener(
+    "click",
+    () => {
+
+      previousSlide();
+
+      restartSlider();
+
+    }
+  );
+
+}
+
+
+/* -------------------------------------------------------
+   DOT NAVIGATION
+------------------------------------------------------- */
+
+dots.forEach((dot, index) => {
+
+  dot.addEventListener(
+    "click",
+    () => {
+
+      currentSlide = index;
+
+      updateSlider();
+
+      restartSlider();
+
+    }
+  );
+
+});
+
+
+/* -------------------------------------------------------
+   AUTO SLIDER
+------------------------------------------------------- */
+
+function startSlider() {
+
+  /*
+   * No need for auto-slide if there is
+   * only one vehicle.
+   */
+
+  if (slides.length <= 1) {
+    return;
+  }
+
+  sliderTimer =
+    setInterval(
+      nextSlide,
+      5000
+    );
+
+}
+
+
+/* -------------------------------------------------------
+   RESTART AUTO SLIDER
+------------------------------------------------------- */
+
+function restartSlider() {
+
+  if (sliderTimer) {
+
+    clearInterval(
+      sliderTimer
+    );
+
+  }
+
+  startSlider();
+
+}
+
+
+/* -------------------------------------------------------
+   INITIALIZE SLIDER
+------------------------------------------------------- */
+
+updateSlider();
+
+startSlider();
 
 
 /* =======================================================
@@ -227,38 +392,72 @@ const bookingForm =
 
 if (bookingForm) {
 
-  bookingForm.addEventListener("submit", (event) => {
+  bookingForm.addEventListener(
+    "submit",
+    (event) => {
 
-    event.preventDefault();
+      event.preventDefault();
 
-    const pickup =
-      document.querySelector("#pickup")?.value.trim();
 
-    const drop =
-      document.querySelector("#drop")?.value.trim();
+      const pickup =
+        document
+          .querySelector("#pickup")
+          ?.value
+          .trim();
 
-    const date =
-      document.querySelector("#date")?.value;
+      const drop =
+        document
+          .querySelector("#drop")
+          ?.value
+          .trim();
 
-    const time =
-      document.querySelector("#time")?.value;
+      const date =
+        document
+          .querySelector("#date")
+          ?.value;
 
-    const passengers =
-      document.querySelector("#passengers")?.value;
+      const time =
+        document
+          .querySelector("#time")
+          ?.value;
 
-    const vehicle =
-      document.querySelector("#vehicle")?.value;
+      const passengers =
+        document
+          .querySelector("#passengers")
+          ?.value;
 
-    if (!pickup || !drop || !date || !time) {
+      const vehicle =
+        document
+          .querySelector("#vehicle")
+          ?.value;
 
-      alert("Please fill in all required booking details.");
 
-      return;
+      /*
+       * Required fields
+       */
 
-    }
+      if (
+        !pickup ||
+        !drop ||
+        !date ||
+        !time
+      ) {
 
-    const message =
-      `Hello Radhakrishna Taxi Service,
+        alert(
+          "Please fill in all required booking details."
+        );
+
+        return;
+
+      }
+
+
+      /*
+       * WhatsApp booking message
+       */
+
+      const message =
+`Hello Radhakrishna Taxi Service,
 
 I would like to book a taxi.
 
@@ -271,16 +470,19 @@ Vehicle: ${vehicle || "Not specified"}
 
 Please confirm availability and fare.`;
 
-    const whatsappURL =
-      `https://wa.me/918147771217?text=${encodeURIComponent(message)}`;
 
-    window.open(
-      whatsappURL,
-      "_blank",
-      "noopener"
-    );
+      const whatsappURL =
+        `https://wa.me/918147771217?text=${encodeURIComponent(message)}`;
 
-  });
+
+      window.open(
+        whatsappURL,
+        "_blank",
+        "noopener"
+      );
+
+    }
+  );
 
 }
 
@@ -289,7 +491,8 @@ Please confirm availability and fare.`;
    CURRENT YEAR
 ======================================================= */
 
-document.querySelectorAll(".current-year")
+document
+  .querySelectorAll(".current-year")
   .forEach(element => {
 
     element.textContent =
@@ -302,37 +505,53 @@ document.querySelectorAll(".current-year")
    SMOOTH SCROLL
 ======================================================= */
 
-document.querySelectorAll('a[href^="#"]')
+document
+  .querySelectorAll('a[href^="#"]')
   .forEach(link => {
 
-    link.addEventListener("click", function (event) {
+    link.addEventListener(
+      "click",
+      function (event) {
 
-      const targetID =
-        this.getAttribute("href");
+        const targetID =
+          this.getAttribute("href");
 
-      if (
-        !targetID ||
-        targetID === "#" ||
-        targetID.length <= 1
-      ) {
-        return;
+
+        if (
+          !targetID ||
+          targetID === "#" ||
+          targetID.length <= 1
+        ) {
+
+          return;
+
+        }
+
+
+        /*
+         * Ignore dropdown buttons and links
+         * that do not point to an existing section.
+         */
+
+        const target =
+          document.querySelector(targetID);
+
+
+        if (!target) {
+          return;
+        }
+
+
+        event.preventDefault();
+
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
       }
-
-      const target =
-        document.querySelector(targetID);
-
-      if (!target) {
-        return;
-      }
-
-      event.preventDefault();
-
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-
-    });
+    );
 
   });
 
@@ -342,34 +561,62 @@ document.querySelectorAll('a[href^="#"]')
 ======================================================= */
 
 const destinationButtons =
-  document.querySelectorAll("[data-destination]");
+  document.querySelectorAll(
+    "[data-destination]"
+  );
+
 
 destinationButtons.forEach(button => {
 
-  button.addEventListener("click", () => {
+  button.addEventListener(
+    "click",
+    () => {
 
-    const destination =
-      button.getAttribute("data-destination");
+      const destination =
+        button.getAttribute(
+          "data-destination"
+        );
 
-    if (!destination) {
-      return;
+
+      if (!destination) {
+        return;
+      }
+
+
+      const pickupField =
+        document.querySelector("#pickup");
+
+      const dropField =
+        document.querySelector("#drop");
+
+
+      /*
+       * Put destination into drop field.
+       */
+
+      if (dropField) {
+
+        dropField.value =
+          destination;
+
+      }
+
+
+      /*
+       * Focus pickup field if empty.
+       */
+
+      if (
+        pickupField &&
+        !pickupField.value.trim()
+      ) {
+
+        pickupField.focus();
+
+      }
+
     }
-
-    const pickupField =
-      document.querySelector("#pickup");
-
-    const dropField =
-      document.querySelector("#drop");
-
-    if (dropField) {
-      dropField.value = destination;
-    }
-
-    if (pickupField && !pickupField.value.trim()) {
-      pickupField.focus();
-    }
-
-  });
+  );
 
 });
 
@@ -379,23 +626,32 @@ destinationButtons.forEach(button => {
 ======================================================= */
 
 const sections =
-  document.querySelectorAll("section[id]");
+  document.querySelectorAll(
+    "section[id]"
+  );
+
 
 const navigationLinks =
   document.querySelectorAll(
     '.nav-links a[href^="#"]'
   );
 
-if (sections.length && navigationLinks.length) {
+
+if (
+  sections.length &&
+  navigationLinks.length
+) {
 
   const updateActiveNavigation = () => {
 
     let currentSection = "";
 
+
     sections.forEach(section => {
 
       const sectionTop =
         section.offsetTop - 150;
+
 
       if (
         window.scrollY >= sectionTop
@@ -413,11 +669,14 @@ if (sections.length && navigationLinks.length) {
 
       link.classList.remove("active");
 
+
       const href =
         link.getAttribute("href");
 
+
       if (
-        href === `#${currentSection}`
+        href ===
+        `#${currentSection}`
       ) {
 
         link.classList.add("active");
@@ -432,8 +691,11 @@ if (sections.length && navigationLinks.length) {
   window.addEventListener(
     "scroll",
     updateActiveNavigation,
-    { passive: true }
+    {
+      passive: true
+    }
   );
+
 
   updateActiveNavigation();
 
@@ -444,19 +706,26 @@ if (sections.length && navigationLinks.length) {
    IMAGE ERROR HANDLING
 ======================================================= */
 
-document.querySelectorAll("img")
+document
+  .querySelectorAll("img")
   .forEach(image => {
 
-    image.addEventListener("error", () => {
+    image.addEventListener(
+      "error",
+      () => {
 
-      image.classList.add("image-error");
+        image.classList.add(
+          "image-error"
+        );
 
-      console.warn(
-        "Image could not be loaded:",
-        image.src
-      );
 
-    });
+        console.warn(
+          "Image could not be loaded:",
+          image.src
+        );
+
+      }
+    );
 
   });
 
@@ -465,28 +734,38 @@ document.querySelectorAll("img")
    PREVENT EMPTY WHATSAPP LINKS
 ======================================================= */
 
-document.querySelectorAll(
-  'a[href*="wa.me"]'
-).forEach(link => {
+document
+  .querySelectorAll(
+    'a[href*="wa.me"]'
+  )
+  .forEach(link => {
 
-  link.addEventListener("click", event => {
+    link.addEventListener(
+      "click",
+      event => {
 
-    const href =
-      link.getAttribute("href");
+        const href =
+          link.getAttribute("href");
 
-    if (!href || href.trim() === "") {
 
-      event.preventDefault();
+        if (
+          !href ||
+          href.trim() === ""
+        ) {
 
-      console.warn(
-        "WhatsApp link is empty."
-      );
+          event.preventDefault();
 
-    }
+
+          console.warn(
+            "WhatsApp link is empty."
+          );
+
+        }
+
+      }
+    );
 
   });
-
-});
 
 
 /* =======================================================
@@ -494,7 +773,10 @@ document.querySelectorAll(
 ======================================================= */
 
 const backToTop =
-  document.querySelector(".back-to-top");
+  document.querySelector(
+    ".back-to-top"
+  );
+
 
 if (backToTop) {
 
@@ -502,29 +784,40 @@ if (backToTop) {
     "scroll",
     () => {
 
-      if (window.scrollY > 500) {
+      if (
+        window.scrollY > 500
+      ) {
 
-        backToTop.classList.add("show");
+        backToTop.classList.add(
+          "show"
+        );
 
       } else {
 
-        backToTop.classList.remove("show");
+        backToTop.classList.remove(
+          "show"
+        );
 
       }
 
     },
-    { passive: true }
+    {
+      passive: true
+    }
   );
 
 
-  backToTop.addEventListener("click", () => {
+  backToTop.addEventListener(
+    "click",
+    () => {
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
-  });
+    }
+  );
 
 }
 
