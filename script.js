@@ -1,642 +1,502 @@
-/* =========================================================
-   RADHAKRISHNA TAXI SERVICE
-   Main Website JavaScript
-   ========================================================= */
+/* =======================================================
+   MOBILE NAVIGATION
+======================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+const menuButton = document.querySelector(".menu-button");
+const navLinks = document.querySelector(".nav-links");
 
-  /* =======================================================
-     MOBILE NAVIGATION
-     ======================================================= */
+if (menuButton && navLinks) {
 
-  const menuButton = document.querySelector(".menu-button");
-  const navLinks = document.querySelector(".nav-links");
+  menuButton.addEventListener("click", () => {
 
-  if (menuButton && navLinks) {
+    const isOpen = navLinks.classList.toggle("active");
 
-    menuButton.addEventListener("click", () => {
+    menuButton.setAttribute(
+      "aria-expanded",
+      isOpen ? "true" : "false"
+    );
 
-      const isOpen = navLinks.classList.toggle("active");
+    menuButton.setAttribute(
+      "aria-label",
+      isOpen ? "Close navigation" : "Open navigation"
+    );
+
+  });
+
+  // Close menu after clicking a normal navigation link
+  navLinks.querySelectorAll("a").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+      navLinks.classList.remove("active");
 
       menuButton.setAttribute(
         "aria-expanded",
-        isOpen ? "true" : "false"
+        "false"
       );
 
       menuButton.setAttribute(
         "aria-label",
-        isOpen ? "Close navigation" : "Open navigation"
+        "Open navigation"
       );
 
     });
 
-    // Close menu after clicking a navigation link
-    navLinks.querySelectorAll("a").forEach(link => {
+  });
+
+}
+
+
+/* =======================================================
+   PACKAGE TOURS DROPDOWN
+======================================================= */
+
+const packageDropdown =
+  document.querySelector(".nav-dropdown");
+
+const packageToggle =
+  document.querySelector(".nav-dropdown-toggle");
+
+if (packageDropdown && packageToggle) {
+
+  packageToggle.addEventListener("click", (event) => {
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    const isOpen =
+      packageDropdown.classList.toggle("open");
+
+    packageToggle.setAttribute(
+      "aria-expanded",
+      isOpen ? "true" : "false"
+    );
+
+  });
+
+
+  // Close dropdown when clicking outside
+
+  document.addEventListener("click", (event) => {
+
+    if (!packageDropdown.contains(event.target)) {
+
+      packageDropdown.classList.remove("open");
+
+      packageToggle.setAttribute(
+        "aria-expanded",
+        "false"
+      );
+
+    }
+
+  });
+
+
+  // Prevent dropdown links from triggering
+  // the dropdown toggle
+
+  packageDropdown
+    .querySelectorAll(".package-menu a")
+    .forEach((link) => {
 
       link.addEventListener("click", () => {
 
-        navLinks.classList.remove("active");
+        packageDropdown.classList.remove("open");
 
-        menuButton.setAttribute(
+        packageToggle.setAttribute(
           "aria-expanded",
           "false"
         );
 
-        menuButton.setAttribute(
-          "aria-label",
-          "Open navigation"
-        );
-
       });
 
     });
 
-  }
+}
 
 
-  /* =======================================================
-   VEHICLE SLIDER — STABLE RESPONSIVE VERSION
-   ======================================================= */
+/* =======================================================
+   VEHICLE SLIDER
+======================================================= */
 
 (() => {
+
   const slider = document.querySelector(".vehicle-slider");
+  const cards = document.querySelectorAll(".vehicle-card");
+  const prevButton = document.querySelector(".vehicle-prev");
+  const nextButton = document.querySelector(".vehicle-next");
 
-  if (!slider) return;
-
-  const track = slider.querySelector(".slider-track");
-  const slides = Array.from(slider.querySelectorAll(".slide"));
-  const prevBtn = slider.querySelector(".slider-prev");
-  const nextBtn = slider.querySelector(".slider-next");
-  const dotsWrap = slider.querySelector(".slider-dots");
-
-  if (!track || slides.length === 0) return;
+  if (!slider || !cards.length) {
+    return;
+  }
 
   let currentIndex = 0;
-  let autoplayTimer = null;
-  let startX = 0;
-  let isDragging = false;
 
-  /* -----------------------------------------------
-     CREATE DOTS
-  ----------------------------------------------- */
+  const getVisibleCards = () => {
 
-  if (dotsWrap) {
-    dotsWrap.innerHTML = "";
-
-    slides.forEach((_, index) => {
-      const dot = document.createElement("button");
-
-      dot.type = "button";
-      dot.className = "slider-dot";
-      dot.setAttribute("aria-label", `Go to slide ${index + 1}`);
-
-      dot.addEventListener("click", () => {
-        goToSlide(index);
-        restartAutoplay();
-      });
-
-      dotsWrap.appendChild(dot);
-    });
-  }
-
-  const dots = dotsWrap
-    ? Array.from(dotsWrap.querySelectorAll(".slider-dot"))
-    : [];
-
-  /* -----------------------------------------------
-     MOVE SLIDER
-  ----------------------------------------------- */
-
-  function goToSlide(index) {
-    currentIndex =
-      (index + slides.length) % slides.length;
-
-    track.style.transform =
-      `translateX(-${currentIndex * 100}%)`;
-
-    updateDots();
-  }
-
-  /* -----------------------------------------------
-     UPDATE DOTS
-  ----------------------------------------------- */
-
-  function updateDots() {
-    dots.forEach((dot, index) => {
-      const active = index === currentIndex;
-
-      dot.classList.toggle("active", active);
-      dot.setAttribute("aria-current", active ? "true" : "false");
-    });
-  }
-
-  /* -----------------------------------------------
-     NEXT / PREVIOUS
-  ----------------------------------------------- */
-
-  function nextSlide() {
-    goToSlide(currentIndex + 1);
-  }
-
-  function previousSlide() {
-    goToSlide(currentIndex - 1);
-  }
-
-  if (nextBtn) {
-    nextBtn.addEventListener("click", () => {
-      nextSlide();
-      restartAutoplay();
-    });
-  }
-
-  if (prevBtn) {
-    prevBtn.addEventListener("click", () => {
-      previousSlide();
-      restartAutoplay();
-    });
-  }
-
-  /* -----------------------------------------------
-     AUTOPLAY
-  ----------------------------------------------- */
-
-  function startAutoplay() {
-    stopAutoplay();
-
-    autoplayTimer = setInterval(() => {
-      nextSlide();
-    }, 5000);
-  }
-
-  function stopAutoplay() {
-    if (autoplayTimer) {
-      clearInterval(autoplayTimer);
-      autoplayTimer = null;
+    if (window.innerWidth <= 650) {
+      return 1;
     }
-  }
 
-  function restartAutoplay() {
-    startAutoplay();
-  }
+    if (window.innerWidth <= 900) {
+      return 2;
+    }
 
-  /* -----------------------------------------------
-     PAUSE WHEN MOUSE IS OVER SLIDER
-  ----------------------------------------------- */
+    return 3;
 
-  slider.addEventListener("mouseenter", stopAutoplay);
+  };
 
-  slider.addEventListener("mouseleave", startAutoplay);
 
-  /* -----------------------------------------------
-     MOBILE SWIPE
-  ----------------------------------------------- */
+  const updateSlider = () => {
 
-  slider.addEventListener(
-    "touchstart",
-    (event) => {
-      if (!event.touches.length) return;
+    const visibleCards = getVisibleCards();
 
-      startX = event.touches[0].clientX;
-      isDragging = true;
+    const maxIndex =
+      Math.max(0, cards.length - visibleCards);
 
-      stopAutoplay();
-    },
-    { passive: true }
-  );
+    currentIndex =
+      Math.min(currentIndex, maxIndex);
 
-  slider.addEventListener(
-    "touchend",
-    (event) => {
-      if (!isDragging || !event.changedTouches.length) return;
+    const cardWidth =
+      cards[0].getBoundingClientRect().width;
 
-      const endX = event.changedTouches[0].clientX;
-      const distance = endX - startX;
+    const gap =
+      parseFloat(
+        getComputedStyle(slider).gap || "0"
+      );
 
-      isDragging = false;
+    slider.style.transform =
+      `translateX(-${currentIndex * (cardWidth + gap)}px)`;
 
-      if (Math.abs(distance) > 50) {
-        if (distance < 0) {
-          nextSlide();
-        } else {
-          previousSlide();
-        }
+  };
+
+
+  if (prevButton) {
+
+    prevButton.addEventListener("click", () => {
+
+      currentIndex--;
+
+      if (currentIndex < 0) {
+        currentIndex = 0;
       }
 
-      startAutoplay();
-    },
-    { passive: true }
-  );
+      updateSlider();
 
-  /* -----------------------------------------------
-     KEYBOARD CONTROL
-  ----------------------------------------------- */
+    });
 
-  document.addEventListener("keydown", (event) => {
-    if (!slider.matches(":hover")) return;
+  }
 
-    if (event.key === "ArrowRight") {
-      nextSlide();
-      restartAutoplay();
-    }
 
-    if (event.key === "ArrowLeft") {
-      previousSlide();
-      restartAutoplay();
-    }
-  });
+  if (nextButton) {
 
-  /* -----------------------------------------------
-     RESIZE SAFETY
-  ----------------------------------------------- */
+    nextButton.addEventListener("click", () => {
 
-  window.addEventListener("resize", () => {
-    goToSlide(currentIndex);
-  });
+      const visibleCards = getVisibleCards();
 
-  /* -----------------------------------------------
-     INITIALIZE
-  ----------------------------------------------- */
+      const maxIndex =
+        Math.max(0, cards.length - visibleCards);
 
-  goToSlide(0);
-  startAutoplay();
+      currentIndex++;
+
+      if (currentIndex > maxIndex) {
+        currentIndex = maxIndex;
+      }
+
+      updateSlider();
+
+    });
+
+  }
+
+
+  window.addEventListener("resize", updateSlider);
+
+  updateSlider();
 
 })();
 
 
-  /* =======================================================
-     BOOKING FORM → WHATSAPP
-     ======================================================= */
+/* =======================================================
+   BOOKING FORM
+======================================================= */
 
-  const bookingForm =
-    document.getElementById("booking-form");
+const bookingForm =
+  document.querySelector("#booking-form");
 
+if (bookingForm) {
 
-  if (bookingForm) {
+  bookingForm.addEventListener("submit", (event) => {
 
-    bookingForm.addEventListener(
-      "submit",
-      event => {
+    event.preventDefault();
 
-        event.preventDefault();
+    const pickup =
+      document.querySelector("#pickup")?.value.trim();
 
+    const drop =
+      document.querySelector("#drop")?.value.trim();
 
-        const formData =
-          new FormData(bookingForm);
+    const date =
+      document.querySelector("#date")?.value;
 
+    const time =
+      document.querySelector("#time")?.value;
 
-        const name =
-          formData.get("name") || "";
+    const passengers =
+      document.querySelector("#passengers")?.value;
 
+    const vehicle =
+      document.querySelector("#vehicle")?.value;
 
-        const phone =
-          formData.get("phone") || "";
+    if (!pickup || !drop || !date || !time) {
 
+      alert("Please fill in all required booking details.");
 
-        const pickup =
-          formData.get("pickup") || "";
+      return;
 
+    }
 
-        const destination =
-          formData.get("destination") || "";
+    const message =
+      `Hello Radhakrishna Taxi Service,
 
+I would like to book a taxi.
 
-        const date =
-          formData.get("date") || "";
+Pickup: ${pickup}
+Drop: ${drop}
+Date: ${date}
+Time: ${time}
+Passengers: ${passengers || "Not specified"}
+Vehicle: ${vehicle || "Not specified"}
 
+Please confirm availability and fare.`;
 
-        const vehicle =
-          formData.get("vehicle") || "";
+    const whatsappURL =
+      `https://wa.me/918147771217?text=${encodeURIComponent(message)}`;
 
-
-        /* ---------------------------------------------------
-           Format date
-           --------------------------------------------------- */
-
-        let formattedDate = date;
-
-        if (date) {
-
-          const dateObject =
-            new Date(`${date}T00:00:00`);
-
-          formattedDate =
-            dateObject.toLocaleDateString(
-              "en-IN",
-              {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric"
-              }
-            );
-
-        }
-
-
-        /* ---------------------------------------------------
-           WhatsApp message
-           --------------------------------------------------- */
-
-        const message =
-`🚕 RADHAKRISHNA TAXI SERVICE
-
-📋 TAXI BOOKING REQUEST
-
-👤 Name: ${name}
-📱 Phone: ${phone}
-
-📍 Pickup: ${pickup}
-🏁 Destination: ${destination}
-
-📅 Travel Date: ${formattedDate}
-
-🚗 Vehicle: ${vehicle}
-
-Please confirm availability and fare.
-
-Thank you,
-Radhakrishna Taxi Service`;
-
-
-        const whatsappNumber =
-          "918147771217";
-
-
-        const whatsappURL =
-          `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-
-
-        window.open(
-          whatsappURL,
-          "_blank",
-          "noopener,noreferrer"
-        );
-
-      }
+    window.open(
+      whatsappURL,
+      "_blank",
+      "noopener"
     );
 
-  }
+  });
+
+}
 
 
-  /* =======================================================
-     SET CURRENT YEAR
-     ======================================================= */
+/* =======================================================
+   CURRENT YEAR
+======================================================= */
 
-  const yearElement =
-    document.getElementById("year");
+document.querySelectorAll(".current-year")
+  .forEach(element => {
 
-
-  if (yearElement) {
-
-    yearElement.textContent =
+    element.textContent =
       new Date().getFullYear();
 
-  }
-
-
-  /* =======================================================
-     SMOOTH SCROLL
-     ======================================================= */
-
-  document.querySelectorAll(
-    'a[href^="#"]'
-  ).forEach(link => {
-
-    link.addEventListener(
-      "click",
-      event => {
-
-        const targetID =
-          link.getAttribute("href");
-
-
-        if (
-          !targetID ||
-          targetID === "#"
-        ) {
-
-          return;
-
-        }
-
-
-        const target =
-          document.querySelector(targetID);
-
-
-        if (!target) {
-
-          return;
-
-        }
-
-
-        event.preventDefault();
-
-
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-      }
-    );
-
   });
 
 
-  /* =======================================================
-     DESTINATION DETAILS
-     ======================================================= */
+/* =======================================================
+   SMOOTH SCROLL
+======================================================= */
 
-  const destinationDetails =
-    document.querySelectorAll(
-      ".destination-list details"
-    );
+document.querySelectorAll('a[href^="#"]')
+  .forEach(link => {
 
+    link.addEventListener("click", function (event) {
 
-  destinationDetails.forEach(detail => {
+      const targetID =
+        this.getAttribute("href");
 
-    detail.addEventListener(
-      "toggle",
-      () => {
-
-        if (!detail.open) {
-          return;
-        }
-
-
-        destinationDetails.forEach(otherDetail => {
-
-          if (
-            otherDetail !== detail &&
-            otherDetail.open
-          ) {
-
-            otherDetail.removeAttribute("open");
-
-          }
-
-        });
-
+      if (
+        !targetID ||
+        targetID === "#" ||
+        targetID.length <= 1
+      ) {
+        return;
       }
-    );
 
-  });
+      const target =
+        document.querySelector(targetID);
 
+      if (!target) {
+        return;
+      }
 
-  /* =======================================================
-     ACTIVE NAVIGATION ON SCROLL
-     ======================================================= */
+      event.preventDefault();
 
-  const sections =
-    document.querySelectorAll(
-      "main section[id]"
-    );
-
-
-  const navigationItems =
-    document.querySelectorAll(
-      '.nav-links a[href^="#"]'
-    );
-
-
-  if (
-    sections.length > 0 &&
-    navigationItems.length > 0
-  ) {
-
-    const observer =
-      new IntersectionObserver(
-        entries => {
-
-          entries.forEach(entry => {
-
-            if (!entry.isIntersecting) {
-              return;
-            }
-
-
-            const id =
-              entry.target.getAttribute("id");
-
-
-            navigationItems.forEach(link => {
-
-              link.classList.remove(
-                "active"
-              );
-
-
-              if (
-                link.getAttribute("href") ===
-                `#${id}`
-              ) {
-
-                link.classList.add(
-                  "active"
-                );
-
-              }
-
-            });
-
-          });
-
-        },
-        {
-          rootMargin:
-            "-30% 0px -60% 0px"
-        }
-      );
-
-
-    sections.forEach(section => {
-
-      observer.observe(section);
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
 
     });
 
-  }
-
-
-  /* =======================================================
-     IMAGE ERROR HANDLING
-     ======================================================= */
-
-  document.querySelectorAll("img").forEach(image => {
-
-    image.addEventListener(
-      "error",
-      () => {
-
-        image.classList.add(
-          "image-error"
-        );
-
-      }
-    );
-
   });
 
 
-  /* =======================================================
-     PREVENT EMPTY WHATSAPP LINKS
-     ======================================================= */
+/* =======================================================
+   DESTINATION DETAILS
+======================================================= */
 
+const destinationButtons =
+  document.querySelectorAll("[data-destination]");
+
+destinationButtons.forEach(button => {
+
+  button.addEventListener("click", () => {
+
+    const destination =
+      button.getAttribute("data-destination");
+
+    if (!destination) {
+      return;
+    }
+
+    const pickupField =
+      document.querySelector("#pickup");
+
+    const dropField =
+      document.querySelector("#drop");
+
+    if (dropField) {
+      dropField.value = destination;
+    }
+
+    if (pickupField && !pickupField.value.trim()) {
+      pickupField.focus();
+    }
+
+  });
+
+});
+
+
+/* =======================================================
+   ACTIVE NAVIGATION ON SCROLL
+======================================================= */
+
+const sections =
+  document.querySelectorAll("section[id]");
+
+const navigationLinks =
   document.querySelectorAll(
-    'a[href*="wa.me"]'
-  ).forEach(link => {
+    '.nav-links a[href^="#"]'
+  );
 
-    link.addEventListener(
-      "click",
-      () => {
+if (sections.length && navigationLinks.length) {
 
-        link.setAttribute(
-          "rel",
-          "noopener noreferrer"
-        );
+  const updateActiveNavigation = () => {
+
+    let currentSection = "";
+
+    sections.forEach(section => {
+
+      const sectionTop =
+        section.offsetTop - 150;
+
+      if (
+        window.scrollY >= sectionTop
+      ) {
+
+        currentSection =
+          section.getAttribute("id");
 
       }
-    );
+
+    });
+
+
+    navigationLinks.forEach(link => {
+
+      link.classList.remove("active");
+
+      const href =
+        link.getAttribute("href");
+
+      if (
+        href === `#${currentSection}`
+      ) {
+
+        link.classList.add("active");
+
+      }
+
+    });
+
+  };
+
+
+  window.addEventListener(
+    "scroll",
+    updateActiveNavigation,
+    { passive: true }
+  );
+
+  updateActiveNavigation();
+
+}
+
+
+/* =======================================================
+   IMAGE ERROR HANDLING
+======================================================= */
+
+document.querySelectorAll("img")
+  .forEach(image => {
+
+    image.addEventListener("error", () => {
+
+      image.classList.add("image-error");
+
+      console.warn(
+        "Image could not be loaded:",
+        image.src
+      );
+
+    });
 
   });
 
 
-  /* =======================================================
-     BACK TO TOP
-     ======================================================= */
+/* =======================================================
+   PREVENT EMPTY WHATSAPP LINKS
+======================================================= */
 
-  let backToTop =
-    document.querySelector(
-      ".back-to-top"
-    );
+document.querySelectorAll(
+  'a[href*="wa.me"]'
+).forEach(link => {
+
+  link.addEventListener("click", event => {
+
+    const href =
+      link.getAttribute("href");
+
+    if (!href || href.trim() === "") {
+
+      event.preventDefault();
+
+      console.warn(
+        "WhatsApp link is empty."
+      );
+
+    }
+
+  });
+
+});
 
 
-  if (!backToTop) {
+/* =======================================================
+   BACK TO TOP BUTTON
+======================================================= */
 
-    backToTop =
-      document.createElement("button");
+const backToTop =
+  document.querySelector(".back-to-top");
 
-    backToTop.className =
-      "back-to-top";
-
-    backToTop.type =
-      "button";
-
-    backToTop.setAttribute(
-      "aria-label",
-      "Back to top"
-    );
-
-    backToTop.innerHTML =
-      "↑";
-
-    document.body.appendChild(
-      backToTop
-    );
-
-  }
-
+if (backToTop) {
 
   window.addEventListener(
     "scroll",
@@ -644,15 +504,11 @@ Radhakrishna Taxi Service`;
 
       if (window.scrollY > 500) {
 
-        backToTop.classList.add(
-          "visible"
-        );
+        backToTop.classList.add("show");
 
       } else {
 
-        backToTop.classList.remove(
-          "visible"
-        );
+        backToTop.classList.remove("show");
 
       }
 
@@ -661,25 +517,22 @@ Radhakrishna Taxi Service`;
   );
 
 
-  backToTop.addEventListener(
-    "click",
-    () => {
+  backToTop.addEventListener("click", () => {
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
 
-    }
-  );
+  });
+
+}
 
 
-  /* =======================================================
-     CONSOLE MESSAGE
-     ======================================================= */
+/* =======================================================
+   CONSOLE MESSAGE
+======================================================= */
 
-  console.log(
-    "Radhakrishna Taxi Service website loaded successfully."
-  );
-
-});
+console.log(
+  "Radhakrishna Taxi Service website loaded successfully."
+);
