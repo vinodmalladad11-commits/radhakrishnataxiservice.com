@@ -1,3 +1,4 @@
+```javascript
 /* =======================================================
    RADHAKRISHNA TAXI SERVICE
    MAIN JAVASCRIPT
@@ -8,58 +9,50 @@
    MOBILE NAVIGATION
 ======================================================= */
 
-const menuButton =
-  document.querySelector(".menu-button");
-
-const navLinks =
-  document.querySelector(".nav-links");
+const menuButton = document.querySelector(".menu-button");
+const navLinks = document.querySelector(".nav-links");
 
 if (menuButton && navLinks) {
 
-  menuButton.addEventListener("click", (event) => {
+    menuButton.addEventListener("click", (event) => {
 
-    event.preventDefault();
-    event.stopPropagation();
+        event.preventDefault();
+        event.stopPropagation();
 
-    const isOpen =
-      navLinks.classList.toggle("active");
-
-    menuButton.setAttribute(
-      "aria-expanded",
-      isOpen ? "true" : "false"
-    );
-
-    menuButton.setAttribute(
-      "aria-label",
-      isOpen
-        ? "Close navigation"
-        : "Open navigation"
-    );
-
-  });
-
-
-  /* Close menu after clicking normal links */
-
-  navLinks
-    .querySelectorAll("a")
-    .forEach(link => {
-
-      link.addEventListener("click", () => {
-
-        navLinks.classList.remove("active");
+        const isOpen = navLinks.classList.toggle("active");
 
         menuButton.setAttribute(
-          "aria-expanded",
-          "false"
+            "aria-expanded",
+            isOpen ? "true" : "false"
         );
 
         menuButton.setAttribute(
-          "aria-label",
-          "Open navigation"
+            "aria-label",
+            isOpen ? "Close navigation" : "Open navigation"
         );
 
-      });
+    });
+
+
+    /* Close menu after clicking normal links */
+
+    navLinks.querySelectorAll("a").forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            navLinks.classList.remove("active");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            menuButton.setAttribute(
+                "aria-label",
+                "Open navigation"
+            );
+
+        });
 
     });
 
@@ -70,132 +63,133 @@ if (menuButton && navLinks) {
    PACKAGE TOURS DROPDOWN
 ======================================================= */
 
-const packageDropdown =
-  document.querySelector(".nav-dropdown");
-
-const packageToggle =
-  document.querySelector(".nav-dropdown-toggle");
+const packageDropdown = document.querySelector(".nav-dropdown");
+const packageToggle = document.querySelector(".nav-dropdown-toggle");
 
 if (packageDropdown && packageToggle) {
 
-  packageToggle.addEventListener(
-    "click",
-    (event) => {
+    packageToggle.addEventListener("click", (event) => {
 
-      event.preventDefault();
-      event.stopPropagation();
-
-      /*
-       * On mobile, toggle the dropdown manually.
-       * On desktop, CSS hover handles the dropdown.
-       */
-
-      if (window.innerWidth <= 700) {
-
-        const isOpen =
-          packageDropdown.classList.toggle("open");
-
-        packageToggle.setAttribute(
-          "aria-expanded",
-          isOpen ? "true" : "false"
-        );
-
-      }
-
-    }
-  );
-
-
-  /* Close dropdown when clicking outside */
-
-  document.addEventListener(
-    "click",
-    (event) => {
-
-      if (
-        window.innerWidth <= 700 &&
-        !packageDropdown.contains(event.target)
-      ) {
-
-        packageDropdown.classList.remove("open");
-
-        packageToggle.setAttribute(
-          "aria-expanded",
-          "false"
-        );
-
-      }
-
-    }
-  );
-
-
-  /* Close dropdown after selecting a package */
-
-  packageDropdown
-    .querySelectorAll(".package-menu a")
-    .forEach(link => {
-
-      link.addEventListener("click", () => {
-
-        packageDropdown.classList.remove("open");
-
-        packageToggle.setAttribute(
-          "aria-expanded",
-          "false"
-        );
+        event.preventDefault();
+        event.stopPropagation();
 
         /*
-         * Also close mobile navigation.
+         * On mobile, toggle the dropdown manually.
+         * On desktop, CSS hover handles the dropdown.
          */
 
-        if (navLinks) {
-          navLinks.classList.remove("active");
-        }
+        if (window.innerWidth <= 700) {
 
-        if (menuButton) {
+            const isOpen =
+                packageDropdown.classList.toggle("open");
 
-          menuButton.setAttribute(
-            "aria-expanded",
-            "false"
-          );
-
-          menuButton.setAttribute(
-            "aria-label",
-            "Open navigation"
-          );
+            packageToggle.setAttribute(
+                "aria-expanded",
+                isOpen ? "true" : "false"
+            );
 
         }
-
-      });
 
     });
+
+
+    /* Close dropdown when clicking outside */
+
+    document.addEventListener("click", (event) => {
+
+        if (
+            window.innerWidth <= 700 &&
+            !packageDropdown.contains(event.target)
+        ) {
+
+            packageDropdown.classList.remove("open");
+
+            packageToggle.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
+
+    });
+
+
+    /* Close dropdown after selecting a package */
+
+    packageDropdown
+        .querySelectorAll(".package-menu a")
+        .forEach(link => {
+
+            link.addEventListener("click", () => {
+
+                packageDropdown.classList.remove("open");
+
+                packageToggle.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+
+                /* Also close mobile navigation */
+
+                if (navLinks) {
+                    navLinks.classList.remove("active");
+                }
+
+
+                if (menuButton) {
+
+                    menuButton.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                    menuButton.setAttribute(
+                        "aria-label",
+                        "Open navigation"
+                    );
+
+                }
+
+            });
+
+        });
 
 }
 
 
 /* =======================================================
    VEHICLE SLIDER
+   MOBILE + DESKTOP FIX
 ======================================================= */
 
 const sliderTrack =
-  document.querySelector(".slider-track");
+    document.querySelector(".slider-track");
 
 const slides =
-  document.querySelectorAll(".slide");
+    document.querySelectorAll(".slide");
 
 const prevButton =
-  document.querySelector(".slider-prev");
+    document.querySelector(".slider-prev");
 
 const nextButton =
-  document.querySelector(".slider-next");
+    document.querySelector(".slider-next");
 
 const dots =
-  document.querySelectorAll(".slider-dots button");
+    document.querySelectorAll(".slider-dots button");
+
 
 let currentSlide = 0;
-
 let sliderTimer = null;
+
+
+/* Touch variables */
+
+let touchStartX = 0;
+let touchStartY = 0;
+let touchCurrentX = 0;
+let isTouching = false;
+let isHorizontalSwipe = false;
 
 
 /* -------------------------------------------------------
@@ -204,30 +198,63 @@ let sliderTimer = null;
 
 function updateSlider() {
 
-  if (!sliderTrack || !slides.length) {
-    return;
-  }
-
-  /*
-   * Move the track one full slide at a time.
-   */
-
-  sliderTrack.style.transform =
-    `translateX(-${currentSlide * 100}%)`;
+    if (!sliderTrack || !slides.length) {
+        return;
+    }
 
 
-  /*
-   * Update active dot.
-   */
+    /*
+     * Make sure current slide is valid.
+     */
 
-  dots.forEach((dot, index) => {
+    if (currentSlide < 0) {
+        currentSlide = slides.length - 1;
+    }
 
-    dot.classList.toggle(
-      "active",
-      index === currentSlide
-    );
+    if (currentSlide >= slides.length) {
+        currentSlide = 0;
+    }
 
-  });
+
+    /*
+     * IMPORTANT:
+     * Use the actual position of each slide instead of
+     * translateX(100%).
+     *
+     * This works correctly when:
+     * - slide width changes
+     * - mobile layout changes
+     * - gaps are present
+     * - desktop/mobile CSS differs
+     */
+
+    const slidePosition =
+        slides[currentSlide].offsetLeft;
+
+
+    sliderTrack.style.transform =
+        `translate3d(-${slidePosition}px, 0, 0)`;
+
+
+    /*
+     * Update active dot.
+     */
+
+    dots.forEach((dot, index) => {
+
+        dot.classList.toggle(
+            "active",
+            index === currentSlide
+        );
+
+        dot.setAttribute(
+            "aria-current",
+            index === currentSlide
+                ? "true"
+                : "false"
+        );
+
+    });
 
 }
 
@@ -238,14 +265,14 @@ function updateSlider() {
 
 function nextSlide() {
 
-  if (!slides.length) {
-    return;
-  }
+    if (!slides.length) {
+        return;
+    }
 
-  currentSlide =
-    (currentSlide + 1) % slides.length;
+    currentSlide =
+        (currentSlide + 1) % slides.length;
 
-  updateSlider();
+    updateSlider();
 
 }
 
@@ -256,15 +283,15 @@ function nextSlide() {
 
 function previousSlide() {
 
-  if (!slides.length) {
-    return;
-  }
+    if (!slides.length) {
+        return;
+    }
 
-  currentSlide =
-    (currentSlide - 1 + slides.length) %
-    slides.length;
+    currentSlide =
+        (currentSlide - 1 + slides.length) %
+        slides.length;
 
-  updateSlider();
+    updateSlider();
 
 }
 
@@ -275,16 +302,15 @@ function previousSlide() {
 
 if (nextButton) {
 
-  nextButton.addEventListener(
-    "click",
-    () => {
+    nextButton.addEventListener("click", (event) => {
 
-      nextSlide();
+        event.preventDefault();
 
-      restartSlider();
+        nextSlide();
 
-    }
-  );
+        restartSlider();
+
+    });
 
 }
 
@@ -295,16 +321,15 @@ if (nextButton) {
 
 if (prevButton) {
 
-  prevButton.addEventListener(
-    "click",
-    () => {
+    prevButton.addEventListener("click", (event) => {
 
-      previousSlide();
+        event.preventDefault();
 
-      restartSlider();
+        previousSlide();
 
-    }
-  );
+        restartSlider();
+
+    });
 
 }
 
@@ -315,20 +340,232 @@ if (prevButton) {
 
 dots.forEach((dot, index) => {
 
-  dot.addEventListener(
-    "click",
-    () => {
+    dot.addEventListener("click", (event) => {
 
-      currentSlide = index;
+        event.preventDefault();
 
-      updateSlider();
+        if (index >= slides.length) {
+            return;
+        }
 
-      restartSlider();
+        currentSlide = index;
 
-    }
-  );
+        updateSlider();
+
+        restartSlider();
+
+    });
 
 });
+
+
+/* -------------------------------------------------------
+   MOBILE TOUCH START
+------------------------------------------------------- */
+
+if (sliderTrack) {
+
+    sliderTrack.addEventListener(
+        "touchstart",
+        (event) => {
+
+            if (!event.touches || !event.touches.length) {
+                return;
+            }
+
+            touchStartX =
+                event.touches[0].clientX;
+
+            touchStartY =
+                event.touches[0].clientY;
+
+            touchCurrentX =
+                touchStartX;
+
+            isTouching = true;
+            isHorizontalSwipe = false;
+
+
+            /*
+             * Stop auto slider while user is touching it.
+             */
+
+            if (sliderTimer) {
+
+                clearInterval(sliderTimer);
+
+                sliderTimer = null;
+
+            }
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* ---------------------------------------------------
+       MOBILE TOUCH MOVE
+    --------------------------------------------------- */
+
+    sliderTrack.addEventListener(
+        "touchmove",
+        (event) => {
+
+            if (
+                !isTouching ||
+                !event.touches ||
+                !event.touches.length
+            ) {
+                return;
+            }
+
+
+            touchCurrentX =
+                event.touches[0].clientX;
+
+            const currentY =
+                event.touches[0].clientY;
+
+
+            const diffX =
+                touchCurrentX - touchStartX;
+
+            const diffY =
+                currentY - touchStartY;
+
+
+            /*
+             * Determine whether the user is swiping
+             * horizontally or scrolling vertically.
+             */
+
+            if (
+                Math.abs(diffX) > 10 &&
+                Math.abs(diffX) > Math.abs(diffY)
+            ) {
+
+                isHorizontalSwipe = true;
+
+                /*
+                 * Prevent the page from scrolling sideways
+                 * while the vehicle slider is being swiped.
+                 */
+
+                event.preventDefault();
+
+            }
+
+        },
+        {
+            passive: false
+        }
+    );
+
+
+    /* ---------------------------------------------------
+       MOBILE TOUCH END
+    --------------------------------------------------- */
+
+    sliderTrack.addEventListener(
+        "touchend",
+        () => {
+
+            if (!isTouching) {
+                return;
+            }
+
+
+            const swipeDistance =
+                touchCurrentX - touchStartX;
+
+
+            /*
+             * 50px is the minimum swipe distance.
+             */
+
+            const minimumSwipeDistance = 50;
+
+
+            if (
+                isHorizontalSwipe &&
+                Math.abs(swipeDistance) >=
+                minimumSwipeDistance
+            ) {
+
+                if (swipeDistance < 0) {
+
+                    /*
+                     * Swipe left
+                     * → next vehicle
+                     */
+
+                    nextSlide();
+
+                } else {
+
+                    /*
+                     * Swipe right
+                     * → previous vehicle
+                     */
+
+                    previousSlide();
+
+                }
+
+            }
+
+
+            /*
+             * Reset touch values.
+             */
+
+            touchStartX = 0;
+            touchStartY = 0;
+            touchCurrentX = 0;
+
+            isTouching = false;
+            isHorizontalSwipe = false;
+
+
+            /*
+             * Restart automatic slider.
+             */
+
+            restartSlider();
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* ---------------------------------------------------
+       MOBILE TOUCH CANCEL
+    --------------------------------------------------- */
+
+    sliderTrack.addEventListener(
+        "touchcancel",
+        () => {
+
+            touchStartX = 0;
+            touchStartY = 0;
+            touchCurrentX = 0;
+
+            isTouching = false;
+            isHorizontalSwipe = false;
+
+            restartSlider();
+
+        },
+        {
+            passive: true
+        }
+    );
+
+}
 
 
 /* -------------------------------------------------------
@@ -337,19 +574,28 @@ dots.forEach((dot, index) => {
 
 function startSlider() {
 
-  /*
-   * No need for auto-slide if there is
-   * only one vehicle.
-   */
+    /*
+     * No need for auto-slide if there is
+     * only one vehicle.
+     */
 
-  if (slides.length <= 1) {
-    return;
-  }
+    if (slides.length <= 1) {
+        return;
+    }
 
-  sliderTimer =
-    setInterval(
-      nextSlide,
-      5000
+
+    /*
+     * Prevent multiple timers.
+     */
+
+    if (sliderTimer) {
+        clearInterval(sliderTimer);
+    }
+
+
+    sliderTimer = setInterval(
+        nextSlide,
+        5000
     );
 
 }
@@ -361,17 +607,44 @@ function startSlider() {
 
 function restartSlider() {
 
-  if (sliderTimer) {
+    if (sliderTimer) {
 
-    clearInterval(
-      sliderTimer
-    );
+        clearInterval(
+            sliderTimer
+        );
 
-  }
+        sliderTimer = null;
 
-  startSlider();
+    }
+
+    startSlider();
 
 }
+
+
+/* -------------------------------------------------------
+   REPOSITION SLIDER AFTER RESIZE
+------------------------------------------------------- */
+
+let resizeTimer = null;
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(() => {
+
+            updateSlider();
+
+        }, 150);
+
+    },
+    {
+        passive: true
+    }
+);
 
 
 /* -------------------------------------------------------
@@ -388,75 +661,80 @@ startSlider();
 ======================================================= */
 
 const bookingForm =
-  document.querySelector("#booking-form");
+    document.querySelector("#booking-form");
 
 if (bookingForm) {
 
-  bookingForm.addEventListener(
-    "submit",
-    (event) => {
+    bookingForm.addEventListener(
+        "submit",
+        (event) => {
 
-      event.preventDefault();
-
-
-      const pickup =
-        document
-          .querySelector("#pickup")
-          ?.value
-          .trim();
-
-      const drop =
-        document
-          .querySelector("#drop")
-          ?.value
-          .trim();
-
-      const date =
-        document
-          .querySelector("#date")
-          ?.value;
-
-      const time =
-        document
-          .querySelector("#time")
-          ?.value;
-
-      const passengers =
-        document
-          .querySelector("#passengers")
-          ?.value;
-
-      const vehicle =
-        document
-          .querySelector("#vehicle")
-          ?.value;
+            event.preventDefault();
 
 
-      /*
-       * Required fields
-       */
-
-      if (
-        !pickup ||
-        !drop ||
-        !date ||
-        !time
-      ) {
-
-        alert(
-          "Please fill in all required booking details."
-        );
-
-        return;
-
-      }
+            const pickup =
+                document
+                    .querySelector("#pickup")
+                    ?.value
+                    .trim();
 
 
-      /*
-       * WhatsApp booking message
-       */
+            const drop =
+                document
+                    .querySelector("#drop")
+                    ?.value
+                    .trim();
 
-      const message =
+
+            const date =
+                document
+                    .querySelector("#date")
+                    ?.value;
+
+
+            const time =
+                document
+                    .querySelector("#time")
+                    ?.value;
+
+
+            const passengers =
+                document
+                    .querySelector("#passengers")
+                    ?.value;
+
+
+            const vehicle =
+                document
+                    .querySelector("#vehicle")
+                    ?.value;
+
+
+            /*
+             * Required fields
+             */
+
+            if (
+                !pickup ||
+                !drop ||
+                !date ||
+                !time
+            ) {
+
+                alert(
+                    "Please fill in all required booking details."
+                );
+
+                return;
+
+            }
+
+
+            /*
+             * WhatsApp booking message
+             */
+
+            const message =
 `Hello Radhakrishna Taxi Service,
 
 I would like to book a taxi.
@@ -471,18 +749,18 @@ Vehicle: ${vehicle || "Not specified"}
 Please confirm availability and fare.`;
 
 
-      const whatsappURL =
-        `https://wa.me/918147771217?text=${encodeURIComponent(message)}`;
+            const whatsappURL =
+                `https://wa.me/918147771217?text=${encodeURIComponent(message)}`;
 
 
-      window.open(
-        whatsappURL,
-        "_blank",
-        "noopener"
-      );
+            window.open(
+                whatsappURL,
+                "_blank",
+                "noopener"
+            );
 
-    }
-  );
+        }
+    );
 
 }
 
@@ -492,13 +770,13 @@ Please confirm availability and fare.`;
 ======================================================= */
 
 document
-  .querySelectorAll(".current-year")
-  .forEach(element => {
+    .querySelectorAll(".current-year")
+    .forEach(element => {
 
-    element.textContent =
-      new Date().getFullYear();
+        element.textContent =
+            new Date().getFullYear();
 
-  });
+    });
 
 
 /* =======================================================
@@ -506,54 +784,54 @@ document
 ======================================================= */
 
 document
-  .querySelectorAll('a[href^="#"]')
-  .forEach(link => {
+    .querySelectorAll('a[href^="#"]')
+    .forEach(link => {
 
-    link.addEventListener(
-      "click",
-      function (event) {
+        link.addEventListener(
+            "click",
+            function (event) {
 
-        const targetID =
-          this.getAttribute("href");
-
-
-        if (
-          !targetID ||
-          targetID === "#" ||
-          targetID.length <= 1
-        ) {
-
-          return;
-
-        }
+                const targetID =
+                    this.getAttribute("href");
 
 
-        /*
-         * Ignore dropdown buttons and links
-         * that do not point to an existing section.
-         */
+                if (
+                    !targetID ||
+                    targetID === "#" ||
+                    targetID.length <= 1
+                ) {
 
-        const target =
-          document.querySelector(targetID);
+                    return;
 
-
-        if (!target) {
-          return;
-        }
+                }
 
 
-        event.preventDefault();
+                /*
+                 * Ignore links that do not point
+                 * to an existing section.
+                 */
+
+                const target =
+                    document.querySelector(targetID);
 
 
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
+                if (!target) {
+                    return;
+                }
 
-      }
-    );
 
-  });
+                event.preventDefault();
+
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+        );
+
+    });
 
 
 /* =======================================================
@@ -561,62 +839,63 @@ document
 ======================================================= */
 
 const destinationButtons =
-  document.querySelectorAll(
-    "[data-destination]"
-  );
+    document.querySelectorAll(
+        "[data-destination]"
+    );
 
 
 destinationButtons.forEach(button => {
 
-  button.addEventListener(
-    "click",
-    () => {
+    button.addEventListener(
+        "click",
+        () => {
 
-      const destination =
-        button.getAttribute(
-          "data-destination"
-        );
-
-
-      if (!destination) {
-        return;
-      }
+            const destination =
+                button.getAttribute(
+                    "data-destination"
+                );
 
 
-      const pickupField =
-        document.querySelector("#pickup");
-
-      const dropField =
-        document.querySelector("#drop");
+            if (!destination) {
+                return;
+            }
 
 
-      /*
-       * Put destination into drop field.
-       */
-
-      if (dropField) {
-
-        dropField.value =
-          destination;
-
-      }
+            const pickupField =
+                document.querySelector("#pickup");
 
 
-      /*
-       * Focus pickup field if empty.
-       */
+            const dropField =
+                document.querySelector("#drop");
 
-      if (
-        pickupField &&
-        !pickupField.value.trim()
-      ) {
 
-        pickupField.focus();
+            /*
+             * Put destination into drop field.
+             */
 
-      }
+            if (dropField) {
 
-    }
-  );
+                dropField.value =
+                    destination;
+
+            }
+
+
+            /*
+             * Focus pickup field if empty.
+             */
+
+            if (
+                pickupField &&
+                !pickupField.value.trim()
+            ) {
+
+                pickupField.focus();
+
+            }
+
+        }
+    );
 
 });
 
@@ -626,78 +905,78 @@ destinationButtons.forEach(button => {
 ======================================================= */
 
 const sections =
-  document.querySelectorAll(
-    "section[id]"
-  );
+    document.querySelectorAll(
+        "section[id]"
+    );
 
 
 const navigationLinks =
-  document.querySelectorAll(
-    '.nav-links a[href^="#"]'
-  );
+    document.querySelectorAll(
+        '.nav-links a[href^="#"]'
+    );
 
 
 if (
-  sections.length &&
-  navigationLinks.length
+    sections.length &&
+    navigationLinks.length
 ) {
 
-  const updateActiveNavigation = () => {
+    const updateActiveNavigation = () => {
 
-    let currentSection = "";
-
-
-    sections.forEach(section => {
-
-      const sectionTop =
-        section.offsetTop - 150;
+        let currentSection = "";
 
 
-      if (
-        window.scrollY >= sectionTop
-      ) {
+        sections.forEach(section => {
 
-        currentSection =
-          section.getAttribute("id");
-
-      }
-
-    });
+            const sectionTop =
+                section.offsetTop - 150;
 
 
-    navigationLinks.forEach(link => {
+            if (
+                window.scrollY >= sectionTop
+            ) {
 
-      link.classList.remove("active");
+                currentSection =
+                    section.getAttribute("id");
 
+            }
 
-      const href =
-        link.getAttribute("href");
-
-
-      if (
-        href ===
-        `#${currentSection}`
-      ) {
-
-        link.classList.add("active");
-
-      }
-
-    });
-
-  };
+        });
 
 
-  window.addEventListener(
-    "scroll",
-    updateActiveNavigation,
-    {
-      passive: true
-    }
-  );
+        navigationLinks.forEach(link => {
+
+            link.classList.remove("active");
 
 
-  updateActiveNavigation();
+            const href =
+                link.getAttribute("href");
+
+
+            if (
+                href ===
+                `#${currentSection}`
+            ) {
+
+                link.classList.add("active");
+
+            }
+
+        });
+
+    };
+
+
+    window.addEventListener(
+        "scroll",
+        updateActiveNavigation,
+        {
+            passive: true
+        }
+    );
+
+
+    updateActiveNavigation();
 
 }
 
@@ -707,27 +986,27 @@ if (
 ======================================================= */
 
 document
-  .querySelectorAll("img")
-  .forEach(image => {
+    .querySelectorAll("img")
+    .forEach(image => {
 
-    image.addEventListener(
-      "error",
-      () => {
+        image.addEventListener(
+            "error",
+            () => {
 
-        image.classList.add(
-          "image-error"
+                image.classList.add(
+                    "image-error"
+                );
+
+
+                console.warn(
+                    "Image could not be loaded:",
+                    image.src
+                );
+
+            }
         );
 
-
-        console.warn(
-          "Image could not be loaded:",
-          image.src
-        );
-
-      }
-    );
-
-  });
+    });
 
 
 /* =======================================================
@@ -735,37 +1014,37 @@ document
 ======================================================= */
 
 document
-  .querySelectorAll(
-    'a[href*="wa.me"]'
-  )
-  .forEach(link => {
+    .querySelectorAll(
+        'a[href*="wa.me"]'
+    )
+    .forEach(link => {
 
-    link.addEventListener(
-      "click",
-      event => {
+        link.addEventListener(
+            "click",
+            event => {
 
-        const href =
-          link.getAttribute("href");
-
-
-        if (
-          !href ||
-          href.trim() === ""
-        ) {
-
-          event.preventDefault();
+                const href =
+                    link.getAttribute("href");
 
 
-          console.warn(
-            "WhatsApp link is empty."
-          );
+                if (
+                    !href ||
+                    href.trim() === ""
+                ) {
 
-        }
+                    event.preventDefault();
 
-      }
-    );
 
-  });
+                    console.warn(
+                        "WhatsApp link is empty."
+                    );
+
+                }
+
+            }
+        );
+
+    });
 
 
 /* =======================================================
@@ -773,51 +1052,51 @@ document
 ======================================================= */
 
 const backToTop =
-  document.querySelector(
-    ".back-to-top"
-  );
+    document.querySelector(
+        ".back-to-top"
+    );
 
 
 if (backToTop) {
 
-  window.addEventListener(
-    "scroll",
-    () => {
+    window.addEventListener(
+        "scroll",
+        () => {
 
-      if (
-        window.scrollY > 500
-      ) {
+            if (
+                window.scrollY > 500
+            ) {
 
-        backToTop.classList.add(
-          "show"
-        );
+                backToTop.classList.add(
+                    "show"
+                );
 
-      } else {
+            } else {
 
-        backToTop.classList.remove(
-          "show"
-        );
+                backToTop.classList.remove(
+                    "show"
+                );
 
-      }
+            }
 
-    },
-    {
-      passive: true
-    }
-  );
+        },
+        {
+            passive: true
+        }
+    );
 
 
-  backToTop.addEventListener(
-    "click",
-    () => {
+    backToTop.addEventListener(
+        "click",
+        () => {
 
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
 
-    }
-  );
+        }
+    );
 
 }
 
@@ -827,5 +1106,5 @@ if (backToTop) {
 ======================================================= */
 
 console.log(
-  "Radhakrishna Taxi Service website loaded successfully."
+    "Radhakrishna Taxi Service website loaded successfully."
 );
