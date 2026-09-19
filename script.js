@@ -1,4 +1,3 @@
-```javascript
 /* =======================================================
    RADHAKRISHNA TAXI SERVICE
    MAIN JAVASCRIPT
@@ -12,6 +11,17 @@
 const menuButton = document.querySelector(".menu-button");
 const navLinks = document.querySelector(".nav-links");
 
+const packageDropdown =
+    document.querySelector(".nav-dropdown");
+
+const packageToggle =
+    document.querySelector(".nav-dropdown-toggle");
+
+
+/* -------------------------------------------------------
+   OPEN / CLOSE MOBILE NAVIGATION
+------------------------------------------------------- */
+
 if (menuButton && navLinks) {
 
     menuButton.addEventListener("click", (event) => {
@@ -19,7 +29,8 @@ if (menuButton && navLinks) {
         event.preventDefault();
         event.stopPropagation();
 
-        const isOpen = navLinks.classList.toggle("active");
+        const isOpen =
+            navLinks.classList.toggle("active");
 
         menuButton.setAttribute(
             "aria-expanded",
@@ -28,33 +39,43 @@ if (menuButton && navLinks) {
 
         menuButton.setAttribute(
             "aria-label",
-            isOpen ? "Close navigation" : "Open navigation"
+            isOpen
+                ? "Close navigation"
+                : "Open navigation"
         );
 
     });
 
 
-    /* Close menu after clicking normal links */
+    /* ---------------------------------------------------
+       CLOSE MENU AFTER CLICKING NORMAL LINKS
 
-    navLinks.querySelectorAll("a").forEach(link => {
+       Package Tours toggle is excluded.
+    --------------------------------------------------- */
 
-        link.addEventListener("click", () => {
+    navLinks
+        .querySelectorAll(
+            "a:not(.nav-dropdown-toggle)"
+        )
+        .forEach(link => {
 
-            navLinks.classList.remove("active");
+            link.addEventListener("click", () => {
 
-            menuButton.setAttribute(
-                "aria-expanded",
-                "false"
-            );
+                navLinks.classList.remove("active");
 
-            menuButton.setAttribute(
-                "aria-label",
-                "Open navigation"
-            );
+                menuButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+                menuButton.setAttribute(
+                    "aria-label",
+                    "Open navigation"
+                );
+
+            });
 
         });
-
-    });
 
 }
 
@@ -63,95 +84,120 @@ if (menuButton && navLinks) {
    PACKAGE TOURS DROPDOWN
 ======================================================= */
 
-const packageDropdown = document.querySelector(".nav-dropdown");
-const packageToggle = document.querySelector(".nav-dropdown-toggle");
-
 if (packageDropdown && packageToggle) {
 
-    packageToggle.addEventListener("click", (event) => {
+    packageToggle.addEventListener(
+        "click",
+        (event) => {
 
-        event.preventDefault();
-        event.stopPropagation();
-
-        /*
-         * On mobile, toggle the dropdown manually.
-         * On desktop, CSS hover handles the dropdown.
-         */
-
-        if (window.innerWidth <= 700) {
-
-            const isOpen =
-                packageDropdown.classList.toggle("open");
-
-            packageToggle.setAttribute(
-                "aria-expanded",
-                isOpen ? "true" : "false"
-            );
-
-        }
-
-    });
+            event.preventDefault();
+            event.stopPropagation();
 
 
-    /* Close dropdown when clicking outside */
+            /*
+             * Mobile only.
+             *
+             * Desktop dropdown is handled by CSS hover.
+             */
 
-    document.addEventListener("click", (event) => {
+            if (window.innerWidth <= 700) {
 
-        if (
-            window.innerWidth <= 700 &&
-            !packageDropdown.contains(event.target)
-        ) {
+                const isOpen =
+                    packageDropdown.classList.toggle(
+                        "open"
+                    );
 
-            packageDropdown.classList.remove("open");
 
-            packageToggle.setAttribute(
-                "aria-expanded",
-                "false"
-            );
+                packageToggle.setAttribute(
+                    "aria-expanded",
+                    isOpen ? "true" : "false"
+                );
+
+            }
 
         }
+    );
 
-    });
 
+    /* ---------------------------------------------------
+       CLOSE DROPDOWN WHEN CLICKING OUTSIDE
+    --------------------------------------------------- */
 
-    /* Close dropdown after selecting a package */
+    document.addEventListener(
+        "click",
+        (event) => {
 
-    packageDropdown
-        .querySelectorAll(".package-menu a")
-        .forEach(link => {
+            if (
+                window.innerWidth <= 700 &&
+                !packageDropdown.contains(event.target)
+            ) {
 
-            link.addEventListener("click", () => {
-
-                packageDropdown.classList.remove("open");
+                packageDropdown.classList.remove(
+                    "open"
+                );
 
                 packageToggle.setAttribute(
                     "aria-expanded",
                     "false"
                 );
 
+            }
 
-                /* Also close mobile navigation */
-
-                if (navLinks) {
-                    navLinks.classList.remove("active");
-                }
+        }
+    );
 
 
-                if (menuButton) {
+    /* ---------------------------------------------------
+       CLOSE DROPDOWN AFTER SELECTING A PACKAGE
+    --------------------------------------------------- */
 
-                    menuButton.setAttribute(
+    packageDropdown
+        .querySelectorAll(".package-menu a")
+        .forEach(link => {
+
+            link.addEventListener(
+                "click",
+                () => {
+
+                    packageDropdown.classList.remove(
+                        "open"
+                    );
+
+                    packageToggle.setAttribute(
                         "aria-expanded",
                         "false"
                     );
 
-                    menuButton.setAttribute(
-                        "aria-label",
-                        "Open navigation"
-                    );
+
+                    /*
+                     * Also close mobile navigation.
+                     */
+
+                    if (navLinks) {
+
+                        navLinks.classList.remove(
+                            "active"
+                        );
+
+                    }
+
+
+                    if (menuButton) {
+
+                        menuButton.setAttribute(
+                            "aria-expanded",
+                            "false"
+                        );
+
+                        menuButton.setAttribute(
+                            "aria-label",
+                            "Open navigation"
+                        );
+
+                    }
 
                 }
-
-            });
+            );
 
         });
 
@@ -302,15 +348,18 @@ function previousSlide() {
 
 if (nextButton) {
 
-    nextButton.addEventListener("click", (event) => {
+    nextButton.addEventListener(
+        "click",
+        (event) => {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        nextSlide();
+            nextSlide();
 
-        restartSlider();
+            restartSlider();
 
-    });
+        }
+    );
 
 }
 
@@ -321,15 +370,18 @@ if (nextButton) {
 
 if (prevButton) {
 
-    prevButton.addEventListener("click", (event) => {
+    prevButton.addEventListener(
+        "click",
+        (event) => {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        previousSlide();
+            previousSlide();
 
-        restartSlider();
+            restartSlider();
 
-    });
+        }
+    );
 
 }
 
@@ -340,21 +392,26 @@ if (prevButton) {
 
 dots.forEach((dot, index) => {
 
-    dot.addEventListener("click", (event) => {
+    dot.addEventListener(
+        "click",
+        (event) => {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        if (index >= slides.length) {
-            return;
+
+            if (index >= slides.length) {
+                return;
+            }
+
+
+            currentSlide = index;
+
+            updateSlider();
+
+            restartSlider();
+
         }
-
-        currentSlide = index;
-
-        updateSlider();
-
-        restartSlider();
-
-    });
+    );
 
 });
 
@@ -369,9 +426,13 @@ if (sliderTrack) {
         "touchstart",
         (event) => {
 
-            if (!event.touches || !event.touches.length) {
+            if (
+                !event.touches ||
+                !event.touches.length
+            ) {
                 return;
             }
+
 
             touchStartX =
                 event.touches[0].clientX;
@@ -447,6 +508,7 @@ if (sliderTrack) {
             ) {
 
                 isHorizontalSwipe = true;
+
 
                 /*
                  * Prevent the page from scrolling sideways
@@ -634,11 +696,14 @@ window.addEventListener(
 
         clearTimeout(resizeTimer);
 
-        resizeTimer = setTimeout(() => {
+        resizeTimer = setTimeout(
+            () => {
 
-            updateSlider();
+                updateSlider();
 
-        }, 150);
+            },
+            150
+        );
 
     },
     {
