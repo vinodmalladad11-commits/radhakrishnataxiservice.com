@@ -94,12 +94,14 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      min-width: 0;
     }
 
     .brand img {
       width: 52px;
       height: 52px;
       object-fit: contain;
+      flex-shrink: 0;
     }
 
     .brand-name {
@@ -128,6 +130,8 @@
       font-size: 14px;
       font-weight: 600;
       transition: 0.3s ease;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .back-link:hover {
@@ -137,15 +141,21 @@
 
     /* =========================
        HERO
+       FULL IMAGE - NO CROPPING
     ========================= */
 
     .tour-hero {
-      min-height: 480px;
+      width: 100%;
+      background: #f4f4f4;
+      overflow: hidden;
+      line-height: 0;
+    }
 
-      background-image: url("../assets/coastal-karnataka-tour-bg.jpg");
-      background-position: center center;
-      background-size: cover;
-      background-repeat: no-repeat;
+    .tour-hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
     }
 
     /* =========================
@@ -275,6 +285,7 @@
       font-size: 14px;
       font-weight: 700;
       transition: 0.3s ease;
+      text-align: center;
     }
 
     .package-button:hover {
@@ -434,8 +445,8 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .tour-hero {
-        min-height: 420px;
+      .intro-section h1 {
+        font-size: 34px;
       }
     }
 
@@ -448,6 +459,11 @@
       .header-inner {
         min-height: 68px;
         padding: 9px 15px;
+        gap: 10px;
+      }
+
+      .brand {
+        gap: 9px;
       }
 
       .brand img {
@@ -468,8 +484,18 @@
         font-size: 12px;
       }
 
+      /*
+        Hero image stays width:100% and height:auto.
+        The complete image remains visible.
+      */
       .tour-hero {
-        min-height: 350px;
+        width: 100%;
+      }
+
+      .tour-hero img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
       }
 
       .intro-section {
@@ -522,6 +548,11 @@
       .cta-section h2 {
         font-size: 28px;
       }
+
+      .whatsapp-button {
+        width: 100%;
+        max-width: 360px;
+      }
     }
 
     /* =========================
@@ -530,12 +561,21 @@
 
     @media (max-width: 450px) {
 
+      .header-inner {
+        padding: 8px 12px;
+      }
+
       .brand {
-        gap: 8px;
+        gap: 7px;
+      }
+
+      .brand img {
+        width: 40px;
+        height: 40px;
       }
 
       .brand-name {
-        font-size: 14px;
+        font-size: 13px;
       }
 
       .brand-location {
@@ -543,16 +583,45 @@
       }
 
       .back-link {
-        padding: 7px 10px;
-        font-size: 11px;
-      }
-
-      .tour-hero {
-        min-height: 300px;
+        padding: 7px 9px;
+        font-size: 10px;
       }
 
       .intro-section h1 {
         font-size: 27px;
+      }
+
+      .intro-section {
+        padding-top: 45px;
+      }
+    }
+
+    /* =========================
+       EXTRA SMALL MOBILE
+    ========================= */
+
+    @media (max-width: 360px) {
+
+      .brand-name {
+        font-size: 12px;
+      }
+
+      .brand-location {
+        font-size: 8px;
+      }
+
+      .back-link {
+        padding: 6px 8px;
+        font-size: 9px;
+      }
+
+      .intro-section h1 {
+        font-size: 25px;
+      }
+
+      .packages-heading h2,
+      .why-heading h2 {
+        font-size: 24px;
       }
     }
   </style>
@@ -573,6 +642,8 @@
         <img
           src="../assets/radhakrishna-taxi-logo.png"
           alt="Radhakrishna Taxi Service Logo"
+          width="52"
+          height="52"
         >
 
         <div>
@@ -600,12 +671,24 @@
 
   <!-- =========================
        HERO
+       FULL IMAGE - NO CROPPING
   ========================= -->
 
   <section
     class="tour-hero"
     aria-label="Coastal Karnataka Tour from Mangalore"
-  ></section>
+  >
+
+    <img
+      src="../assets/coastal-karnataka-tour-bg.jpg"
+      alt="Coastal Karnataka Tour Packages from Mangalore"
+      width="1920"
+      height="700"
+      loading="eager"
+      fetchpriority="high"
+    >
+
+  </section>
 
 
   <!-- =========================
@@ -673,7 +756,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Udupi%20and%20Malpe%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Udupi%20and%20Malpe%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -702,7 +785,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Kundapura%20Coastal%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Kundapura%20Coastal%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -731,7 +814,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Murudeshwar%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Murudeshwar%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -760,7 +843,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Gokarna%20Coastal%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Gokarna%20Coastal%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -789,7 +872,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Coastal%20Temple%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Coastal%20Temple%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -818,7 +901,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20plan%20a%20custom%20Coastal%20Karnataka%20tour%20from%20Mangalore."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20plan%20a%20custom%20Coastal%20Karnataka%20tour%20from%20Mangalore"
           target="_blank"
           rel="noopener"
         >
@@ -959,7 +1042,7 @@
 
     <a
       class="whatsapp-button"
-      href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20planning%20a%20Coastal%20Karnataka%20trip%20from%20Mangalore.%20Please%20share%20the%20tour%20details."
+      href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20planning%20a%20Coastal%20Karnataka%20trip%20from%20Mangalore.%20Please%20share%20the%20tour%20details"
       target="_blank"
       rel="noopener"
     >

@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Western Ghats Tour Packages from Mangalore | Radhakrishna Taxi Service</title>
@@ -65,7 +64,7 @@
       z-index: 1000;
       background: #ffffff;
       border-bottom: 1px solid #eeeeee;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
     }
 
     .header-inner {
@@ -104,6 +103,7 @@
       font-size: 14px;
       font-weight: 700;
       transition: 0.3s ease;
+      white-space: nowrap;
     }
 
     .home-btn:hover {
@@ -113,14 +113,21 @@
 
     /* =========================
        HERO
+       FULL IMAGE - NO CROPPING
     ========================= */
 
     .hero {
-      min-height: 560px;
-      background-image: url("../assets/western-ghats-tour-bg.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      width: 100%;
+      background: #f4f4f4;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    .hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
     }
 
     /* =========================
@@ -168,9 +175,8 @@
 
     .section-heading {
       max-width: 1100px;
-      margin: auto;
+      margin: 0 auto 45px;
       text-align: center;
-      margin-bottom: 45px;
     }
 
     .section-heading h2 {
@@ -198,13 +204,13 @@
       border-radius: 14px;
       padding: 30px 25px;
       border: 1px solid #eeeeee;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
       transition: 0.3s ease;
     }
 
     .package-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.09);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.09);
     }
 
     .package-icon {
@@ -350,16 +356,16 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .hero {
-        min-height: 480px;
-      }
-
     }
 
     @media (max-width: 650px) {
 
       .header-inner {
         padding: 10px 16px;
+      }
+
+      .brand {
+        gap: 9px;
       }
 
       .brand img {
@@ -374,10 +380,6 @@
       .home-btn {
         padding: 9px 13px;
         font-size: 13px;
-      }
-
-      .hero {
-        min-height: 390px;
       }
 
       .intro {
@@ -417,16 +419,16 @@
         padding: 8px 11px;
       }
 
-      .hero {
-        min-height: 300px;
-      }
-
       .why-grid {
         grid-template-columns: 1fr;
       }
 
       .intro h1 {
         font-size: 27px;
+      }
+
+      .package-card {
+        padding: 26px 21px;
       }
 
     }
@@ -449,6 +451,8 @@
         <img
           src="../assets/radhakrishna-taxi-logo.png"
           alt="Radhakrishna Taxi Service Logo"
+          width="52"
+          height="52"
         >
 
         <span class="brand-text">
@@ -473,7 +477,16 @@
   <section
     class="hero"
     aria-label="Western Ghats Tour Packages from Mangalore"
-  ></section>
+  >
+    <img
+      src="../assets/western-ghats-tour-bg.jpg"
+      alt="Western Ghats Tour Packages from Mangalore"
+      width="1920"
+      height="700"
+      loading="eager"
+      fetchpriority="high"
+    >
+  </section>
 
 
   <!-- =========================
@@ -545,7 +558,7 @@
 
         <a
           class="package-btn"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%20Western%20Ghats%20Hill%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%20Western%20Ghats%20Hill%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -562,7 +575,7 @@
         <div class="package-icon">💧</div>
 
         <h3>
-          Waterfall & Nature Tour
+          Waterfall &amp; Nature Tour
         </h3>
 
         <p>
@@ -572,7 +585,7 @@
 
         <a
           class="package-btn"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%20Waterfall%20and%20Nature%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%20Waterfall%20and%20Nature%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -599,7 +612,7 @@
 
         <a
           class="package-btn"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20an%20Agumbe%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20an%20Agumbe%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -626,7 +639,7 @@
 
         <a
           class="package-btn"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20a%20Kudremukh%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20a%20Kudremukh%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -653,7 +666,7 @@
 
         <a
           class="package-btn"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20a%20Sakleshpur%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20a%20Sakleshpur%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -681,7 +694,7 @@
 
         <a
           class="package-btn"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20want%20to%20plan%20a%20custom%20Western%20Ghats%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20want%20to%20plan%20a%20custom%20Western%20Ghats%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -689,7 +702,6 @@
         </a>
 
       </div>
-
 
     </div>
 
@@ -721,7 +733,6 @@
 
 
     <div class="why-grid">
-
 
       <div class="why-card">
 
@@ -782,7 +793,6 @@
 
       </div>
 
-
     </div>
 
   </section>
@@ -805,7 +815,7 @@
 
     <a
       class="whatsapp-btn"
-      href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20want%20to%20plan%20a%20Western%20Ghats%20Tour%20from%20Mangalore."
+      href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20want%20to%20plan%20a%20Western%20Ghats%20Tour%20from%20Mangalore"
       target="_blank"
       rel="noopener"
     >
@@ -827,7 +837,6 @@
     All rights reserved.
 
   </footer>
-
 
 </body>
 </html>

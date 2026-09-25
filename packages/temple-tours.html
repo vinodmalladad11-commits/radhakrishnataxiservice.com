@@ -30,10 +30,7 @@
     href="../assets/radhakrishna-taxi-logo.png"
   >
 
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 
   <link
     rel="preconnect"
@@ -160,17 +157,22 @@
        ===================================================== */
 
     .tour-hero {
-      position: relative;
-
       width: 100%;
 
-      min-height: 480px;
-
-      background:
-        url("../assets/temple-tour-bg.jpg")
-        center center / cover no-repeat;
+      background: #f4f4f4;
 
       overflow: hidden;
+
+      line-height: 0;
+    }
+
+    .tour-hero img {
+      width: 100%;
+      height: auto;
+
+      display: block;
+
+      object-fit: contain;
     }
 
 
@@ -249,6 +251,8 @@
     }
 
     .package-card {
+      position: relative;
+
       background: #ffffff;
 
       border: 1px solid #eeeeee;
@@ -271,6 +275,29 @@
       transform: translateY(-5px);
 
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.10);
+    }
+
+    .popular-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      width: fit-content;
+
+      margin-bottom: 12px;
+
+      padding: 5px 10px;
+
+      border-radius: 20px;
+
+      background: #b71c1c;
+      color: #ffffff;
+
+      font-size: 11px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .package-number {
@@ -560,12 +587,6 @@
         font-size: 13px;
       }
 
-      .tour-hero {
-        min-height: 380px;
-
-        background-position: center center;
-      }
-
       .intro-section {
         padding-top: 55px;
       }
@@ -589,10 +610,6 @@
 
       .back-link {
         padding: 7px 10px;
-      }
-
-      .tour-hero {
-        min-height: 330px;
       }
 
       .package-card {
@@ -625,6 +642,8 @@
         <img
           src="../assets/radhakrishna-taxi-logo.png"
           alt="Radhakrishna Taxi Service Logo"
+          width="52"
+          height="52"
         >
 
         <span class="brand-text">
@@ -655,6 +674,16 @@
     class="tour-hero"
     aria-label="Karnataka Temple Tours"
   >
+
+    <img
+      src="../assets/temple-tour-bg.jpg"
+      alt="Karnataka Temple Tour Packages from Mangalore"
+      width="1920"
+      height="700"
+      loading="eager"
+      fetchpriority="high"
+    >
+
   </section>
 
 
@@ -718,8 +747,10 @@
       <!-- PACKAGE 1 -->
 
       <article class="package-card">
-        
-        <span class="popular-badge">Popular Tour</span>
+
+        <span class="popular-badge">
+          Popular Tour
+        </span>
 
         <div class="package-number">
           01
@@ -746,7 +777,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%201%20Day%20Mangalore%20Temple%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%201%20Day%20Mangalore%20Temple%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -784,7 +815,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%202%20Day%20Udupi%20Kollur%20Temple%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%202%20Day%20Udupi%20Kollur%20Temple%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -823,7 +854,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%203%20Day%20Coastal%20Karnataka%20Temple%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%203%20Day%20Coastal%20Karnataka%20Temple%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -862,7 +893,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%204%20Day%20Kukke%20Dharmasthala%20Udupi%20Temple%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%204%20Day%20Kukke%20Dharmasthala%20Udupi%20Temple%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -901,7 +932,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%205%20Day%20Coastal%20Karnataka%20Pilgrimage%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%205%20Day%20Coastal%20Karnataka%20Pilgrimage%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -942,7 +973,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%206%20Day%20Karnataka%20Grand%20Temple%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%206%20Day%20Karnataka%20Grand%20Temple%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -1086,7 +1117,7 @@
 
       <a
         class="cta-button"
-        href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20plan%20a%20Karnataka%20Temple%20Tour%20from%20Mangalore."
+        href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20plan%20a%20Karnataka%20Temple%20Tour%20from%20Mangalore"
         target="_blank"
         rel="noopener"
       >

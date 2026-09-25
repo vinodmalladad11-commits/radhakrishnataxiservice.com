@@ -30,10 +30,7 @@
     href="../assets/radhakrishna-taxi-logo.png"
   >
 
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
 
   <link
     rel="preconnect"
@@ -153,12 +150,17 @@
     ========================= */
 
     .tour-hero {
-      min-height: 480px;
+      width: 100%;
+      background: #f4f4f4;
+      overflow: hidden;
+      line-height: 0;
+    }
 
-      background-image: url("../assets/mysore-tour-bg.jpg");
-      background-position: center center;
-      background-size: cover;
-      background-repeat: no-repeat;
+    .tour-hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
     }
 
     /* =========================
@@ -474,10 +476,6 @@
       .why-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-
-      .tour-hero {
-        min-height: 420px;
-      }
     }
 
     /* =========================
@@ -507,10 +505,6 @@
       .back-link {
         padding: 8px 12px;
         font-size: 12px;
-      }
-
-      .tour-hero {
-        min-height: 350px;
       }
 
       .intro-section {
@@ -588,10 +582,6 @@
         font-size: 11px;
       }
 
-      .tour-hero {
-        min-height: 300px;
-      }
-
       .intro-section h1 {
         font-size: 27px;
       }
@@ -606,15 +596,20 @@
   ========================= -->
 
   <header class="site-header">
+
     <div class="header-inner">
 
       <a href="../index.html" class="brand">
+
         <img
           src="../assets/radhakrishna-taxi-logo.png"
           alt="Radhakrishna Taxi Service Logo"
+          width="52"
+          height="52"
         >
 
         <div>
+
           <div class="brand-name">
             Radhakrishna Taxi Service
           </div>
@@ -622,7 +617,9 @@
           <span class="brand-location">
             Mangalore, Karnataka
           </span>
+
         </div>
+
       </a>
 
       <a href="../index.html" class="back-link">
@@ -630,6 +627,7 @@
       </a>
 
     </div>
+
   </header>
 
 
@@ -639,8 +637,19 @@
 
   <section
     class="tour-hero"
-    aria-label="Mysore Tour from Mangalore"
-  ></section>
+    aria-label="Mysore Tour Packages from Mangalore"
+  >
+
+    <img
+      src="../assets/mysore-tour-bg.jpg"
+      alt="Mysore Tour Packages from Mangalore"
+      width="1920"
+      height="700"
+      loading="eager"
+      fetchpriority="high"
+    >
+
+  </section>
 
 
   <!-- =========================
@@ -709,7 +718,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Mysore%20Palace%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Mysore%20Palace%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -738,7 +747,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Mysore%20Sightseeing%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Mysore%20Sightseeing%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -767,7 +776,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Chamundi%20Hills%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Chamundi%20Hills%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -796,7 +805,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Brindavan%20Gardens%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Brindavan%20Gardens%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -825,7 +834,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Mysore%20Family%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20enquire%20about%20the%20Mysore%20Family%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -854,7 +863,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20plan%20a%20custom%20Mysore%20tour%20from%20Mangalore."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20plan%20a%20custom%20Mysore%20tour%20from%20Mangalore"
           target="_blank"
           rel="noopener"
         >
@@ -995,7 +1004,7 @@
 
     <a
       class="whatsapp-button"
-      href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20planning%20a%20Mysore%20trip%20from%20Mangalore.%20Please%20share%20the%20tour%20details."
+      href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20planning%20a%20Mysore%20trip%20from%20Mangalore.%20Please%20share%20the%20tour%20details"
       target="_blank"
       rel="noopener"
     >

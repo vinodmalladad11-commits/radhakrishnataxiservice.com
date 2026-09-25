@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Coastal Jain Temple Tour Packages | Radhakrishna Taxi Service</title>
@@ -24,7 +23,14 @@
     href="https://radhakrishnataxiservice.com/packages/coastal-jain-temples.html"
   >
 
-  <link rel="icon" href="../assets/favicon.png">
+  <link
+    rel="icon"
+    type="image/png"
+    href="../assets/radhakrishna-taxi-logo.png"
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
@@ -32,6 +38,10 @@
   >
 
   <style>
+
+    /* =====================================================
+       RESET
+    ===================================================== */
 
     * {
       margin: 0;
@@ -48,6 +58,7 @@
       background: #ffffff;
       color: #1b1b1b;
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     a {
@@ -55,9 +66,15 @@
       color: inherit;
     }
 
-    /* =========================
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+
+    /* =====================================================
        HEADER
-    ========================= */
+    ===================================================== */
 
     header {
       position: sticky;
@@ -69,12 +86,15 @@
     }
 
     .header-inner {
-      max-width: 1200px;
+      width: min(1200px, 94%);
+      min-height: 76px;
       margin: auto;
-      padding: 12px 24px;
+      padding: 10px 0;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       gap: 20px;
     }
 
@@ -82,27 +102,39 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      min-width: 0;
     }
 
     .brand img {
       width: 52px;
       height: 52px;
       object-fit: contain;
+      flex-shrink: 0;
     }
 
     .brand-text {
       font-size: 19px;
       font-weight: 800;
       color: #151515;
+      white-space: nowrap;
     }
 
     .home-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
       background: #e21b23;
       color: #ffffff;
+
       padding: 10px 18px;
       border-radius: 8px;
+
       font-size: 14px;
       font-weight: 700;
+
+      white-space: nowrap;
+
       transition: 0.3s ease;
     }
 
@@ -111,71 +143,100 @@
       transform: translateY(-1px);
     }
 
-    /* =========================
+
+    /* =====================================================
        HERO
-    ========================= */
+       FULL IMAGE — NO CROPPING
+    ===================================================== */
 
     .hero {
-      min-height: 560px;
-      background-image: url("../assets/coastal-jain-temples-bg.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      width: 100%;
+      background: #f4f4f4;
+      overflow: hidden;
+      line-height: 0;
     }
 
-    /* =========================
+    .hero img {
+      width: 100%;
+      height: auto;
+
+      display: block;
+
+      /*
+        IMPORTANT:
+        Do NOT use object-fit: cover here.
+        The full image remains visible.
+      */
+
+      object-fit: contain;
+    }
+
+
+    /* =====================================================
        INTRO
-    ========================= */
+    ===================================================== */
 
     .intro {
-      max-width: 1050px;
+      width: min(1050px, 94%);
       margin: auto;
-      padding: 80px 24px 55px;
+
+      padding: 80px 20px 55px;
+
       text-align: center;
     }
 
     .section-label {
       color: #e21b23;
+
       font-size: 13px;
       font-weight: 800;
+
       letter-spacing: 2px;
       text-transform: uppercase;
+
       margin-bottom: 12px;
     }
 
     .intro h1 {
-      font-size: 40px;
+      font-size: clamp(30px, 4vw, 40px);
       line-height: 1.2;
+
       margin-bottom: 20px;
+
       color: #111111;
     }
 
     .intro p {
       max-width: 850px;
       margin: auto;
+
       color: #666666;
       font-size: 16px;
     }
 
-    /* =========================
+
+    /* =====================================================
        PACKAGES
-    ========================= */
+    ===================================================== */
 
     .packages-section {
       background: #f7f7f7;
-      padding: 70px 24px 80px;
+      padding: 70px 20px 80px;
     }
 
     .section-heading {
-      max-width: 1100px;
-      margin: auto;
+      width: min(1100px, 94%);
+      margin: 0 auto 45px;
+
       text-align: center;
-      margin-bottom: 45px;
     }
 
     .section-heading h2 {
-      font-size: 34px;
+      font-size: clamp(28px, 4vw, 34px);
+      line-height: 1.25;
+
       margin-bottom: 12px;
+
       color: #111111;
     }
 
@@ -186,91 +247,142 @@
     }
 
     .package-grid {
-      max-width: 1100px;
+      width: min(1100px, 94%);
       margin: auto;
+
       display: grid;
+
       grid-template-columns: repeat(3, 1fr);
+
       gap: 24px;
     }
 
     .package-card {
       background: #ffffff;
+
       border-radius: 14px;
+
       padding: 30px 25px;
+
       border: 1px solid #eeeeee;
+
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
-      transition: 0.3s ease;
+
+      display: flex;
+      flex-direction: column;
+
+      transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
     }
 
     .package-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.09);
+
+      box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.09);
     }
 
     .package-icon {
       font-size: 34px;
-      margin-bottom: 15px;
+      line-height: 1;
+
+      margin-bottom: 18px;
     }
 
     .package-card h3 {
       font-size: 20px;
+      line-height: 1.35;
+
       margin-bottom: 10px;
+
       color: #151515;
     }
 
     .package-card p {
       color: #686868;
+
       font-size: 14px;
-      margin-bottom: 20px;
+
+      margin-bottom: 22px;
     }
 
     .package-btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      margin-top: auto;
+
       background: #e21b23;
       color: #ffffff;
-      padding: 10px 16px;
+
+      padding: 11px 17px;
+
+      min-height: 43px;
+
       border-radius: 7px;
+
       font-size: 13px;
       font-weight: 700;
+
+      text-align: center;
+
       transition: 0.3s ease;
     }
 
     .package-btn:hover {
       background: #b9141b;
+      transform: translateY(-1px);
     }
 
-    /* =========================
+
+    /* =====================================================
        WHY CHOOSE US
-    ========================= */
+    ===================================================== */
 
     .why-section {
-      padding: 80px 24px;
+      padding: 80px 20px;
       background: #ffffff;
     }
 
     .why-grid {
-      max-width: 1050px;
+      width: min(1050px, 94%);
+
       margin: 45px auto 0;
+
       display: grid;
+
       grid-template-columns: repeat(4, 1fr);
+
       gap: 20px;
     }
 
     .why-card {
       text-align: center;
+
       padding: 28px 18px;
+
       border: 1px solid #eeeeee;
+
       border-radius: 12px;
+
       background: #ffffff;
+
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.03);
     }
 
     .why-icon {
       font-size: 30px;
-      margin-bottom: 12px;
+      line-height: 1;
+
+      margin-bottom: 14px;
     }
 
     .why-card h3 {
       font-size: 17px;
+      line-height: 1.3;
+
       margin-bottom: 8px;
     }
 
@@ -279,39 +391,64 @@
       color: #707070;
     }
 
-    /* =========================
+
+    /* =====================================================
        CTA
-    ========================= */
+    ===================================================== */
 
     .cta {
       background: #171717;
+
       color: #ffffff;
-      padding: 70px 24px;
+
+      padding: 70px 20px;
+
       text-align: center;
     }
 
+    .cta-inner {
+      width: min(800px, 94%);
+      margin: auto;
+    }
+
     .cta h2 {
-      font-size: 34px;
+      font-size: clamp(28px, 4vw, 34px);
+      line-height: 1.25;
+
       margin-bottom: 12px;
     }
 
     .cta p {
       color: #cccccc;
+
       max-width: 700px;
+
       margin: 0 auto 28px;
+
+      font-size: 15px;
     }
 
     .whatsapp-btn {
       display: inline-flex;
+
       align-items: center;
       justify-content: center;
+
       gap: 8px;
+
       background: #25d366;
+
       color: #ffffff;
+
       padding: 14px 25px;
+
+      min-height: 50px;
+
       border-radius: 8px;
+
       font-size: 15px;
       font-weight: 800;
+
       transition: 0.3s ease;
     }
 
@@ -320,15 +457,20 @@
       filter: brightness(0.95);
     }
 
-    /* =========================
+
+    /* =====================================================
        FOOTER
-    ========================= */
+    ===================================================== */
 
     footer {
       background: #0e0e0e;
+
       color: #aaaaaa;
+
       text-align: center;
+
       padding: 25px 20px;
+
       font-size: 13px;
     }
 
@@ -336,11 +478,16 @@
       color: #ffffff;
     }
 
-    /* =========================
-       RESPONSIVE
-    ========================= */
+
+    /* =====================================================
+       TABLET
+    ===================================================== */
 
     @media (max-width: 900px) {
+
+      .header-inner {
+        min-height: 70px;
+      }
 
       .package-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -350,16 +497,26 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .hero {
-        min-height: 480px;
-      }
-
     }
+
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
 
     @media (max-width: 650px) {
 
       .header-inner {
-        padding: 10px 16px;
+        width: 94%;
+        min-height: 68px;
+
+        padding: 8px 0;
+
+        gap: 10px;
+      }
+
+      .brand {
+        gap: 9px;
       }
 
       .brand img {
@@ -368,65 +525,139 @@
       }
 
       .brand-text {
-        font-size: 16px;
+        font-size: 15px;
       }
 
       .home-btn {
-        padding: 9px 13px;
-        font-size: 13px;
+        padding: 9px 12px;
+        font-size: 12px;
       }
 
+      /*
+        HERO:
+        Width remains 100%.
+        Height is automatic.
+        Therefore the entire image is visible.
+      */
+
       .hero {
-        min-height: 390px;
+        width: 100%;
+      }
+
+      .hero img {
+        width: 100%;
+        height: auto;
       }
 
       .intro {
-        padding: 60px 20px 45px;
+        padding: 60px 15px 45px;
       }
 
       .intro h1 {
         font-size: 30px;
       }
 
-      .section-heading h2 {
-        font-size: 28px;
+      .intro p {
+        font-size: 15px;
+      }
+
+      .packages-section {
+        padding: 60px 15px 70px;
       }
 
       .package-grid {
+        width: 100%;
         grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .package-card {
+        padding: 26px 22px;
+      }
+
+      .why-section {
+        padding: 65px 15px;
       }
 
       .why-grid {
+        width: 100%;
         grid-template-columns: 1fr 1fr;
+        gap: 15px;
       }
 
-      .cta h2 {
-        font-size: 28px;
+      .why-card {
+        padding: 24px 14px;
+      }
+
+      .cta {
+        padding: 60px 15px;
       }
 
     }
 
+
+    /* =====================================================
+       SMALL MOBILE
+    ===================================================== */
+
     @media (max-width: 450px) {
 
+      .header-inner {
+        gap: 8px;
+      }
+
       .brand-text {
-        font-size: 14px;
+        font-size: 13px;
+      }
+
+      .brand img {
+        width: 42px;
+        height: 42px;
       }
 
       .home-btn {
-        font-size: 12px;
-        padding: 8px 11px;
+        padding: 8px 10px;
+        font-size: 11px;
       }
 
-      .hero {
-        min-height: 300px;
+      .intro {
+        padding-top: 50px;
+      }
+
+      .intro h1 {
+        font-size: 27px;
       }
 
       .why-grid {
         grid-template-columns: 1fr;
       }
 
-      .intro h1 {
-        font-size: 27px;
+      .whatsapp-btn {
+        width: 100%;
+        max-width: 330px;
+      }
+
+    }
+
+
+    /* =====================================================
+       VERY SMALL PHONES
+    ===================================================== */
+
+    @media (max-width: 360px) {
+
+      .brand-text {
+        font-size: 12px;
+      }
+
+      .home-btn {
+        padding: 7px 9px;
+        font-size: 10px;
+      }
+
+      .brand img {
+        width: 39px;
+        height: 39px;
       }
 
     }
@@ -434,17 +665,23 @@
   </style>
 </head>
 
+
 <body>
 
-  <!-- =========================
+
+  <!-- =====================================================
        HEADER
-  ========================= -->
+  ===================================================== -->
 
   <header>
 
     <div class="header-inner">
 
-      <a href="../index.html" class="brand">
+      <a
+        href="../index.html"
+        class="brand"
+        aria-label="Radhakrishna Taxi Service Home"
+      >
 
         <img
           src="../assets/radhakrishna-taxi-logo.png"
@@ -457,7 +694,11 @@
 
       </a>
 
-      <a href="../index.html" class="home-btn">
+
+      <a
+        href="../index.html"
+        class="home-btn"
+      >
         ← Back to Home
       </a>
 
@@ -466,19 +707,31 @@
   </header>
 
 
-  <!-- =========================
+  <!-- =====================================================
        HERO
-  ========================= -->
+       FULL IMAGE
+  ===================================================== -->
 
   <section
     class="hero"
     aria-label="Coastal Jain Temple Tour Packages from Mangalore"
-  ></section>
+  >
+
+    <img
+      src="../assets/coastal-jain-temples-bg.jpg"
+      alt="Coastal Jain Temple Tour Packages from Mangalore"
+      width="1920"
+      height="700"
+      loading="eager"
+      fetchpriority="high"
+    >
+
+  </section>
 
 
-  <!-- =========================
+  <!-- =====================================================
        INTRO
-  ========================= -->
+  ===================================================== -->
 
   <section class="intro">
 
@@ -501,9 +754,9 @@
   </section>
 
 
-  <!-- =========================
+  <!-- =====================================================
        TOUR PACKAGES
-  ========================= -->
+  ===================================================== -->
 
   <section class="packages-section">
 
@@ -545,7 +798,7 @@
 
         <a
           class="package-btn"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%20Karkala%20Jain%20Heritage%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%20Karkala%20Jain%20Heritage%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -572,7 +825,7 @@
 
         <a
           class="package-btn"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%20Moodabidri%20Jain%20Temple%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%20Moodabidri%20Jain%20Temple%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -599,7 +852,7 @@
 
         <a
           class="package-btn"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%20Venur%20Jain%20Heritage%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%20Venur%20Jain%20Heritage%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -626,7 +879,7 @@
 
         <a
           class="package-btn"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%20Coastal%20Jain%20Heritage%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%20Coastal%20Jain%20Heritage%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -643,7 +896,7 @@
         <div class="package-icon">📿</div>
 
         <h3>
-          Jain Temple & Culture Tour
+          Jain Temple &amp; Culture Tour
         </h3>
 
         <p>
@@ -653,7 +906,7 @@
 
         <a
           class="package-btn"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%20Jain%20Temple%20and%20Culture%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20the%20Jain%20Temple%20and%20Culture%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -681,7 +934,7 @@
 
         <a
           class="package-btn"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20want%20to%20plan%20a%20custom%20Coastal%20Jain%20Temple%20Tour."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20want%20to%20plan%20a%20custom%20Coastal%20Jain%20Temple%20Tour"
           target="_blank"
           rel="noopener"
         >
@@ -696,9 +949,9 @@
   </section>
 
 
-  <!-- =========================
+  <!-- =====================================================
        WHY CHOOSE US
-  ========================= -->
+  ===================================================== -->
 
   <section class="why-section">
 
@@ -788,36 +1041,40 @@
   </section>
 
 
-  <!-- =========================
+  <!-- =====================================================
        CTA
-  ========================= -->
+  ===================================================== -->
 
   <section class="cta">
 
-    <h2>
-      Plan Your Jain Heritage Journey
-    </h2>
+    <div class="cta-inner">
 
-    <p>
-      Tell us your preferred temples, travel dates and group size.
-      We'll help arrange a comfortable private taxi from Mangalore.
-    </p>
+      <h2>
+        Plan Your Jain Heritage Journey
+      </h2>
 
-    <a
-      class="whatsapp-btn"
-      href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20want%20to%20plan%20a%20Coastal%20Jain%20Temple%20Tour%20from%20Mangalore."
-      target="_blank"
-      rel="noopener"
-    >
-      💬 Book on WhatsApp
-    </a>
+      <p>
+        Tell us your preferred temples, travel dates and group size.
+        We'll help arrange a comfortable private taxi from Mangalore.
+      </p>
+
+      <a
+        class="whatsapp-btn"
+        href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20want%20to%20plan%20a%20Coastal%20Jain%20Temple%20Tour%20from%20Mangalore"
+        target="_blank"
+        rel="noopener"
+      >
+        💬 Book on WhatsApp
+      </a>
+
+    </div>
 
   </section>
 
 
-  <!-- =========================
+  <!-- =====================================================
        FOOTER
-  ========================= -->
+  ===================================================== -->
 
   <footer>
 

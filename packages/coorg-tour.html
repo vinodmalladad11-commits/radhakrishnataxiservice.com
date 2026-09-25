@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Coorg Tour Packages from Mangalore | Radhakrishna Taxi Service</title>
@@ -31,12 +30,7 @@
   >
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
@@ -117,6 +111,7 @@
       height: 52px;
 
       object-fit: contain;
+      flex-shrink: 0;
     }
 
     .brand-text {
@@ -144,6 +139,9 @@
       color: #333;
 
       transition: 0.25s ease;
+
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .back-link:hover {
@@ -154,20 +152,21 @@
 
     /* =====================================================
        HERO
+       FULL IMAGE - NO CROPPING
        ===================================================== */
 
     .tour-hero {
-      position: relative;
-
       width: 100%;
-
-      min-height: 480px;
-
-      background:
-        url("../assets/coorg-tour-bg.jpg")
-        center center / cover no-repeat;
-
+      background: #f4f4f4;
       overflow: hidden;
+      line-height: 0;
+    }
+
+    .tour-hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
     }
 
 
@@ -353,6 +352,8 @@
       font-weight: 700;
 
       transition: 0.25s ease;
+
+      text-align: center;
     }
 
     .package-button:hover {
@@ -540,6 +541,7 @@
 
       .header-inner {
         min-height: 70px;
+        gap: 10px;
       }
 
       .brand-text {
@@ -557,10 +559,19 @@
         font-size: 13px;
       }
 
-      .tour-hero {
-        min-height: 380px;
+      /*
+        The hero image remains width:100% and height:auto.
+        The complete image remains visible on mobile.
+      */
 
-        background-position: center center;
+      .tour-hero {
+        width: 100%;
+      }
+
+      .tour-hero img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
       }
 
       .intro-section {
@@ -580,20 +591,45 @@
 
     @media (max-width: 450px) {
 
+      .header-inner {
+        width: 94%;
+      }
+
       .brand-text {
         font-size: 14px;
       }
 
-      .back-link {
-        padding: 7px 10px;
+      .brand img {
+        width: 42px;
+        height: 42px;
       }
 
-      .tour-hero {
-        min-height: 330px;
+      .back-link {
+        padding: 7px 10px;
+        font-size: 11px;
       }
 
       .package-card {
         padding: 24px 20px;
+      }
+
+    }
+
+
+    @media (max-width: 360px) {
+
+      .brand-text {
+        font-size: 12px;
+      }
+
+      .brand img {
+        width: 38px;
+        height: 38px;
+      }
+
+      .back-link {
+        padding: 6px 8px;
+        font-size: 10px;
       }
 
     }
@@ -622,6 +658,8 @@
         <img
           src="../assets/radhakrishna-taxi-logo.png"
           alt="Radhakrishna Taxi Service Logo"
+          width="52"
+          height="52"
         >
 
         <span class="brand-text">
@@ -646,12 +684,23 @@
 
   <!-- =====================================================
        HERO
+       FULL IMAGE - NO CROPPING
        ===================================================== -->
 
   <section
     class="tour-hero"
     aria-label="Coorg Tour Packages from Mangalore"
   >
+
+    <img
+      src="../assets/coorg-tour-bg.jpg"
+      alt="Coorg Tour Packages from Mangalore"
+      width="1920"
+      height="700"
+      loading="eager"
+      fetchpriority="high"
+    >
+
   </section>
 
 
@@ -741,7 +790,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20a%20Madikeri%20Sightseeing%20Tour%20from%20Mangalore."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20a%20Madikeri%20Sightseeing%20Tour%20from%20Mangalore"
           target="_blank"
           rel="noopener"
         >
@@ -781,7 +830,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20a%20Coorg%20Nature%20Tour%20from%20Mangalore."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20a%20Coorg%20Nature%20Tour%20from%20Mangalore"
           target="_blank"
           rel="noopener"
         >
@@ -821,7 +870,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20a%20Mandalpatti%20Tour%20from%20Mangalore."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20a%20Mandalpatti%20Tour%20from%20Mangalore"
           target="_blank"
           rel="noopener"
         >
@@ -861,7 +910,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20a%20Dubare%20Nisargadhama%20Coorg%20Tour%20from%20Mangalore."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20a%20Dubare%20Nisargadhama%20Coorg%20Tour%20from%20Mangalore"
           target="_blank"
           rel="noopener"
         >
@@ -901,7 +950,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20a%20Coorg%20Family%20Tour%20from%20Mangalore."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20a%20Coorg%20Family%20Tour%20from%20Mangalore"
           target="_blank"
           rel="noopener"
         >
@@ -940,7 +989,7 @@
 
         <a
           class="package-button"
-          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20want%20to%20customize%20a%20Coorg%20Tour%20from%20Mangalore."
+          href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20want%20to%20customize%20a%20Coorg%20Tour%20from%20Mangalore"
           target="_blank"
           rel="noopener"
         >
@@ -1084,7 +1133,7 @@
 
       <a
         class="cta-button"
-        href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20plan%20a%20Coorg%20Tour%20from%20Mangalore."
+        href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20would%20like%20to%20plan%20a%20Coorg%20Tour%20from%20Mangalore"
         target="_blank"
         rel="noopener"
       >
