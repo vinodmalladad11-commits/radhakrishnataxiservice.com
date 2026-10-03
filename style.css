@@ -1,0 +1,1832 @@
+/* =========================================================
+   RADHAKRISHNA TAXI SERVICE
+   Main Website Styles
+   ========================================================= */
+
+:root {
+
+    --dark: #102d35;
+    --dark-2: #173d47;
+    --orange: #e47b32;
+    --orange-dark: #c96220;
+
+    --cream: #f8f3ea;
+    --white: #ffffff;
+
+    --text: #26373c;
+    --muted: #66777b;
+
+    --border: #e5e1d9;
+
+    --shadow:
+        0 15px 45px rgba(16, 45, 53, 0.10);
+
+    --radius: 18px;
+
+    --container: 1180px;
+
+}
+
+
+/* ================= RESET ================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    font-family:
+        "DM Sans",
+        Arial,
+        sans-serif;
+
+    color: var(--text);
+
+    background: var(--white);
+
+    line-height: 1.65;
+
+    overflow-x: hidden;
+
+}
+
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+.container {
+
+    width: min(
+        calc(100% - 40px),
+        var(--container)
+    );
+
+    margin-inline: auto;
+
+}
+
+
+/* ================= HEADER ================= */
+
+.site-header {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    background:
+        rgba(255,255,255,0.96);
+
+    border-bottom:
+        1px solid rgba(16,45,53,0.08);
+
+    backdrop-filter: blur(12px);
+
+}
+
+
+.header-inner {
+
+    min-height: 82px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+}
+
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-shrink: 0;
+
+}
+
+
+.brand-logo {
+
+    width: 190px;
+
+    height: auto;
+
+}
+
+
+.main-nav {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+}
+
+
+.main-nav > a,
+.dropdown-button {
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: var(--dark);
+
+    transition:
+        color .2s ease;
+
+}
+
+
+.main-nav > a:hover,
+.dropdown-button:hover {
+
+    color: var(--orange);
+
+}
+
+
+.dropdown-button {
+
+    border: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+}
+
+
+.nav-dropdown {
+
+    position: relative;
+
+}
+
+
+.dropdown-menu {
+
+    position: absolute;
+
+    top: calc(100% + 18px);
+
+    right: 0;
+
+    width: 260px;
+
+    background: var(--white);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 14px;
+
+    box-shadow: var(--shadow);
+
+    padding: 10px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateY(8px);
+
+    transition:
+        opacity .2s ease,
+        transform .2s ease,
+        visibility .2s ease;
+
+}
+
+
+.nav-dropdown:hover .dropdown-menu,
+.nav-dropdown:focus-within .dropdown-menu {
+
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateY(0);
+
+}
+
+
+.dropdown-menu a {
+
+    display: block;
+
+    padding: 11px 13px;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+
+}
+
+
+.dropdown-menu a:hover {
+
+    background: var(--cream);
+
+    color: var(--orange);
+
+}
+
+
+.nav-book {
+
+    background: var(--orange);
+
+    color: var(--white) !important;
+
+    padding:
+        11px 18px;
+
+    border-radius: 50px;
+
+}
+
+
+.nav-book:hover {
+
+    background: var(--orange-dark);
+
+}
+
+
+.menu-toggle {
+
+    display: none;
+
+    border: 0;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    width: 44px;
+
+    height: 44px;
+
+}
+
+
+.menu-toggle span {
+
+    display: block;
+
+    width: 24px;
+
+    height: 2px;
+
+    background: var(--dark);
+
+    margin: 5px auto;
+
+}
+
+
+/* ================= HERO ================= */
+
+.hero {
+
+    position: relative;
+
+    min-height: 650px;
+
+    display: flex;
+
+    align-items: center;
+
+    background:
+        url("assets/hero.jpg")
+        center center / cover
+        no-repeat;
+
+}
+
+
+.hero-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(16,45,53,.94),
+            rgba(16,45,53,.72),
+            rgba(16,45,53,.30)
+        );
+
+}
+
+
+.hero-content {
+
+    position: relative;
+
+    z-index: 1;
+
+    max-width: 780px;
+
+    padding:
+        80px 0;
+
+    color: var(--white);
+
+}
+
+
+.hero-label {
+
+    display: inline-block;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: .12em;
+
+    text-transform: uppercase;
+
+    color: #ffd3b4;
+
+    margin-bottom: 18px;
+
+}
+
+
+.hero h1 {
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(42px, 6vw, 72px);
+
+    line-height: 1.08;
+
+    margin-bottom: 25px;
+
+}
+
+
+.hero p {
+
+    max-width: 690px;
+
+    font-size: 18px;
+
+    color:
+        rgba(255,255,255,.90);
+
+    margin-bottom: 32px;
+
+}
+
+
+.hero-buttons {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+}
+
+
+.btn {
+
+    display: inline-flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    min-height: 50px;
+
+    padding:
+        0 23px;
+
+    border-radius: 50px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+
+}
+
+
+.btn:hover {
+
+    transform: translateY(-2px);
+
+}
+
+
+.btn-primary {
+
+    background: var(--orange);
+
+    color: var(--white);
+
+}
+
+
+.btn-primary:hover {
+
+    background: var(--orange-dark);
+
+}
+
+
+.btn-light {
+
+    background: var(--white);
+
+    color: var(--dark);
+
+}
+
+
+.btn-whatsapp {
+
+    background: #1f9d55;
+
+    color: var(--white);
+
+}
+
+
+.hero-trust {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 18px;
+
+    margin-top: 35px;
+
+    font-size: 13px;
+
+    color:
+        rgba(255,255,255,.86);
+
+}
+
+
+/* ================= QUICK BOOKING ================= */
+
+.quick-booking {
+
+    margin-top: -65px;
+
+    position: relative;
+
+    z-index: 10;
+
+}
+
+
+.quick-booking-card {
+
+    background: var(--white);
+
+    border-radius: 20px;
+
+    box-shadow: var(--shadow);
+
+    padding:
+        28px 32px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 30px;
+
+}
+
+
+.section-kicker {
+
+    display: block;
+
+    color: var(--orange);
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: .13em;
+
+    margin-bottom: 8px;
+
+}
+
+
+.section-kicker.light {
+
+    color: #ffd0ae;
+
+}
+
+
+.quick-booking-card h2 {
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    color: var(--dark);
+
+    font-size: 27px;
+
+}
+
+
+.quick-actions {
+
+    display: flex;
+
+    gap: 12px;
+
+}
+
+
+.quick-call,
+.quick-whatsapp {
+
+    display: flex;
+
+    flex-direction: column;
+
+    min-width: 170px;
+
+    padding: 14px 18px;
+
+    border-radius: 13px;
+
+}
+
+
+.quick-call {
+
+    background: var(--cream);
+
+}
+
+
+.quick-whatsapp {
+
+    background: #e9f8ef;
+
+}
+
+
+.quick-actions strong {
+
+    font-size: 14px;
+
+}
+
+
+.quick-actions span {
+
+    font-size: 13px;
+
+    color: var(--muted);
+
+}
+
+
+/* ================= SECTIONS ================= */
+
+.section {
+
+    padding:
+        100px 0;
+
+}
+
+
+.intro-section {
+
+    padding-top: 90px;
+
+}
+
+
+.two-column {
+
+    display: grid;
+
+    grid-template-columns:
+        .85fr 1.15fr;
+
+    gap: 80px;
+
+    align-items: start;
+
+}
+
+
+.two-column h2,
+.section-heading h2 {
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    color: var(--dark);
+
+    font-size:
+        clamp(32px, 4vw, 48px);
+
+    line-height: 1.15;
+
+}
+
+
+.two-column p {
+
+    color: var(--muted);
+
+    margin-bottom: 18px;
+
+}
+
+
+.section-heading {
+
+    max-width: 760px;
+
+    margin-bottom: 45px;
+
+}
+
+
+.section-heading p {
+
+    color: var(--muted);
+
+    margin-top: 14px;
+
+}
+
+
+/* ================= SERVICES ================= */
+
+.services-section {
+
+    background: var(--cream);
+
+}
+
+
+.service-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.service-card {
+
+    background: var(--white);
+
+    padding: 30px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+
+}
+
+
+.service-card:hover {
+
+    transform: translateY(-5px);
+
+    box-shadow: var(--shadow);
+
+}
+
+
+.service-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 13px;
+
+    background: #fff0e6;
+
+    color: var(--orange);
+
+    font-size: 21px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.service-card h3 {
+
+    color: var(--dark);
+
+    font-size: 20px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.service-card p {
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.service-card a {
+
+    color: var(--orange);
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+}
+
+
+/* ================= AIRPORT ================= */
+
+.airport-banner {
+
+    position: relative;
+
+    background:
+        url("assets/airport.jpg")
+        center / cover
+        no-repeat;
+
+    color: var(--white);
+
+}
+
+
+.airport-banner-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(16,45,53,.88);
+
+}
+
+
+.airport-content {
+
+    position: relative;
+
+    z-index: 1;
+
+    min-height: 360px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 40px;
+
+}
+
+
+.airport-content h2 {
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(35px, 4vw, 55px);
+
+    margin-bottom: 10px;
+
+}
+
+
+.airport-content p {
+
+    color:
+        rgba(255,255,255,.85);
+
+}
+
+
+/* ================= ROUTES ================= */
+
+.routes-section {
+
+    background: var(--white);
+
+}
+
+
+.route-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 14px;
+
+}
+
+
+.route-card {
+
+    min-height: 105px;
+
+    padding: 22px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 14px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    background: var(--white);
+
+    transition:
+        border-color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+
+}
+
+
+.route-card:hover {
+
+    border-color: var(--orange);
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 30px
+        rgba(16,45,53,.08);
+
+}
+
+
+.route-card span {
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .08em;
+
+}
+
+
+.route-card strong {
+
+    color: var(--dark);
+
+    font-size: 18px;
+
+}
+
+
+/* ================= PACKAGES ================= */
+
+.packages-section {
+
+    background: var(--cream);
+
+}
+
+
+.package-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+}
+
+
+.package-card {
+
+    min-height: 190px;
+
+    padding: 28px;
+
+    border-radius: var(--radius);
+
+    color: var(--white);
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--dark),
+            var(--dark-2)
+        );
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    transition:
+        transform .2s ease;
+
+}
+
+
+.package-card:hover {
+
+    transform: translateY(-5px);
+
+}
+
+
+.package-card span {
+
+    color: #ffd0ae;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: .1em;
+
+}
+
+
+.package-card strong {
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size: 24px;
+
+    line-height: 1.2;
+
+    margin-top: 8px;
+
+}
+
+
+/* ================= FLEET ================= */
+
+.fleet-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.fleet-card {
+
+    overflow: hidden;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    background: var(--white);
+
+}
+
+
+.fleet-image-placeholder {
+
+    aspect-ratio: 16 / 9;
+
+    background: var(--cream);
+
+    overflow: hidden;
+
+}
+
+
+.fleet-image-placeholder img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+
+.fleet-info {
+
+    padding: 23px;
+
+}
+
+
+.fleet-info h3 {
+
+    color: var(--dark);
+
+    font-size: 21px;
+
+}
+
+
+.fleet-info p {
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    margin:
+        7px 0 12px;
+
+}
+
+
+.fleet-info strong {
+
+    color: var(--orange);
+
+    font-size: 17px;
+
+}
+
+
+.fleet-note {
+
+    margin-top: 30px;
+
+    padding: 18px 22px;
+
+    background: var(--cream);
+
+    border-radius: 12px;
+
+    color: var(--muted);
+
+}
+
+
+/* ================= WHY ================= */
+
+.why-section {
+
+    background: var(--dark);
+
+    color: var(--white);
+
+}
+
+
+.why-section .section-heading h2 {
+
+    color: var(--white);
+
+}
+
+
+.why-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 18px;
+
+}
+
+
+.why-card {
+
+    padding: 28px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    border-radius: 15px;
+
+}
+
+
+.why-card > span {
+
+    color: #ffb98d;
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+}
+
+
+.why-card h3 {
+
+    margin:
+        13px 0 8px;
+
+    font-size: 19px;
+
+}
+
+
+.why-card p {
+
+    color:
+        rgba(255,255,255,.70);
+
+    font-size: 14px;
+
+}
+
+
+/* ================= AREAS ================= */
+
+.areas-list {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+}
+
+
+.areas-list span {
+
+    padding:
+        10px 15px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 50px;
+
+    color: var(--dark);
+
+    background: var(--white);
+
+    font-size: 13px;
+
+}
+
+
+/* ================= FINAL CTA ================= */
+
+.final-cta {
+
+    background: var(--orange);
+
+    color: var(--white);
+
+}
+
+
+.final-cta-inner {
+
+    min-height: 330px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 40px;
+
+}
+
+
+.final-cta h2 {
+
+    font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(34px, 4vw, 52px);
+
+}
+
+
+.final-cta p {
+
+    color:
+        rgba(255,255,255,.86);
+
+}
+
+
+.final-buttons {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+}
+
+
+/* ================= FOOTER ================= */
+
+.site-footer {
+
+    background: #0b242b;
+
+    color: var(--white);
+
+}
+
+
+.footer-grid {
+
+    padding:
+        75px 0;
+
+    display: grid;
+
+    grid-template-columns:
+        1.4fr 1fr 1fr 1fr;
+
+    gap: 45px;
+
+}
+
+
+.footer-brand img {
+
+    width: 180px;
+
+    background: var(--white);
+
+    padding: 8px;
+
+    border-radius: 8px;
+
+    margin-bottom: 18px;
+
+}
+
+
+.footer-brand p {
+
+    max-width: 350px;
+
+    color:
+        rgba(255,255,255,.65);
+
+    font-size: 14px;
+
+}
+
+
+.footer-column {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+}
+
+
+.footer-column h3 {
+
+    font-size: 16px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.footer-column a {
+
+    color:
+        rgba(255,255,255,.68);
+
+    font-size: 14px;
+
+}
+
+
+.footer-column a:hover {
+
+    color: #ffbd94;
+
+}
+
+
+.footer-bottom {
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.10);
+
+}
+
+
+.footer-bottom-inner {
+
+    min-height: 70px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+
+.footer-bottom p,
+.footer-bottom a {
+
+    color:
+        rgba(255,255,255,.55);
+
+    font-size: 12px;
+
+}
+
+
+.footer-bottom-inner > div {
+
+    display: flex;
+
+    gap: 10px;
+
+}
+
+
+/* ================= FLOATING WHATSAPP ================= */
+
+.floating-whatsapp {
+
+    position: fixed;
+
+    right: 20px;
+
+    bottom: 20px;
+
+    z-index: 999;
+
+    background: #1f9d55;
+
+    color: var(--white);
+
+    padding:
+        13px 18px;
+
+    border-radius: 50px;
+
+    box-shadow:
+        0 8px 30px
+        rgba(0,0,0,.20);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+}
+
+
+.floating-whatsapp:hover {
+
+    transform: translateY(-2px);
+
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1050px) {
+
+    .main-nav {
+
+        gap: 15px;
+
+    }
+
+    .service-grid,
+    .fleet-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+    .why-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+    .footer-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 820px) {
+
+    .header-inner {
+
+        min-height: 72px;
+
+    }
+
+    .menu-toggle {
+
+        display: block;
+
+    }
+
+    .main-nav {
+
+        position: absolute;
+
+        top: 72px;
+
+        left: 20px;
+
+        right: 20px;
+
+        display: none;
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        gap: 0;
+
+        background: var(--white);
+
+        padding: 12px;
+
+        border-radius: 15px;
+
+        box-shadow: var(--shadow);
+
+        border:
+            1px solid var(--border);
+
+    }
+
+    .main-nav.open {
+
+        display: flex;
+
+    }
+
+    .main-nav > a,
+    .dropdown-button {
+
+        padding: 13px;
+
+    }
+
+    .dropdown-menu {
+
+        position: static;
+
+        width: 100%;
+
+        display: none;
+
+        box-shadow: none;
+
+        border: 0;
+
+        padding: 0 8px 8px;
+
+        opacity: 1;
+
+        visibility: visible;
+
+        transform: none;
+
+    }
+
+    .nav-dropdown.open .dropdown-menu {
+
+        display: block;
+
+    }
+
+    .nav-book {
+
+        text-align: center;
+
+        margin-top: 5px;
+
+    }
+
+    .hero {
+
+        min-height: 620px;
+
+    }
+
+    .quick-booking-card {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+    .quick-actions {
+
+        flex-direction: column;
+
+    }
+
+    .two-column {
+
+        grid-template-columns: 1fr;
+
+        gap: 30px;
+
+    }
+
+    .airport-content,
+    .final-cta-inner {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        justify-content: center;
+
+    }
+
+    .route-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+    .package-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .container {
+
+        width:
+            min(
+                calc(100% - 28px),
+                var(--container)
+            );
+
+    }
+
+    .brand-logo {
+
+        width: 155px;
+
+    }
+
+    .hero-content {
+
+        padding:
+            65px 0;
+
+    }
+
+    .hero h1 {
+
+        font-size: 39px;
+
+    }
+
+    .hero p {
+
+        font-size: 16px;
+
+    }
+
+    .hero-buttons {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+    .btn {
+
+        width: 100%;
+
+    }
+
+    .hero-trust {
+
+        flex-direction: column;
+
+        gap: 7px;
+
+    }
+
+    .section {
+
+        padding:
+            70px 0;
+
+    }
+
+    .quick-booking {
+
+        margin-top: -40px;
+
+    }
+
+    .quick-booking-card {
+
+        padding: 22px;
+
+    }
+
+    .quick-booking-card h2 {
+
+        font-size: 23px;
+
+    }
+
+    .service-grid,
+    .fleet-grid,
+    .route-grid,
+    .package-grid,
+    .why-grid,
+    .footer-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .airport-content {
+
+        min-height: 400px;
+
+    }
+
+    .footer-grid {
+
+        padding:
+            55px 0;
+
+    }
+
+    .footer-bottom-inner {
+
+        padding:
+            18px 0;
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+    .floating-whatsapp {
+
+        right: 14px;
+
+        bottom: 14px;
+
+    }
+
+}
