@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+    <!-- Main Pages -->
+
     <url>
         <loc>https://radhakrishnataxiservice.com/</loc>
     </url>
@@ -13,14 +15,11 @@
         <loc>https://radhakrishnataxiservice.com/airport-booking.html</loc>
     </url>
 
+
     <!-- Services -->
 
     <url>
         <loc>https://radhakrishnataxiservice.com/services/mangalore-airport-taxi.html</loc>
-    </url>
-
-    <url>
-        <loc>https://radhakrishnataxiservice.com/services/airport-pickup-drop.html</loc>
     </url>
 
     <url>
@@ -40,16 +39,9 @@
     </url>
 
     <url>
-        <loc>https://radhakrishnataxiservice.com/services/family-taxi.html</loc>
-    </url>
-
-    <url>
-        <loc>https://radhakrishnataxiservice.com/services/hotel-airport-taxi.html</loc>
-    </url>
-
-    <url>
         <loc>https://radhakrishnataxiservice.com/services/tour-package-taxi.html</loc>
     </url>
+
 
     <!-- Routes -->
 
@@ -124,6 +116,7 @@
     <url>
         <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-dandeli.html</loc>
     </url>
+
 
     <!-- Tour Packages -->
 
