@@ -2,1529 +2,1448 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Belur & Halebidu Tour from Mangalore | Radhakrishna Taxi Service</title>
 
-    <meta
-        name="description"
-        content="Belur and Halebidu heritage tour from Mangalore with Radhakrishna Taxi Service. Visit Chennakeshava Temple, Hoysaleswara Temple and famous Hoysala heritage attractions."
-    >
+    <meta name="description" content="Plan a Belur and Halebidu heritage tour from Mangalore with Radhakrishna Taxi Service. Explore Chennakeshava Temple, Hoysaleswara Temple and the remarkable Hoysala architectural heritage.">
 
     <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#102d35">
 
-    <link
-        rel="canonical"
-        href="https://radhakrishnataxiservice.com/packages/belur-halebidu-tour.html"
-    >
-
-    <link
-        rel="icon"
-        type="image/png"
-        href="../assets/radhakrishna-taxi-logo.png"
-    >
+    <link rel="canonical" href="https://radhakrishnataxiservice.com/packages/belur-halebidu-tour.html">
+    <link rel="icon" type="image/png" href="../assets/radhakrishna-taxi-logo.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <meta
-        property="og:title"
-        content="Belur & Halebidu Tour from Mangalore | Radhakrishna Taxi Service"
-    >
-
-    <meta
-        property="og:description"
-        content="Explore Belur and Halebidu Hoysala heritage temples from Mangalore with Radhakrishna Taxi Service."
-    >
-
-    <meta
-        property="og:url"
-        content="https://radhakrishnataxiservice.com/packages/belur-halebidu-tour.html"
-    >
-
-    <meta
-        property="og:type"
-        content="website"
-    >
-
-    <meta
-        property="og:image"
-        content="https://radhakrishnataxiservice.com/assets/karnataka-tour.jpg"
-    >
+    <meta property="og:title" content="Belur & Halebidu Tour from Mangalore | Radhakrishna Taxi Service">
+    <meta property="og:description" content="Discover the magnificent Hoysala temples of Belur and Halebidu with comfortable private taxi travel from Mangalore.">
+    <meta property="og:url" content="https://radhakrishnataxiservice.com/packages/belur-halebidu-tour.html">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://radhakrishnataxiservice.com/assets/belur%20halebidu.jpg">
 
     <link rel="stylesheet" href="../style.css">
+
+    <style>
+        /* =========================================
+           BELUR & HALEBIDU — PAGE-SPECIFIC DESIGN
+        ========================================= */
+
+        .bh-page {
+            --bh-ink: #172c30;
+            --bh-muted: #657276;
+            --bh-paper: #f8f7f3;
+            --bh-white: #ffffff;
+            --bh-line: #e4e5df;
+            --bh-accent: #b58b55;
+            --bh-deep: #102d35;
+
+            color: var(--bh-ink);
+            font-family: "DM Sans", sans-serif;
+            font-size: 16px;
+            line-height: 1.8;
+            overflow: hidden;
+        }
+
+        .bh-page *,
+        .bh-page *::before,
+        .bh-page *::after {
+            box-sizing: border-box;
+        }
+
+        .bh-page h1,
+        .bh-page h2,
+        .bh-page h3,
+        .bh-page p {
+            margin-top: 0;
+        }
+
+        .bh-page h1,
+        .bh-page h2,
+        .bh-page h3 {
+            font-family: "Playfair Display", Georgia, serif;
+            font-weight: 500;
+            letter-spacing: -0.035em;
+            line-height: 1.15;
+        }
+
+        .bh-page p {
+            color: var(--bh-muted);
+        }
+
+        .bh-page a {
+            text-decoration: none;
+        }
+
+        .bh-container {
+            width: min(1160px, calc(100% - 48px));
+            margin-inline: auto;
+        }
+
+        .bh-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+            color: var(--bh-accent);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.19em;
+            line-height: 1.6;
+            text-transform: uppercase;
+        }
+
+        .bh-eyebrow::before {
+            width: 30px;
+            height: 1px;
+            background: currentColor;
+            content: "";
+        }
+
+        .bh-heading {
+            max-width: 750px;
+            margin-bottom: 22px;
+            font-size: clamp(34px, 4.4vw, 57px);
+        }
+
+        .bh-heading em,
+        .bh-hero h1 em,
+        .bh-cta h2 em {
+            color: var(--bh-accent);
+            font-weight: 400;
+        }
+
+        .bh-lead {
+            max-width: 690px;
+            font-size: 17px;
+            line-height: 1.95;
+        }
+
+        .bh-section {
+            padding-block: 100px;
+        }
+
+        /* Hero */
+
+        .bh-hero {
+            position: relative;
+            display: flex;
+            min-height: 690px;
+            align-items: center;
+            isolation: isolate;
+            overflow: hidden;
+            background: var(--bh-deep);
+            color: white;
+        }
+
+        .bh-hero::before {
+            position: absolute;
+            z-index: -2;
+            inset: 0;
+            background-image:
+                linear-gradient(
+                    90deg,
+                    rgba(9, 25, 29, 0.88) 0%,
+                    rgba(9, 25, 29, 0.68) 46%,
+                    rgba(9, 25, 29, 0.22) 100%
+                ),
+                url("../assets/belur%20halebidu.jpg");
+            background-position: center;
+            background-size: cover;
+            content: "";
+        }
+
+        .bh-hero::after {
+            position: absolute;
+            z-index: -1;
+            inset: 0;
+            background: linear-gradient(
+                0deg,
+                rgba(9, 25, 29, 0.64),
+                transparent 35%
+            );
+            content: "";
+        }
+
+        .bh-hero-content {
+            width: min(1160px, calc(100% - 48px));
+            margin: 0 auto;
+            padding-block: 110px 150px;
+        }
+
+        .bh-hero .bh-eyebrow {
+            color: #e1c39a;
+        }
+
+        .bh-hero h1 {
+            max-width: 800px;
+            margin-bottom: 28px;
+            color: #fff;
+            font-size: clamp(48px, 7.5vw, 88px);
+            line-height: 1.04;
+        }
+
+        .bh-hero h1 em {
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        .bh-hero-copy {
+            max-width: 620px;
+            margin-bottom: 35px;
+            color: rgba(255, 255, 255, 0.84);
+            font-size: 17px;
+            line-height: 1.9;
+        }
+
+        .bh-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 13px;
+        }
+
+        .bh-button {
+            display: inline-flex;
+            min-height: 52px;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px 23px;
+            border: 1px solid transparent;
+            border-radius: 2px;
+            font-family: "DM Sans", sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.025em;
+            transition: background 0.2s ease, color 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .bh-button-primary {
+            background: #c09a68;
+            color: #142a2e;
+        }
+
+        .bh-button-primary:hover {
+            background: #d5b78e;
+        }
+
+        .bh-button-outline {
+            border-color: rgba(255, 255, 255, 0.55);
+            color: white;
+        }
+
+        .bh-button-outline:hover {
+            border-color: white;
+            background: white;
+            color: var(--bh-ink);
+        }
+
+        .bh-hero-meta {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.22);
+            background: rgba(12, 32, 36, 0.38);
+            backdrop-filter: blur(8px);
+        }
+
+        .bh-meta-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            padding-block: 22px;
+        }
+
+        .bh-meta-item {
+            display: grid;
+            gap: 3px;
+        }
+
+        .bh-meta-item span {
+            color: #d5b78e;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .bh-meta-item strong {
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* Introduction */
+
+        .bh-intro {
+            background: var(--bh-paper);
+        }
+
+        .bh-intro-grid {
+            display: grid;
+            grid-template-columns: 0.7fr 2fr;
+            gap: 70px;
+            align-items: start;
+        }
+
+        .bh-index {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding-top: 10px;
+            color: var(--bh-muted);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .bh-index span {
+            color: var(--bh-accent);
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 30px;
+            font-weight: 500;
+            letter-spacing: 0;
+        }
+
+        .bh-intro-copy .bh-heading {
+            margin-bottom: 27px;
+        }
+
+        .bh-intro-copy p {
+            max-width: 760px;
+            margin-bottom: 18px;
+        }
+
+        /* Temple highlights */
+
+        .bh-highlights {
+            background: #fff;
+        }
+
+        .bh-section-top {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 36px;
+            margin-bottom: 45px;
+        }
+
+        .bh-section-top .bh-heading {
+            margin-bottom: 0;
+        }
+
+        .bh-section-top > p {
+            max-width: 380px;
+            margin-bottom: 4px;
+        }
+
+        .bh-feature-list {
+            border-top: 1px solid var(--bh-line);
+        }
+
+        .bh-feature {
+            display: grid;
+            grid-template-columns: 65px minmax(220px, 0.95fr) 1.25fr 25px;
+            align-items: center;
+            gap: 24px;
+            padding-block: 28px;
+            border-bottom: 1px solid var(--bh-line);
+        }
+
+        .bh-feature-number {
+            color: var(--bh-accent);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+
+        .bh-feature h3 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .bh-feature p {
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.85;
+        }
+
+        .bh-feature-arrow {
+            color: var(--bh-accent);
+            font-size: 22px;
+        }
+
+        /* Journey information */
+
+        .bh-journey {
+            background: var(--bh-paper);
+        }
+
+        .bh-journey-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .bh-journey-intro p {
+            max-width: 500px;
+        }
+
+        .bh-info-list {
+            border-top: 1px solid var(--bh-line);
+        }
+
+        .bh-info-row {
+            display: grid;
+            grid-template-columns: 43px 1fr;
+            gap: 17px;
+            padding-block: 21px;
+            border-bottom: 1px solid var(--bh-line);
+        }
+
+        .bh-info-number {
+            color: var(--bh-accent);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .bh-info-row h3 {
+            margin-bottom: 7px;
+            font-size: 21px;
+        }
+
+        .bh-info-row p {
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        /* Booking band */
+
+        .bh-booking-band {
+            padding-block: 32px;
+            background: var(--bh-deep);
+            color: white;
+        }
+
+        .bh-booking-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .bh-booking-inner span {
+            display: block;
+            margin-bottom: 5px;
+            color: #d5b78e;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+        }
+
+        .bh-booking-inner strong {
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: clamp(20px, 2.4vw, 28px);
+            font-weight: 500;
+        }
+
+        .bh-booking-inner a {
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .bh-booking-inner a:hover {
+            color: #d5b78e;
+        }
+
+        /* Related destinations */
+
+        .bh-related {
+            background: white;
+        }
+
+        .bh-related-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .bh-related-card {
+            display: flex;
+            min-height: 235px;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 28px;
+            border: 1px solid var(--bh-line);
+            background: #fff;
+            transition: border-color 0.2s ease,
+                transform 0.2s ease, background 0.2s ease;
+        }
+
+        .bh-related-card:hover {
+            transform: translateY(-4px);
+            border-color: #c5a579;
+            background: var(--bh-paper);
+        }
+
+        .bh-related-card > span {
+            color: var(--bh-accent);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+        }
+
+        .bh-related-card h3 {
+            margin: 25px 0 12px;
+            font-size: 27px;
+        }
+
+        .bh-related-card p {
+            margin-bottom: 18px;
+            font-size: 13px;
+        }
+
+        .bh-related-card b {
+            color: var(--bh-deep);
+            font-size: 13px;
+        }
+
+        /* FAQs */
+
+        .bh-faq {
+            background: var(--bh-paper);
+        }
+
+        .bh-faq-grid {
+            display: grid;
+            grid-template-columns: 0.85fr 1.4fr;
+            gap: 75px;
+            align-items: start;
+        }
+
+        .bh-faq-list {
+            border-top: 1px solid var(--bh-line);
+        }
+
+        .bh-faq-item {
+            padding-block: 24px;
+            border-bottom: 1px solid var(--bh-line);
+        }
+
+        .bh-faq-item h3 {
+            margin-bottom: 10px;
+            font-family: "DM Sans", sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.55;
+        }
+
+        .bh-faq-item p {
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        /* Final CTA */
+
+        .bh-cta {
+            padding: 100px 24px;
+            background: var(--bh-deep);
+            color: white;
+            text-align: center;
+        }
+
+        .bh-cta .bh-eyebrow {
+            justify-content: center;
+        }
+
+        .bh-cta h2 {
+            max-width: 780px;
+            margin: 0 auto 24px;
+            color: white;
+            font-size: clamp(38px, 5.5vw, 65px);
+        }
+
+        .bh-cta > .bh-container > p {
+            max-width: 630px;
+            margin: 0 auto 30px;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .bh-cta .bh-actions {
+            justify-content: center;
+        }
+
+        /* Breadcrumbs */
+
+        .bh-breadcrumbs {
+            padding-block: 14px;
+            background: #fff;
+            border-bottom: 1px solid var(--bh-line);
+        }
+
+        .bh-breadcrumbs ol {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            color: var(--bh-muted);
+            font-size: 12px;
+        }
+
+        .bh-breadcrumbs a {
+            color: var(--bh-ink);
+        }
+
+        .bh-breadcrumbs a:hover {
+            color: var(--bh-accent);
+        }
+
+        /* Responsive */
+
+        @media (max-width: 850px) {
+            .bh-section {
+                padding-block: 75px;
+            }
+
+            .bh-hero {
+                min-height: 650px;
+            }
+
+            .bh-intro-grid,
+            .bh-journey-grid,
+            .bh-faq-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .bh-feature {
+                grid-template-columns: 38px 1fr 20px;
+                gap: 16px;
+            }
+
+            .bh-feature p {
+                grid-column: 2 / 3;
+            }
+
+            .bh-feature-arrow {
+                grid-column: 3;
+                grid-row: 1;
+            }
+
+            .bh-related-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .bh-section-top {
+                align-items: start;
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .bh-container,
+            .bh-hero-content {
+                width: calc(100% - 36px);
+            }
+
+            .bh-hero {
+                min-height: 700px;
+                align-items: flex-start;
+            }
+
+            .bh-hero::before {
+                background-position: 57% center;
+            }
+
+            .bh-hero-content {
+                padding-top: 95px;
+                padding-bottom: 175px;
+            }
+
+            .bh-hero h1 {
+                font-size: clamp(43px, 12vw, 61px);
+            }
+
+            .bh-hero-copy {
+                font-size: 15px;
+            }
+
+            .bh-meta-inner {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 17px;
+            }
+
+            .bh-meta-item strong {
+                font-size: 12px;
+            }
+
+            .bh-section {
+                padding-block: 60px;
+            }
+
+            .bh-heading {
+                font-size: 36px;
+            }
+
+            .bh-lead {
+                font-size: 15px;
+            }
+
+            .bh-feature {
+                grid-template-columns: 28px minmax(0, 1fr) 16px;
+                gap: 11px;
+                padding-block: 23px;
+            }
+
+            .bh-feature h3 {
+                font-size: 20px;
+            }
+
+            .bh-feature p {
+                font-size: 13px;
+            }
+
+            .bh-booking-inner {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .bh-related-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bh-related-card {
+                min-height: 195px;
+            }
+
+            .bh-cta {
+                padding-block: 70px;
+            }
+
+            .bh-button {
+                width: 100%;
+            }
+
+            .bh-actions {
+                width: 100%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .bh-page *,
+            .bh-page *::before,
+            .bh-page *::after {
+                scroll-behavior: auto !important;
+                transition: none !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- =========================================================
-     HEADER
-========================================================= -->
-
 <header class="site-header">
-
     <div class="header-inner">
 
-        <a href="../index.html" class="brand">
-
-            <img
-                src="../assets/radhakrishna-taxi-logo.png"
-                alt="Radhakrishna Taxi Service"
-            >
-
+        <a href="../index.html" class="brand" aria-label="Radhakrishna Taxi Service home">
+            <img src="../assets/radhakrishna-taxi-logo.png"
+                 alt="Radhakrishna Taxi Service">
         </a>
 
-
-        <button
-            class="menu-toggle"
-            id="menuToggle"
-            aria-label="Open navigation"
-            aria-expanded="false"
-        >
+        <button class="menu-toggle"
+                id="menuToggle"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+                aria-controls="mainNav">
             <span></span>
             <span></span>
             <span></span>
         </button>
 
-
-        <nav class="main-nav" id="mainNav">
-
-            <a href="../index.html">
-                Home
-            </a>
-
-            <a href="../index.html#services">
-                Services
-            </a>
-
-            <a href="../index.html#routes">
-                Routes
-            </a>
-
+        <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+            <a href="../index.html">Home</a>
+            <a href="../index.html#services">Services</a>
+            <a href="../index.html#routes">Routes</a>
 
             <div class="nav-dropdown">
-
-                <button
-                    class="dropdown-button"
-                    type="button"
-                >
-                    Tours
-                    <span>⌄</span>
+                <button class="dropdown-button" type="button">
+                    Tours <span>⌄</span>
                 </button>
 
-
                 <div class="dropdown-menu">
-
-                    <a href="temple-tours.html">
-                        Temple Tours
-                    </a>
-
-                    <a href="coastal-karnataka.html">
-                        Coastal Karnataka
-                    </a>
-
-                    <a href="western-ghats.html">
-                        Western Ghats
-                    </a>
-
-                    <a href="goa-tour-package.html">
-                        Goa Tour Package
-                    </a>
-
-                    <a href="chikkamagaluru-tour.html">
-                        Chikkamagaluru
-                    </a>
-
-                    <a href="coastal-jain-temples.html">
-                        Coastal Jain Temples
-                    </a>
-
+                    <a href="temple-tours.html">Temple Tours</a>
+                    <a href="coastal-karnataka.html">Coastal Karnataka</a>
+                    <a href="western-ghats.html">Western Ghats</a>
+                    <a href="goa-tour-package.html">Goa Tour Package</a>
+                    <a href="chikkamagaluru-tour.html">Chikkamagaluru</a>
+                    <a href="coastal-jain-temples.html">Coastal Jain Temples</a>
                 </div>
-
             </div>
 
-
-            <a href="../index.html#fleet">
-                Fleet
-            </a>
-
-            <a href="../contact.html">
-                Contact
-            </a>
-
-
-            <a
-                href="../airport-booking.html"
-                target="_blank"
-                class="nav-book"
-                rel="noopener"
-            >
-                Book Taxi
-            </a>
-
+            <a href="../index.html#fleet">Fleet</a>
+            <a href="../contact.html">Contact</a>
+            <a href="../airport-booking.html"
+               class="nav-book"
+               target="_blank"
+               rel="noopener">Book Taxi</a>
         </nav>
-
     </div>
-
 </header>
 
+<main class="bh-page">
 
-<main>
-
-<!-- =========================================================
-     HERO
-========================================================= -->
-
-<section class="hero-v5">
-
-    <div class="hero-image"></div>
-
-    <div class="hero-overlay"></div>
-
-
-    <div class="hero-content">
-
-        <div class="hero-eyebrow">
-            BELUR • HALEBIDU • KARNATAKA
+    <nav class="bh-breadcrumbs" aria-label="Breadcrumb">
+        <div class="bh-container">
+            <ol>
+                <li><a href="../index.html">Home</a></li>
+                <li aria-hidden="true">/</li>
+                <li><a href="temple-tours.html">Tour Packages</a></li>
+                <li aria-hidden="true">/</li>
+                <li aria-current="page">Belur &amp; Halebidu</li>
+            </ol>
         </div>
+    </nav>
 
+    <!-- HERO -->
+    <section class="bh-hero">
+        <div class="bh-hero-content">
 
-        <h1>
-            Discover
-            <br>
-            <em>Hoysala heritage.</em>
-        </h1>
+            <div class="bh-eyebrow">Belur · Halebidu · Karnataka</div>
 
+            <h1>
+                Discover the art<br>
+                of <em>Hoysala heritage.</em>
+            </h1>
 
-        <p>
-            Travel from Mangalore to Belur and Halebidu and explore
-            magnificent temples, intricate stone carvings and the
-            remarkable heritage of Karnataka.
-        </p>
-
-
-        <div class="hero-actions">
-
-            <a
-                href="../airport-booking.html"
-                target="_blank"
-                rel="noopener"
-                class="button button-primary"
-            >
-                Book Your Taxi
-            </a>
-
-
-            <a
-                href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20a%20Belur%20and%20Halebidu%20tour%20from%20Mangalore."
-                class="button button-outline"
-                target="_blank"
-                rel="noopener"
-            >
-                WhatsApp Us
-            </a>
-
-        </div>
-
-    </div>
-
-
-    <div class="hero-bottom">
-
-        <div class="hero-contact">
-
-            <span>TOUR BOOKINGS</span>
-
-            <strong>
-                +91 81477 71217
-            </strong>
-
-        </div>
-
-
-        <div class="hero-location">
-
-            <span>STARTING FROM</span>
-
-            <strong>
-                Mangalore, Karnataka
-            </strong>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     INTRO
-========================================================= -->
-
-<section class="intro-section">
-
-    <div class="section-container intro-grid">
-
-        <div class="intro-label">
-
-            <span>01</span>
-
-            ABOUT THE TOUR
-
-        </div>
-
-
-        <div class="intro-main">
-
-            <h2>
-                History carved in stone.
-                <br>
-                <em>Heritage worth discovering.</em>
-            </h2>
-
-
-            <p>
-                Belur and Halebidu are among Karnataka's most remarkable
-                heritage destinations. Famous for their Hoysala temples,
-                detailed sculptures and distinctive architecture, they
-                offer an unforgettable experience for travellers interested
-                in history, culture and Indian temple architecture.
+            <p class="bh-hero-copy">
+                Journey from Mangalore to the historic temples of Belur
+                and Halebidu. Discover extraordinary stone carvings,
+                remarkable architecture and the cultural legacy of Karnataka.
             </p>
 
+            <div class="bh-actions">
+                <a class="bh-button bh-button-primary"
+                   href="../airport-booking.html"
+                   target="_blank"
+                   rel="noopener">
+                    Plan Your Journey <span aria-hidden="true">→</span>
+                </a>
 
-            <p>
-                Radhakrishna Taxi Service provides comfortable private
-                taxi travel from Mangalore for families, couples and groups
-                planning a Belur and Halebidu heritage journey.
-            </p>
-
+                <a class="bh-button bh-button-outline"
+                   href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20am%20interested%20in%20a%20Belur%20and%20Halebidu%20tour%20from%20Mangalore."
+                   target="_blank"
+                   rel="noopener">
+                    Enquire on WhatsApp
+                </a>
+            </div>
         </div>
 
-    </div>
+        <div class="bh-hero-meta">
+            <div class="bh-container bh-meta-inner">
+                <div class="bh-meta-item">
+                    <span>Tour enquiries</span>
+                    <strong>+91 81477 71217</strong>
+                </div>
 
-</section>
+                <div class="bh-meta-item">
+                    <span>Journey begins</span>
+                    <strong>Mangalore, Karnataka</strong>
+                </div>
 
-
-<!-- =========================================================
-     BOOKING STRIP
-========================================================= -->
-
-<section class="booking-strip">
-
-    <div class="section-container booking-inner">
-
-        <div>
-
-            <span>READY TO EXPLORE?</span>
-
-            <strong>
-                Plan your Belur & Halebidu journey.
-            </strong>
-
+                <div class="bh-meta-item">
+                    <span>Travel style</span>
+                    <strong>Private taxi journey</strong>
+                </div>
+            </div>
         </div>
+    </section>
 
+    <!-- INTRODUCTION -->
+    <section class="bh-section bh-intro">
+        <div class="bh-container bh-intro-grid">
 
-        <a
-            href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20I%20want%20to%20plan%20a%20Belur%20and%20Halebidu%20tour%20from%20Mangalore."
-            class="booking-link"
-            target="_blank"
-            rel="noopener"
-        >
-            WhatsApp +91 81477 71217
-            <span>→</span>
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     TOUR HIGHLIGHTS
-========================================================= -->
-
-<section class="services-section">
-
-    <div class="section-container">
-
-        <div class="section-heading">
-
-            <div class="heading-number">
-                02
-            </div>
-
-
-            <div>
-
-                <span class="section-kicker">
-                    HERITAGE HIGHLIGHTS
-                </span>
-
-                <h2>
-                    Explore the
-                    <br>
-                    <em>Hoysala legacy.</em>
-                </h2>
-
-            </div>
-
-        </div>
-
-
-        <div class="services-list">
-
-
-            <div class="service-row">
-
-                <span class="service-number">
-                    01
-                </span>
-
-
-                <div class="service-title">
-                    Chennakeshava Temple
-                </div>
-
-
-                <div class="service-description">
-                    Visit the famous Chennakeshava Temple at Belur,
-                    known for its intricate sculptures, ornate pillars
-                    and beautiful Hoysala architecture.
-                </div>
-
-
-                <span class="service-arrow">
-                    ↗
-                </span>
-
-            </div>
-
-
-            <div class="service-row">
-
-                <span class="service-number">
-                    02
-                </span>
-
-
-                <div class="service-title">
-                    Hoysaleswara Temple
-                </div>
-
-
-                <div class="service-description">
-                    Explore the historic Hoysaleswara Temple at Halebidu
-                    and admire its detailed stone sculptures and
-                    remarkable architectural features.
-                </div>
-
-
-                <span class="service-arrow">
-                    ↗
-                </span>
-
-            </div>
-
-
-            <div class="service-row">
-
-                <span class="service-number">
-                    03
-                </span>
-
-
-                <div class="service-title">
-                    Hoysala Architecture
-                </div>
-
-
-                <div class="service-description">
-                    Experience the distinctive Hoysala style through
-                    beautifully carved temple walls, sculptures,
-                    pillars and architectural details.
-                </div>
-
-
-                <span class="service-arrow">
-                    ↗
-                </span>
-
-            </div>
-
-
-            <div class="service-row">
-
-                <span class="service-number">
-                    04
-                </span>
-
-
-                <div class="service-title">
-                    Heritage Sightseeing
-                </div>
-
-
-                <div class="service-description">
-                    Discover the historical and cultural character of
-                    Belur and Halebidu while enjoying a comfortable
-                    private taxi journey from Mangalore.
-                </div>
-
-
-                <span class="service-arrow">
-                    ↗
-                </span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     TOUR EXPERIENCE
-========================================================= -->
-
-<section class="destinations-section">
-
-    <div class="section-container">
-
-        <div class="destination-heading">
-
-            <div>
-
-                <span class="section-kicker">
-                    YOUR HERITAGE JOURNEY
-                </span>
-
-                <h2>
-                    Travel comfortably.
-                    <br>
-                    <em>Explore freely.</em>
-                </h2>
-
-            </div>
-
-
-            <p>
-                Plan your journey from Mangalore according to your
-                preferred travel date, vehicle and sightseeing
-                requirements.
-            </p>
-
-        </div>
-
-
-        <div class="destination-mosaic">
-
-
-            <div class="destination-card destination-large">
-
-                <img
-                    src="../assets/karnataka-tour.jpg"
-                    alt="Karnataka heritage tour from Mangalore"
-                    loading="lazy"
-                >
-
-
-                <div class="destination-overlay">
-
-                    <span>01</span>
-
-                    <strong>
-                        Heritage Travel
-                    </strong>
-
-                    <small>
-                        History • Architecture • Culture
-                    </small>
-
-                </div>
-
-            </div>
-
-
-            <div class="destination-card destination-tall">
-
-                <img
-                    src="../assets/temple-tour-bg.jpg"
-                    alt="Karnataka temple tour from Mangalore"
-                    loading="lazy"
-                >
-
-
-                <div class="destination-overlay">
-
-                    <span>02</span>
-
-                    <strong>
-                        Temple Heritage
-                    </strong>
-
-                    <small>
-                        Temples • Sculpture • Tradition
-                    </small>
-
-                </div>
-
-            </div>
-
-
-            <a
-                href="temple-tours.html"
-                class="destination-card"
-            >
-
-                <img
-                    src="../assets/temple-tour-bg.jpg"
-                    alt="Karnataka temple tours from Mangalore"
-                    loading="lazy"
-                >
-
-
-                <div class="destination-overlay">
-
-                    <span>03</span>
-
-                    <strong>
-                        Temple Tours
-                    </strong>
-
-                    <small>
-                        Explore Karnataka
-                    </small>
-
-                </div>
-
-            </a>
-
-
-            <a
-                href="chikkamagaluru-tour.html"
-                class="destination-card"
-            >
-
-                <img
-                    src="../assets/chikkamagalur-tour-bg.jpg"
-                    alt="Chikkamagaluru tour from Mangalore"
-                    loading="lazy"
-                >
-
-
-                <div class="destination-overlay">
-
-                    <span>04</span>
-
-                    <strong>
-                        Chikkamagaluru
-                    </strong>
-
-                    <small>
-                        Coffee • Mountains • Mist
-                    </small>
-
-                </div>
-
-            </a>
-
-
-            <a
-                href="western-ghats.html"
-                class="destination-card"
-            >
-
-                <img
-                    src="../assets/western-ghats-tour-bg.jpg"
-                    alt="Western Ghats tour from Mangalore"
-                    loading="lazy"
-                >
-
-
-                <div class="destination-overlay">
-
-                    <span>05</span>
-
-                    <strong>
-                        Western Ghats
-                    </strong>
-
-                    <small>
-                        Hills • Forests • Waterfalls
-                    </small>
-
-                </div>
-
-            </a>
-
-
-            <a
-                href="coastal-karnataka.html"
-                class="destination-card"
-            >
-
-                <img
-                    src="../assets/coastal-karnataka-tour-bg.jpg"
-                    alt="Coastal Karnataka tour from Mangalore"
-                    loading="lazy"
-                >
-
-
-                <div class="destination-overlay">
-
-                    <span>06</span>
-
-                    <strong>
-                        Coastal Karnataka
-                    </strong>
-
-                    <small>
-                        Beaches • Temples • Heritage
-                    </small>
-
-                </div>
-
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     TRAVEL BENEFITS
-========================================================= -->
-
-<section class="routes-section">
-
-    <div class="section-container">
-
-        <div class="routes-top">
-
-            <div>
-
-                <span class="section-kicker">
-                    TOUR EXPERIENCE
-                </span>
-
-                <h2>
-                    Built around
-                    <br>
-                    <em>your journey.</em>
-                </h2>
-
-            </div>
-
-
-            <p>
-                Enjoy a comfortable private taxi journey with a flexible
-                sightseeing plan designed around your travel requirements.
-            </p>
-
-        </div>
-
-
-        <div class="routes-grid">
-
-            <div>
-
+            <div class="bh-index">
                 <span>01</span>
-
-                Comfortable Vehicles
-
-                <b>↗</b>
-
+                About the tour
             </div>
 
+            <div class="bh-intro-copy">
+                <div class="bh-eyebrow">History · Culture · Architecture</div>
 
-            <div>
-
-                <span>02</span>
-
-                Flexible Itinerary
-
-                <b>↗</b>
-
-            </div>
-
-
-            <div>
-
-                <span>03</span>
-
-                Family Friendly Travel
-
-                <b>↗</b>
-
-            </div>
-
-
-            <div>
-
-                <span>04</span>
-
-                Experienced Drivers
-
-                <b>↗</b>
-
-            </div>
-
-
-            <div>
-
-                <span>05</span>
-
-                Local Route Knowledge
-
-                <b>↗</b>
-
-            </div>
-
-
-            <div>
-
-                <span>06</span>
-
-                Private Taxi Journey
-
-                <b>↗</b>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     RELATED TOURS
-========================================================= -->
-
-<section class="fleet-section">
-
-    <div class="section-container">
-
-        <div class="fleet-heading">
-
-            <div>
-
-                <span class="section-kicker">
-                    EXPLORE MORE
-                </span>
-
-                <h2>
-                    More Karnataka
-                    <br>
-                    <em>tour packages.</em>
+                <h2 class="bh-heading">
+                    Centuries of history,<br>
+                    <em>beautifully preserved.</em>
                 </h2>
 
+                <p class="bh-lead">
+                    Belur and Halebidu are celebrated for their extraordinary
+                    Hoysala temples, intricate sculptures and distinctive
+                    architectural details. Together, these heritage
+                    destinations offer a memorable journey into Karnataka's
+                    artistic and cultural history.
+                </p>
+
+                <p>
+                    Radhakrishna Taxi Service helps travellers plan private
+                    taxi journeys from Mangalore to Belur and Halebidu.
+                    Whether you are travelling with family, as a couple
+                    or with friends, discuss your preferred dates, vehicle
+                    and sightseeing plans with our team before booking.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- HIGHLIGHTS -->
+    <section class="bh-section bh-highlights">
+        <div class="bh-container">
+
+            <div class="bh-section-top">
+                <div>
+                    <div class="bh-eyebrow">The heritage highlights</div>
+                    <h2 class="bh-heading">
+                        Discover the <em>Hoysala legacy.</em>
+                    </h2>
+                </div>
+
+                <p>
+                    Explore celebrated temples and architectural details
+                    that make this region an important destination
+                    for history and culture enthusiasts.
+                </p>
             </div>
 
+            <div class="bh-feature-list">
 
-            <p>
-                Discover more destinations from Mangalore with
-                Radhakrishna Taxi Service.
-            </p>
+                <article class="bh-feature">
+                    <span class="bh-feature-number">01</span>
+                    <h3>Chennakeshava Temple</h3>
+                    <p>
+                        Visit the renowned temple at Belur, admired for
+                        its detailed sculptures, ornamental pillars
+                        and elaborate stone craftsmanship.
+                    </p>
+                    <span class="bh-feature-arrow" aria-hidden="true">↗</span>
+                </article>
 
-        </div>
+                <article class="bh-feature">
+                    <span class="bh-feature-number">02</span>
+                    <h3>Hoysaleswara Temple</h3>
+                    <p>
+                        Discover the historic temple at Halebidu and
+                        its intricate sculptural panels depicting
+                        stories, figures and traditional motifs.
+                    </p>
+                    <span class="bh-feature-arrow" aria-hidden="true">↗</span>
+                </article>
 
+                <article class="bh-feature">
+                    <span class="bh-feature-number">03</span>
+                    <h3>Hoysala Architecture</h3>
+                    <p>
+                        Appreciate the distinctive craftsmanship of
+                        Hoysala architecture, from carved stonework
+                        to elaborate pillars and temple exteriors.
+                    </p>
+                    <span class="bh-feature-arrow" aria-hidden="true">↗</span>
+                </article>
 
-        <div class="fleet-showcase">
-
-
-            <article class="fleet-card">
-
-                <div class="fleet-image">
-
-                    <img
-                        src="../assets/temple-tour-bg.jpg"
-                        alt="Karnataka temple tour"
-                        loading="lazy"
-                    >
-
-                </div>
-
-
-                <div class="fleet-info">
-
-                    <div>
-
-                        <span>HERITAGE</span>
-
-                        <h3>
-                            Temple Tours
-                        </h3>
-
-                    </div>
-
-
-                    <a href="temple-tours.html">
-                        Explore →
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <article class="fleet-card">
-
-                <div class="fleet-image">
-
-                    <img
-                        src="../assets/chikkamagalur-tour-bg.jpg"
-                        alt="Chikkamagaluru tour"
-                        loading="lazy"
-                    >
-
-                </div>
-
-
-                <div class="fleet-info">
-
-                    <div>
-
-                        <span>HILL COUNTRY</span>
-
-                        <h3>
-                            Chikkamagaluru
-                        </h3>
-
-                    </div>
-
-
-                    <a href="chikkamagaluru-tour.html">
-                        Explore →
-                    </a>
-
-                </div>
-
-            </article>
-
-
-            <article class="fleet-card featured-fleet">
-
-                <div class="fleet-image">
-
-                    <img
-                        src="../assets/western-ghats-tour-bg.jpg"
-                        alt="Western Ghats tour"
-                        loading="lazy"
-                    >
-
-                </div>
-
-
-                <div class="fleet-info">
-
-                    <div>
-
-                        <span>NATURE</span>
-
-                        <h3>
-                            Western Ghats
-                        </h3>
-
-                    </div>
-
-
-                    <a href="western-ghats.html">
-                        Explore →
-                    </a>
-
-                </div>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     WHY US
-========================================================= -->
-
-<section class="why-section">
-
-    <div class="section-container why-grid">
-
-
-        <div class="why-image">
-
-            <img
-                src="../assets/karnataka-tour.jpg"
-                alt="Karnataka tour with Radhakrishna Taxi Service"
-                loading="lazy"
-            >
-
-
-            <div class="why-image-label">
-
-                <span>RADHAKRISHNA</span>
-
-                <strong>
-                    Travel Karnataka
-                </strong>
+                <article class="bh-feature">
+                    <span class="bh-feature-number">04</span>
+                    <h3>Heritage Sightseeing</h3>
+                    <p>
+                        Experience the historical character of both
+                        destinations with a travel plan arranged
+                        around your available time and interests.
+                    </p>
+                    <span class="bh-feature-arrow" aria-hidden="true">↗</span>
+                </article>
 
             </div>
-
         </div>
+    </section>
 
+    <!-- JOURNEY DETAILS -->
+    <section class="bh-section bh-journey">
+        <div class="bh-container bh-journey-grid">
 
-        <div class="why-content">
+            <div class="bh-journey-intro">
+                <div class="bh-eyebrow">A journey planned for you</div>
 
-            <span class="section-kicker">
-                WHY TRAVEL WITH US
-            </span>
+                <h2 class="bh-heading">
+                    Travel comfortably.<br>
+                    <em>Explore at your pace.</em>
+                </h2>
 
+                <p class="bh-lead">
+                    Your Belur and Halebidu journey can be planned around
+                    your travel date, passenger count, preferred vehicle
+                    and sightseeing requirements.
+                </p>
+
+                <p>
+                    Contact us to discuss pickup arrangements from
+                    Mangalore, the destinations you wish to visit and
+                    the most suitable travel schedule for your group.
+                </p>
+
+                <div class="bh-actions">
+                    <a class="bh-button bh-button-primary"
+                       href="https://wa.me/918147771217?text=Hello%2C%20please%20help%20me%20plan%20a%20Belur%20and%20Halebidu%20tour%20from%20Mangalore."
+                       target="_blank"
+                       rel="noopener">
+                        Discuss Your Tour →
+                    </a>
+                </div>
+            </div>
+
+            <div class="bh-info-list">
+
+                <article class="bh-info-row">
+                    <span class="bh-info-number">01</span>
+                    <div>
+                        <h3>Comfortable vehicles</h3>
+                        <p>
+                            Ask about available sedans, SUVs and larger
+                            vehicles for your passenger group.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="bh-info-row">
+                    <span class="bh-info-number">02</span>
+                    <div>
+                        <h3>Flexible travel planning</h3>
+                        <p>
+                            Discuss pickup times, sightseeing priorities
+                            and the schedule that suits your trip.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="bh-info-row">
+                    <span class="bh-info-number">03</span>
+                    <div>
+                        <h3>Family and group journeys</h3>
+                        <p>
+                            Share the number of passengers and luggage
+                            requirements so you can select an appropriate
+                            vehicle.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="bh-info-row">
+                    <span class="bh-info-number">04</span>
+                    <div>
+                        <h3>Booking assistance</h3>
+                        <p>
+                            Confirm your travel date, itinerary and
+                            quotation with our team before the journey.
+                        </p>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOKING STRIP -->
+    <section class="bh-booking-band">
+        <div class="bh-container bh-booking-inner">
+            <div>
+                <span>START PLANNING YOUR HERITAGE TOUR</span>
+                <strong>Belur &amp; Halebidu from Mangalore</strong>
+            </div>
+
+            <a href="https://wa.me/918147771217?text=Hello%20Radhakrishna%20Taxi%20Service%2C%20please%20share%20a%20quotation%20for%20a%20Belur%20and%20Halebidu%20tour%20from%20Mangalore."
+               target="_blank"
+               rel="noopener">
+                Request a quotation →
+            </a>
+        </div>
+    </section>
+
+    <!-- RELATED TOURS -->
+    <section class="bh-section bh-related">
+        <div class="bh-container">
+
+            <div class="bh-section-top">
+                <div>
+                    <div class="bh-eyebrow">Continue exploring</div>
+                    <h2 class="bh-heading">
+                        More journeys across <em>Karnataka.</em>
+                    </h2>
+                </div>
+
+                <p>
+                    Explore other tour ideas and plan your next journey
+                    from Mangalore.
+                </p>
+            </div>
+
+            <div class="bh-related-grid">
+
+                <a class="bh-related-card" href="temple-tours.html">
+                    <span>01 / HERITAGE</span>
+                    <div>
+                        <h3>Temple Tours</h3>
+                        <p>Discover important temples and cultural destinations.</p>
+                        <b>Explore tours →</b>
+                    </div>
+                </a>
+
+                <a class="bh-related-card" href="chikkamagaluru-tour.html">
+                    <span>02 / HILL COUNTRY</span>
+                    <div>
+                        <h3>Chikkamagaluru</h3>
+                        <p>Plan a journey to Karnataka's coffee-growing hills.</p>
+                        <b>Explore destination →</b>
+                    </div>
+                </a>
+
+                <a class="bh-related-card" href="western-ghats.html">
+                    <span>03 / NATURE</span>
+                    <div>
+                        <h3>Western Ghats</h3>
+                        <p>Discover green landscapes and scenic hill regions.</p>
+                        <b>Explore destination →</b>
+                    </div>
+                </a>
+
+                <a class="bh-related-card" href="coastal-karnataka.html">
+                    <span>04 / COASTAL</span>
+                    <div>
+                        <h3>Coastal Karnataka</h3>
+                        <p>Explore coastal heritage, temples and destinations.</p>
+                        <b>Explore destination →</b>
+                    </div>
+                </a>
+
+                <a class="bh-related-card" href="coastal-jain-temples.html">
+                    <span>05 / CULTURE</span>
+                    <div>
+                        <h3>Coastal Jain Temples</h3>
+                        <p>Plan a journey through notable Jain heritage sites.</p>
+                        <b>Explore destination →</b>
+                    </div>
+                </a>
+
+                <a class="bh-related-card" href="goa-tour-package.html">
+                    <span>06 / GETAWAY</span>
+                    <div>
+                        <h3>Goa Tour</h3>
+                        <p>Discuss a Goa journey with our taxi service team.</p>
+                        <b>Explore destination →</b>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="bh-section bh-faq">
+        <div class="bh-container bh-faq-grid">
+
+            <div>
+                <div class="bh-eyebrow">Helpful information</div>
+                <h2 class="bh-heading">
+                    Frequently asked <em>questions.</em>
+                </h2>
+                <p>
+                    A few useful details to help you plan your
+                    Belur and Halebidu journey from Mangalore.
+                </p>
+            </div>
+
+            <div class="bh-faq-list">
+
+                <article class="bh-faq-item">
+                    <h3>Can I arrange a Belur and Halebidu tour from Mangalore?</h3>
+                    <p>
+                        Yes. Contact Radhakrishna Taxi Service with your
+                        travel date, passenger count and vehicle preference
+                        to discuss the journey and receive a quotation.
+                    </p>
+                </article>
+
+                <article class="bh-faq-item">
+                    <h3>Which temples are the main attractions?</h3>
+                    <p>
+                        The key attractions include Chennakeshava Temple
+                        at Belur and Hoysaleswara Temple at Halebidu.
+                    </p>
+                </article>
+
+                <article class="bh-faq-item">
+                    <h3>Can I customize my sightseeing plan?</h3>
+                    <p>
+                        You can discuss your preferred sightseeing stops
+                        and schedule with our team before confirming
+                        your booking.
+                    </p>
+                </article>
+
+                <article class="bh-faq-item">
+                    <h3>How can I check the taxi fare?</h3>
+                    <p>
+                        Share your travel date, pickup location, passenger
+                        count, destinations and preferred vehicle to request
+                        a quotation. Confirm the final fare and inclusions
+                        before booking.
+                    </p>
+                </article>
+
+                <article class="bh-faq-item">
+                    <h3>How do I book the taxi?</h3>
+                    <p>
+                        Call +91 81477 71217 or contact us on WhatsApp
+                        to discuss availability and your travel requirements.
+                    </p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="bh-cta">
+        <div class="bh-container">
+
+            <div class="bh-eyebrow">Your next heritage journey</div>
 
             <h2>
-                Your heritage trip,
-                <br>
-                made
-                <em>comfortable.</em>
+                Let the journey become<br>
+                <em>part of the story.</em>
             </h2>
 
+            <p>
+                Plan your Belur and Halebidu tour with Radhakrishna
+                Taxi Service. Tell us your preferred date, passenger
+                count and vehicle requirements.
+            </p>
 
-            <div class="why-points">
+            <div class="bh-actions">
+                <a class="bh-button bh-button-primary"
+                   href="../airport-booking.html"
+                   target="_blank"
+                   rel="noopener">
+                    Book Your Taxi →
+                </a>
 
-
-                <div>
-
-                    <span>01</span>
-
-                    <div>
-
-                        <h3>
-                            Experienced Drivers
-                        </h3>
-
-                        <p>
-                            Professional drivers with local route
-                            knowledge and practical travel experience.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div>
-
-                    <span>02</span>
-
-                    <div>
-
-                        <h3>
-                            Comfortable Vehicles
-                        </h3>
-
-                        <p>
-                            A range of well-maintained vehicles for
-                            couples, families and groups.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div>
-
-                    <span>03</span>
-
-                    <div>
-
-                        <h3>
-                            Flexible Travel
-                        </h3>
-
-                        <p>
-                            Plan your sightseeing schedule according
-                            to your travel requirements.
-                        </p>
-
-                    </div>
-
-                </div>
-
-
-                <div>
-
-                    <span>04</span>
-
-                    <div>
-
-                        <h3>
-                            Local Expertise
-                        </h3>
-
-                        <p>
-                            Local knowledge of Karnataka destinations,
-                            roads and popular tour routes.
-                        </p>
-
-                    </div>
-
-                </div>
-
+                <a class="bh-button bh-button-outline"
+                   href="tel:+918147771217">
+                    Call +91 81477 71217
+                </a>
             </div>
-
         </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     FAQ
-========================================================= -->
-
-<section class="services-section">
-
-    <div class="section-container">
-
-        <div class="section-heading">
-
-            <div class="heading-number">
-                07
-            </div>
-
-
-            <div>
-
-                <span class="section-kicker">
-                    FREQUENTLY ASKED QUESTIONS
-                </span>
-
-                <h2>
-                    Belur & Halebidu
-                    <br>
-                    <em>tour FAQ.</em>
-                </h2>
-
-            </div>
-
-        </div>
-
-
-        <div class="services-list">
-
-
-            <div class="service-row">
-
-                <span class="service-number">
-                    01
-                </span>
-
-
-                <div class="service-title">
-                    Can I book this tour from Mangalore?
-                </div>
-
-
-                <div class="service-description">
-                    Yes. Contact Radhakrishna Taxi Service with your
-                    travel date, passenger count and vehicle requirement
-                    to plan your Belur and Halebidu journey.
-                </div>
-
-
-                <span class="service-arrow">
-                    ↗
-                </span>
-
-            </div>
-
-
-            <div class="service-row">
-
-                <span class="service-number">
-                    02
-                </span>
-
-
-                <div class="service-title">
-                    Which temples can I visit?
-                </div>
-
-
-                <div class="service-description">
-                    The main attractions include Chennakeshava Temple
-                    at Belur and Hoysaleswara Temple at Halebidu.
-                </div>
-
-
-                <span class="service-arrow">
-                    ↗
-                </span>
-
-            </div>
-
-
-            <div class="service-row">
-
-                <span class="service-number">
-                    03
-                </span>
-
-
-                <div class="service-title">
-                    Can the itinerary be customized?
-                </div>
-
-
-                <div class="service-description">
-                    Yes. Your travel schedule, sightseeing requirements
-                    and preferred vehicle can be discussed before booking.
-                </div>
-
-
-                <span class="service-arrow">
-                    ↗
-                </span>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     FINAL CTA
-========================================================= -->
-
-<section class="final-cta">
-
-    <div class="final-cta-background"></div>
-
-    <div class="final-cta-overlay"></div>
-
-
-    <div class="final-cta-content">
-
-        <span>
-            YOUR HERITAGE JOURNEY
-        </span>
-
-
-        <h2>
-            Make the journey
-            <br>
-            <em>part of the memory.</em>
-        </h2>
-
-
-        <p>
-            Tell us your travel date and requirements.
-            We'll help you plan comfortable taxi travel from
-            Mangalore to Belur and Halebidu.
-        </p>
-
-
-        <div class="hero-actions">
-
-            <a
-                href="../airport-booking.html"
-                target="_blank"
-                rel="noopener"
-                class="button button-primary"
-            >
-                Book a Taxi
-            </a>
-
-
-            <a
-                href="tel:+918147771217"
-                class="button button-outline"
-            >
-                Call +91 81477 71217
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
+    </section>
 
 </main>
 
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
 <footer class="site-footer">
-
     <div class="section-container footer-grid">
 
-
         <div class="footer-brand">
-
-            <img
-                src="../assets/radhakrishna-taxi-logo.png"
-                alt="Radhakrishna Taxi Service"
-            >
-
+            <a href="../index.html" aria-label="Radhakrishna Taxi Service home">
+                <img src="../assets/radhakrishna-taxi-logo.png"
+                     alt="Radhakrishna Taxi Service">
+            </a>
 
             <p>
                 Reliable Mangalore taxi service for airport transfers,
                 local travel, outstation journeys and Karnataka tours.
             </p>
-
         </div>
 
-
         <div class="footer-column">
-
-            <h3>
-                Services
-            </h3>
-
-
-            <a href="../services/mangalore-airport-taxi.html">
-                Airport Taxi
-            </a>
-
-
-            <a href="../services/local-mangalore-taxi.html">
-                Local Taxi
-            </a>
-
-
-            <a href="../services/outstation-taxi.html">
-                Outstation Taxi
-            </a>
-
-
-            <a href="../services/round-trip-taxi.html">
-                Round Trip Taxi
-            </a>
-
-
-            <a href="../services/corporate-taxi.html">
-                Corporate Taxi
-            </a>
-
+            <h3>Services</h3>
+            <a href="../services/mangalore-airport-taxi.html">Airport Taxi</a>
+            <a href="../services/local-mangalore-taxi.html">Local Taxi</a>
+            <a href="../services/outstation-taxi.html">Outstation Taxi</a>
+            <a href="../services/round-trip-taxi.html">Round Trip Taxi</a>
+            <a href="../services/corporate-taxi.html">Corporate Taxi</a>
         </div>
 
-
         <div class="footer-column">
-
-            <h3>
-                Tours
-            </h3>
-
-
-            <a href="temple-tours.html">
-                Temple Tours
-            </a>
-
-
-            <a href="coastal-karnataka.html">
-                Coastal Karnataka
-            </a>
-
-
-            <a href="western-ghats.html">
-                Western Ghats
-            </a>
-
-
-            <a href="goa-tour-package.html">
-                Goa Tour
-            </a>
-
-
-            <a href="chikkamagaluru-tour.html">
-                Chikkamagaluru
-            </a>
-
+            <h3>Tours</h3>
+            <a href="temple-tours.html">Temple Tours</a>
+            <a href="coastal-karnataka.html">Coastal Karnataka</a>
+            <a href="western-ghats.html">Western Ghats</a>
+            <a href="goa-tour-package.html">Goa Tour</a>
+            <a href="chikkamagaluru-tour.html">Chikkamagaluru</a>
+            <a href="coastal-jain-temples.html">Coastal Jain Temples</a>
         </div>
 
-
         <div class="footer-column">
-
-            <h3>
-                Contact
-            </h3>
-
-
-            <a href="tel:+918147771217">
-                +91 81477 71217
-            </a>
-
-
-            <a
-                href="https://wa.me/918147771217"
-                target="_blank"
-                rel="noopener"
-            >
-                WhatsApp
-            </a>
-
-
-            <a href="mailto:radhakrishnataximangalore@gmail.com">
-                Email Us
-            </a>
-
-
-            <span>
-                Mangalore, Karnataka
-            </span>
-
+            <h3>Contact</h3>
+            <a href="tel:+918147771217">+91 81477 71217</a>
+            <a href="https://wa.me/918147771217"
+               target="_blank"
+               rel="noopener">WhatsApp</a>
+            <a href="mailto:radhakrishnataximangalore@gmail.com">Email Us</a>
+            <span>Mangalore, Karnataka</span>
         </div>
 
     </div>
-
 
     <div class="footer-bottom">
-
         <div class="section-container footer-bottom-inner">
-
             <span>
                 © <span id="currentYear"></span>
-                Radhakrishna Taxi Service.
-                All Rights Reserved.
+                Radhakrishna Taxi Service. All Rights Reserved.
             </span>
-
-
-            <span>
-                Belur & Halebidu Tour from Mangalore
-            </span>
-
+            <span>Belur &amp; Halebidu Tour from Mangalore</span>
         </div>
-
     </div>
-
 </footer>
 
-
-<!-- =========================================================
-     STRUCTURED DATA
-========================================================= -->
-
+<!-- TOUR STRUCTURED DATA -->
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "TouristTrip",
-    "name": "Belur & Halebidu Heritage Tour from Mangalore",
-    "description": "Belur and Halebidu heritage tour from Mangalore covering important Hoysala temples and historical attractions.",
-    "url": "https://radhakrishnataxiservice.com/packages/belur-halebidu-tour.html",
-    "touristType": [
-        "Families",
-        "Couples",
-        "Heritage Travellers",
-        "Cultural Travellers"
-    ],
-    "provider": {
-        "@type": "TaxiService",
-        "name": "Radhakrishna Taxi Service",
-        "url": "https://radhakrishnataxiservice.com/",
-        "telephone": "+918147771217",
-        "email": "radhakrishnataximangalore@gmail.com",
-        "logo": "https://radhakrishnataxiservice.com/assets/radhakrishna-taxi-logo.png",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Mangalore",
-            "addressRegion": "Karnataka",
-            "addressCountry": "IN"
-        }
+  "@context": "https://schema.org",
+  "@type": "TouristTrip",
+  "name": "Belur and Halebidu Heritage Tour from Mangalore",
+  "description": "A heritage sightseeing journey from Mangalore to Belur and Halebidu, featuring Chennakeshava Temple, Hoysaleswara Temple and Hoysala architecture.",
+  "url": "https://radhakrishnataxiservice.com/packages/belur-halebidu-tour.html",
+  "touristType": [
+    "Families",
+    "Couples",
+    "Heritage travellers",
+    "Cultural travellers"
+  ],
+  "provider": {
+    "@type": "TaxiService",
+    "name": "Radhakrishna Taxi Service",
+    "url": "https://radhakrishnataxiservice.com/",
+    "telephone": "+918147771217",
+    "email": "radhakrishnataximangalore@gmail.com",
+    "image": "https://radhakrishnataxiservice.com/assets/radhakrishna-taxi-logo.png",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mangalore",
+      "addressRegion": "Karnataka",
+      "addressCountry": "IN"
+    }
+  },
+  "itinerary": [
+    {
+      "@type": "TouristAttraction",
+      "name": "Chennakeshava Temple",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Belur",
+        "addressRegion": "Karnataka",
+        "addressCountry": "IN"
+      }
     },
-    "itinerary": [
-        {
-            "@type": "TouristAttraction",
-            "name": "Chennakeshava Temple, Belur"
-        },
-        {
-            "@type": "TouristAttraction",
-            "name": "Hoysaleswara Temple, Halebidu"
-        }
-    ]
+    {
+      "@type": "TouristAttraction",
+      "name": "Hoysaleswara Temple",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Halebidu",
+        "addressRegion": "Karnataka",
+        "addressCountry": "IN"
+      }
+    }
+  ]
 }
 </script>
 
-
+<!-- FAQ STRUCTURED DATA -->
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-        {
-            "@type": "Question",
-            "name": "Can I book a Belur and Halebidu tour from Mangalore?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. Radhakrishna Taxi Service provides private taxi travel from Mangalore to Belur and Halebidu for heritage sightseeing."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Which temples can I visit during the tour?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "The main attractions include Chennakeshava Temple at Belur and Hoysaleswara Temple at Halebidu."
-            }
-        },
-        {
-            "@type": "Question",
-            "name": "Can the Belur and Halebidu itinerary be customized?",
-            "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Yes. Travel dates, sightseeing requirements and preferred vehicle can be discussed with Radhakrishna Taxi Service before booking."
-            }
-        }
-    ]
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can I arrange a Belur and Halebidu tour from Mangalore?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Contact Radhakrishna Taxi Service with your travel date, passenger count and vehicle preference to discuss the journey and request a quotation."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which temples are the main attractions?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The key attractions include Chennakeshava Temple at Belur and Hoysaleswara Temple at Halebidu."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I customize my sightseeing plan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can discuss your preferred sightseeing stops and schedule with Radhakrishna Taxi Service before confirming your booking."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I check the taxi fare?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Share your travel date, pickup location, passenger count, destinations and preferred vehicle to request a quotation. Confirm the final fare and inclusions before booking."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I book the taxi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Call +91 81477 71217 or contact Radhakrishna Taxi Service on WhatsApp to discuss availability and travel requirements."
+      }
+    }
+  ]
 }
 </script>
 
-
+<!-- BREADCRUMB STRUCTURED DATA -->
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-        {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://radhakrishnataxiservice.com/"
-        },
-        {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Tour Packages",
-            "item": "https://radhakrishnataxiservice.com/packages/temple-tours.html"
-        },
-        {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Belur & Halebidu Tour",
-            "item": "https://radhakrishnataxiservice.com/packages/belur-halebidu-tour.html"
-        }
-    ]
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://radhakrishnataxiservice.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Tour Packages",
+      "item": "https://radhakrishnataxiservice.com/packages/temple-tours.html"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Belur & Halebidu Tour",
+      "item": "https://radhakrishnataxiservice.com/packages/belur-halebidu-tour.html"
+    }
+  ]
 }
 </script>
-
 
 <script src="../script.js"></script>
 
