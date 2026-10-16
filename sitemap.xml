@@ -1,185 +1,107 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- Main pages -->
   <url>
     <loc>https://radhakrishnataxiservice.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-
   <url>
     <loc>https://radhakrishnataxiservice.com/about.html</loc>
     <priority>0.6</priority>
   </url>
-
   <url>
     <loc>https://radhakrishnataxiservice.com/contact.html</loc>
     <priority>0.8</priority>
   </url>
-
   <url>
     <loc>https://radhakrishnataxiservice.com/routes.html</loc>
     <priority>0.8</priority>
   </url>
-
   <url>
     <loc>https://radhakrishnataxiservice.com/services.html</loc>
     <priority>0.8</priority>
   </url>
 
   <!-- Service pages -->
-  <url>
-    <loc>https://radhakrishnataxiservice.com/services/airport-pickup-drop.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/services/corporate.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/services/family.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/services/hotel-airport.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/services/local-mangalore.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/services/mangalore-airport.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/services/outstation.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/services/round-trip.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/services/tour-package.html</loc>
-  </url>
+  <url><loc>https://radhakrishnataxiservice.com/services/airport-pickup-drop.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/services/corporate.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/services/family.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/services/hotel-airport.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/services/local-mangalore.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/services/mangalore-airport.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/services/outstation.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/services/round-trip.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/services/tour-package.html</loc></url>
+
+  <!-- Tour package category pages -->
+  <url><loc>https://radhakrishnataxiservice.com/packages/temple-tours.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/coastal-karnataka.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/western-ghats.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/goa-tour-package.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/chikkamagaluru-tour.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/coastal-jain-temples.html</loc></url>
+
+  <!-- Individual tour packages: verify filenames before publishing -->
+  <url><loc>https://radhakrishnataxiservice.com/packages/udupi-krishna-tour-package.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/murudeshwara-gokarna-tour-package.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/dharmasthala-kukke-tour-package.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/kollur-murudeshwar-tour.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/sringeri-horanadu-tour-package.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/coorg-tour-package.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/wayanad-tour-package.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/mysore-tour-package.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/ooty-tour-package.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/belur-halebidu-tour.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/dandeli-tour-package.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/coastal-temple-tour.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/family-tour-package.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/karnataka-multi-day-tour.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/packages/karnataka-family-tour-package.html</loc></url>
 
   <!-- Route pages -->
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-bangalore.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-goa.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-udupi.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-gokarna.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-murudeshwara.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-dharmasthala.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-kukke-subrahmanya.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-kollur.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-coorg.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-chikkamagaluru.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-mysore.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-sringeri.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-horanadu.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-ooty.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-wayanad.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-belur-halebidu.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-bekal.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-dandeli.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-hampi.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-badami.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-shrirangapattana.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-bandipura-nagarahole.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-jog-falls.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-hombuja-padmavathi.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-kamalashile.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-kodaikanal.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-shivamogga.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-shravanabelagola.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-thiruvananthapuram.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-hubli.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-munnar.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-alappuzha.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-velankanni.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-chennai.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-mumbai.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-hyderabad.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-tirupati.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-mantralaya.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-aihole-pattadakal.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-kolhapur-mahalaxmi.html</loc>
-  </url>
-  <url>
-    <loc>https://radhakrishnataxiservice.com/routes/mangalore-to-shirdi.html</loc>
-  </url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-bangalore.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-goa.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-udupi.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-gokarna.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-murudeshwara.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-dharmasthala.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-kukke-subrahmanya.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-kollur.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-coorg.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-chikkamagaluru.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-mysore.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-sringeri.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-horanadu.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-ooty.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-wayanad.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-belur-halebidu.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-bekal.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-dandeli.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-hampi.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-badami.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-shrirangapattana.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-bandipura-nagarahole.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-jog-falls.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-hombuja-padmavathi.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-kamalashile.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-kodaikanal.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-shivamogga.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-shravanabelagola.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-thiruvananthapuram.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-hubli.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-munnar.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-alappuzha.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-velankanni.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-chennai.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-mumbai.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-hyderabad.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-tirupati.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-mantralaya.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-aihole-pattadakal.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-kolhapur-mahalaxmi.html</loc></url>
+  <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-shirdi.html</loc></url>
 
 </urlset>
-```

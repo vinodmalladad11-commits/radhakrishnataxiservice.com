@@ -24,6 +24,137 @@
     <meta property="og:image" content="https://radhakrishnataxiservice.com/assets/hero.jpg">
 
     <link rel="stylesheet" href="style.css">
+
+    <!-- Tour package cards: self-contained styling -->
+    <style>
+        .all-packages-section {
+            padding: 80px 0;
+            background: #f7f5f0;
+        }
+
+        .all-packages-heading {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 28px;
+            margin-bottom: 35px;
+        }
+
+        .all-packages-heading h2 {
+            margin: 8px 0 0;
+        }
+
+        .all-packages-heading p {
+            max-width: 460px;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .all-packages-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .all-package-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 175px;
+            padding: 23px 20px;
+            background: #ffffff;
+            border: 1px solid #e7e3da;
+            border-radius: 8px;
+            color: #102d35;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease,
+                        border-color 0.2s ease;
+        }
+
+        .all-package-card:hover,
+        .all-package-card:focus-visible {
+            transform: translateY(-4px);
+            border-color: #c5a36a;
+            box-shadow: 0 10px 28px rgba(16, 45, 53, 0.09);
+        }
+
+        .all-package-number {
+            color: #9a7b48;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+
+        .all-package-card h3 {
+            margin: 18px 0 12px;
+            font-size: 17px;
+            line-height: 1.45;
+        }
+
+        .all-package-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            padding-top: 12px;
+            border-top: 1px solid #eeeae2;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.4px;
+        }
+
+        .all-package-link span:last-child {
+            color: #9a7b48;
+            font-size: 19px;
+        }
+
+        .all-packages-note {
+            margin-top: 25px;
+            color: #526165;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 1000px) {
+            .all-packages-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 700px) {
+            .all-packages-section {
+                padding: 55px 0;
+            }
+
+            .all-packages-heading {
+                display: block;
+            }
+
+            .all-packages-heading p {
+                margin-top: 15px;
+            }
+
+            .all-packages-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+            }
+
+            .all-package-card {
+                min-height: 160px;
+                padding: 17px 14px;
+            }
+
+            .all-package-card h3 {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .all-packages-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -61,6 +192,7 @@
                     <a href="packages/goa-tour-package.html">Goa Tour Package</a>
                     <a href="packages/chikkamagaluru-tour.html">Chikkamagaluru</a>
                     <a href="packages/coastal-jain-temples.html">Coastal Jain Temples</a>
+                    <a href="#all-packages">All Tour Packages</a>
                 </div>
             </div>
 
@@ -221,7 +353,7 @@
     </div>
 </section>
 
-<!-- DESTINATIONS -->
+<!-- DESTINATION CATEGORIES -->
 <section class="destinations-section">
     <div class="section-container">
 
@@ -301,6 +433,156 @@
             </a>
 
         </div>
+    </div>
+</section>
+
+<!-- ALL 20 INDIVIDUAL TOUR PACKAGES -->
+<section class="all-packages-section" id="all-packages">
+    <div class="section-container">
+
+        <div class="all-packages-heading">
+            <div>
+                <span class="section-kicker">EXPLORE OUR TOURS</span>
+                <h2>Find your next<br><em>destination.</em></h2>
+            </div>
+
+            <p>
+                Explore individual tour packages from Mangalore, including
+                temple pilgrimages, coastal destinations, heritage sites,
+                hill stations, wildlife destinations and family holidays.
+                Select a package to learn more about the places to visit.
+            </p>
+        </div>
+
+        <div class="all-packages-grid">
+
+            <a href="packages/temple-tours.html" class="all-package-card">
+                <span class="all-package-number">TOUR 01</span>
+                <h3>Karnataka Temple Tours</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/coastal-karnataka.html" class="all-package-card">
+                <span class="all-package-number">TOUR 02</span>
+                <h3>Coastal Karnataka Tour</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/western-ghats.html" class="all-package-card">
+                <span class="all-package-number">TOUR 03</span>
+                <h3>Western Ghats Tour</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/goa-tour-package.html" class="all-package-card">
+                <span class="all-package-number">TOUR 04</span>
+                <h3>Goa Tour Package</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/chikkamagaluru-tour.html" class="all-package-card">
+                <span class="all-package-number">TOUR 05</span>
+                <h3>Chikkamagaluru Tour</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/coastal-jain-temples.html" class="all-package-card">
+                <span class="all-package-number">TOUR 06</span>
+                <h3>Coastal Jain Temples Tour</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/udupi-krishna-temple-tour.html" class="all-package-card">
+                <span class="all-package-number">TOUR 07</span>
+                <h3>Udupi Krishna Temple Tour</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/murudeshwar-gokarna-tour.html" class="all-package-card">
+                <span class="all-package-number">TOUR 08</span>
+                <h3>Murudeshwar &amp; Gokarna Tour</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/dharmasthala-kukke-tour.html" class="all-package-card">
+                <span class="all-package-number">TOUR 09</span>
+                <h3>Dharmasthala &amp; Kukke Subrahmanya</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/kollur-murudeshwar-tour.html" class="all-package-card">
+                <span class="all-package-number">TOUR 10</span>
+                <h3>Kollur &amp; Murudeshwar Tour</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/sringeri-horanadu-tour.html" class="all-package-card">
+                <span class="all-package-number">TOUR 11</span>
+                <h3>Sringeri &amp; Horanadu Tour</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/coorg-tour-package.html" class="all-package-card">
+                <span class="all-package-number">TOUR 12</span>
+                <h3>Coorg Tour Package</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/wayanad-tour-package.html" class="all-package-card">
+                <span class="all-package-number">TOUR 13</span>
+                <h3>Wayanad Tour Package</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/mysore-tour-package.html" class="all-package-card">
+                <span class="all-package-number">TOUR 14</span>
+                <h3>Mysore Heritage Tour</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/ooty-tour-package.html" class="all-package-card">
+                <span class="all-package-number">TOUR 15</span>
+                <h3>Ooty Hill Station Tour</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/belur-halebidu-tour.html" class="all-package-card">
+                <span class="all-package-number">TOUR 16</span>
+                <h3>Belur &amp; Halebidu Heritage Tour</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/dandeli-tour-package.html" class="all-package-card">
+                <span class="all-package-number">TOUR 17</span>
+                <h3>Dandeli Nature &amp; Adventure Tour</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/coastal-temple-tour.html" class="all-package-card">
+                <span class="all-package-number">TOUR 18</span>
+                <h3>Coastal Temple Tour</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/family-tour-package.html" class="all-package-card">
+                <span class="all-package-number">TOUR 19</span>
+                <h3>Karnataka Family Tour</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+            <a href="packages/karnataka-multi-day-tour.html" class="all-package-card">
+                <span class="all-package-number">TOUR 20</span>
+                <h3>Karnataka Multi-Day Tour</h3>
+                <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
+            </a>
+
+        </div>
+
+        <p class="all-packages-note">
+            Every package card opens its individual tour page. Check that the
+            corresponding HTML file exists in the packages folder before publishing.
+        </p>
+
     </div>
 </section>
 
@@ -576,12 +858,13 @@
 
         <div class="footer-column">
             <h3>Tours</h3>
+            <a href="#all-packages">All Tour Packages</a>
             <a href="packages/temple-tours.html">Temple Tours</a>
             <a href="packages/coastal-karnataka.html">Coastal Karnataka</a>
             <a href="packages/western-ghats.html">Western Ghats</a>
             <a href="packages/goa-tour-package.html">Goa Tour</a>
             <a href="packages/chikkamagaluru-tour.html">Chikkamagaluru</a>
-            <a href="packages/coastal-jain-temples.html">Coastal Jain Temples</a>
+            <a href="packages/belur-halebidu-tour.html">Belur &amp; Halebidu</a>
         </div>
 
         <div class="footer-column">
@@ -666,4 +949,3 @@
 
 </body>
 </html>
-```
