@@ -956,7 +956,7 @@ button {
     position: absolute;
     inset: 0;
     background:
-        url("assets/mysore-tour-bg.jpg")
+        url("assets/cta-bg.jpg")
         center / cover no-repeat;
 }
 
