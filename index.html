@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,8 +26,8 @@
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- Tour package cards: self-contained styling -->
     <style>
+        /* TOUR PACKAGE CARDS */
         .all-packages-section {
             padding: 80px 0;
             background: #f7f5f0;
@@ -115,22 +116,226 @@
             line-height: 1.7;
         }
 
+        /* TRAVEL GUIDES AND BLOGS */
+        .blog-section {
+            padding: 85px 0;
+            background: #ffffff;
+        }
+
+        .blog-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 30px;
+            margin-bottom: 36px;
+        }
+
+        .blog-heading h2 {
+            margin: 8px 0 0;
+        }
+
+        .blog-heading p {
+            max-width: 470px;
+            margin: 0;
+            color: #526165;
+            line-height: 1.8;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .blog-card {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            overflow: hidden;
+            background: #ffffff;
+            border: 1px solid #e8e5de;
+            border-radius: 10px;
+            color: #102d35;
+            text-decoration: none;
+            transition: transform 0.25s ease, box-shadow 0.25s ease,
+                        border-color 0.25s ease;
+        }
+
+        .blog-card:hover,
+        .blog-card:focus-visible {
+            transform: translateY(-5px);
+            border-color: #c5a36a;
+            box-shadow: 0 14px 32px rgba(16, 45, 53, 0.10);
+        }
+
+        .blog-card-image {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+            background: #e9e5dc;
+        }
+
+        .blog-card-image img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .blog-card:hover .blog-card-image img {
+            transform: scale(1.045);
+        }
+
+        .blog-card-content {
+            display: flex;
+            flex: 1;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 23px;
+        }
+
+        .blog-category {
+            display: inline-block;
+            margin-bottom: 12px;
+            color: #967746;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .blog-card h3 {
+            margin: 0 0 12px;
+            color: #102d35;
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 21px;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .blog-card p {
+            margin: 0 0 20px;
+            color: #58666a;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .blog-read-more {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            width: 100%;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid #eeeae2;
+            color: #102d35;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            text-transform: uppercase;
+        }
+
+        .blog-read-more span:last-child {
+            color: #9a7b48;
+            font-size: 20px;
+        }
+
+        .blog-bottom-cta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            margin-top: 35px;
+            padding: 27px 30px;
+            background: #102d35;
+            border-radius: 8px;
+            color: #ffffff;
+        }
+
+        .blog-bottom-cta p {
+            margin: 0;
+            color: #e1e7e5;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .blog-bottom-cta strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #ffffff;
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 21px;
+        }
+
+        .blog-contact-link {
+            display: inline-flex;
+            flex-shrink: 0;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 13px 19px;
+            border: 1px solid #d5a75b;
+            border-radius: 4px;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .blog-contact-link:hover,
+        .blog-contact-link:focus-visible {
+            background: #d5a75b;
+            color: #102d35;
+        }
+
+        /* BLOG NAVIGATION BUTTON */
+        .nav-blogs {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 9px 15px;
+            border: 1px solid #c5a36a;
+            border-radius: 4px;
+            color: #c5a36a !important;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .nav-blogs:hover,
+        .nav-blogs:focus-visible {
+            background: #c5a36a;
+            color: #102d35 !important;
+        }
+
         @media (max-width: 1000px) {
             .all-packages-grid {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
             }
+
+            .blog-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
         }
 
         @media (max-width: 700px) {
-            .all-packages-section {
+            .all-packages-section,
+            .blog-section {
                 padding: 55px 0;
             }
 
-            .all-packages-heading {
+            .all-packages-heading,
+            .blog-heading {
                 display: block;
             }
 
-            .all-packages-heading p {
+            .all-packages-heading p,
+            .blog-heading p {
                 margin-top: 15px;
             }
 
@@ -146,6 +351,33 @@
 
             .all-package-card h3 {
                 font-size: 15px;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .blog-card-image {
+                aspect-ratio: 16 / 9;
+            }
+
+            .blog-card-content {
+                padding: 20px;
+            }
+
+            .blog-card h3 {
+                font-size: 20px;
+            }
+
+            .blog-bottom-cta {
+                align-items: flex-start;
+                flex-direction: column;
+                padding: 23px;
+            }
+
+            .blog-contact-link {
+                width: 100%;
             }
         }
 
@@ -197,6 +429,7 @@
             </div>
 
             <a href="#fleet">Fleet</a>
+            <a href="blog.html" class="nav-blogs" aria-label="Visit our travel blogs">Blogs</a>
             <a href="contact.html">Contact</a>
 
             <a href="airport-booking.html" target="_blank" rel="noopener" class="nav-book">
@@ -250,7 +483,6 @@
 <!-- INTRO -->
 <section class="intro-section">
     <div class="section-container intro-grid">
-
         <div class="intro-label">
             <span>01</span>
             ABOUT US
@@ -272,14 +504,12 @@
                 and well-maintained vehicles are ready for your journey.
             </p>
         </div>
-
     </div>
 </section>
 
 <!-- QUICK BOOKING -->
 <section class="booking-strip">
     <div class="section-container booking-inner">
-
         <div>
             <span>READY TO TRAVEL?</span>
             <strong>Tell us where you want to go.</strong>
@@ -289,14 +519,12 @@
            class="booking-link" target="_blank" rel="noopener">
             WhatsApp +91 81477 71217 <span>→</span>
         </a>
-
     </div>
 </section>
 
 <!-- SERVICES -->
 <section class="services-section" id="services">
     <div class="section-container">
-
         <div class="section-heading">
             <div class="heading-number">02</div>
             <div>
@@ -306,7 +534,6 @@
         </div>
 
         <div class="services-list">
-
             <a href="services/mangalore-airport-taxi.html" class="service-row">
                 <span class="service-number">01</span>
                 <div class="service-title">Mangalore Airport Taxi</div>
@@ -348,7 +575,6 @@
                 <div class="service-description">Explore Karnataka with flexible taxi-based tour packages planned around your journey.</div>
                 <span class="service-arrow">↗</span>
             </a>
-
         </div>
     </div>
 </section>
@@ -356,7 +582,6 @@
 <!-- DESTINATION CATEGORIES -->
 <section class="destinations-section">
     <div class="section-container">
-
         <div class="destination-heading">
             <div>
                 <span class="section-kicker">DISCOVER KARNATAKA</span>
@@ -371,7 +596,6 @@
         </div>
 
         <div class="destination-mosaic">
-
             <a href="packages/coastal-karnataka.html" class="destination-card destination-large">
                 <img src="assets/coastal-karnataka-tour-bg.jpg"
                      alt="Coastal Karnataka tour from Mangalore" loading="lazy">
@@ -431,7 +655,6 @@
                     <small>Heritage • Architecture</small>
                 </div>
             </a>
-
         </div>
     </div>
 </section>
@@ -439,7 +662,6 @@
 <!-- ALL 20 INDIVIDUAL TOUR PACKAGES -->
 <section class="all-packages-section" id="all-packages">
     <div class="section-container">
-
         <div class="all-packages-heading">
             <div>
                 <span class="section-kicker">EXPLORE OUR TOURS</span>
@@ -455,7 +677,6 @@
         </div>
 
         <div class="all-packages-grid">
-
             <a href="packages/temple-tours.html" class="all-package-card">
                 <span class="all-package-number">TOUR 01</span>
                 <h3>Karnataka Temple Tours</h3>
@@ -575,21 +796,262 @@
                 <h3>Karnataka Multi-Day Tour</h3>
                 <div class="all-package-link"><span>Explore Package</span><span>↗</span></div>
             </a>
-
         </div>
 
         <p class="all-packages-note">
             Every package card opens its individual tour page. Check that the
             corresponding HTML file exists in the packages folder before publishing.
         </p>
+    </div>
+</section>
 
+<!-- ALL 10 TRAVEL GUIDES AND BLOGS -->
+<section class="blog-section" id="blogs">
+    <div class="section-container">
+        <div class="blog-heading">
+            <div>
+                <span class="section-kicker">TRAVEL INSPIRATION</span>
+                <h2>Explore more.<br><em>Travel better.</em></h2>
+            </div>
+
+            <p>
+                Planning a holiday from Mangalore? Explore our travel guides
+                for destination ideas, family road trips, airport travel tips,
+                hill stations, temples and Karnataka heritage destinations.
+            </p>
+        </div>
+
+        <div class="blog-grid">
+
+            <!-- BLOG 01 -->
+            <a href="blogs/best-places-to-visit-in-mangalore.html"
+               class="blog-card"
+               aria-label="Read Best Places to Visit in Mangalore">
+                <div class="blog-card-image">
+                    <img src="assets/blogs/best-places-to-visit-in-mangalore.jpg"
+                         alt="Places to visit in Mangalore travel guide"
+                         loading="lazy">
+                </div>
+                <div class="blog-card-content">
+                    <span class="blog-category">City Guide</span>
+                    <h3>Best Places to Visit in Mangalore</h3>
+                    <p>
+                        Discover city attractions, beaches, cultural landmarks
+                        and local places to include in your Mangalore visit.
+                    </p>
+                    <div class="blog-read-more"><span>Read Travel Guide</span><span>↗</span></div>
+                </div>
+            </a>
+
+            <!-- BLOG 02 -->
+            <a href="blogs/mangalore-to-udupi-travel-guide.html"
+               class="blog-card"
+               aria-label="Read Mangalore to Udupi Travel Guide">
+                <div class="blog-card-image">
+                    <img src="assets/blogs/mangalore-to-udupi-travel-guide.jpg"
+                         alt="Udupi destination travel guide from Mangalore"
+                         loading="lazy">
+                </div>
+                <div class="blog-card-content">
+                    <span class="blog-category">Route Guide</span>
+                    <h3>Mangalore to Udupi: Travel Guide</h3>
+                    <p>
+                        Plan your journey to Udupi with ideas for temples,
+                        local attractions, coastal stops and trip preparation.
+                    </p>
+                    <div class="blog-read-more"><span>Read Travel Guide</span><span>↗</span></div>
+                </div>
+            </a>
+
+            <!-- BLOG 03 -->
+            <a href="blogs/best-temples-near-mangalore.html"
+               class="blog-card"
+               aria-label="Read Best Temples Near Mangalore">
+                <div class="blog-card-image">
+                    <img src="assets/blogs/best-temples-near-mangalore.jpg"
+                         alt="Temple destinations near Mangalore"
+                         loading="lazy">
+                </div>
+                <div class="blog-card-content">
+                    <span class="blog-category">Temple Guide</span>
+                    <h3>Best Temples Near Mangalore</h3>
+                    <p>
+                        Explore temple destinations for pilgrimages and
+                        cultural visits around Mangalore and coastal Karnataka.
+                    </p>
+                    <div class="blog-read-more"><span>Read Travel Guide</span><span>↗</span></div>
+                </div>
+            </a>
+
+            <!-- BLOG 04 -->
+            <a href="blogs/mangalore-to-dharmasthala-travel-guide.html"
+               class="blog-card"
+               aria-label="Read Mangalore to Dharmasthala Travel Guide">
+                <div class="blog-card-image">
+                    <img src="assets/blogs/mangalore-to-dharmasthala-travel-guide.jpg"
+                         alt="Dharmasthala pilgrimage travel guide"
+                         loading="lazy">
+                </div>
+                <div class="blog-card-content">
+                    <span class="blog-category">Pilgrimage Guide</span>
+                    <h3>Mangalore to Dharmasthala: Travel Guide</h3>
+                    <p>
+                        Prepare for a pilgrimage to Dharmasthala with
+                        practical trip-planning and sightseeing suggestions.
+                    </p>
+                    <div class="blog-read-more"><span>Read Travel Guide</span><span>↗</span></div>
+                </div>
+            </a>
+
+            <!-- BLOG 05 -->
+            <a href="blogs/best-places-coastal-karnataka.html"
+               class="blog-card"
+               aria-label="Read Best Places to Visit in Coastal Karnataka">
+                <div class="blog-card-image">
+                    <img src="assets/blogs/coastal-karnataka-guide.jpg"
+                         alt="Coastal Karnataka travel destinations"
+                         loading="lazy">
+                </div>
+                <div class="blog-card-content">
+                    <span class="blog-category">Destination Guide</span>
+                    <h3>Best Places to Visit in Coastal Karnataka</h3>
+                    <p>
+                        Discover coastal destinations, beaches, temples,
+                        heritage attractions and places to include in a
+                        trip from Mangalore.
+                    </p>
+                    <div class="blog-read-more"><span>Read Travel Guide</span><span>↗</span></div>
+                </div>
+            </a>
+
+            <!-- BLOG 06 -->
+            <a href="blogs/mangalore-to-coorg-family-trip.html"
+               class="blog-card"
+               aria-label="Read Mangalore to Coorg Family Trip">
+                <div class="blog-card-image">
+                    <img src="assets/blogs/coorg-family-trip.jpg"
+                         alt="Coorg hill landscape for a family trip from Mangalore"
+                         loading="lazy">
+                </div>
+                <div class="blog-card-content">
+                    <span class="blog-category">Family Travel</span>
+                    <h3>Mangalore to Coorg: A Family Trip Guide</h3>
+                    <p>
+                        Plan a family journey to Coorg with ideas for
+                        sightseeing, hill scenery, travel preparation
+                        and a comfortable itinerary.
+                    </p>
+                    <div class="blog-read-more"><span>Read Travel Guide</span><span>↗</span></div>
+                </div>
+            </a>
+
+            <!-- BLOG 07 -->
+            <a href="blogs/mangalore-airport-taxi-guide.html"
+               class="blog-card"
+               aria-label="Read Mangalore Airport Taxi Booking Guide">
+                <div class="blog-card-image">
+                    <img src="assets/blogs/mangalore-airport-taxi-guide.jpg"
+                         alt="Mangalore airport taxi travel guide"
+                         loading="lazy">
+                </div>
+                <div class="blog-card-content">
+                    <span class="blog-category">Airport Travel</span>
+                    <h3>Mangalore Airport Taxi Booking Guide</h3>
+                    <p>
+                        Learn how to prepare for an airport pickup or drop,
+                        share your flight details and choose a vehicle
+                        suited to your travel needs.
+                    </p>
+                    <div class="blog-read-more"><span>Read Travel Guide</span><span>↗</span></div>
+                </div>
+            </a>
+
+            <!-- BLOG 08 -->
+            <a href="blogs/hill-stations-near-mangalore.html"
+               class="blog-card"
+               aria-label="Read Best Hill Stations Near Mangalore">
+                <div class="blog-card-image">
+                    <img src="assets/blogs/hill-stations-near-mangalore.jpg"
+                         alt="Green mountain landscape in a hill station near Mangalore"
+                         loading="lazy">
+                </div>
+                <div class="blog-card-content">
+                    <span class="blog-category">Hill Station Guide</span>
+                    <h3>Best Hill Stations Near Mangalore</h3>
+                    <p>
+                        Find inspiration for mountain escapes, misty
+                        landscapes, nature outings and scenic drives
+                        from the Mangalore region.
+                    </p>
+                    <div class="blog-read-more"><span>Read Travel Guide</span><span>↗</span></div>
+                </div>
+            </a>
+
+            <!-- BLOG 09 -->
+            <a href="blogs/belur-halebidu-travel-guide.html"
+               class="blog-card"
+               aria-label="Read Belur and Halebidu Heritage Travel Guide">
+                <div class="blog-card-image">
+                    <img src="assets/blogs/belur-halebidu-heritage.jpg"
+                         alt="Hoysala stone temple architecture at Belur or Halebidu"
+                         loading="lazy">
+                </div>
+                <div class="blog-card-content">
+                    <span class="blog-category">Heritage Travel</span>
+                    <h3>Belur and Halebidu Heritage Travel Guide</h3>
+                    <p>
+                        Explore remarkable Hoysala temple architecture
+                        and plan a heritage-focused visit to Belur
+                        and Halebidu from Mangalore.
+                    </p>
+                    <div class="blog-read-more"><span>Read Travel Guide</span><span>↗</span></div>
+                </div>
+            </a>
+
+            <!-- BLOG 10 -->
+            <a href="blogs/family-road-trips-from-mangalore.html"
+               class="blog-card"
+               aria-label="Read Best Family Road Trips from Mangalore">
+                <div class="blog-card-image">
+                    <img src="assets/blogs/family-road-trips-mangalore.jpg"
+                         alt="Scenic Karnataka road for a family trip from Mangalore"
+                         loading="lazy">
+                </div>
+                <div class="blog-card-content">
+                    <span class="blog-category">Road Trip Ideas</span>
+                    <h3>Best Family Road Trips from Mangalore</h3>
+                    <p>
+                        Get ideas for family-friendly journeys, sightseeing
+                        stops and multi-day holidays starting from
+                        Mangalore and coastal Karnataka.
+                    </p>
+                    <div class="blog-read-more"><span>Read Travel Guide</span><span>↗</span></div>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="blog-bottom-cta">
+            <div>
+                <strong>Planning your next journey?</strong>
+                <p>
+                    Contact Radhakrishna Taxi Service for taxi bookings
+                    from Mangalore and travel planning assistance.
+                </p>
+            </div>
+
+            <a href="https://wa.me/918147771217"
+               class="blog-contact-link"
+               target="_blank" rel="noopener">
+                PLAN YOUR TRIP <span>↗</span>
+            </a>
+        </div>
     </div>
 </section>
 
 <!-- ALL 41 ROUTES -->
 <section class="routes-section" id="routes">
     <div class="section-container">
-
         <div class="routes-top">
             <div>
                 <span class="section-kicker">POPULAR TAXI ROUTES</span>
@@ -604,7 +1066,6 @@
         </div>
 
         <div class="routes-grid">
-
             <a href="routes/mangalore-to-bangalore.html"><span>01</span> Mangalore → Bangalore <b>↗</b></a>
             <a href="routes/mangalore-to-goa.html"><span>02</span> Mangalore → Goa <b>↗</b></a>
             <a href="routes/mangalore-to-udupi.html"><span>03</span> Mangalore → Udupi <b>↗</b></a>
@@ -646,7 +1107,6 @@
             <a href="routes/mangalore-to-aihole-pattadakal.html"><span>39</span> Mangalore → Aihole &amp; Pattadakal <b>↗</b></a>
             <a href="routes/mangalore-to-kolhapur-mahalaxmi.html"><span>40</span> Mangalore → Kolhapur Mahalaxmi <b>↗</b></a>
             <a href="routes/mangalore-to-shirdi.html"><span>41</span> Mangalore → Shirdi Sai Baba <b>↗</b></a>
-
         </div>
     </div>
 </section>
@@ -654,7 +1114,6 @@
 <!-- FLEET -->
 <section class="fleet-section" id="fleet">
     <div class="section-container">
-
         <div class="fleet-heading">
             <div>
                 <span class="section-kicker">OUR FLEET</span>
@@ -668,7 +1127,6 @@
         </div>
 
         <div class="fleet-showcase">
-
             <article class="fleet-card">
                 <div class="fleet-image">
                     <img src="assets/dzire.jpg" alt="Maruti Suzuki Dzire taxi" loading="lazy">
@@ -738,7 +1196,6 @@
                     <strong>₹26/km</strong>
                 </div>
             </article>
-
         </div>
 
         <div class="fleet-note">
@@ -746,14 +1203,12 @@
             <strong>Force Urbania &amp; Mini Bus</strong>
             <span>Available on request</span>
         </div>
-
     </div>
 </section>
 
 <!-- WHY US -->
 <section class="why-section">
     <div class="section-container why-grid">
-
         <div class="why-image">
             <img src="assets/karnataka-tour.jpg"
                  alt="Karnataka tour with Radhakrishna Taxi Service" loading="lazy">
@@ -769,7 +1224,6 @@
             <h2>A taxi service<br>built around <em>your journey.</em></h2>
 
             <div class="why-points">
-
                 <div>
                     <span>01</span>
                     <div>
@@ -801,7 +1255,6 @@
                         <p>We know the roads, destinations and travel routes across Karnataka.</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -837,7 +1290,6 @@
 <!-- FOOTER -->
 <footer class="site-footer">
     <div class="section-container footer-grid">
-
         <div class="footer-brand">
             <img src="assets/radhakrishna-taxi-logo.png" alt="Radhakrishna Taxi Service">
             <p>
@@ -857,7 +1309,7 @@
         </div>
 
         <div class="footer-column">
-            <h3>Tours</h3>
+            <h3>Tours &amp; Guides</h3>
             <a href="#all-packages">All Tour Packages</a>
             <a href="packages/temple-tours.html">Temple Tours</a>
             <a href="packages/coastal-karnataka.html">Coastal Karnataka</a>
@@ -865,6 +1317,7 @@
             <a href="packages/goa-tour-package.html">Goa Tour</a>
             <a href="packages/chikkamagaluru-tour.html">Chikkamagaluru</a>
             <a href="packages/belur-halebidu-tour.html">Belur &amp; Halebidu</a>
+            <a href="blog.html">Blogs &amp; Travel Guides</a>
         </div>
 
         <div class="footer-column">
@@ -875,7 +1328,6 @@
             <a href="contact.html">Contact Page</a>
             <span>Mangalore, Karnataka</span>
         </div>
-
     </div>
 
     <div class="footer-bottom">

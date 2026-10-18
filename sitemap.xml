@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
@@ -24,6 +23,53 @@
     <loc>https://radhakrishnataxiservice.com/services.html</loc>
     <priority>0.8</priority>
   </url>
+  <url>
+    <loc>https://radhakrishnataxiservice.com/blogs.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Blog articles -->
+  <url>
+    <loc>https://radhakrishnataxiservice.com/blogs/best-places-to-visit-in-mangalore.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radhakrishnataxiservice.com/blogs/mangalore-to-udupi-travel-guide.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radhakrishnataxiservice.com/blogs/best-temples-near-mangalore.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radhakrishnataxiservice.com/blogs/mangalore-to-dharmasthala-travel-guide.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radhakrishnataxiservice.com/blogs/best-places-coastal-karnataka.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radhakrishnataxiservice.com/blogs/mangalore-to-coorg-family-trip.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radhakrishnataxiservice.com/blogs/mangalore-airport-taxi-guide.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radhakrishnataxiservice.com/blogs/hill-stations-near-mangalore.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radhakrishnataxiservice.com/blogs/belur-halebidu-travel-guide.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://radhakrishnataxiservice.com/blogs/family-road-trips-from-mangalore.html</loc>
+    <priority>0.8</priority>
+  </url>
 
   <!-- Service pages -->
   <url><loc>https://radhakrishnataxiservice.com/services/airport-pickup-drop.html</loc></url>
@@ -44,7 +90,7 @@
   <url><loc>https://radhakrishnataxiservice.com/packages/chikkamagaluru-tour.html</loc></url>
   <url><loc>https://radhakrishnataxiservice.com/packages/coastal-jain-temples.html</loc></url>
 
-  <!-- Individual tour packages: verify filenames before publishing -->
+  <!-- Individual tour packages -->
   <url><loc>https://radhakrishnataxiservice.com/packages/udupi-krishna-tour-package.html</loc></url>
   <url><loc>https://radhakrishnataxiservice.com/packages/murudeshwara-gokarna-tour-package.html</loc></url>
   <url><loc>https://radhakrishnataxiservice.com/packages/dharmasthala-kukke-tour-package.html</loc></url>
