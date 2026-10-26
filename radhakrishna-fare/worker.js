@@ -482,7 +482,7 @@ function calculateOutstationFare(input, vehicle, onwardKm) {
   const isRoundTrip = tripType === "roundtrip";
 
   // Total distance includes the return journey for round trips.
-  const totalKm = isRoundTrip ? onwardKm * 2 : onwardKm;
+  const totalKm = isRoundTrip ? onwardKm * 1 : onwardKm;
 
   // Count calendar days inclusively: same-day trip = 1 day.
   const pickupDate = Date.parse(input.date + "T00:00:00Z");
