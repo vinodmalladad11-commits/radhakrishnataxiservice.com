@@ -321,6 +321,7 @@ function calculateDriverBata(input) {
   };
 }
 
+
 function calculateFare(input, vehicle, distanceKm) {
   const isOneWay = input.tripType === "oneway";
   const isOutstation = input.category === "outstation";
@@ -333,9 +334,10 @@ function calculateFare(input, vehicle, distanceKm) {
   let totalKm = distanceKm;
 
   if (isOneWay) {
-    // Preserve the existing fare calculation rule.
+    // One-way fare uses the mileage rate and the existing multiplier.
     fare = distanceKm * vehicle.rate * 2;
   } else {
+    // Round-trip distance estimate.
     totalKm = distanceKm * 2;
 
     if (totalKm > 200) {
@@ -368,11 +370,16 @@ function calculateFare(input, vehicle, distanceKm) {
       }
     }
 
+    // Add existing extra-hour charges.
     fare += extraHours * vehicle.extraHour;
+
+    // Add 10% to the round-trip base fare.
+    fare *= 1.10;
   }
 
   const bataDetails = calculateDriverBata(input);
 
+  // Add bata, toll and parking after the 10% uplift.
   fare += bataDetails.driverBata + toll + parking;
 
   const totalFare = Math.ceil(fare);
@@ -396,6 +403,7 @@ function calculateFare(input, vehicle, distanceKm) {
       : "Round-trip distance is estimated as twice the onward road distance. Actual routing may differ."
   };
 }
+
 
 export default {
   async fetch(request, env) {
