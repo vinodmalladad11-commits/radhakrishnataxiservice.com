@@ -160,100 +160,80 @@ async function geocode(place) {
   return { lat, lon };
 }
 
-async function getRoadDistanceKm(pickup, destination) {
+
+async function getRoadDistanceKm(pickup, destination, apiKey) {
+  if (!apiKey) {
+    throw new Error(
+      "Routing API key is missing. Please configure GEOAPIFY_API_KEY in Cloudflare."
+    );
+  }
+
   const start = await geocode(pickup);
-
-  // Respect the public Nominatim service's request limits.
   await sleep(1100);
-
   const end = await geocode(destination);
 
-  const routeUrl =
-    "https://router.project-osrm.org/route/v1/driving/" +
-    `${start.lon},${start.lat};${end.lon},${end.lat}` +
-    "?overview=false&alternatives=false&steps=false";
+  const url = new URL("https://api.geoapify.com/v1/routing");
+
+  url.searchParams.set(
+    "waypoints",
+    `${start.lat},${start.lon}|${end.lat},${end.lon}`
+  );
+  url.searchParams.set("mode", "drive");
+  url.searchParams.set("format", "json");
+  url.searchParams.set("units", "metric");
+  url.searchParams.set("apiKey", apiKey);
 
   let response;
 
   try {
-    response = await fetch(routeUrl, {
-      headers: {
-        "Accept": "application/json"
-      }
+    response = await fetch(url.toString(), {
+      headers: { "Accept": "application/json" }
     });
   } catch (error) {
-    console.error("OSRM network request failed:", {
-      message: error instanceof Error
-        ? error.message
-        : String(error)
-    });
-
+    console.error("Geoapify network error:", String(error));
     throw new Error(
-      "Unable to connect to the road-distance service. Please try again shortly."
+      "Unable to connect to the road-distance service. Please try again."
     );
   }
 
   if (!response.ok) {
-    let errorDetails = "";
+    const details = (await response.text()).slice(0, 400);
+    console.error("Geoapify request failed:", {
+      status: response.status,
+      details
+    });
 
-    try {
-      errorDetails = await response.text();
-    } catch {
-      errorDetails = "Could not read the upstream error response.";
+    if (response.status === 401 || response.status === 403) {
+      throw new Error(
+        "The routing service rejected its API key or request. Please check the Geoapify API key and project settings."
+      );
     }
 
-    console.error("OSRM request failed:", {
-      status: response.status,
-      statusText: response.statusText,
-      details: errorDetails.slice(0, 500)
-    });
+    if (response.status === 429) {
+      throw new Error(
+        "The routing service has reached its request limit. Please try again later."
+      );
+    }
 
     throw new Error(
-      `Road-distance service is temporarily unavailable (HTTP ${response.status}). Please try again shortly.`
+      `Road-distance service unavailable (HTTP ${response.status}). Please try again.`
     );
   }
 
-  let data;
-
-  try {
-    data = await response.json();
-  } catch (error) {
-    console.error("OSRM returned invalid JSON:", {
-      message: error instanceof Error
-        ? error.message
-        : String(error)
-    });
-
-    throw new Error(
-      "The road-distance service returned an invalid response. Please try again."
-    );
-  }
-
-  if (
-    data.code !== "Ok" ||
-    !Array.isArray(data.routes) ||
-    !data.routes.length
-  ) {
-    console.error("OSRM could not calculate route:", {
-      code: data.code,
-      message: data.message || "No route returned"
-    });
-
-    throw new Error(
-      "We couldn't calculate a road route for these locations. Please check your pickup and destination."
-    );
-  }
-
-  const distanceKm = Number(data.routes[0].distance) / 1000;
+  const data = await response.json();
+  const route = data.results?.[0];
+  const distanceKm = Number(route?.distance) / 1000;
 
   if (!Number.isFinite(distanceKm) || distanceKm <= 0) {
+    console.error("Invalid Geoapify route response:", data);
     throw new Error(
-      "The road-distance service returned an invalid distance."
+      "No valid driving route was found. Please check your pickup and destination."
     );
   }
 
   return distanceKm;
 }
+
 
 function calculateFare(input, vehicle, distanceKm) {
   const isOneWay = input.tripType === "oneway";
@@ -328,7 +308,7 @@ function calculateFare(input, vehicle, distanceKm) {
 }
 
 export default {
-  async fetch(request) {
+  async fetch(request, env) {
     const origin = request.headers.get("Origin") || "";
 
     if (request.method === "OPTIONS") {
@@ -431,8 +411,9 @@ export default {
 
       const distanceKm = await getRoadDistanceKm(
         input.pickup.trim(),
-        input.destination.trim()
-      );
+        input.destination.trim(),
+        env.GEOAPIFY_API_KEY
+        );
 
       const result = calculateFare(input, vehicle, distanceKm);
 
