@@ -392,16 +392,24 @@ $("policyNote").textContent =
 }
 }
 function getFormData() {
-const data = Object.fromEntries(new FormData(form).entries());
-data.stops = [...$("stopsContainer").querySelectorAll("input")]
-.map(input => input.value.trim()).filter(Boolean);
-data.extraHours = Number(data.extraHours || 0);
-data.waitingHours = Number(data.waitingHours || 0);
-data.toll = Number(data.toll || 0);
-data.parking = Number(data.parking || 0);
-data.passengers = Number(data.passengers || 1);
-data.mode = data.mode;
-return data;
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    data.stops = [
+        ...$("stopsContainer").querySelectorAll("input")
+    ]
+    .map(input => input.value.trim())
+    .filter(Boolean);
+
+    data.extraHours = Number(data.extraHours || 0);
+    data.waitingHours = Number(data.waitingHours || 0);
+    data.toll = Number(data.toll || 0);
+    data.parking = Number(data.parking || 0);
+    data.passengers = Number(data.passengers || 1);
+
+    // Keep the selected four-mode service value.
+    data.mode = String(data.mode || "").trim().toLowerCase();
+
+    return data;
 }
 function validateForm(data) {
 if (!data.pickup.trim() || !data.destination.trim()) return "Please enter pickup and destination.";
@@ -473,20 +481,31 @@ clearStatus();
 resultBox.style.display = "none";
 latestEstimate = null;
 const data = getFormData();
+
+console.log("Selected service mode:", data.mode);
+console.log("Request payload:", data);
+
 const error = validateForm(data);
+
 if (error) {
-showStatus(error, "error");
-return;
+    showStatus(error, "error");
+    return;
 }
+
 calculateButton.disabled = true;
 calculateButton.textContent = "Calculating Fare...";
 showStatus("Calculating your estimate. Please wait...", "info");
+
 try {
-const response = await fetch(API_BASE + "/api/estimate", {
-method: "POST",
-headers: {"Content-Type":"application/json"},
-body: JSON.stringify(data)
-});
+    const response = await fetch(API_BASE + "/api/estimate", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    console.log("Worker HTTP status:", response.status);
 let result;
 try { result = await response.json(); }
 catch { throw new Error("The fare service returned an invalid response. Please try again."); }
