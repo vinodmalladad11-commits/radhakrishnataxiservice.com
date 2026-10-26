@@ -350,22 +350,28 @@ async function getRoute(locations, apiKey) {
   };
 }
 
-async function validateLocalArea(locations, apiKey) {
+async function distanceFromMangaloreCentre(place, apiKey) {
   const centre = await geocode(
     "Mangalore, Karnataka, India",
     apiKey
   );
 
+  const point = await geocode(place, apiKey);
+
+  return getRoadDistanceBetween(centre, point, apiKey);
+}
+
+async function isWithinMangaloreLocalLimit(place, apiKey) {
+  const distance = await distanceFromMangaloreCentre(place, apiKey);
+
+  return distance <= LOCAL_MAX_DISTANCE_KM;
+}
+
+async function validateLocalArea(locations, apiKey) {
   const checked = [];
 
   for (const place of locations) {
-    const point = await geocode(place, apiKey);
-
-    const distance = await getRoadDistanceBetween(
-      centre,
-      point,
-      apiKey
-    );
+    const distance = await distanceFromMangaloreCentre(place, apiKey);
 
     checked.push({
       location: place,
@@ -444,12 +450,8 @@ function calculateOutstationBata(date, dropDate, time) {
   }
 
   const chargeableDays = daysApart + 1;
-
-  const earlyMorningSurcharge =
-    Number(time.split(":")[0]) < 6;
-
+  const earlyMorningSurcharge = Number(time.split(":")[0]) < 6;
   const dailyBata = chargeableDays * DRIVER_BATA;
-
   const earlyMorningBata =
     earlyMorningSurcharge ? DRIVER_BATA : 0;
 
@@ -522,7 +524,7 @@ function calculateLocalFare(input, vehicle, routeKm) {
   } else if (duration === "8") {
     if (vehicle.local8 === null) {
       throw new Error(
-        `${vehicle.name} is not available for the 8-hour package. Please choose another vehicle.`
+        `${vehicle.name} is not available for the 8-hour package. Please choose another duration or vehicle.`
       );
     }
 
@@ -559,7 +561,8 @@ function calculateOutstationFare(
   input,
   vehicle,
   onwardKm,
-  totalKm
+  totalKm,
+  destinationWithinLocalLimit
 ) {
   if (!vehicle.rate || vehicle.rate <= 0) {
     throw new Error(
@@ -597,8 +600,8 @@ function calculateOutstationFare(
 
   if (isRoundTrip) {
     // ROUND TRIP:
-    // Daily package plus charges for kilometres exceeding
-    // the included 200 km per chargeable day.
+    // Full outstation daily rate plus excess kilometres above
+    // 200 km per chargeable day.
     if (!vehicle.fullOutstation || vehicle.fullOutstation <= 0) {
       throw new Error(
         "The selected vehicle does not have a valid daily outstation rate."
@@ -613,21 +616,42 @@ function calculateOutstationFare(
     baseFare = dailyFare + excessKmFare;
 
     // Apply the 5% extra once to base fare + driver bata.
-    // Toll and parking remain separate charges.
+    // Toll and parking are charged separately.
     roundTripExtra =
       (baseFare + bata.driverBata) * ROUND_TRIP_EXTRA_PERCENT;
 
-    // Display the full outward + return distance.
     displayDistanceKm = totalKm;
   } else {
     // ONE WAY:
-    // Charge twice the outward road distance at the per-km rate.
-    // Do not apply daily package rates or the 200 km allowance.
-    const chargeableKm = onwardKm * 2;
+    // 100-200 km: Mangaluru local full-day package.
+    // Over 200 km: actual outward kilometres x per-km rate.
+    // No doubling of the outward distance.
+    if (
+      onwardKm >= 100 &&
+      onwardKm <= 200
+    ) {
+      if (!vehicle.fullLocal || vehicle.fullLocal <= 0) {
+        throw new Error(
+          "The selected vehicle does not have a valid Mangaluru local full-day rate."
+        );
+      }
 
-    baseFare = chargeableKm * vehicle.rate;
+      baseFare = vehicle.fullLocal;
+    } else if (
+      onwardKm < 100 &&
+      destinationWithinLocalLimit
+    ) {
+      if (!vehicle.fullLocal || vehicle.fullLocal <= 0) {
+        throw new Error(
+          "The selected vehicle does not have a valid Mangaluru local full-day rate."
+        );
+      }
 
-    // Display only the actual outward distance.
+      baseFare = vehicle.fullLocal;
+    } else {
+      baseFare = onwardKm * vehicle.rate;
+    }
+
     displayDistanceKm = onwardKm;
   }
 
@@ -760,7 +784,7 @@ export default {
 
       const vehicle = VEHICLES[input.vehicle];
 
-      // Airport and railway transfers keep their existing fixed fares.
+      // Preserve existing fixed airport and railway transfer prices.
       if (mode === "airport" || mode === "railway") {
         return jsonResponse(
           calculateTransfer(input, vehicle, mode),
@@ -771,7 +795,7 @@ export default {
 
       const locations = validateLocations(input);
 
-      // Local package-duration validation applies only to local trips.
+      // Local packages retain the existing 20 km validation and prices.
       if (mode === "local") {
         if (!["4", "8", "full"].includes(String(input.duration))) {
           throw new Error("Please select a valid local package duration.");
@@ -800,7 +824,6 @@ export default {
         return jsonResponse(result, 200, origin);
       }
 
-      // Outstation trip type and dates.
       if (!["oneway", "roundtrip"].includes(input.tripType)) {
         throw new Error(
           "Please select a valid outstation trip type."
@@ -819,9 +842,45 @@ export default {
         );
       }
 
-      // Outward route: pickup -> stops in order -> destination.
+      let routeLocations = [...locations];
+
+      // For one-way journeys where both pickup and destination are
+      // outside Mangaluru's 20 km local limit, include Mangaluru
+      // as a waypoint before the final destination.
+      //
+      // If pickup is already within Mangaluru, the route starts
+      // from the pickup and does not add a duplicate waypoint.
+      if (input.tripType === "oneway") {
+        const pickupWithinLocalLimit =
+          await isWithinMangaloreLocalLimit(
+            input.pickup,
+            env.GEOAPIFY_API_KEY
+          );
+
+        const destinationWithinLocalLimit =
+          await isWithinMangaloreLocalLimit(
+            input.destination,
+            env.GEOAPIFY_API_KEY
+          );
+
+        if (
+          !pickupWithinLocalLimit &&
+          !destinationWithinLocalLimit
+        ) {
+          const intermediateLocations = locations.slice(1, -1);
+
+          routeLocations = [
+            locations[0],
+            ...intermediateLocations,
+            "Mangalore, Karnataka, India",
+            locations[locations.length - 1]
+          ];
+        }
+      }
+
+      // Calculate the outward road route.
       const outwardRoute = await getRoute(
-        locations,
+        routeLocations,
         env.GEOAPIFY_API_KEY
       );
 
@@ -832,7 +891,7 @@ export default {
       let allRouteLegs = [...outwardRoute.legs];
 
       if (input.tripType === "roundtrip") {
-        // Return route: destination -> stops in reverse order -> pickup.
+        // Return through the same stops in reverse order.
         const returnLocations = [...locations].reverse();
 
         const returnRoute = await getRoute(
@@ -841,8 +900,6 @@ export default {
         );
 
         returnKm = returnRoute.onwardKm;
-
-        // Count outward and return kilometres once each.
         totalKm = onwardKm + returnKm;
 
         allRouteLegs = [
@@ -851,11 +908,18 @@ export default {
         ];
       }
 
+      const destinationWithinLocalLimit =
+        await isWithinMangaloreLocalLimit(
+          input.destination,
+          env.GEOAPIFY_API_KEY
+        );
+
       const result = calculateOutstationFare(
         input,
         vehicle,
         onwardKm,
-        totalKm
+        totalKm,
+        destinationWithinLocalLimit
       );
 
       result.returnDistanceKm = Math.round(returnKm * 10) / 10;
@@ -864,8 +928,14 @@ export default {
 
       result.routeNotice =
         input.tripType === "roundtrip"
-          ? "Round-trip distance includes the complete outward route and the return route through all stops. A 5% round-trip extra is included in the fare. Toll and parking are added separately."
-          : "The displayed distance is the outward road distance only. The one-way base fare is calculated using twice the outward distance at the selected vehicle's per-kilometre rate. Toll and parking are added separately.";
+          ? "Round-trip distance includes the complete outward route and return route through all stops. The outstation daily rate includes 200 km per chargeable day; excess kilometres are charged at the selected vehicle's per-kilometre rate. A 5% round-trip extra is included. Toll and parking are separate."
+          : onwardKm >= 100 && onwardKm <= 200
+            ? "For one-way journeys of 100–200 km, the Mangaluru local Full Day package price applies. The displayed distance is the outward road distance. Toll and parking are separate."
+            : onwardKm > 200
+              ? "For one-way journeys over 200 km, the base fare is the outward road distance multiplied by the selected vehicle's per-kilometre rate. The distance is not doubled. Toll and parking are separate."
+              : destinationWithinLocalLimit
+                ? "For this one-way journey within Mangaluru's 20 km local limit, the local Full Day price applies. Toll and parking are separate."
+                : "The displayed distance is the outward road distance only. The fare uses the selected vehicle's per-kilometre rate. Toll and parking are separate.";
 
       return jsonResponse(result, 200, origin);
 
