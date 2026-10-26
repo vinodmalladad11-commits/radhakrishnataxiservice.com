@@ -664,8 +664,8 @@ export default {
           env.GEOAPIFY_API_KEY
         );
         result.distanceKm = Math.round((onwardKm + reverse.onwardKm) * 10) / 10;
-        result.routeNotice =
-          "Round-trip estimate includes the listed outward stops and an estimated return route. A 10% premium is applied to the base fare.";
+       result.routeNotice =
+        "Round-trip estimate includes the outward journey and estimated return route. No additional 10% round-trip premium is applied.";
       }
 
       result.stops = locations.slice(1, -1);
