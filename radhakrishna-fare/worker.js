@@ -269,10 +269,22 @@ async function geocode(place, apiKey) {
   );
 }
 
+
 async function getRoadDistanceBetween(start, end, apiKey) {
   if (!apiKey) {
+    throw new Error("GEOAPIFY_API_KEY is missing.");
+  }
+
+  if (
+    !start ||
+    !end ||
+    !Number.isFinite(Number(start.lat)) ||
+    !Number.isFinite(Number(start.lon)) ||
+    !Number.isFinite(Number(end.lat)) ||
+    !Number.isFinite(Number(end.lon))
+  ) {
     throw new Error(
-      "Routing API key is missing. Configure GEOAPIFY_API_KEY in Cloudflare."
+      "Invalid coordinates received for road-distance calculation."
     );
   }
 
@@ -288,34 +300,88 @@ async function getRoadDistanceBetween(start, end, apiKey) {
   url.searchParams.set("apiKey", apiKey);
 
   const response = await fetch(url.toString(), {
-    headers: { "Accept": "application/json" }
+    headers: { Accept: "application/json" }
   });
 
-  if (!response.ok) {
-    if (response.status === 401 || response.status === 403) {
-      throw new Error("The routing API rejected the configured API key.");
-    }
+  const responseText = await response.text();
 
-    if (response.status === 429) {
-      throw new Error(
-        "The routing service request limit was reached. Try again later."
-      );
-    }
+  let data;
 
-    throw new Error("The road-distance service is temporarily unavailable.");
-  }
+  try {
+    data = JSON.parse(responseText);
+  } catch {
+    console.error(
+      "Geoapify returned a non-JSON response. HTTP:",
+      response.status
+    );
 
-  const data = await response.json();
-  const distanceKm = Number(data.results?.[0]?.distance) / 1000;
-
-  if (!Number.isFinite(distanceKm) || distanceKm <= 0) {
     throw new Error(
-      "No valid driving route was found between two locations."
+      "The routing service returned an invalid response. Check Worker logs."
     );
   }
 
-  return distanceKm;
+  if (!response.ok) {
+    console.error(
+      "Geoapify routing error:",
+      response.status,
+      JSON.stringify(data)
+    );
+
+    throw new Error(
+      `Geoapify routing failed with HTTP ${response.status}. Check the API key and Worker logs.`
+    );
+  }
+
+  const route = data.results?.[0] || data.features?.[0] || null;
+
+  if (!route) {
+    console.error(
+      "Geoapify returned no route:",
+      JSON.stringify(data)
+    );
+
+    throw new Error(
+      "Geoapify returned no route. Check the pickup and destination addresses in Worker logs."
+    );
+  }
+
+  const properties = route.properties || route;
+
+  let distanceMetres = Number(properties.distance);
+
+  if (
+    !Number.isFinite(distanceMetres) ||
+    distanceMetres <= 0
+  ) {
+    const legs = properties.legs || route.legs;
+
+    if (Array.isArray(legs) && legs.length > 0) {
+      distanceMetres = legs.reduce((total, leg) => {
+        const value = Number(leg.distance);
+        return total + (
+          Number.isFinite(value) && value > 0 ? value : 0
+        );
+      }, 0);
+    }
+  }
+
+  if (
+    !Number.isFinite(distanceMetres) ||
+    distanceMetres <= 0
+  ) {
+    console.error(
+      "Geoapify response has no usable distance:",
+      JSON.stringify(data)
+    );
+
+    throw new Error(
+      "Geoapify returned a route without a usable distance. Check Worker logs."
+    );
+  }
+
+  return distanceMetres / 1000;
 }
+
 
 async function getRoute(locations, apiKey) {
   const coordinates = [];
