@@ -1612,3 +1612,68 @@ button {
         grid-column: auto;
     }
 }
+/* Floating Get Fare Estimate Button */
+.floating-fare-button {
+    position: fixed;
+    right: 20px;
+    bottom: 95px;
+    z-index: 9998;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    padding: 13px 19px;
+    background: #d7ad62;
+    color: #102d35;
+
+    border: 2px solid #ffffff;
+    border-radius: 50px;
+
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.22);
+    transition: transform 0.25s ease,
+                background 0.25s ease;
+}
+
+.floating-fare-button:hover {
+    background: #102d35;
+    color: #d7ad62;
+    transform: translateY(-3px);
+}
+
+.fare-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 29px;
+    height: 29px;
+
+    background: #102d35;
+    color: #d7ad62;
+
+    border-radius: 50%;
+    font-size: 19px;
+    font-weight: 700;
+}
+
+@media (max-width: 600px) {
+    .floating-fare-button {
+        right: 12px;
+        bottom: 88px;
+        padding: 10px 14px;
+        font-size: 12px;
+        gap: 7px;
+    }
+
+    .fare-icon {
+        width: 26px;
+        height: 26px;
+        font-size: 17px;
+    }
+}
