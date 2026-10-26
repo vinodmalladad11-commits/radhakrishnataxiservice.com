@@ -888,21 +888,38 @@
 
             return;
         }
-        console.log("Fare service response:", result);
+        console.log("Full fare service response:", result);
+        console.log("totalFare:", result.totalFare, typeof result.totalFare);
+        console.log("driverBata:", result.driverBata, typeof result.driverBata);
+
         const totalFare = Number(result.totalFare);
         const driverBata = Number(result.driverBata);
-        const extras = Number(data.toll) + Number(data.parking);
+        const extras = Number(data.toll || 0) + Number(data.parking || 0);
 
         if (
+            result.totalFare === undefined ||
+            result.driverBata === undefined ||
             !Number.isFinite(totalFare) ||
             !Number.isFinite(driverBata) ||
             totalFare < 0 ||
             driverBata < 0
         ) {
-            throw new Error("Invalid fare or driver bata returned by the fare service.");
+            throw new Error(
+                "Invalid fare response: " + JSON.stringify(result)
+            );
         }
 
-const baseFare = totalFare - driverBata - extras;
+        const baseFare = totalFare - driverBata - extras;
+                if (
+                    !Number.isFinite(totalFare) ||
+                    !Number.isFinite(driverBata) ||
+                    totalFare < 0 ||
+                    driverBata < 0
+                ) {
+                    throw new Error("Invalid fare or driver bata returned by the fare service.");
+                }
+
+        const baseFare = totalFare - driverBata - extras;
 
         $("estimatedFare").textContent = formatINR(totalFare);
 
