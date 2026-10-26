@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Taxi Fare Estimate | Radhakrishna Taxi Service</title>
+
+    <meta name="description"
+          content="Estimate your taxi fare for local trips, airport transfers and outstation journeys with Radhakrishna Taxi Service in Mangalore.">
+
+    <meta name="theme-color" content="#102d35">
+
+    <link rel="canonical"
+          href="https://radhakrishnataxiservice.com/fare-estimate.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #102d35;
+            --primary-light: #19444d;
+            --gold: #d7ad62;
+            --gold-light: #f5dfad;
+            --background: #f5f7f7;
+            --white: #ffffff;
+            --text: #24353a;
+            --muted: #68777b;
+            --border: #dce5e6;
+            --success: #16794b;
+            --danger: #b42318;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        .topbar {
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 5%;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav {
+            max-width: 1150px;
+            margin: auto;
+            padding: 18px 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .brand {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 19px;
+            line-height: 1.3;
+        }
+
+        .brand span {
+            display: block;
+            color: #98702e;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #98702e;
+        }
+
+        .hero {
+            background:
+                radial-gradient(
+                    circle at 85% 15%,
+                    rgba(215,173,98,.18),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--primary-light)
+                );
+
+            color: var(--white);
+            text-align: center;
+            padding: 65px 20px 100px;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            color: var(--gold-light);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        h1,
+        h2 {
+            font-family: "Playfair Display", serif;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            line-height: 1.2;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: #e0ebec;
+        }
+
+        .calculator-wrap {
+            max-width: 950px;
+            margin: -60px auto 60px;
+            padding: 0 18px;
+            position: relative;
+        }
+
+        .calculator {
+            background: var(--white);
+            border-radius: 18px;
+            padding: 32px;
+            box-shadow: 0 15px 55px rgba(16,45,53,.12);
+            border: 1px solid var(--border);
+        }
+
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 7px;
+            font-size: 25px;
+        }
+
+        .section-description {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .field {
+            min-width: 0;
+        }
+
+        .field.full {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            background: #fff;
+            color: var(--text);
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(215,173,98,.15);
+        }
+
+        .help {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        .button {
+            border: none;
+            border-radius: 9px;
+            padding: 14px 20px;
+            font-weight: 700;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            transition: .2s;
+        }
+
+        .button-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .button-primary:hover {
+            background: var(--primary-light);
+        }
+
+        .button-gold {
+            background: var(--gold);
+            color: var(--primary);
+        }
+
+        .button-gold:hover {
+            background: var(--gold-light);
+        }
+
+        .button-whatsapp {
+            background: #168b52;
+            color: white;
+        }
+
+        .button-whatsapp:hover {
+            background: #116c40;
+        }
+
+        .calculate-button {
+            width: 100%;
+            margin-top: 25px;
+        }
+
+        .notice {
+            padding: 13px 15px;
+            border-radius: 9px;
+            font-size: 13px;
+            margin-top: 18px;
+            background: #f4f7f7;
+            color: var(--muted);
+        }
+
+        .status {
+            display: none;
+            padding: 13px 15px;
+            margin-top: 18px;
+            border-radius: 9px;
+            font-size: 14px;
+        }
+
+        .status.error {
+            display: block;
+            color: var(--danger);
+            background: #fff1f0;
+        }
+
+        .status.info {
+            display: block;
+            color: var(--primary);
+            background: #edf5f6;
+        }
+
+        .result {
+            display: none;
+            margin-top: 28px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .result-header {
+            background: var(--primary);
+            color: white;
+            padding: 23px;
+        }
+
+        .result-header p {
+            color: #dce8e9;
+            font-size: 13px;
+        }
+
+        .result-header h2 {
+            font-size: 25px;
+            margin-bottom: 5px;
+        }
+
+        .total {
+            font-size: clamp(35px, 7vw, 48px);
+            font-weight: 700;
+            color: var(--gold-light);
+            margin-top: 8px;
+            overflow-wrap: anywhere;
+        }
+
+        .result-body {
+            padding: 22px;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .result-item {
+            background: #f6f8f8;
+            border-radius: 10px;
+            padding: 14px;
+            min-width: 0;
+        }
+
+        .result-item span {
+            display: block;
+            font-size: 12px;
+            color: var(--muted);
+            margin-bottom: 5px;
+        }
+
+        .result-item strong {
+            color: var(--primary);
+            font-size: 19px;
+            overflow-wrap: anywhere;
+        }
+
+        .advance-box {
+            border: 1px solid #e5d1a5;
+            background: #fffaf0;
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 18px;
+        }
+
+        .advance-box p {
+            font-size: 13px;
+            color: #67552f;
+        }
+
+        .advance-amount {
+            color: var(--primary);
+            font-size: 27px;
+            font-weight: 700;
+            margin: 5px 0;
+        }
+
+        .result-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .result-actions .button {
+            width: 100%;
+            text-align: center;
+        }
+
+        .small-note {
+            margin-top: 16px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .features {
+            max-width: 1000px;
+            margin: 0 auto 65px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .feature {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 22px;
+            border-radius: 13px;
+        }
+
+        .feature h3 {
+            color: var(--primary);
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 32px 20px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 13px;
+            color: #d7e2e3;
+            margin-top: 7px;
+        }
+
+        @media (max-width: 650px) {
+            .nav {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 14px;
+            }
+
+            .hero {
+                padding: 48px 18px 90px;
+            }
+
+            .calculator {
+                padding: 22px 17px;
+            }
+
+            .form-grid,
+            .result-grid,
+            .result-actions,
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .field.full {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="topbar">
+    Mangalore Taxi Service · Local Travel · Outstation Tours
+</div>
+
+<header>
+    <nav class="nav">
+        <a href="index.html" class="brand">
+            Radhakrishna Taxi Service
+            <span>Mangalore · Karnataka</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="packages.html">Tour Packages</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+</header>
+
+<section class="hero">
+    <span class="eyebrow">Plan Your Journey</span>
+
+    <h1>Taxi Fare Estimate</h1>
+
+    <p>
+        Enter your journey details to estimate your taxi fare.
+        Choose your vehicle and trip type, then request confirmation
+        from our team.
+    </p>
+</section>
+
+<main class="calculator-wrap">
+
+    <section class="calculator">
+
+        <h2 class="section-title">Calculate Your Trip Fare</h2>
+
+        <p class="section-description">
+            Complete your trip details to receive an estimated fare.
+        </p>
+
+        <form id="fareForm">
+
+            <div class="form-grid">
+
+                <div class="field">
+                    <label for="pickup">Pickup Location *</label>
+
+                    <input
+                        type="text"
+                        id="pickup"
+                        name="pickup"
+                        placeholder="e.g. Mangalore Airport"
+                        maxlength="180"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="destination">Destination *</label>
+
+                    <input
+                        type="text"
+                        id="destination"
+                        name="destination"
+                        placeholder="e.g. Udupi"
+                        maxlength="180"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="tripType">Trip Type *</label>
+
+                    <select id="tripType" name="tripType" required>
+                        <option value="oneway">One-Way Trip</option>
+                        <option value="roundtrip">Round Trip</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="category">Journey Category *</label>
+
+                    <select id="category" name="category" required>
+                        <option value="local">Local</option>
+                        <option value="outstation">Outstation</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="vehicle">Select Vehicle *</label>
+
+                    <select id="vehicle" name="vehicle" required>
+                        <option value="dzire">Swift Dzire</option>
+                        <option value="etios">Toyota Etios</option>
+                        <option value="ertiga">Maruti Ertiga</option>
+                        <option value="innova">Toyota Innova</option>
+                        <option value="crysta">Toyota Innova Crysta</option>
+                        <option value="tempo">Tempo Traveller</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="duration">Booking Duration *</label>
+
+                    <select id="duration" name="duration" required>
+                        <option value="4">4 Hours / 40 KM</option>
+                        <option value="8">8 Hours / 80 KM</option>
+                        <option value="full">Full Day</option>
+                    </select>
+
+                    <p class="help">
+                        Full-day timing: 6:00 AM to 8:30 PM.
+                    </p>
+                </div>
+
+                <div class="field">
+                    <label for="date">Travel Date *</label>
+
+                    <input
+                        type="date"
+                        id="date"
+                        name="date"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="time">Pickup Time *</label>
+
+                    <input
+                        type="time"
+                        id="time"
+                        name="time"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="extraHours">Additional Hours</label>
+
+                    <input
+                        type="number"
+                        id="extraHours"
+                        name="extraHours"
+                        min="0"
+                        max="48"
+                        step="1"
+                        value="0"
+                    >
+
+                    <p class="help">
+                        Enter the number of extra hours, if applicable.
+                    </p>
+                </div>
+
+                <div class="field">
+                    <label for="waitingHours">Expected Waiting Hours</label>
+
+                    <input
+                        type="number"
+                        id="waitingHours"
+                        name="waitingHours"
+                        min="0"
+                        max="48"
+                        step="1"
+                        value="0"
+                    >
+
+                    <p class="help">
+                        Waiting charges, if applicable, will be confirmed.
+                    </p>
+                </div>
+
+                <div class="field">
+                    <label for="toll">Estimated Toll Charges (₹)</label>
+
+                    <input
+                        type="number"
+                        id="toll"
+                        name="toll"
+                        min="0"
+                        max="100000"
+                        step="1"
+                        value="0"
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="parking">Estimated Parking Charges (₹)</label>
+
+                    <input
+                        type="number"
+                        id="parking"
+                        name="parking"
+                        min="0"
+                        max="100000"
+                        step="1"
+                        value="0"
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="passengers">Number of Passengers</label>
+
+                    <select id="passengers" name="passengers">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4" selected>4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="customerName">Your Name *</label>
+
+                    <input
+                        type="text"
+                        id="customerName"
+                        name="customerName"
+                        maxlength="100"
+                        autocomplete="name"
+                        required
+                    >
+                </div>
+
+                <div class="field full">
+                    <label for="phone">Mobile Number *</label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        maxlength="20"
+                        autocomplete="tel"
+                        placeholder="Enter your mobile number"
+                        required
+                    >
+                </div>
+
+            </div>
+
+            <div class="notice">
+                Tolls, parking, waiting charges and other applicable
+                additional charges are not necessarily included in the
+                estimate. Final pricing and vehicle availability must
+                be confirmed by Radhakrishna Taxi Service.
+            </div>
+
+            <button
+                type="submit"
+                class="button button-primary calculate-button"
+                id="calculateButton"
+            >
+                Calculate Estimated Fare
+            </button>
+
+            <div
+                id="status"
+                class="status"
+                role="status"
+                aria-live="polite"
+            ></div>
+
+        </form>
+
+        <section id="result" class="result" aria-live="polite">
+
+            <div class="result-header">
+
+                <p>YOUR ESTIMATED TAXI FARE</p>
+
+                <div id="estimatedFare" class="total">₹0</div>
+
+                <p id="journeySummary"></p>
+
+            </div>
+
+            <div class="result-body">
+
+                <div class="result-grid">
+
+                    <div class="result-item">
+                        <span>Estimated Road Distance</span>
+                        <strong id="distance">—</strong>
+                    </div>
+
+                    <div class="result-item">
+                        <span>Selected Vehicle</span>
+                        <strong id="vehicleName">—</strong>
+                    </div>
+
+                    <div class="result-item">
+                        <span>Advance Required (10%)</span>
+                        <strong id="advance">—</strong>
+                    </div>
+
+                    <div class="result-item">
+                        <span>Estimated Remaining Balance</span>
+                        <strong id="balance">—</strong>
+                    </div>
+
+                </div>
+
+                <div class="advance-box">
+                    <p>RESERVATION ADVANCE</p>
+
+                    <div id="advanceBoxAmount" class="advance-amount">
+                        ₹0
+                    </div>
+
+                    <p>
+                        A 10% advance is required for reservation
+                        confirmation. Payment instructions will be
+                        provided by our team.
+                    </p>
+                </div>
+
+                <div class="result-actions">
+
+                    <button
+                        type="button"
+                        id="whatsappButton"
+                        class="button button-whatsapp"
+                    >
+                        Enquire on WhatsApp
+                    </button>
+
+                    <button
+                        type="button"
+                        id="recalculateButton"
+                        class="button button-gold"
+                    >
+                        Change Trip Details
+                    </button>
+
+                </div>
+
+                <p class="small-note">
+                    This is an estimate, not a confirmed quotation.
+                    Tolls, parking, waiting charges and other applicable
+                    extras may change the final fare. Your reservation
+                    is confirmed only after the company confirms
+                    availability and the applicable advance is paid
+                    through an agreed payment method.
+                </p>
+
+            </div>
+
+        </section>
+
+    </section>
+
+</main>
+
+<section class="features">
+
+    <article class="feature">
+        <h3>Clear Estimates</h3>
+
+        <p>
+            Receive an estimated fare based on your journey,
+            selected vehicle and applicable package.
+        </p>
+    </article>
+
+    <article class="feature">
+        <h3>Comfortable Journeys</h3>
+
+        <p>
+            Choose a suitable vehicle for local travel,
+            family trips and outstation journeys.
+        </p>
+    </article>
+
+    <article class="feature">
+        <h3>Easy Enquiries</h3>
+
+        <p>
+            Send your trip details directly to our team
+            through WhatsApp for confirmation.
+        </p>
+    </article>
+
+</section>
+
+<footer>
+    <strong>Radhakrishna Taxi Service</strong>
+
+    <p>Mangalore, Karnataka</p>
+
+    <p>Call / WhatsApp: +91 81477 71217</p>
+
+    <p>
+        © <span id="year"></span> Radhakrishna Taxi Service.
+        All rights reserved.
+    </p>
+</footer>
+
+<script>
+    /*
+      Replace this with your deployed Cloudflare Worker URL.
+
+      Example:
+      https://radhakrishna-fare.YOUR-SUBDOMAIN.workers.dev
+    */
+    const API_BASE = "https://YOUR-WORKER-URL";
+
+    const WHATSAPP_NUMBER = "918147771217";
+
+    const form = document.getElementById("fareForm");
+    const statusBox = document.getElementById("status");
+    const resultBox = document.getElementById("result");
+    const calculateButton = document.getElementById("calculateButton");
+
+    let latestEstimate = null;
+
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+
+    const dateInput = document.getElementById("date");
+
+    const localToday = new Date();
+
+    const localDate =
+        localToday.getFullYear() + "-" +
+        String(localToday.getMonth() + 1).padStart(2, "0") + "-" +
+        String(localToday.getDate()).padStart(2, "0");
+
+    dateInput.min = localDate;
+    dateInput.value = localDate;
+
+    function formatINR(value) {
+        return new Intl.NumberFormat("en-IN", {
+            style: "currency",
+            currency: "INR",
+            maximumFractionDigits: 0
+        }).format(value);
+    }
+
+    function showStatus(message, type) {
+        statusBox.textContent = message;
+        statusBox.className = "status " + type;
+    }
+
+    function clearStatus() {
+        statusBox.textContent = "";
+        statusBox.className = "status";
+    }
+
+    function getFormData() {
+        const data = new FormData(form);
+
+        return {
+            pickup: String(data.get("pickup") || "").trim(),
+            destination: String(data.get("destination") || "").trim(),
+            tripType: String(data.get("tripType") || ""),
+            category: String(data.get("category") || ""),
+            vehicle: String(data.get("vehicle") || ""),
+            duration: String(data.get("duration") || ""),
+            date: String(data.get("date") || ""),
+            time: String(data.get("time") || ""),
+            extraHours: Number(data.get("extraHours") || 0),
+            waitingHours: Number(data.get("waitingHours") || 0),
+            toll: Number(data.get("toll") || 0),
+            parking: Number(data.get("parking") || 0),
+            passengers: Number(data.get("passengers") || 1),
+            customerName: String(data.get("customerName") || "").trim(),
+            phone: String(data.get("phone") || "").trim()
+        };
+    }
+
+    function validateForm(data) {
+        if (!data.pickup || !data.destination) {
+            return "Enter both pickup and destination.";
+        }
+
+        if (data.pickup.length > 180 || data.destination.length > 180) {
+            return "Location names are too long.";
+        }
+
+        if (data.pickup.toLowerCase() === data.destination.toLowerCase()) {
+            return "Pickup and destination must be different.";
+        }
+
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(data.date)) {
+            return "Please select a valid travel date.";
+        }
+
+        if (data.date < localDate) {
+            return "Travel date cannot be in the past.";
+        }
+
+        if (!/^\d{2}:\d{2}$/.test(data.time)) {
+            return "Please select a valid pickup time.";
+        }
+
+        if (!data.customerName || !data.phone) {
+            return "Enter your name and mobile number.";
+        }
+
+        if (!/^[0-9+\s()-]{7,20}$/.test(data.phone)) {
+            return "Enter a valid mobile number.";
+        }
+
+        if (data.extraHours < 0 || data.extraHours > 48) {
+            return "Invalid additional hours.";
+        }
+
+        if (data.waitingHours < 0 || data.waitingHours > 48) {
+            return "Invalid waiting hours.";
+        }
+
+        if (data.toll < 0 || data.parking < 0) {
+            return "Additional charges cannot be negative.";
+        }
+
+        return null;
+    }
+
+    form.addEventListener("submit", async function(event) {
+        event.preventDefault();
+
+        clearStatus();
+        resultBox.style.display = "none";
+        latestEstimate = null;
+
+        const data = getFormData();
+        const validationError = validateForm(data);
+
+        if (validationError) {
+            showStatus(validationError, "error");
+            return;
+        }
+
+        if (API_BASE.includes("YOUR-WORKER-URL")) {
+            showStatus(
+                "The fare calculator is not connected to its backend yet. " +
+                "Please complete the backend deployment first.",
+                "error"
+            );
+            return;
+        }
+
+        calculateButton.disabled = true;
+        calculateButton.textContent = "Calculating Route and Fare...";
+
+        showStatus(
+            "Finding your driving route and preparing your estimate. Please wait.",
+            "info"
+        );
+
+        try {
+            const response = await fetch(
+                API_BASE.replace(/\/+$/, "") + "/api/estimate",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(data)
+                }
+            );
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    result.error || "Unable to calculate the fare."
+                );
+            }
+
+            latestEstimate = {
+                ...data,
+                ...result
+            };
+
+            document.getElementById("estimatedFare").textContent =
+                formatINR(result.totalFare);
+
+            document.getElementById("distance").textContent =
+                result.distanceKm + " km";
+
+            document.getElementById("vehicleName").textContent =
+                result.vehicleName;
+
+            document.getElementById("advance").textContent =
+                formatINR(result.advance);
+
+            document.getElementById("balance").textContent =
+                formatINR(result.balance);
+
+            document.getElementById("advanceBoxAmount").textContent =
+                formatINR(result.advance);
+
+            document.getElementById("journeySummary").textContent =
+                data.pickup + " → " + data.destination +
+                " · " +
+                (data.tripType === "oneway" ? "One-Way" : "Round Trip");
+
+            resultBox.style.display = "block";
+
+            clearStatus();
+
+            resultBox.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        } catch (error) {
+            showStatus(
+                error.message ||
+                "Something went wrong. Please try again or contact us on WhatsApp.",
+                "error"
+            );
+        } finally {
+            calculateButton.disabled = false;
+            calculateButton.textContent = "Calculate Estimated Fare";
+        }
+    });
+
+    document.getElementById("whatsappButton").addEventListener("click", function() {
+        if (!latestEstimate) {
+            return;
+        }
+
+        const e = latestEstimate;
+
+        const message = [
+            "Hello Radhakrishna Taxi Service,",
+            "",
+            "I would like to enquire about a taxi reservation.",
+            "",
+            "Name: " + e.customerName,
+            "Mobile: " + e.phone,
+            "Pickup: " + e.pickup,
+            "Destination: " + e.destination,
+            "Trip type: " + (e.tripType === "oneway" ? "One-Way" : "Round Trip"),
+            "Category: " + e.category,
+            "Vehicle: " + e.vehicleName,
+            "Travel date: " + e.date,
+            "Pickup time: " + e.time,
+            "Passengers: " + e.passengers,
+            "Estimated distance: " + e.distanceKm + " km",
+            "Estimated fare: " + formatINR(e.totalFare),
+            "Estimated 10% advance: " + formatINR(e.advance),
+            "",
+            "Please confirm the final fare, vehicle availability,",
+            "applicable additional charges and reservation procedure."
+        ].join("\n");
+
+        const url =
+            "https://wa.me/" +
+            WHATSAPP_NUMBER +
+            "?text=" +
+            encodeURIComponent(message);
+
+        window.open(url, "_blank", "noopener,noreferrer");
+    });
+
+    document.getElementById("recalculateButton").addEventListener("click", function() {
+        resultBox.style.display = "none";
+        latestEstimate = null;
+
+        document.getElementById("pickup").focus();
+
+        window.scrollTo({
+            top: form.getBoundingClientRect().top + window.scrollY - 20,
+            behavior: "smooth"
+        });
+    });
+</script>
+
+</body>
+</html>
