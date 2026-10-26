@@ -464,42 +464,56 @@ function calculateLocalFare(input, vehicle, routeKm) {
   });
 }
 
+
 function calculateOutstationFare(input, vehicle, onwardKm) {
   if (!vehicle.rate) {
-    throw new Error("Please select a vehicle with a published per-kilometre rate.");
+    throw new Error(
+      "Please select a vehicle with a published per-kilometre rate."
+    );
+  }
+
+  if (!vehicle.fullOutstation || vehicle.fullOutstation <= 0) {
+    throw new Error(
+      "The selected vehicle does not have a valid daily outstation rate."
+    );
   }
 
   const tripType = input.tripType;
   const isRoundTrip = tripType === "roundtrip";
+
+  // Total distance includes the return journey for round trips.
   const totalKm = isRoundTrip ? onwardKm * 2 : onwardKm;
 
-  let baseFare;
+  // Count calendar days inclusively: same-day trip = 1 day.
+  const pickupDate = Date.parse(input.date + "T00:00:00Z");
+  const dropDate = Date.parse(input.dropDate + "T00:00:00Z");
 
-  if (!isRoundTrip) {
-    baseFare = totalKm * vehicle.rate;
-  } else if (totalKm > 200) {
-    baseFare = totalKm * vehicle.rate;
-    baseFare *= 1.10;
-  } else if (totalKm >= 100) {
-    baseFare = vehicle.fullOutstation * 1.10;
-  } else {
-    const duration = String(input.duration || "full");
+  if (
+    !Number.isFinite(pickupDate) ||
+    !Number.isFinite(dropDate) ||
+    dropDate < pickupDate
+  ) {
+    throw new Error("Please enter valid pickup and drop dates.");
+  }
 
-    if (duration === "4") {
-      if (vehicle.local4 === null) {
-        throw new Error(
-          `${vehicle.name} is not available for the 4-hour package.`
-        );
-      }
-      baseFare = vehicle.local4 +
-        Math.max(0, totalKm - 40) * vehicle.rate;
-    } else if (duration === "8") {
-      baseFare = vehicle.local8 +
-        Math.max(0, totalKm - 80) * vehicle.rate;
-    } else {
-      baseFare = vehicle.fullOutstation;
-    }
+  const days = Math.max(
+    1,
+    Math.round((dropDate - pickupDate) / 86400000) + 1
+  );
 
+  // Charge the daily outstation package for every trip day.
+  const dailyFare = vehicle.fullOutstation * days;
+
+  // Allow 200 km per day. Charge the vehicle's per-km rate
+  // only for the kilometres exceeding the total allowance.
+  const includedKm = 200 * days;
+  const excessKm = Math.max(0, totalKm - includedKm);
+  const excessKmFare = excessKm * vehicle.rate;
+
+  let baseFare = dailyFare + excessKmFare;
+
+  // Preserve the existing 10% round-trip premium.
+  if (isRoundTrip) {
     baseFare *= 1.10;
   }
 
