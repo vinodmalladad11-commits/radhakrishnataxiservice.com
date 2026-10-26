@@ -889,10 +889,20 @@
             return;
         }
 
-        const totalFare = Number(result.totalFare || 0);
-        const driverBata = Number(result.driverBata || 0);
-        const extras = data.toll + data.parking;
-        const baseFare = Math.max(0, totalFare - driverBata - extras);
+        const totalFare = Number(result.totalFare);
+        const driverBata = Number(result.driverBata);
+        const extras = Number(data.toll) + Number(data.parking);
+
+        if (
+            !Number.isFinite(totalFare) ||
+            !Number.isFinite(driverBata) ||
+            totalFare < 0 ||
+            driverBata < 0
+        ) {
+            throw new Error("Invalid fare or driver bata returned by the fare service.");
+        }
+
+const baseFare = totalFare - driverBata - extras;
 
         $("estimatedFare").textContent = formatINR(totalFare);
 
