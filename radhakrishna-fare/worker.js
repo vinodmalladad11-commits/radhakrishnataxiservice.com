@@ -1,4 +1,3 @@
-
 const ALLOWED_ORIGINS = new Set([
   "https://radhakrishnataxiservice.com",
   "https://www.radhakrishnataxiservice.com"
@@ -160,7 +159,6 @@ async function geocode(place) {
   return { lat, lon };
 }
 
-
 async function getRoadDistanceKm(pickup, destination, apiKey) {
   if (!apiKey) {
     throw new Error(
@@ -198,6 +196,7 @@ async function getRoadDistanceKm(pickup, destination, apiKey) {
 
   if (!response.ok) {
     const details = (await response.text()).slice(0, 400);
+
     console.error("Geoapify request failed:", {
       status: response.status,
       details
@@ -226,6 +225,7 @@ async function getRoadDistanceKm(pickup, destination, apiKey) {
 
   if (!Number.isFinite(distanceKm) || distanceKm <= 0) {
     console.error("Invalid Geoapify route response:", data);
+
     throw new Error(
       "No valid driving route was found. Please check your pickup and destination."
     );
@@ -234,6 +234,91 @@ async function getRoadDistanceKm(pickup, destination, apiKey) {
   return distanceKm;
 }
 
+/*
+  Driver bata:
+  ₹300 for each early-morning period before 6:00 AM.
+  ₹300 for each late-night period from 9:00 PM to midnight.
+
+  Duration includes the selected package, extra hours and expected
+  waiting hours. Full Day uses 14.5 hours.
+*/
+function calculateDriverBata(input) {
+  const timeParts = String(input.time || "").split(":").map(Number);
+  const hours = timeParts[0];
+  const minutes = timeParts[1];
+
+  if (
+    timeParts.length !== 2 ||
+    !Number.isInteger(hours) ||
+    !Number.isInteger(minutes) ||
+    hours < 0 ||
+    hours > 23 ||
+    minutes < 0 ||
+    minutes > 59
+  ) {
+    throw new Error("Please provide a valid pickup time.");
+  }
+
+  const packageHours =
+    String(input.duration) === "4" ? 4 :
+    String(input.duration) === "8" ? 8 :
+    String(input.duration) === "full" ? 14.5 :
+    null;
+
+  if (packageHours === null) {
+    throw new Error("Please select a valid booking duration.");
+  }
+
+  const extraHours = Number(input.extraHours || 0);
+  const waitingHours = Number(input.waitingHours || 0);
+
+  const durationMinutes = Math.ceil(
+    (packageHours + extraHours + waitingHours) * 60
+  );
+
+  const start = hours * 60 + minutes;
+  const end = start + durationMinutes;
+
+  const MINUTES_PER_DAY = 24 * 60;
+  const EARLY_MORNING_END = 6 * 60;
+  const LATE_NIGHT_START = 21 * 60;
+
+  let earlyMorningPeriods = 0;
+  let lateNightPeriods = 0;
+
+  const firstDay = Math.floor(start / MINUTES_PER_DAY);
+  const lastDay = Math.floor((end - 1) / MINUTES_PER_DAY);
+
+  for (let day = firstDay; day <= lastDay; day++) {
+    const dayStart = day * MINUTES_PER_DAY;
+
+    const earlyStart = dayStart;
+    const earlyEnd = dayStart + EARLY_MORNING_END;
+
+    if (
+      Math.max(start, earlyStart) <
+      Math.min(end, earlyEnd)
+    ) {
+      earlyMorningPeriods++;
+    }
+
+    const nightStart = dayStart + LATE_NIGHT_START;
+    const nightEnd = dayStart + MINUTES_PER_DAY;
+
+    if (
+      Math.max(start, nightStart) <
+      Math.min(end, nightEnd)
+    ) {
+      lateNightPeriods++;
+    }
+  }
+
+  return {
+    earlyMorningPeriods,
+    lateNightPeriods,
+    driverBata: (earlyMorningPeriods + lateNightPeriods) * 300
+  };
+}
 
 function calculateFare(input, vehicle, distanceKm) {
   const isOneWay = input.tripType === "oneway";
@@ -250,7 +335,6 @@ function calculateFare(input, vehicle, distanceKm) {
     // Preserve the existing fare calculation rule.
     fare = distanceKm * vehicle.rate * 2;
   } else {
-    // Estimate the return journey as twice the outward distance.
     totalKm = distanceKm * 2;
 
     if (totalKm > 200) {
@@ -286,7 +370,9 @@ function calculateFare(input, vehicle, distanceKm) {
     fare += extraHours * vehicle.extraHour;
   }
 
-  fare += toll + parking;
+  const bataDetails = calculateDriverBata(input);
+
+  fare += bataDetails.driverBata + toll + parking;
 
   const totalFare = Math.ceil(fare);
   const advance = Math.ceil(totalFare * 0.10);
@@ -296,6 +382,9 @@ function calculateFare(input, vehicle, distanceKm) {
     totalFare,
     advance,
     balance,
+    driverBata: bataDetails.driverBata,
+    earlyMorningPeriods: bataDetails.earlyMorningPeriods,
+    lateNightPeriods: bataDetails.lateNightPeriods,
     distanceKm: Math.round(totalKm * 10) / 10,
     vehicleName: vehicle.name,
     quotationRequired: false,
@@ -398,6 +487,17 @@ export default {
         );
       }
 
+      if (
+        !["4", "8", "full"].includes(String(input.duration)) ||
+        !/^([01]\d|2[0-3]):[0-5]\d$/.test(String(input.time || ""))
+      ) {
+        return jsonResponse(
+          { error: "Please provide a valid booking duration and pickup time." },
+          400,
+          origin
+        );
+      }
+
       const vehicle = VEHICLES[input.vehicle];
 
       if (input.vehicle === "tempo") {
@@ -413,7 +513,7 @@ export default {
         input.pickup.trim(),
         input.destination.trim(),
         env.GEOAPIFY_API_KEY
-        );
+      );
 
       const result = calculateFare(input, vehicle, distanceKm);
 

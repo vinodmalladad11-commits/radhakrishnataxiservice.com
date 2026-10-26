@@ -1,7 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Taxi Fare Estimate | Radhakrishna Taxi Service</title>
@@ -20,6 +24,7 @@
           rel="stylesheet">
 
     <style>
+
         :root {
             --primary: #102d35;
             --primary-light: #19444d;
@@ -211,10 +216,11 @@
             width: 100%;
             padding: 13px 14px;
             border: 1px solid var(--border);
-            border-radius: 9px;
+            border-radius: 10px;
             background: #fff;
             color: var(--text);
             outline: none;
+            min-height: 48px;
         }
 
         input:focus,
@@ -223,556 +229,469 @@
             box-shadow: 0 0 0 3px rgba(215,173,98,.15);
         }
 
-        .help {
+        .field-hint {
+            display: block;
             color: var(--muted);
             font-size: 12px;
-            margin-top: 6px;
+            margin-top: 5px;
         }
 
-        .button {
-            border: none;
-            border-radius: 9px;
-            padding: 14px 20px;
-            font-weight: 700;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            transition: .2s;
-        }
-
-        .button-primary {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .button-primary:hover {
-            background: var(--primary-light);
-        }
-
-        .button-gold {
-            background: var(--gold);
-            color: var(--primary);
-        }
-
-        .button-gold:hover {
-            background: var(--gold-light);
-        }
-
-        .button-whatsapp {
-            background: #168b52;
-            color: white;
-        }
-
-        .button-whatsapp:hover {
-            background: #116c40;
-        }
-
-        .calculate-button {
-            width: 100%;
+        .button-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
             margin-top: 25px;
         }
 
-        .notice {
-            padding: 13px 15px;
-            border-radius: 9px;
-            font-size: 13px;
-            margin-top: 18px;
-            background: #f4f7f7;
-            color: var(--muted);
+        .btn {
+            border: none;
+            border-radius: 10px;
+            padding: 14px 20px;
+            font-weight: 700;
+            min-height: 48px;
+        }
+
+        .btn-primary {
+            background: var(--gold);
+            color: var(--primary);
+            flex: 1;
+        }
+
+        .btn-secondary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background: #16834a;
+            color: white;
+            flex: 1;
+        }
+
+        .btn:disabled {
+            opacity: .65;
+            cursor: wait;
         }
 
         .status {
             display: none;
-            padding: 13px 15px;
             margin-top: 18px;
-            border-radius: 9px;
+            padding: 13px 15px;
+            border-radius: 10px;
             font-size: 14px;
+            overflow-wrap: anywhere;
         }
 
-        .status.error {
+        .status.show {
             display: block;
-            color: var(--danger);
-            background: #fff1f0;
         }
 
         .status.info {
-            display: block;
-            color: var(--primary);
-            background: #edf5f6;
+            background: #edf5f7;
+            color: var(--primary-light);
+        }
+
+        .status.error {
+            background: #fff0ef;
+            color: var(--danger);
+        }
+
+        .status.success {
+            background: #eaf7ef;
+            color: var(--success);
         }
 
         .result {
             display: none;
             margin-top: 28px;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            overflow: hidden;
         }
 
         .result-header {
             background: var(--primary);
             color: white;
+            border-radius: 14px;
             padding: 23px;
         }
 
-        .result-header p {
-            color: #dce8e9;
-            font-size: 13px;
+        .result-header small {
+            color: #d8e3e4;
         }
 
-        .result-header h2 {
-            font-size: 25px;
-            margin-bottom: 5px;
-        }
-
-        .total {
-            font-size: clamp(35px, 7vw, 48px);
-            font-weight: 700;
+        .fare-amount {
+            font: 700 clamp(32px, 5vw, 44px) "Playfair Display", serif;
             color: var(--gold-light);
-            margin-top: 8px;
-            overflow-wrap: anywhere;
-        }
-
-        .result-body {
-            padding: 22px;
+            margin: 5px 0;
         }
 
         .result-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            margin-top: 15px;
         }
 
         .result-item {
-            background: #f6f8f8;
-            border-radius: 10px;
-            padding: 14px;
-            min-width: 0;
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .result-item:nth-child(odd) {
+            border-right: 1px solid var(--border);
         }
 
         .result-item span {
             display: block;
-            font-size: 12px;
             color: var(--muted);
-            margin-bottom: 5px;
+            font-size: 12px;
         }
 
         .result-item strong {
+            display: block;
             color: var(--primary);
-            font-size: 19px;
+            font-size: 17px;
             overflow-wrap: anywhere;
         }
 
-        .advance-box {
-            border: 1px solid #e5d1a5;
-            background: #fffaf0;
-            padding: 18px;
-            border-radius: 10px;
+        .policy-note {
             margin-top: 18px;
-        }
-
-        .advance-box p {
+            background: #fffaf0;
+            border: 1px solid #f0dfb7;
+            border-radius: 10px;
+            padding: 14px 16px;
             font-size: 13px;
-            color: #67552f;
         }
 
-        .advance-amount {
-            color: var(--primary);
-            font-size: 27px;
-            font-weight: 700;
-            margin: 5px 0;
-        }
-
-        .result-actions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 20px;
-        }
-
-        .result-actions .button {
-            width: 100%;
-            text-align: center;
-        }
-
-        .small-note {
-            margin-top: 16px;
+        .fine-print {
+            margin-top: 14px;
             color: var(--muted);
             font-size: 12px;
         }
 
-        .features {
-            max-width: 1000px;
-            margin: 0 auto 65px;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 20px;
-        }
-
-        .feature {
-            background: white;
-            border: 1px solid var(--border);
-            padding: 22px;
-            border-radius: 13px;
-        }
-
-        .feature h3 {
-            color: var(--primary);
-            font-size: 17px;
-            margin-bottom: 8px;
-        }
-
-        .feature p {
-            color: var(--muted);
-            font-size: 13px;
-        }
-
-        footer {
-            background: var(--primary);
-            color: white;
-            padding: 32px 20px;
+        .footer {
             text-align: center;
+            background: var(--primary);
+            color: #e0ebec;
+            padding: 26px 18px;
+            font-size: 13px;
         }
 
-        footer p {
-            font-size: 13px;
-            color: #d7e2e3;
-            margin-top: 7px;
+        .footer a {
+            color: var(--gold-light);
+            font-weight: 700;
         }
 
         @media (max-width: 650px) {
             .nav {
                 flex-direction: column;
+                align-items: flex-start;
             }
 
             .nav-links {
                 flex-wrap: wrap;
-                justify-content: center;
                 gap: 14px;
             }
 
-            .hero {
-                padding: 48px 18px 90px;
-            }
-
             .calculator {
-                padding: 22px 17px;
+                padding: 20px 16px;
             }
 
-            .form-grid,
-            .result-grid,
-            .result-actions,
-            .features {
+            .form-grid {
                 grid-template-columns: 1fr;
+                gap: 16px;
             }
 
             .field.full {
                 grid-column: auto;
             }
+
+            .hero {
+                padding: 45px 18px 85px;
+            }
+
+            .result-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .result-item {
+                padding: 12px;
+            }
+
+            .result-item strong {
+                font-size: 15px;
+            }
         }
+
     </style>
 </head>
 
 <body>
 
-<div class="topbar">
-    Mangalore Taxi Service · Local Travel · Outstation Tours
-</div>
+    <div class="topbar">
+        Mangalore Taxi Service | Airport Transfers | Local & Outstation Travel
+    </div>
 
-<header>
-    <nav class="nav">
-        <a href="index.html" class="brand">
-            Radhakrishna Taxi Service
-            <span>Mangalore · Karnataka</span>
-        </a>
+    <header>
+        <nav class="nav">
+            <a class="brand" href="https://radhakrishnataxiservice.com/">
+                Radhakrishna Taxi Service
+                <span>Safe · Comfortable · Reliable</span>
+            </a>
 
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="services.html">Services</a>
-            <a href="packages.html">Tour Packages</a>
-            <a href="contact.html">Contact</a>
-        </div>
-    </nav>
-</header>
+            <div class="nav-links">
+                <a href="https://radhakrishnataxiservice.com/">Home</a>
+                <a href="https://radhakrishnataxiservice.com/blog.html">Blogs</a>
+                <a href="https://wa.me/918147771217">Contact</a>
+            </div>
+        </nav>
+    </header>
 
-<section class="hero">
-    <span class="eyebrow">Plan Your Journey</span>
-
-    <h1>Taxi Fare Estimate</h1>
-
-    <p>
-        Enter your journey details to estimate your taxi fare.
-        Choose your vehicle and trip type, then request confirmation
-        from our team.
-    </p>
-</section>
-
-<main class="calculator-wrap">
-
-    <section class="calculator">
-
-        <h2 class="section-title">Calculate Your Trip Fare</h2>
-
-        <p class="section-description">
-            Complete your trip details to receive an estimated fare.
+    <section class="hero">
+        <span class="eyebrow">Simple · Transparent · Convenient</span>
+        <h1>Taxi Fare Estimate</h1>
+        <p>
+            Estimate your journey fare with Radhakrishna Taxi Service.
+            Enter your pickup, destination and trip details to calculate
+            your estimated road distance and fare.
         </p>
+    </section>
 
-        <form id="fareForm">
+    <main class="calculator-wrap">
+        <section class="calculator">
 
-            <div class="form-grid">
+            <h2 class="section-title">Plan Your Journey</h2>
 
-                <div class="field">
-                    <label for="pickup">Pickup Location *</label>
+            <p class="section-description">
+                Complete the details below to calculate your estimated fare.
+            </p>
 
-                    <input
-                        type="text"
-                        id="pickup"
-                        name="pickup"
-                        placeholder="e.g. Mangalore Airport"
-                        maxlength="180"
-                        required
+            <form id="fareForm">
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label for="pickup">Pickup Location *</label>
+                        <input
+                            type="text"
+                            id="pickup"
+                            name="pickup"
+                            placeholder="Example: Mangalore Airport"
+                            maxlength="180"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="destination">Destination *</label>
+                        <input
+                            type="text"
+                            id="destination"
+                            name="destination"
+                            placeholder="Example: Udupi Sri Krishna Matha"
+                            maxlength="180"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="category">Journey Category *</label>
+                        <select id="category" name="category" required>
+                            <option value="local">Local Journey</option>
+                            <option value="outstation">Outstation Journey</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="tripType">Trip Type *</label>
+                        <select id="tripType" name="tripType" required>
+                            <option value="roundtrip">Round Trip</option>
+                            <option value="oneway">One-Way</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="vehicle">Select Vehicle *</label>
+                        <select id="vehicle" name="vehicle" required>
+                            <option value="dzire">Swift Dzire — ₹13/km</option>
+                            <option value="etios">Toyota Etios — ₹13/km</option>
+                            <option value="ertiga">Maruti Ertiga — ₹16/km</option>
+                            <option value="innova">Toyota Innova — ₹18/km</option>
+                            <option value="crysta">Toyota Innova Crysta — ₹20/km</option>
+                            <option value="tempo">Tempo Traveller — ₹26/km</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="duration">Package Duration *</label>
+                        <select id="duration" name="duration" required>
+                            <option value="4">4 Hours</option>
+                            <option value="8">8 Hours</option>
+                            <option value="full" selected>Full Day</option>
+                        </select>
+                        <span class="field-hint">
+                            Full-day package duration is 14.5 hours.
+                        </span>
+                    </div>
+
+                    <div class="field">
+                        <label for="date">Travel Date *</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="time">Pickup Time *</label>
+                        <input type="time" id="time" name="time" required>
+                    </div>
+
+                    <div class="field">
+                        <label for="extraHours">Additional Hours</label>
+                        <input
+                            type="number"
+                            id="extraHours"
+                            name="extraHours"
+                            min="0"
+                            max="24"
+                            step="1"
+                            value="0"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="waitingHours">Waiting Hours</label>
+                        <input
+                            type="number"
+                            id="waitingHours"
+                            name="waitingHours"
+                            min="0"
+                            max="24"
+                            step="1"
+                            value="0"
+                        >
+                        <span class="field-hint">
+                            Waiting charges may require confirmation.
+                        </span>
+                    </div>
+
+                    <div class="field">
+                        <label for="passengers">Number of Passengers *</label>
+                        <select id="passengers" name="passengers" required>
+                            <option value="1">1 Passenger</option>
+                            <option value="2" selected>2 Passengers</option>
+                            <option value="3">3 Passengers</option>
+                            <option value="4">4 Passengers</option>
+                            <option value="5">5 Passengers</option>
+                            <option value="6">6 Passengers</option>
+                            <option value="7">7 Passengers</option>
+                            <option value="8">8 Passengers</option>
+                            <option value="9">9 Passengers</option>
+                            <option value="10">10 Passengers</option>
+                            <option value="11">11 Passengers</option>
+                            <option value="12">12 Passengers</option>
+                            <option value="13">13 Passengers</option>
+                            <option value="14">14 Passengers</option>
+                            <option value="15">15 Passengers</option>
+                            <option value="16">16 Passengers</option>
+                            <option value="17">17 Passengers</option>
+                            <option value="18">18 Passengers</option>
+                            <option value="19">19 Passengers</option>
+                            <option value="20">20 Passengers</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label for="toll">Estimated Toll Charges (₹)</label>
+                        <input
+                            type="number"
+                            id="toll"
+                            name="toll"
+                            min="0"
+                            step="1"
+                            value="0"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="parking">Estimated Parking Charges (₹)</label>
+                        <input
+                            type="number"
+                            id="parking"
+                            name="parking"
+                            min="0"
+                            step="1"
+                            value="0"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="customerName">Your Name *</label>
+                        <input
+                            type="text"
+                            id="customerName"
+                            name="customerName"
+                            maxlength="100"
+                            placeholder="Enter your name"
+                            required
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label for="phone">Mobile Number *</label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            maxlength="20"
+                            placeholder="Enter your mobile number"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <div class="policy-note">
+                    <strong>Driver Bata Information</strong><br>
+                    An additional ₹300 applies when the booking overlaps
+                    the early-morning period from midnight to 6:00 AM.
+                    Another ₹300 applies when it overlaps the late-night
+                    period from 9:00 PM to midnight. The calculator counts
+                    these periods using your pickup time, package duration
+                    and additional hours.
+                </div>
+
+                <div class="button-row">
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                        id="calculateButton"
                     >
-                </div>
+                        Calculate Estimated Fare
+                    </button>
 
-                <div class="field">
-                    <label for="destination">Destination *</label>
-
-                    <input
-                        type="text"
-                        id="destination"
-                        name="destination"
-                        placeholder="e.g. Udupi"
-                        maxlength="180"
-                        required
+                    <button
+                        type="reset"
+                        class="btn btn-secondary"
                     >
+                        Reset
+                    </button>
                 </div>
 
-                <div class="field">
-                    <label for="tripType">Trip Type *</label>
+                <div
+                    id="status"
+                    class="status"
+                    role="status"
+                    aria-live="polite"
+                ></div>
 
-                    <select id="tripType" name="tripType" required>
-                        <option value="oneway">One-Way Trip</option>
-                        <option value="roundtrip">Round Trip</option>
-                    </select>
+            </form>
+
+                        <section id="result" class="result" aria-live="polite">
+
+                <div class="result-header">
+                    <small>Estimated total fare</small>
+                    <div class="fare-amount" id="estimatedFare">₹0</div>
+                    <div id="journeySummary"></div>
                 </div>
-
-                <div class="field">
-                    <label for="category">Journey Category *</label>
-
-                    <select id="category" name="category" required>
-                        <option value="local">Local</option>
-                        <option value="outstation">Outstation</option>
-                    </select>
-                </div>
-
-                <div class="field">
-                    <label for="vehicle">Select Vehicle *</label>
-
-                    <select id="vehicle" name="vehicle" required>
-                        <option value="dzire">Swift Dzire</option>
-                        <option value="etios">Toyota Etios</option>
-                        <option value="ertiga">Maruti Ertiga</option>
-                        <option value="innova">Toyota Innova</option>
-                        <option value="crysta">Toyota Innova Crysta</option>
-                        <option value="tempo">Tempo Traveller</option>
-                    </select>
-                </div>
-
-                <div class="field">
-                    <label for="duration">Booking Duration *</label>
-
-                    <select id="duration" name="duration" required>
-                        <option value="4">4 Hours / 40 KM</option>
-                        <option value="8">8 Hours / 80 KM</option>
-                        <option value="full">Full Day</option>
-                    </select>
-
-                    <p class="help">
-                        Full-day timing: 6:00 AM to 8:30 PM.
-                    </p>
-                </div>
-
-                <div class="field">
-                    <label for="date">Travel Date *</label>
-
-                    <input
-                        type="date"
-                        id="date"
-                        name="date"
-                        required
-                    >
-                </div>
-
-                <div class="field">
-                    <label for="time">Pickup Time *</label>
-
-                    <input
-                        type="time"
-                        id="time"
-                        name="time"
-                        required
-                    >
-                </div>
-
-                <div class="field">
-                    <label for="extraHours">Additional Hours</label>
-
-                    <input
-                        type="number"
-                        id="extraHours"
-                        name="extraHours"
-                        min="0"
-                        max="48"
-                        step="1"
-                        value="0"
-                    >
-
-                    <p class="help">
-                        Enter the number of extra hours, if applicable.
-                    </p>
-                </div>
-
-                <div class="field">
-                    <label for="waitingHours">Expected Waiting Hours</label>
-
-                    <input
-                        type="number"
-                        id="waitingHours"
-                        name="waitingHours"
-                        min="0"
-                        max="48"
-                        step="1"
-                        value="0"
-                    >
-
-                    <p class="help">
-                        Waiting charges, if applicable, will be confirmed.
-                    </p>
-                </div>
-
-                <div class="field">
-                    <label for="toll">Estimated Toll Charges (₹)</label>
-
-                    <input
-                        type="number"
-                        id="toll"
-                        name="toll"
-                        min="0"
-                        max="100000"
-                        step="1"
-                        value="0"
-                    >
-                </div>
-
-                <div class="field">
-                    <label for="parking">Estimated Parking Charges (₹)</label>
-
-                    <input
-                        type="number"
-                        id="parking"
-                        name="parking"
-                        min="0"
-                        max="100000"
-                        step="1"
-                        value="0"
-                    >
-                </div>
-
-                <div class="field">
-                    <label for="passengers">Number of Passengers</label>
-
-                    <select id="passengers" name="passengers">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4" selected>4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                    </select>
-                </div>
-
-                <div class="field">
-                    <label for="customerName">Your Name *</label>
-
-                    <input
-                        type="text"
-                        id="customerName"
-                        name="customerName"
-                        maxlength="100"
-                        autocomplete="name"
-                        required
-                    >
-                </div>
-
-                <div class="field full">
-                    <label for="phone">Mobile Number *</label>
-
-                    <input
-                        type="tel"
-                        id="phone"
-                        name="phone"
-                        maxlength="20"
-                        autocomplete="tel"
-                        placeholder="Enter your mobile number"
-                        required
-                    >
-                </div>
-
-            </div>
-
-            <div class="notice">
-                Tolls, parking, waiting charges and other applicable
-                additional charges are not necessarily included in the
-                estimate. Final pricing and vehicle availability must
-                be confirmed by Radhakrishna Taxi Service.
-            </div>
-
-            <button
-                type="submit"
-                class="button button-primary calculate-button"
-                id="calculateButton"
-            >
-                Calculate Estimated Fare
-            </button>
-
-            <div
-                id="status"
-                class="status"
-                role="status"
-                aria-live="polite"
-            ></div>
-
-        </form>
-
-        <section id="result" class="result" aria-live="polite">
-
-            <div class="result-header">
-
-                <p>YOUR ESTIMATED TAXI FARE</p>
-
-                <div id="estimatedFare" class="total">₹0</div>
-
-                <p id="journeySummary"></p>
-
-            </div>
-
-            <div class="result-body">
 
                 <div class="result-grid">
 
@@ -787,158 +706,106 @@
                     </div>
 
                     <div class="result-item">
-                        <span>Advance Required (10%)</span>
+                        <span>Estimated Base Fare</span>
+                        <strong id="baseFare">—</strong>
+                    </div>
+
+                    <div class="result-item">
+                        <span>Driver Bata</span>
+                        <strong id="driverBata">—</strong>
+                    </div>
+
+                    <div class="result-item">
+                        <span>Toll and Parking</span>
+                        <strong id="extras">—</strong>
+                    </div>
+
+                    <div class="result-item">
+                        <span>Estimated 10% Advance</span>
                         <strong id="advance">—</strong>
                     </div>
 
                     <div class="result-item">
-                        <span>Estimated Remaining Balance</span>
+                        <span>Remaining Balance</span>
                         <strong id="balance">—</strong>
                     </div>
 
-                </div>
-
-                <div class="advance-box">
-                    <p>RESERVATION ADVANCE</p>
-
-                    <div id="advanceBoxAmount" class="advance-amount">
-                        ₹0
+                    <div class="result-item">
+                        <span>Driver Bata Periods</span>
+                        <strong id="bataPeriods">—</strong>
                     </div>
 
-                    <p>
-                        A 10% advance is required for reservation
-                        confirmation. Payment instructions will be
-                        provided by our team.
-                    </p>
                 </div>
 
-                <div class="result-actions">
-
-                    <button
-                        type="button"
-                        id="whatsappButton"
-                        class="button button-whatsapp"
-                    >
-                        Enquire on WhatsApp
-                    </button>
-
-                    <button
-                        type="button"
-                        id="recalculateButton"
-                        class="button button-gold"
-                    >
-                        Change Trip Details
-                    </button>
-
-                </div>
-
-                <p class="small-note">
-                    This is an estimate, not a confirmed quotation.
-                    Tolls, parking, waiting charges and other applicable
-                    extras may change the final fare. Your reservation
-                    is confirmed only after the company confirms
-                    availability and the applicable advance is paid
-                    through an agreed payment method.
+                <p class="fine-print">
+                    This is an estimate, not a confirmed booking.
+                    Actual road distance, vehicle availability, tolls,
+                    parking and final charges must be confirmed with
+                    Radhakrishna Taxi Service.
                 </p>
 
-            </div>
+                <div class="button-row">
+                    <button
+                        type="button"
+                        class="btn btn-whatsapp"
+                        id="whatsappButton"
+                    >
+                        Send Estimate on WhatsApp
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        id="editButton"
+                    >
+                        Edit Trip
+                    </button>
+                </div>
+
+            </section>
 
         </section>
+    </main>
 
-    </section>
+    <footer class="footer">
+        <strong>Radhakrishna Taxi Service</strong><br>
+        Mangalore, Karnataka<br>
+        Call / WhatsApp:
+        <a href="https://wa.me/918147771217">+91 81477 71217</a><br>
+        <a href="https://radhakrishnataxiservice.com/">
+            radhakrishnataxiservice.com
+        </a>
+    </footer>
 
-</main>
+    <script>
+"use strict";
 
-<section class="features">
-
-    <article class="feature">
-        <h3>Clear Estimates</h3>
-
-        <p>
-            Receive an estimated fare based on your journey,
-            selected vehicle and applicable package.
-        </p>
-    </article>
-
-    <article class="feature">
-        <h3>Comfortable Journeys</h3>
-
-        <p>
-            Choose a suitable vehicle for local travel,
-            family trips and outstation journeys.
-        </p>
-    </article>
-
-    <article class="feature">
-        <h3>Easy Enquiries</h3>
-
-        <p>
-            Send your trip details directly to our team
-            through WhatsApp for confirmation.
-        </p>
-    </article>
-
-</section>
-
-<footer>
-    <strong>Radhakrishna Taxi Service</strong>
-
-    <p>Mangalore, Karnataka</p>
-
-    <p>Call / WhatsApp: +91 81477 71217</p>
-
-    <p>
-        © <span id="year"></span> Radhakrishna Taxi Service.
-        All rights reserved.
-    </p>
-</footer>
-
-<script>
-    /*
-      Replace this with your deployed Cloudflare Worker URL.
-
-      Example:
-      https://radhakrishna-fare.YOUR-SUBDOMAIN.workers.dev
-    */
-    
-    const API_BASE = "https://radhakrishna-fare.radhakrishna-fare.workers.dev";
-
+(() => {
+    const API_BASE =
+        "https://radhakrishna-fare.radhakrishna-fare.workers.dev";
 
     const WHATSAPP_NUMBER = "918147771217";
 
     const form = document.getElementById("fareForm");
+    const calculateButton = document.getElementById("calculateButton");
     const statusBox = document.getElementById("status");
     const resultBox = document.getElementById("result");
-    const calculateButton = document.getElementById("calculateButton");
 
     let latestEstimate = null;
 
-    document.getElementById("year").textContent =
-        new Date().getFullYear();
-
-    const dateInput = document.getElementById("date");
-
-    const localToday = new Date();
-
-    const localDate =
-        localToday.getFullYear() + "-" +
-        String(localToday.getMonth() + 1).padStart(2, "0") + "-" +
-        String(localToday.getDate()).padStart(2, "0");
-
-    dateInput.min = localDate;
-    dateInput.value = localDate;
+    const $ = id => document.getElementById(id);
 
     function formatINR(value) {
         return new Intl.NumberFormat("en-IN", {
             style: "currency",
             currency: "INR",
             maximumFractionDigits: 0
-        }).format(value);
+        }).format(Math.ceil(Number(value) || 0));
     }
 
     function showStatus(message, type) {
         statusBox.textContent = message;
-        statusBox.className = "status " + type;
+        statusBox.className = "status show " + type;
     }
 
     function clearStatus() {
@@ -947,76 +814,143 @@
     }
 
     function getFormData() {
-        const data = new FormData(form);
+        const data = Object.fromEntries(new FormData(form).entries());
 
-        return {
-            pickup: String(data.get("pickup") || "").trim(),
-            destination: String(data.get("destination") || "").trim(),
-            tripType: String(data.get("tripType") || ""),
-            category: String(data.get("category") || ""),
-            vehicle: String(data.get("vehicle") || ""),
-            duration: String(data.get("duration") || ""),
-            date: String(data.get("date") || ""),
-            time: String(data.get("time") || ""),
-            extraHours: Number(data.get("extraHours") || 0),
-            waitingHours: Number(data.get("waitingHours") || 0),
-            toll: Number(data.get("toll") || 0),
-            parking: Number(data.get("parking") || 0),
-            passengers: Number(data.get("passengers") || 1),
-            customerName: String(data.get("customerName") || "").trim(),
-            phone: String(data.get("phone") || "").trim()
-        };
+        data.extraHours = Number(data.extraHours || 0);
+        data.waitingHours = Number(data.waitingHours || 0);
+        data.toll = Number(data.toll || 0);
+        data.parking = Number(data.parking || 0);
+        data.passengers = Number(data.passengers || 1);
+
+        return data;
     }
 
     function validateForm(data) {
-        if (!data.pickup || !data.destination) {
-            return "Enter both pickup and destination.";
+        if (!data.pickup.trim() || !data.destination.trim()) {
+            return "Please enter both pickup and destination.";
         }
 
-        if (data.pickup.length > 180 || data.destination.length > 180) {
-            return "Location names are too long.";
-        }
-
-        if (data.pickup.toLowerCase() === data.destination.toLowerCase()) {
+        if (
+            data.pickup.trim().toLowerCase() ===
+            data.destination.trim().toLowerCase()
+        ) {
             return "Pickup and destination must be different.";
         }
 
-        if (!/^\d{4}-\d{2}-\d{2}$/.test(data.date)) {
-            return "Please select a valid travel date.";
+        if (!data.customerName.trim()) {
+            return "Please enter your name.";
         }
 
-        if (data.date < localDate) {
+        if (!/^[0-9+\s()-]{7,20}$/.test(data.phone || "")) {
+            return "Please enter a valid mobile number.";
+        }
+
+        if (!data.date || !data.time) {
+            return "Please select your travel date and pickup time.";
+        }
+
+        if (data.date < $("date").min) {
             return "Travel date cannot be in the past.";
         }
 
-        if (!/^\d{2}:\d{2}$/.test(data.time)) {
-            return "Please select a valid pickup time.";
+        if (
+            !Number.isFinite(data.extraHours) ||
+            data.extraHours < 0 ||
+            data.extraHours > 24
+        ) {
+            return "Additional hours must be between 0 and 24.";
         }
 
-        if (!data.customerName || !data.phone) {
-            return "Enter your name and mobile number.";
-        }
-
-        if (!/^[0-9+\s()-]{7,20}$/.test(data.phone)) {
-            return "Enter a valid mobile number.";
-        }
-
-        if (data.extraHours < 0 || data.extraHours > 48) {
-            return "Invalid additional hours.";
-        }
-
-        if (data.waitingHours < 0 || data.waitingHours > 48) {
-            return "Invalid waiting hours.";
+        if (
+            !Number.isFinite(data.waitingHours) ||
+            data.waitingHours < 0 ||
+            data.waitingHours > 24
+        ) {
+            return "Waiting hours must be between 0 and 24.";
         }
 
         if (data.toll < 0 || data.parking < 0) {
-            return "Additional charges cannot be negative.";
+            return "Toll and parking charges cannot be negative.";
         }
 
-        return null;
+        return "";
     }
 
-    form.addEventListener("submit", async function(event) {
+    function displayEstimate(data, result) {
+        if (result.quotationRequired) {
+            latestEstimate = null;
+
+            showStatus(
+                result.message ||
+                "Please contact us for a Tempo Traveller quotation.",
+                "info"
+            );
+
+            return;
+        }
+
+        const totalFare = Number(result.totalFare || 0);
+        const driverBata = Number(result.driverBata || 0);
+        const extras = data.toll + data.parking;
+        const baseFare = Math.max(0, totalFare - driverBata - extras);
+
+        $("estimatedFare").textContent = formatINR(totalFare);
+
+        $("journeySummary").textContent =
+            data.pickup + " → " + data.destination;
+
+        $("distance").textContent =
+            Number(result.distanceKm || 0).toFixed(1) + " km";
+
+        $("vehicleName").textContent =
+            result.vehicleName || data.vehicle;
+
+        $("baseFare").textContent = formatINR(baseFare);
+
+        $("driverBata").textContent = formatINR(driverBata);
+
+        $("extras").textContent = formatINR(extras);
+
+        $("advance").textContent =
+            formatINR(result.advance || Math.ceil(totalFare * 0.10));
+
+        $("balance").textContent =
+            formatINR(
+                result.balance !== undefined
+                    ? result.balance
+                    : totalFare - Math.ceil(totalFare * 0.10)
+            );
+
+        $("bataPeriods").textContent =
+            "Early morning: " +
+            Number(result.earlyMorningPeriods || 0) +
+            " × ₹300; Late night: " +
+            Number(result.lateNightPeriods || 0) +
+            " × ₹300";
+
+        latestEstimate = {
+            ...data,
+            ...result,
+            totalFare,
+            driverBata,
+            extras,
+            baseFare
+        };
+
+        resultBox.style.display = "block";
+
+        showStatus(
+            "Your estimated fare has been calculated successfully.",
+            "success"
+        );
+
+        resultBox.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+    }
+
+    form.addEventListener("submit", async event => {
         event.preventDefault();
 
         clearStatus();
@@ -1024,27 +958,18 @@
         latestEstimate = null;
 
         const data = getFormData();
-        const validationError = validateForm(data);
+        const error = validateForm(data);
 
-        if (validationError) {
-            showStatus(validationError, "error");
-            return;
-        }
-
-        if (API_BASE.includes("YOUR-WORKER-URL")) {
-            showStatus(
-                "The fare calculator is not connected to its backend yet. " +
-                "Please complete the backend deployment first.",
-                "error"
-            );
+        if (error) {
+            showStatus(error, "error");
             return;
         }
 
         calculateButton.disabled = true;
-        calculateButton.textContent = "Calculating Route and Fare...";
+        calculateButton.textContent = "Calculating Fare...";
 
         showStatus(
-            "Finding your driving route and preparing your estimate. Please wait.",
+            "Calculating your road distance and fare. Please wait...",
             "info"
         );
 
@@ -1060,7 +985,15 @@
                 }
             );
 
-            const result = await response.json();
+            let result;
+
+            try {
+                result = await response.json();
+            } catch {
+                throw new Error(
+                    "The fare service returned an invalid response. Please try again."
+                );
+            }
 
             if (!response.ok) {
                 throw new Error(
@@ -1068,105 +1001,126 @@
                 );
             }
 
-            latestEstimate = {
-                ...data,
-                ...result
-            };
-
-            document.getElementById("estimatedFare").textContent =
-                formatINR(result.totalFare);
-
-            document.getElementById("distance").textContent =
-                result.distanceKm + " km";
-
-            document.getElementById("vehicleName").textContent =
-                result.vehicleName;
-
-            document.getElementById("advance").textContent =
-                formatINR(result.advance);
-
-            document.getElementById("balance").textContent =
-                formatINR(result.balance);
-
-            document.getElementById("advanceBoxAmount").textContent =
-                formatINR(result.advance);
-
-            document.getElementById("journeySummary").textContent =
-                data.pickup + " → " + data.destination +
-                " · " +
-                (data.tripType === "oneway" ? "One-Way" : "Round Trip");
-
-            resultBox.style.display = "block";
-
-            clearStatus();
-
-            resultBox.scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
+            displayEstimate(data, result);
 
         } catch (error) {
+            console.error("Fare calculator error:", error);
+
             showStatus(
                 error.message ||
-                "Something went wrong. Please try again or contact us on WhatsApp.",
+                "Unable to calculate the fare. Please contact us on WhatsApp.",
                 "error"
             );
+
         } finally {
             calculateButton.disabled = false;
             calculateButton.textContent = "Calculate Estimated Fare";
         }
     });
 
-    document.getElementById("whatsappButton").addEventListener("click", function() {
-        if (!latestEstimate) {
-            return;
+        document.getElementById("whatsappButton").addEventListener(
+        "click",
+        () => {
+            if (!latestEstimate) {
+                showStatus(
+                    "Please calculate your fare before sending the estimate.",
+                    "error"
+                );
+                return;
+            }
+
+            const e = latestEstimate;
+
+            const message = [
+                "Hello Radhakrishna Taxi Service,",
+                "",
+                "I would like to enquire about this taxi trip.",
+                "",
+                "Name: " + e.customerName,
+                "Mobile: " + e.phone,
+                "Pickup: " + e.pickup,
+                "Destination: " + e.destination,
+                "Travel date: " + e.date,
+                "Pickup time: " + e.time,
+                "Journey category: " + e.category,
+                "Trip type: " + e.tripType,
+                "Vehicle: " + (e.vehicleName || e.vehicle),
+                "Duration: " + (
+                    e.duration === "full"
+                        ? "Full day (14.5 hours)"
+                        : e.duration + " hours"
+                ),
+                "Additional hours: " + e.extraHours,
+                "Waiting hours: " + e.waitingHours,
+                "Estimated distance: " +
+                    Number(e.distanceKm || 0).toFixed(1) + " km",
+                "Estimated total fare: " + formatINR(e.totalFare),
+                "Driver bata: " + formatINR(e.driverBata),
+                "Toll and parking: " + formatINR(e.extras),
+                "Estimated advance: " + formatINR(e.advance),
+                "Estimated balance: " + formatINR(e.balance),
+                "",
+                "Please confirm the availability and final fare."
+            ].join("\n");
+
+            const url =
+                "https://wa.me/" +
+                WHATSAPP_NUMBER +
+                "?text=" +
+                encodeURIComponent(message);
+
+            window.open(url, "_blank", "noopener,noreferrer");
         }
+    );
 
-        const e = latestEstimate;
-
-        const message = [
-            "Hello Radhakrishna Taxi Service,",
-            "",
-            "I would like to enquire about a taxi reservation.",
-            "",
-            "Name: " + e.customerName,
-            "Mobile: " + e.phone,
-            "Pickup: " + e.pickup,
-            "Destination: " + e.destination,
-            "Trip type: " + (e.tripType === "oneway" ? "One-Way" : "Round Trip"),
-            "Category: " + e.category,
-            "Vehicle: " + e.vehicleName,
-            "Travel date: " + e.date,
-            "Pickup time: " + e.time,
-            "Passengers: " + e.passengers,
-            "Estimated distance: " + e.distanceKm + " km",
-            "Estimated fare: " + formatINR(e.totalFare),
-            "Estimated 10% advance: " + formatINR(e.advance),
-            "",
-            "Please confirm the final fare, vehicle availability,",
-            "applicable additional charges and reservation procedure."
-        ].join("\n");
-
-        const url =
-            "https://wa.me/" +
-            WHATSAPP_NUMBER +
-            "?text=" +
-            encodeURIComponent(message);
-
-        window.open(url, "_blank", "noopener,noreferrer");
-    });
-
-    document.getElementById("recalculateButton").addEventListener("click", function() {
+    document.getElementById("editButton").addEventListener("click", () => {
         resultBox.style.display = "none";
-        latestEstimate = null;
 
-        document.getElementById("pickup").focus();
+        $("pickup").focus();
 
         window.scrollTo({
-            top: form.getBoundingClientRect().top + window.scrollY - 20,
+            top: form.getBoundingClientRect().top +
+                window.scrollY - 30,
             behavior: "smooth"
         });
     });
+
+    form.addEventListener("reset", () => {
+        latestEstimate = null;
+        resultBox.style.display = "none";
+        clearStatus();
+
+        window.setTimeout(() => {
+            $("extraHours").value = "0";
+            $("waitingHours").value = "0";
+            $("toll").value = "0";
+            $("parking").value = "0";
+            $("duration").value = "full";
+            $("tripType").value = "roundtrip";
+            $("category").value = "local";
+            $("passengers").value = "2";
+        }, 0);
+    });
+
+    function setMinimumDate() {
+        const now = new Date();
+
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const day = String(now.getDate()).padStart(2, "0");
+
+        const today = year + "-" + month + "-" + day;
+
+        $("date").min = today;
+
+        if (!$("date").value || $("date").value < today) {
+            $("date").value = today;
+        }
+    }
+
+    setMinimumDate();
+
+})();
 </script>
 
 </body>
