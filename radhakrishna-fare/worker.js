@@ -174,7 +174,6 @@ function validateLocations(input) {
   return locations;
 }
 
-
 async function geocode(place, apiKey) {
   if (typeof place !== "string" || !place.trim()) {
     throw new Error("Please enter a valid place name.");
@@ -188,7 +187,6 @@ async function geocode(place, apiKey) {
 
   const original = place.trim().replace(/\s+/g, " ");
 
-  // Try the customer's spelling and then add Karnataka/India context.
   const queries = [
     original,
     `${original}, Karnataka, India`,
@@ -235,7 +233,6 @@ async function geocode(place, apiKey) {
 
       if (results.length === 0) continue;
 
-      // Prefer Karnataka when several Indian results match.
       const chosen =
         results.find(result =>
           /karnataka/i.test(result.state || "")
@@ -264,8 +261,6 @@ async function geocode(place, apiKey) {
       ) {
         throw error;
       }
-
-      // Try the next query variation.
     }
   }
 
@@ -273,7 +268,6 @@ async function geocode(place, apiKey) {
     `Could not find "${original}". Try the correct spelling or add the nearby town or district.`
   );
 }
-
 
 async function getRoadDistanceBetween(start, end, apiKey) {
   if (!apiKey) {
@@ -361,10 +355,12 @@ async function validateLocalArea(locations, apiKey) {
     "Mangalore, Karnataka, India",
     apiKey
   );
+
   const checked = [];
 
   for (const place of locations) {
     const point = await geocode(place, apiKey);
+
     const distance = await getRoadDistanceBetween(
       centre,
       point,
@@ -448,10 +444,12 @@ function calculateOutstationBata(date, dropDate, time) {
   }
 
   const chargeableDays = daysApart + 1;
+
   const earlyMorningSurcharge =
     Number(time.split(":")[0]) < 6;
 
   const dailyBata = chargeableDays * DRIVER_BATA;
+
   const earlyMorningBata =
     earlyMorningSurcharge ? DRIVER_BATA : 0;
 
@@ -563,48 +561,29 @@ function calculateOutstationFare(
   onwardKm,
   totalKm
 ) {
-  if (!vehicle.rate) {
+  if (!vehicle.rate || vehicle.rate <= 0) {
     throw new Error(
       "Please select a vehicle with a published per-kilometre rate."
     );
   }
 
-  if (!vehicle.fullOutstation || vehicle.fullOutstation <= 0) {
-    throw new Error(
-      "The selected vehicle does not have a valid daily outstation rate."
-    );
-  }
-
   const isRoundTrip = input.tripType === "roundtrip";
+
+  if (!validDate(input.date) || !validDate(input.dropDate)) {
+    throw new Error("Please enter valid pickup and drop dates.");
+  }
 
   const pickupDate = Date.parse(input.date + "T00:00:00Z");
   const dropDate = Date.parse(input.dropDate + "T00:00:00Z");
 
-  if (
-    !Number.isFinite(pickupDate) ||
-    !Number.isFinite(dropDate) ||
-    dropDate < pickupDate
-  ) {
-    throw new Error("Please enter valid pickup and drop dates.");
+  if (dropDate < pickupDate) {
+    throw new Error("Drop date cannot be earlier than pickup date.");
   }
 
-  // Count both pickup and drop dates as chargeable days.
   const days = Math.max(
     1,
-    Math.round((dropDate - pickupDate) / 86400000) + 1
+    dateDifferenceDays(input.date, input.dropDate) + 1
   );
-
-  // Preserve the existing daily outstation package rate.
-  const dailyFare = vehicle.fullOutstation * days;
-
-  // Each chargeable day includes 200 km.
-  const includedKm = 200 * days;
-
-  // Use the COMPLETE trip distance, not just the outward distance.
-  const excessKm = Math.max(0, totalKm - includedKm);
-  const excessKmFare = excessKm * vehicle.rate;
-
-  const baseFare = dailyFare + excessKmFare;
 
   const bata = calculateOutstationBata(
     input.date,
@@ -612,19 +591,52 @@ function calculateOutstationFare(
     input.time
   );
 
-  // Apply the 5% round-trip extra exactly once.
-  // As agreed, it applies to the base fare plus driver bata.
-  // Tolls and parking are added separately.
-  const roundTripExtra = isRoundTrip
-    ? (baseFare + bata.driverBata) * ROUND_TRIP_EXTRA_PERCENT
-    : 0;
+  let baseFare;
+  let roundTripExtra = 0;
+  let displayDistanceKm;
+
+  if (isRoundTrip) {
+    // ROUND TRIP:
+    // Daily package plus charges for kilometres exceeding
+    // the included 200 km per chargeable day.
+    if (!vehicle.fullOutstation || vehicle.fullOutstation <= 0) {
+      throw new Error(
+        "The selected vehicle does not have a valid daily outstation rate."
+      );
+    }
+
+    const dailyFare = vehicle.fullOutstation * days;
+    const includedKm = 200 * days;
+    const excessKm = Math.max(0, totalKm - includedKm);
+    const excessKmFare = excessKm * vehicle.rate;
+
+    baseFare = dailyFare + excessKmFare;
+
+    // Apply the 5% extra once to base fare + driver bata.
+    // Toll and parking remain separate charges.
+    roundTripExtra =
+      (baseFare + bata.driverBata) * ROUND_TRIP_EXTRA_PERCENT;
+
+    // Display the full outward + return distance.
+    displayDistanceKm = totalKm;
+  } else {
+    // ONE WAY:
+    // Charge twice the outward road distance at the per-km rate.
+    // Do not apply daily package rates or the 200 km allowance.
+    const chargeableKm = onwardKm * 2;
+
+    baseFare = chargeableKm * vehicle.rate;
+
+    // Display only the actual outward distance.
+    displayDistanceKm = onwardKm;
+  }
 
   return makeFareResult({
     baseFare,
     driverBata: bata.driverBata,
     toll: Number(input.toll || 0),
     parking: Number(input.parking || 0),
-    distanceKm: totalKm,
+    distanceKm: displayDistanceKm,
     onwardDistanceKm: onwardKm,
     vehicle,
     mode: "outstation",
@@ -748,6 +760,7 @@ export default {
 
       const vehicle = VEHICLES[input.vehicle];
 
+      // Airport and railway transfers keep their existing fixed fares.
       if (mode === "airport" || mode === "railway") {
         return jsonResponse(
           calculateTransfer(input, vehicle, mode),
@@ -756,13 +769,14 @@ export default {
         );
       }
 
-      if (!["4", "8", "full"].includes(String(input.duration))) {
-        throw new Error("Please select a valid package duration.");
-      }
-
       const locations = validateLocations(input);
 
+      // Local package-duration validation applies only to local trips.
       if (mode === "local") {
+        if (!["4", "8", "full"].includes(String(input.duration))) {
+          throw new Error("Please select a valid local package duration.");
+        }
+
         const areaCheck = await validateLocalArea(
           locations,
           env.GEOAPIFY_API_KEY
@@ -786,6 +800,7 @@ export default {
         return jsonResponse(result, 200, origin);
       }
 
+      // Outstation trip type and dates.
       if (!["oneway", "roundtrip"].includes(input.tripType)) {
         throw new Error(
           "Please select a valid outstation trip type."
@@ -804,22 +819,20 @@ export default {
         );
       }
 
-      // First calculate the complete outward journey:
-      // pickup -> all stops in order -> destination.
+      // Outward route: pickup -> stops in order -> destination.
       const outwardRoute = await getRoute(
         locations,
         env.GEOAPIFY_API_KEY
       );
 
       const onwardKm = outwardRoute.onwardKm;
+
       let returnKm = 0;
       let totalKm = onwardKm;
       let allRouteLegs = [...outwardRoute.legs];
 
       if (input.tripType === "roundtrip") {
-        // Reverse the entire location sequence so return travel
-        // includes every stop in reverse order:
-        // destination -> last stop -> ... -> first stop -> pickup.
+        // Return route: destination -> stops in reverse order -> pickup.
         const returnLocations = [...locations].reverse();
 
         const returnRoute = await getRoute(
@@ -829,7 +842,7 @@ export default {
 
         returnKm = returnRoute.onwardKm;
 
-        // Add outward and return distances once each.
+        // Count outward and return kilometres once each.
         totalKm = onwardKm + returnKm;
 
         allRouteLegs = [
@@ -838,7 +851,6 @@ export default {
         ];
       }
 
-      // Calculate the fare only AFTER the full distance is known.
       const result = calculateOutstationFare(
         input,
         vehicle,
@@ -846,16 +858,14 @@ export default {
         totalKm
       );
 
-      result.returnDistanceKm =
-        Math.round(returnKm * 10) / 10;
-
+      result.returnDistanceKm = Math.round(returnKm * 10) / 10;
       result.stops = locations.slice(1, -1);
       result.routeLegs = allRouteLegs;
 
       result.routeNotice =
         input.tripType === "roundtrip"
-          ? "Round-trip distance includes the complete outward route and the return route through all stops. A 5% round-trip extra is included in the fare."
-          : "One-way distance includes the complete outward route through all stops. No return distance or round-trip extra is included.";
+          ? "Round-trip distance includes the complete outward route and the return route through all stops. A 5% round-trip extra is included in the fare. Toll and parking are added separately."
+          : "The displayed distance is the outward road distance only. The one-way base fare is calculated using twice the outward distance at the selected vehicle's per-kilometre rate. Toll and parking are added separately.";
 
       return jsonResponse(result, 200, origin);
 
