@@ -1,30 +1,19 @@
+
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Taxi Fare Estimate | Radhakrishna Taxi Service</title>
-
-    <meta name="description"
-          content="Estimate your taxi fare for local trips, airport transfers and outstation journeys with Radhakrishna Taxi Service in Mangalore.">
-
+    <meta name="description" content="Estimate your taxi fare for local trips, airport transfers and outstation journeys with Radhakrishna Taxi Service in Mangalore.">
     <meta name="theme-color" content="#102d35">
-
-    <link rel="canonical"
-          href="https://radhakrishnataxiservice.com/fare-estimate.html">
+    <link rel="canonical" href="https://radhakrishnataxiservice.com/fare-estimate.html">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
 
     <style>
-
         :root {
             --primary: #102d35;
             --primary-light: #19444d;
@@ -57,9 +46,7 @@
             text-decoration: none;
         }
 
-        button,
-        input,
-        select {
+        button, input, select {
             font: inherit;
         }
 
@@ -119,17 +106,8 @@
 
         .hero {
             background:
-                radial-gradient(
-                    circle at 85% 15%,
-                    rgba(215,173,98,.18),
-                    transparent 30%
-                ),
-                linear-gradient(
-                    135deg,
-                    var(--primary),
-                    var(--primary-light)
-                );
-
+                radial-gradient(circle at 85% 15%, rgba(215,173,98,.18), transparent 30%),
+                linear-gradient(135deg, var(--primary), var(--primary-light));
             color: var(--white);
             text-align: center;
             padding: 65px 20px 100px;
@@ -145,8 +123,7 @@
             margin-bottom: 14px;
         }
 
-        h1,
-        h2 {
+        h1, h2 {
             font-family: "Playfair Display", serif;
         }
 
@@ -211,8 +188,7 @@
             color: var(--primary);
         }
 
-        input,
-        select {
+        input, select {
             width: 100%;
             padding: 13px 14px;
             border: 1px solid var(--border);
@@ -223,8 +199,7 @@
             min-height: 48px;
         }
 
-        input:focus,
-        select:focus {
+        input:focus, select:focus {
             border-color: var(--gold);
             box-shadow: 0 0 0 3px rgba(215,173,98,.15);
         }
@@ -422,14 +397,12 @@
                 font-size: 15px;
             }
         }
-
     </style>
 </head>
 
 <body>
-
     <div class="topbar">
-        Mangalore Taxi Service | Airport Transfers | Local & Outstation Travel
+        Mangalore Taxi Service | Airport Transfers | Local &amp; Outstation Travel
     </div>
 
     <header>
@@ -459,39 +432,25 @@
 
     <main class="calculator-wrap">
         <section class="calculator">
-
             <h2 class="section-title">Plan Your Journey</h2>
-
             <p class="section-description">
                 Complete the details below to calculate your estimated fare.
             </p>
 
             <form id="fareForm">
-
                 <div class="form-grid">
-
                     <div class="field">
                         <label for="pickup">Pickup Location *</label>
-                        <input
-                            type="text"
-                            id="pickup"
-                            name="pickup"
-                            placeholder="Example: Mangalore Airport"
-                            maxlength="180"
-                            required
-                        >
+                        <input type="text" id="pickup" name="pickup"
+                               placeholder="Example: Mangalore Airport"
+                               maxlength="180" required>
                     </div>
 
                     <div class="field">
                         <label for="destination">Destination *</label>
-                        <input
-                            type="text"
-                            id="destination"
-                            name="destination"
-                            placeholder="Example: Udupi Sri Krishna Matha"
-                            maxlength="180"
-                            required
-                        >
+                        <input type="text" id="destination" name="destination"
+                               placeholder="Example: Udupi Sri Krishna Matha"
+                               maxlength="180" required>
                     </div>
 
                     <div class="field">
@@ -529,9 +488,7 @@
                             <option value="8">8 Hours</option>
                             <option value="full" selected>Full Day</option>
                         </select>
-                        <span class="field-hint">
-                            Full-day package duration is 14.5 hours.
-                        </span>
+                        <span class="field-hint">Full-day package duration is 14.5 hours.</span>
                     </div>
 
                     <div class="field">
@@ -546,31 +503,15 @@
 
                     <div class="field">
                         <label for="extraHours">Additional Hours</label>
-                        <input
-                            type="number"
-                            id="extraHours"
-                            name="extraHours"
-                            min="0"
-                            max="24"
-                            step="1"
-                            value="0"
-                        >
+                        <input type="number" id="extraHours" name="extraHours"
+                               min="0" max="24" step="1" value="0">
                     </div>
 
                     <div class="field">
                         <label for="waitingHours">Waiting Hours</label>
-                        <input
-                            type="number"
-                            id="waitingHours"
-                            name="waitingHours"
-                            min="0"
-                            max="24"
-                            step="1"
-                            value="0"
-                        >
-                        <span class="field-hint">
-                            Waiting charges may require confirmation.
-                        </span>
+                        <input type="number" id="waitingHours" name="waitingHours"
+                               min="0" max="24" step="1" value="0">
+                        <span class="field-hint">Waiting charges may require confirmation.</span>
                     </div>
 
                     <div class="field">
@@ -601,52 +542,27 @@
 
                     <div class="field">
                         <label for="toll">Estimated Toll Charges (₹)</label>
-                        <input
-                            type="number"
-                            id="toll"
-                            name="toll"
-                            min="0"
-                            step="1"
-                            value="0"
-                        >
+                        <input type="number" id="toll" name="toll"
+                               min="0" step="1" value="0">
                     </div>
 
                     <div class="field">
                         <label for="parking">Estimated Parking Charges (₹)</label>
-                        <input
-                            type="number"
-                            id="parking"
-                            name="parking"
-                            min="0"
-                            step="1"
-                            value="0"
-                        >
+                        <input type="number" id="parking" name="parking"
+                               min="0" step="1" value="0">
                     </div>
 
                     <div class="field">
                         <label for="customerName">Your Name *</label>
-                        <input
-                            type="text"
-                            id="customerName"
-                            name="customerName"
-                            maxlength="100"
-                            placeholder="Enter your name"
-                            required
-                        >
+                        <input type="text" id="customerName" name="customerName"
+                               maxlength="100" placeholder="Enter your name" required>
                     </div>
 
                     <div class="field">
                         <label for="phone">Mobile Number *</label>
-                        <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            maxlength="20"
-                            placeholder="Enter your mobile number"
-                            required
-                        >
+                        <input type="tel" id="phone" name="phone"
+                               maxlength="20" placeholder="Enter your mobile number" required>
                     </div>
-
                 </div>
 
                 <div class="policy-note">
@@ -660,33 +576,16 @@
                 </div>
 
                 <div class="button-row">
-                    <button
-                        type="submit"
-                        class="btn btn-primary"
-                        id="calculateButton"
-                    >
+                    <button type="submit" class="btn btn-primary" id="calculateButton">
                         Calculate Estimated Fare
                     </button>
-
-                    <button
-                        type="reset"
-                        class="btn btn-secondary"
-                    >
-                        Reset
-                    </button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
                 </div>
 
-                <div
-                    id="status"
-                    class="status"
-                    role="status"
-                    aria-live="polite"
-                ></div>
-
+                <div id="status" class="status" role="status" aria-live="polite"></div>
             </form>
 
-                        <section id="result" class="result" aria-live="polite">
-
+            <section id="result" class="result" aria-live="polite">
                 <div class="result-header">
                     <small>Estimated total fare</small>
                     <div class="fare-amount" id="estimatedFare">₹0</div>
@@ -694,76 +593,55 @@
                 </div>
 
                 <div class="result-grid">
-
                     <div class="result-item">
                         <span>Estimated Road Distance</span>
                         <strong id="distance">—</strong>
                     </div>
-
                     <div class="result-item">
                         <span>Selected Vehicle</span>
                         <strong id="vehicleName">—</strong>
                     </div>
-
                     <div class="result-item">
                         <span>Estimated Base Fare</span>
                         <strong id="baseFare">—</strong>
                     </div>
-
                     <div class="result-item">
                         <span>Driver Bata</span>
                         <strong id="driverBata">—</strong>
                     </div>
-
                     <div class="result-item">
                         <span>Toll and Parking</span>
                         <strong id="extras">—</strong>
                     </div>
-
                     <div class="result-item">
                         <span>Estimated 10% Advance</span>
                         <strong id="advance">—</strong>
                     </div>
-
                     <div class="result-item">
                         <span>Remaining Balance</span>
                         <strong id="balance">—</strong>
                     </div>
-
                     <div class="result-item">
                         <span>Driver Bata Periods</span>
                         <strong id="bataPeriods">—</strong>
                     </div>
-
                 </div>
 
                 <p class="fine-print">
-                    This is an estimate, not a confirmed booking.
-                    Actual road distance, vehicle availability, tolls,
-                    parking and final charges must be confirmed with
-                    Radhakrishna Taxi Service.
+                    This is an estimate, not a confirmed booking. Actual road distance,
+                    vehicle availability, tolls, parking and final charges must be
+                    confirmed with Radhakrishna Taxi Service.
                 </p>
 
                 <div class="button-row">
-                    <button
-                        type="button"
-                        class="btn btn-whatsapp"
-                        id="whatsappButton"
-                    >
+                    <button type="button" class="btn btn-whatsapp" id="whatsappButton">
                         Send Estimate on WhatsApp
                     </button>
-
-                    <button
-                        type="button"
-                        class="btn btn-secondary"
-                        id="editButton"
-                    >
+                    <button type="button" class="btn btn-secondary" id="editButton">
                         Edit Trip
                     </button>
                 </div>
-
             </section>
-
         </section>
     </main>
 
@@ -772,285 +650,276 @@
         Mangalore, Karnataka<br>
         Call / WhatsApp:
         <a href="https://wa.me/918147771217">+91 81477 71217</a><br>
-        <a href="https://radhakrishnataxiservice.com/">
-            radhakrishnataxiservice.com
-        </a>
+        <a href="https://radhakrishnataxiservice.com/">radhakrishnataxiservice.com</a>
     </footer>
 
     <script>
-"use strict";
+    "use strict";
 
-(() => {
-    const API_BASE =
-        "https://radhakrishna-fare.radhakrishna-fare.workers.dev";
+    (() => {
+        const API_BASE =
+            "https://radhakrishna-fare.radhakrishna-fare.workers.dev";
 
-    const WHATSAPP_NUMBER = "918147771217";
+        const WHATSAPP_NUMBER = "918147771217";
 
-    const form = document.getElementById("fareForm");
-    const calculateButton = document.getElementById("calculateButton");
-    const statusBox = document.getElementById("status");
-    const resultBox = document.getElementById("result");
+        const form = document.getElementById("fareForm");
+        const calculateButton = document.getElementById("calculateButton");
+        const statusBox = document.getElementById("status");
+        const resultBox = document.getElementById("result");
 
-    let latestEstimate = null;
+        let latestEstimate = null;
 
-    const $ = id => document.getElementById(id);
+        const $ = id => document.getElementById(id);
 
-    function formatINR(value) {
-        return new Intl.NumberFormat("en-IN", {
-            style: "currency",
-            currency: "INR",
-            maximumFractionDigits: 0
-        }).format(Math.ceil(Number(value) || 0));
-    }
-
-    function showStatus(message, type) {
-        statusBox.textContent = message;
-        statusBox.className = "status show " + type;
-    }
-
-    function clearStatus() {
-        statusBox.textContent = "";
-        statusBox.className = "status";
-    }
-
-    function getFormData() {
-        const data = Object.fromEntries(new FormData(form).entries());
-
-        data.extraHours = Number(data.extraHours || 0);
-        data.waitingHours = Number(data.waitingHours || 0);
-        data.toll = Number(data.toll || 0);
-        data.parking = Number(data.parking || 0);
-        data.passengers = Number(data.passengers || 1);
-
-        return data;
-    }
-
-    function validateForm(data) {
-        if (!data.pickup.trim() || !data.destination.trim()) {
-            return "Please enter both pickup and destination.";
+        function formatINR(value) {
+            return new Intl.NumberFormat("en-IN", {
+                style: "currency",
+                currency: "INR",
+                maximumFractionDigits: 0
+            }).format(Math.ceil(Number(value) || 0));
         }
 
-        if (
-            data.pickup.trim().toLowerCase() ===
-            data.destination.trim().toLowerCase()
-        ) {
-            return "Pickup and destination must be different.";
+        function showStatus(message, type) {
+            statusBox.textContent = message;
+            statusBox.className = "status show " + type;
         }
 
-        if (!data.customerName.trim()) {
-            return "Please enter your name.";
+        function clearStatus() {
+            statusBox.textContent = "";
+            statusBox.className = "status";
         }
 
-        if (!/^[0-9+\s()-]{7,20}$/.test(data.phone || "")) {
-            return "Please enter a valid mobile number.";
+        function getFormData() {
+            const data = Object.fromEntries(new FormData(form).entries());
+
+            data.extraHours = Number(data.extraHours || 0);
+            data.waitingHours = Number(data.waitingHours || 0);
+            data.toll = Number(data.toll || 0);
+            data.parking = Number(data.parking || 0);
+            data.passengers = Number(data.passengers || 1);
+
+            return data;
         }
 
-        if (!data.date || !data.time) {
-            return "Please select your travel date and pickup time.";
+        function validateForm(data) {
+            if (!data.pickup.trim() || !data.destination.trim()) {
+                return "Please enter both pickup and destination.";
+            }
+
+            if (
+                data.pickup.trim().toLowerCase() ===
+                data.destination.trim().toLowerCase()
+            ) {
+                return "Pickup and destination must be different.";
+            }
+
+            if (!data.customerName.trim()) {
+                return "Please enter your name.";
+            }
+
+            if (!/^[0-9+\s()-]{7,20}$/.test(data.phone || "")) {
+                return "Please enter a valid mobile number.";
+            }
+
+            if (!data.date || !data.time) {
+                return "Please select your travel date and pickup time.";
+            }
+
+            if (data.date < $("date").min) {
+                return "Travel date cannot be in the past.";
+            }
+
+            if (
+                !Number.isFinite(data.extraHours) ||
+                data.extraHours < 0 ||
+                data.extraHours > 24
+            ) {
+                return "Additional hours must be between 0 and 24.";
+            }
+
+            if (
+                !Number.isFinite(data.waitingHours) ||
+                data.waitingHours < 0 ||
+                data.waitingHours > 24
+            ) {
+                return "Waiting hours must be between 0 and 24.";
+            }
+
+            if (
+                !Number.isFinite(data.toll) ||
+                !Number.isFinite(data.parking) ||
+                data.toll < 0 ||
+                data.parking < 0
+            ) {
+                return "Toll and parking charges must be valid non-negative amounts.";
+            }
+
+            return "";
         }
 
-        if (data.date < $("date").min) {
-            return "Travel date cannot be in the past.";
-        }
+        function displayEstimate(data, result) {
+            if (result.quotationRequired) {
+                latestEstimate = null;
 
-        if (
-            !Number.isFinite(data.extraHours) ||
-            data.extraHours < 0 ||
-            data.extraHours > 24
-        ) {
-            return "Additional hours must be between 0 and 24.";
-        }
+                showStatus(
+                    result.message ||
+                    "Please contact us for a Tempo Traveller quotation.",
+                    "info"
+                );
 
-        if (
-            !Number.isFinite(data.waitingHours) ||
-            data.waitingHours < 0 ||
-            data.waitingHours > 24
-        ) {
-            return "Waiting hours must be between 0 and 24.";
-        }
+                return;
+            }
 
-        if (data.toll < 0 || data.parking < 0) {
-            return "Toll and parking charges cannot be negative.";
-        }
-
-        return "";
-    }
-
-    function displayEstimate(data, result) {
-        if (result.quotationRequired) {
-            latestEstimate = null;
-
-            showStatus(
-                result.message ||
-                "Please contact us for a Tempo Traveller quotation.",
-                "info"
+            console.log(
+                "FARE RESPONSE JSON:",
+                JSON.stringify(result, null, 2)
             );
 
-            return;
-        }
-        console.log(
-            "FARE RESPONSE JSON:",
-            JSON.stringify(result, null, 2)
-        );
-        console.log("totalFare:", result.totalFare, typeof result.totalFare);
-        console.log("driverBata:", result.driverBata, typeof result.driverBata);
+            const totalFare = Number(result.totalFare);
+            const driverBata = Number(result.driverBata);
+            const extras = Number(data.toll || 0) + Number(data.parking || 0);
 
-        const totalFare = Number(result.totalFare);
-        const driverBata = Number(result.driverBata);
-        const extras = Number(data.toll || 0) + Number(data.parking || 0);
+            if (
+                result.totalFare === undefined ||
+                result.driverBata === undefined ||
+                !Number.isFinite(totalFare) ||
+                !Number.isFinite(driverBata) ||
+                totalFare < 0 ||
+                driverBata < 0
+            ) {
+                throw new Error(
+                    "Invalid fare response: " + JSON.stringify(result)
+                );
+            }
 
-        if (
-            result.totalFare === undefined ||
-            result.driverBata === undefined ||
-            !Number.isFinite(totalFare) ||
-            !Number.isFinite(driverBata) ||
-            totalFare < 0 ||
-            driverBata < 0
-        ) {
-            throw new Error(
-                "Invalid fare response: " + JSON.stringify(result)
+            // Declare baseFare only once.
+            const baseFare = totalFare - driverBata - extras;
+
+            $("estimatedFare").textContent = formatINR(totalFare);
+
+            $("journeySummary").textContent =
+                data.pickup + " → " + data.destination;
+
+            $("distance").textContent =
+                Number(result.distanceKm || 0).toFixed(1) + " km";
+
+            $("vehicleName").textContent =
+                result.vehicleName || data.vehicle;
+
+            $("baseFare").textContent = formatINR(baseFare);
+            $("driverBata").textContent = formatINR(driverBata);
+            $("extras").textContent = formatINR(extras);
+
+            $("advance").textContent = formatINR(
+                result.advance !== undefined
+                    ? result.advance
+                    : Math.ceil(totalFare * 0.10)
             );
-        }
 
-        const baseFare = totalFare - driverBata - extras;
-                if (
-                    !Number.isFinite(totalFare) ||
-                    !Number.isFinite(driverBata) ||
-                    totalFare < 0 ||
-                    driverBata < 0
-                ) {
-                    throw new Error("Invalid fare or driver bata returned by the fare service.");
-                }
-
-        const baseFare = totalFare - driverBata - extras;
-
-        $("estimatedFare").textContent = formatINR(totalFare);
-
-        $("journeySummary").textContent =
-            data.pickup + " → " + data.destination;
-
-        $("distance").textContent =
-            Number(result.distanceKm || 0).toFixed(1) + " km";
-
-        $("vehicleName").textContent =
-            result.vehicleName || data.vehicle;
-
-        $("baseFare").textContent = formatINR(baseFare);
-
-        $("driverBata").textContent = formatINR(driverBata);
-
-        $("extras").textContent = formatINR(extras);
-
-        $("advance").textContent =
-            formatINR(result.advance || Math.ceil(totalFare * 0.10));
-
-        $("balance").textContent =
-            formatINR(
+            $("balance").textContent = formatINR(
                 result.balance !== undefined
                     ? result.balance
                     : totalFare - Math.ceil(totalFare * 0.10)
             );
 
-        $("bataPeriods").textContent =
-            "Early morning: " +
-            Number(result.earlyMorningPeriods || 0) +
-            " × ₹300; Late night: " +
-            Number(result.lateNightPeriods || 0) +
-            " × ₹300";
+            $("bataPeriods").textContent =
+                "Early morning: " +
+                Number(result.earlyMorningPeriods || 0) +
+                " × ₹300; Late night: " +
+                Number(result.lateNightPeriods || 0) +
+                " × ₹300";
 
-        latestEstimate = {
-            ...data,
-            ...result,
-            totalFare,
-            driverBata,
-            extras,
-            baseFare
-        };
+            latestEstimate = {
+                ...data,
+                ...result,
+                totalFare,
+                driverBata,
+                extras,
+                baseFare
+            };
 
-        resultBox.style.display = "block";
-
-        showStatus(
-            "Your estimated fare has been calculated successfully.",
-            "success"
-        );
-
-        resultBox.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-    }
-
-    form.addEventListener("submit", async event => {
-        event.preventDefault();
-
-        clearStatus();
-        resultBox.style.display = "none";
-        latestEstimate = null;
-
-        const data = getFormData();
-        const error = validateForm(data);
-
-        if (error) {
-            showStatus(error, "error");
-            return;
-        }
-
-        calculateButton.disabled = true;
-        calculateButton.textContent = "Calculating Fare...";
-
-        showStatus(
-            "Calculating your road distance and fare. Please wait...",
-            "info"
-        );
-
-        try {
-            const response = await fetch(
-                API_BASE.replace(/\/+$/, "") + "/api/estimate",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(data)
-                }
-            );
-
-            let result;
-
-            try {
-                result = await response.json();
-            } catch {
-                throw new Error(
-                    "The fare service returned an invalid response. Please try again."
-                );
-            }
-
-            if (!response.ok) {
-                throw new Error(
-                    result.error || "Unable to calculate the fare."
-                );
-            }
-
-            displayEstimate(data, result);
-
-        } catch (error) {
-            console.error("Fare calculator error:", error);
+            resultBox.style.display = "block";
 
             showStatus(
-                error.message ||
-                "Unable to calculate the fare. Please contact us on WhatsApp.",
-                "error"
+                "Your estimated fare has been calculated successfully.",
+                "success"
             );
 
-        } finally {
-            calculateButton.disabled = false;
-            calculateButton.textContent = "Calculate Estimated Fare";
+            resultBox.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
         }
-    });
 
-        document.getElementById("whatsappButton").addEventListener(
-        "click",
-        () => {
+        form.addEventListener("submit", async event => {
+            event.preventDefault();
+
+            clearStatus();
+            resultBox.style.display = "none";
+            latestEstimate = null;
+
+            const data = getFormData();
+            const error = validateForm(data);
+
+            if (error) {
+                showStatus(error, "error");
+                return;
+            }
+
+            calculateButton.disabled = true;
+            calculateButton.textContent = "Calculating Fare...";
+
+            showStatus(
+                "Calculating your road distance and fare. Please wait...",
+                "info"
+            );
+
+            try {
+                const response = await fetch(
+                    API_BASE.replace(/\/+$/, "") + "/api/estimate",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    }
+                );
+
+                let result;
+
+                try {
+                    result = await response.json();
+                } catch {
+                    throw new Error(
+                        "The fare service returned an invalid response. Please try again."
+                    );
+                }
+
+                if (!response.ok) {
+                    throw new Error(
+                        result.error || "Unable to calculate the fare."
+                    );
+                }
+
+                displayEstimate(data, result);
+
+            } catch (error) {
+                console.error("Fare calculator error:", error);
+
+                showStatus(
+                    error.message ||
+                    "Unable to calculate the fare. Please contact us on WhatsApp.",
+                    "error"
+                );
+
+            } finally {
+                calculateButton.disabled = false;
+                calculateButton.textContent = "Calculate Estimated Fare";
+            }
+        });
+
+        $("whatsappButton").addEventListener("click", () => {
             if (!latestEstimate) {
                 showStatus(
                     "Please calculate your fare before sending the estimate.",
@@ -1085,6 +954,7 @@
                 "Estimated distance: " +
                     Number(e.distanceKm || 0).toFixed(1) + " km",
                 "Estimated total fare: " + formatINR(e.totalFare),
+                "Estimated base fare: " + formatINR(e.baseFare),
                 "Driver bata: " + formatINR(e.driverBata),
                 "Toll and parking: " + formatINR(e.extras),
                 "Estimated advance: " + formatINR(e.advance),
@@ -1100,58 +970,53 @@
                 encodeURIComponent(message);
 
             window.open(url, "_blank", "noopener,noreferrer");
-        }
-    );
-
-    document.getElementById("editButton").addEventListener("click", () => {
-        resultBox.style.display = "none";
-
-        $("pickup").focus();
-
-        window.scrollTo({
-            top: form.getBoundingClientRect().top +
-                window.scrollY - 30,
-            behavior: "smooth"
         });
-    });
 
-    form.addEventListener("reset", () => {
-        latestEstimate = null;
-        resultBox.style.display = "none";
-        clearStatus();
+        $("editButton").addEventListener("click", () => {
+            resultBox.style.display = "none";
+            $("pickup").focus();
 
-        window.setTimeout(() => {
-            $("extraHours").value = "0";
-            $("waitingHours").value = "0";
-            $("toll").value = "0";
-            $("parking").value = "0";
-            $("duration").value = "full";
-            $("tripType").value = "roundtrip";
-            $("category").value = "local";
-            $("passengers").value = "2";
-        }, 0);
-    });
+            window.scrollTo({
+                top: form.getBoundingClientRect().top +
+                    window.scrollY - 30,
+                behavior: "smooth"
+            });
+        });
 
-    function setMinimumDate() {
-        const now = new Date();
+        form.addEventListener("reset", () => {
+            latestEstimate = null;
+            resultBox.style.display = "none";
+            clearStatus();
 
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, "0");
-        const day = String(now.getDate()).padStart(2, "0");
+            window.setTimeout(() => {
+                $("extraHours").value = "0";
+                $("waitingHours").value = "0";
+                $("toll").value = "0";
+                $("parking").value = "0";
+                $("duration").value = "full";
+                $("tripType").value = "roundtrip";
+                $("category").value = "local";
+                $("passengers").value = "2";
+                setMinimumDate();
+            }, 0);
+        });
 
-        const today = year + "-" + month + "-" + day;
+        function setMinimumDate() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, "0");
+            const day = String(now.getDate()).padStart(2, "0");
+            const today = year + "-" + month + "-" + day;
 
-        $("date").min = today;
+            $("date").min = today;
 
-        if (!$("date").value || $("date").value < today) {
-            $("date").value = today;
+            if (!$("date").value || $("date").value < today) {
+                $("date").value = today;
+            }
         }
-    }
 
-    setMinimumDate();
-
-})();
-</script>
-
+        setMinimumDate();
+    })();
+    </script>
 </body>
 </html>
