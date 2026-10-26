@@ -3,10 +3,11 @@ const ALLOWED_ORIGINS = new Set([
   "https://www.radhakrishnataxiservice.com"
 ]);
 
+
 const VEHICLES = {
   dzire: {
     name: "Swift Dzire",
-    rate: 13,
+    rate: 16.25,
     local4: 1600,
     local8: 2500,
     fullLocal: 3300,
@@ -15,7 +16,7 @@ const VEHICLES = {
   },
   etios: {
     name: "Toyota Etios",
-    rate: 13,
+    rate: 16.25,
     local4: 1600,
     local8: 2500,
     fullLocal: 3300,
@@ -24,7 +25,7 @@ const VEHICLES = {
   },
   ertiga: {
     name: "Maruti Ertiga",
-    rate: 16,
+    rate: 20,
     local4: 3200,
     local8: 4000,
     fullLocal: 4500,
@@ -33,7 +34,7 @@ const VEHICLES = {
   },
   innova: {
     name: "Toyota Innova",
-    rate: 18,
+    rate: 22.5,
     local4: null,
     local8: 4500,
     fullLocal: 5000,
@@ -42,7 +43,7 @@ const VEHICLES = {
   },
   crysta: {
     name: "Toyota Innova Crysta",
-    rate: 20,
+    rate: 25,
     local4: null,
     local8: 5000,
     fullLocal: 6000,
