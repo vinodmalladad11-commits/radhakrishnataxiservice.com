@@ -7,6 +7,7 @@ const ALLOWED_ORIGINS = new Set([
 const LOCAL_MAX_DISTANCE_KM = 20;
 const DRIVER_BATA = 300;
 const EARLY_MORNING_END = 6 * 60;
+const ROUND_TRIP_EXTRA_PERCENT = 0.05;
 
 const VEHICLES = {
   dzire: {
@@ -134,15 +135,12 @@ function validDate(value) {
 function dateDifferenceDays(startDate, endDate) {
   const start = Date.parse(startDate + "T00:00:00Z");
   const end = Date.parse(endDate + "T00:00:00Z");
+
   return Math.round((end - start) / 86400000);
 }
 
 function validTime(value) {
   return /^([01]\d|2[0-3]):[0-5]\d$/.test(String(value || ""));
-}
-
-function isMangaloreLocation(place) {
-  return /\bmangalore\b|\bmangaluru\b/i.test(String(place || ""));
 }
 
 function validateLocations(input) {
@@ -158,12 +156,16 @@ function validateLocations(input) {
       if (!validText(stop, 180)) {
         throw new Error("Please enter a valid location for every stop.");
       }
+
       return stop.trim();
     }),
     input.destination.trim()
   ];
 
-  if (new Set(locations.map(s => s.toLowerCase())).size !== locations.length) {
+  if (
+    new Set(locations.map(location => location.toLowerCase())).size !==
+    locations.length
+  ) {
     throw new Error(
       "Please remove duplicate locations from your pickup, stops and destination."
     );
@@ -173,39 +175,69 @@ function validateLocations(input) {
 }
 
 async function geocode(place) {
-  const url = new URL("https://nominatim.openstreetmap.org/search");
-  url.searchParams.set("q", place);
-  url.searchParams.set("format", "jsonv2");
-  url.searchParams.set("limit", "1");
-  url.searchParams.set("countrycodes", "in");
+  if (typeof place !== "string" || !place.trim()) {
+    throw new Error("Please enter a valid place name.");
+  }
 
-  const response = await fetch(url.toString(), {
-    headers: {
-      "User-Agent": "RadhakrishnaFareCalculator/2.0 (radhakrishnataxiservice.com)",
-      "Accept": "application/json"
+  const original = place.trim().replace(/\s+/g, " ");
+
+  const queries = [
+    original,
+    `${original}, Karnataka, India`,
+    `${original}, India`
+  ];
+
+  for (const query of queries) {
+    const url = new URL("https://nominatim.openstreetmap.org/search");
+
+    url.searchParams.set("q", query);
+    url.searchParams.set("format", "jsonv2");
+    url.searchParams.set("limit", "5");
+    url.searchParams.set("countrycodes", "in");
+    url.searchParams.set("addressdetails", "1");
+
+    try {
+      const response = await fetch(url.toString(), {
+        headers: {
+          "Accept": "application/json",
+          "Accept-Language": "en"
+        }
+      });
+
+      if (!response.ok) continue;
+
+      const results = await response.json();
+
+      if (!Array.isArray(results) || results.length === 0) {
+        continue;
+      }
+
+      const karnatakaResults = results.filter(result =>
+        /karnataka/i.test(JSON.stringify(result.address || {}))
+      );
+
+      const chosen = karnatakaResults[0] || results[0];
+      const lat = Number(chosen.lat);
+      const lon = Number(chosen.lon);
+
+      if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+        continue;
+      }
+
+      return {
+        lat,
+        lon,
+        displayName: chosen.name || chosen.display_name || original,
+        fullAddress: chosen.display_name || original
+      };
+    } catch (error) {
+      // Try the next search query.
     }
-  });
-
-  if (!response.ok) {
-    throw new Error("Location lookup is temporarily unavailable. Please try again.");
   }
 
-  const results = await response.json();
-
-  if (!Array.isArray(results) || results.length === 0) {
-    throw new Error(
-      "We couldn't find this location. Please enter a clearer place name."
-    );
-  }
-
-  const lat = Number(results[0].lat);
-  const lon = Number(results[0].lon);
-
-  if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
-    throw new Error("The location service returned invalid coordinates.");
-  }
-
-  return { lat, lon };
+  throw new Error(
+    `Could not find "${original}". Please check the spelling or enter a nearby town or landmark.`
+  );
 }
 
 async function getRoadDistanceBetween(start, end, apiKey) {
@@ -216,6 +248,7 @@ async function getRoadDistanceBetween(start, end, apiKey) {
   }
 
   const url = new URL("https://api.geoapify.com/v1/routing");
+
   url.searchParams.set(
     "waypoints",
     `${start.lat},${start.lon}|${end.lat},${end.lon}`
@@ -235,7 +268,9 @@ async function getRoadDistanceBetween(start, end, apiKey) {
     }
 
     if (response.status === 429) {
-      throw new Error("The routing service request limit was reached. Try again later.");
+      throw new Error(
+        "The routing service request limit was reached. Try again later."
+      );
     }
 
     throw new Error("The road-distance service is temporarily unavailable.");
@@ -245,7 +280,9 @@ async function getRoadDistanceBetween(start, end, apiKey) {
   const distanceKm = Number(data.results?.[0]?.distance) / 1000;
 
   if (!Number.isFinite(distanceKm) || distanceKm <= 0) {
-    throw new Error("No valid driving route was found between two locations.");
+    throw new Error(
+      "No valid driving route was found between two locations."
+    );
   }
 
   return distanceKm;
@@ -290,7 +327,11 @@ async function validateLocalArea(locations, apiKey) {
 
   for (const place of locations) {
     const point = await geocode(place);
-    const distance = await getRoadDistanceBetween(centre, point, apiKey);
+    const distance = await getRoadDistanceBetween(
+      centre,
+      point,
+      apiKey
+    );
 
     checked.push({
       location: place,
@@ -327,6 +368,7 @@ function calculateLocalBata(time, duration, extraHours, waitingHours) {
   const start = hours * 60 + minutes;
   const end = start + totalMinutes;
   const dayMinutes = 1440;
+
   let earlyMorningPeriods = 0;
   let lateNightPeriods = 0;
 
@@ -355,7 +397,8 @@ function calculateLocalBata(time, duration, extraHours, waitingHours) {
   return {
     earlyMorningPeriods,
     lateNightPeriods,
-    driverBata: (earlyMorningPeriods + lateNightPeriods) * DRIVER_BATA
+    driverBata:
+      (earlyMorningPeriods + lateNightPeriods) * DRIVER_BATA
   };
 }
 
@@ -366,11 +409,13 @@ function calculateOutstationBata(date, dropDate, time) {
     throw new Error("Drop date cannot be earlier than pickup date.");
   }
 
-  // Both pickup and drop dates count as chargeable days.
   const chargeableDays = daysApart + 1;
-  const earlyMorningSurcharge = Number(time.split(":")[0]) < 6;
+  const earlyMorningSurcharge =
+    Number(time.split(":")[0]) < 6;
+
   const dailyBata = chargeableDays * DRIVER_BATA;
-  const earlyMorningBata = earlyMorningSurcharge ? DRIVER_BATA : 0;
+  const earlyMorningBata =
+    earlyMorningSurcharge ? DRIVER_BATA : 0;
 
   return {
     chargeableDays,
@@ -392,9 +437,13 @@ function makeFareResult({
   onwardDistanceKm,
   vehicle,
   mode,
-  advanceBase
+  advanceBase,
+  roundTripExtra = 0
 }) {
-  const totalFare = Math.ceil(baseFare + driverBata + toll + parking);
+  const totalFare = Math.ceil(
+    baseFare + driverBata + roundTripExtra + toll + parking
+  );
+
   const advance = Math.ceil(totalFare * 0.10);
 
   return {
@@ -402,6 +451,7 @@ function makeFareResult({
     mode,
     vehicleName: vehicle.name,
     baseFare: Math.ceil(baseFare),
+    roundTripExtra: Math.round(roundTripExtra * 100) / 100,
     driverBata,
     toll,
     parking,
@@ -413,8 +463,11 @@ function makeFareResult({
     earlyMorningPeriods: advanceBase.earlyMorningPeriods || 0,
     lateNightPeriods: advanceBase.lateNightPeriods || 0,
     chargeableDays: advanceBase.chargeableDays || 0,
-    earlyMorningSurcharge: Boolean(advanceBase.earlyMorningSurcharge),
-    routeNotice: "This is an estimate. Confirm route, availability and final charges with Radhakrishna Taxi Service."
+    earlyMorningSurcharge: Boolean(
+      advanceBase.earlyMorningSurcharge
+    ),
+    routeNotice:
+      "This is an estimate. Confirm route, availability and final charges with Radhakrishna Taxi Service."
   };
 }
 
@@ -428,6 +481,7 @@ function calculateLocalFare(input, vehicle, routeKm) {
         `${vehicle.name} is not available for the 4-hour package. Please choose another duration or vehicle.`
       );
     }
+
     baseFare = vehicle.local4;
   } else if (duration === "8") {
     if (vehicle.local8 === null) {
@@ -435,6 +489,7 @@ function calculateLocalFare(input, vehicle, routeKm) {
         `${vehicle.name} is not available for the 8-hour package. Please choose another vehicle.`
       );
     }
+
     baseFare = vehicle.local8;
   } else if (duration === "full") {
     baseFare = vehicle.fullLocal;
@@ -464,8 +519,12 @@ function calculateLocalFare(input, vehicle, routeKm) {
   });
 }
 
-
-function calculateOutstationFare(input, vehicle, onwardKm) {
+function calculateOutstationFare(
+  input,
+  vehicle,
+  onwardKm,
+  totalKm
+) {
   if (!vehicle.rate) {
     throw new Error(
       "Please select a vehicle with a published per-kilometre rate."
@@ -478,13 +537,8 @@ function calculateOutstationFare(input, vehicle, onwardKm) {
     );
   }
 
-  const tripType = input.tripType;
-  const isRoundTrip = tripType === "roundtrip";
+  const isRoundTrip = input.tripType === "roundtrip";
 
-  // Total distance includes the return journey for round trips.
-  const totalKm = isRoundTrip ? onwardKm * 1 : onwardKm;
-
-  // Count calendar days inclusively: same-day trip = 1 day.
   const pickupDate = Date.parse(input.date + "T00:00:00Z");
   const dropDate = Date.parse(input.dropDate + "T00:00:00Z");
 
@@ -496,29 +550,36 @@ function calculateOutstationFare(input, vehicle, onwardKm) {
     throw new Error("Please enter valid pickup and drop dates.");
   }
 
+  // Count both pickup and drop dates as chargeable days.
   const days = Math.max(
     1,
     Math.round((dropDate - pickupDate) / 86400000) + 1
   );
 
-  // Charge the daily outstation package for every trip day.
+  // Preserve the existing daily outstation package rate.
   const dailyFare = vehicle.fullOutstation * days;
 
-  // Allow 200 km per day. Charge the vehicle's per-km rate
-  // only for the kilometres exceeding the total allowance.
+  // Each chargeable day includes 200 km.
   const includedKm = 200 * days;
+
+  // Use the COMPLETE trip distance, not just the outward distance.
   const excessKm = Math.max(0, totalKm - includedKm);
   const excessKmFare = excessKm * vehicle.rate;
 
-  let baseFare = dailyFare + excessKmFare;
-
- 
+  const baseFare = dailyFare + excessKmFare;
 
   const bata = calculateOutstationBata(
     input.date,
     input.dropDate,
     input.time
   );
+
+  // Apply the 5% round-trip extra exactly once.
+  // As agreed, it applies to the base fare plus driver bata.
+  // Tolls and parking are added separately.
+  const roundTripExtra = isRoundTrip
+    ? (baseFare + bata.driverBata) * ROUND_TRIP_EXTRA_PERCENT
+    : 0;
 
   return makeFareResult({
     baseFare,
@@ -529,7 +590,8 @@ function calculateOutstationFare(input, vehicle, onwardKm) {
     onwardDistanceKm: onwardKm,
     vehicle,
     mode: "outstation",
-    advanceBase: bata
+    advanceBase: bata,
+    roundTripExtra
   });
 }
 
@@ -541,14 +603,14 @@ function calculateTransfer(input, vehicle, mode) {
       quotationRequired: true,
       mode,
       vehicleName: vehicle.name,
-      message: "Please contact Radhakrishna Taxi Service for a Tempo Traveller quotation."
+      message:
+        "Please contact Radhakrishna Taxi Service for a Tempo Traveller quotation."
     };
   }
 
   return makeFareResult({
     baseFare: fare,
     driverBata: 0,
-    // Fixed city-transfer fare excludes airport toll charges.
     toll: mode === "airport" ? 0 : Number(input.toll || 0),
     parking: Number(input.parking || 0),
     distanceKm: 0,
@@ -575,28 +637,52 @@ export default {
     }
 
     if (request.method !== "POST") {
-      return jsonResponse({ error: "Use POST to request a fare estimate." }, 405, origin);
+      return jsonResponse(
+        { error: "Use POST to request a fare estimate." },
+        405,
+        origin
+      );
     }
 
     if (origin && !ALLOWED_ORIGINS.has(origin)) {
-      return jsonResponse({ error: "This website is not allowed to use this service." }, 403, origin);
+      return jsonResponse(
+        { error: "This website is not allowed to use this service." },
+        403,
+        origin
+      );
     }
 
-    if (!(request.headers.get("Content-Type") || "").toLowerCase().includes("application/json")) {
-      return jsonResponse({ error: "Please send the request as JSON." }, 415, origin);
+    if (
+      !(request.headers.get("Content-Type") || "")
+        .toLowerCase()
+        .includes("application/json")
+    ) {
+      return jsonResponse(
+        { error: "Please send the request as JSON." },
+        415,
+        origin
+      );
     }
 
     try {
       const input = await request.json();
-
       const mode = input.mode || input.category;
 
-      if (!["local", "outstation", "airport", "railway"].includes(mode)) {
-        throw new Error("Please select Local, Outstation, Airport or Railway Station service.");
+      if (
+        !["local", "outstation", "airport", "railway"].includes(mode)
+      ) {
+        throw new Error(
+          "Please select Local, Outstation, Airport or Railway Station service."
+        );
       }
 
-      if (!validText(input.pickup, 180) || !validText(input.destination, 180)) {
-        throw new Error("Enter a valid pickup location and destination.");
+      if (
+        !validText(input.pickup, 180) ||
+        !validText(input.destination, 180)
+      ) {
+        throw new Error(
+          "Enter a valid pickup location and destination."
+        );
       }
 
       if (!Object.hasOwn(VEHICLES, input.vehicle)) {
@@ -608,20 +694,28 @@ export default {
       }
 
       if (!validMoney(input.toll) || !validMoney(input.parking)) {
-        throw new Error("Toll and parking must be valid non-negative amounts.");
+        throw new Error(
+          "Toll and parking must be valid non-negative amounts."
+        );
       }
 
       if (
         !validHours(input.extraHours || 0) ||
         !validHours(input.waitingHours || 0)
       ) {
-        throw new Error("Additional and waiting hours must be between 0 and 24.");
+        throw new Error(
+          "Additional and waiting hours must be between 0 and 24."
+        );
       }
 
       const vehicle = VEHICLES[input.vehicle];
 
       if (mode === "airport" || mode === "railway") {
-        return jsonResponse(calculateTransfer(input, vehicle, mode), 200, origin);
+        return jsonResponse(
+          calculateTransfer(input, vehicle, mode),
+          200,
+          origin
+        );
       }
 
       if (!["4", "8", "full"].includes(String(input.duration))) {
@@ -631,58 +725,120 @@ export default {
       const locations = validateLocations(input);
 
       if (mode === "local") {
-        const areaCheck = await validateLocalArea(locations, env.GEOAPIFY_API_KEY);
-        const route = await getRoute(locations, env.GEOAPIFY_API_KEY);
+        const areaCheck = await validateLocalArea(
+          locations,
+          env.GEOAPIFY_API_KEY
+        );
 
-        const result = calculateLocalFare(input, vehicle, route.onwardKm);
+        const route = await getRoute(
+          locations,
+          env.GEOAPIFY_API_KEY
+        );
+
+        const result = calculateLocalFare(
+          input,
+          vehicle,
+          route.onwardKm
+        );
+
         result.localAreaCheck = areaCheck;
         result.stops = locations.slice(1, -1);
+        result.routeLegs = route.legs;
+
         return jsonResponse(result, 200, origin);
       }
 
       if (!["oneway", "roundtrip"].includes(input.tripType)) {
-        throw new Error("Please select a valid outstation trip type.");
+        throw new Error(
+          "Please select a valid outstation trip type."
+        );
       }
 
       if (!validDate(input.dropDate)) {
-        throw new Error("Please select a valid outstation drop date.");
+        throw new Error(
+          "Please select a valid outstation drop date."
+        );
       }
 
       if (input.dropDate < input.date) {
-        throw new Error("Drop date cannot be earlier than pickup date.");
+        throw new Error(
+          "Drop date cannot be earlier than pickup date."
+        );
       }
 
-      const route = await getRoute(locations, env.GEOAPIFY_API_KEY);
-      const onwardKm = route.onwardKm;
+      // First calculate the complete outward journey:
+      // pickup -> all stops in order -> destination.
+      const outwardRoute = await getRoute(
+        locations,
+        env.GEOAPIFY_API_KEY
+      );
 
-      const result = calculateOutstationFare(input, vehicle, onwardKm);
+      const onwardKm = outwardRoute.onwardKm;
+      let returnKm = 0;
+      let totalKm = onwardKm;
+      let allRouteLegs = [...outwardRoute.legs];
 
-      // A return leg is estimated separately for the route summary.
       if (input.tripType === "roundtrip") {
-        const reverse = await getRoute(
-          [input.destination, input.pickup],
+        // Reverse the entire location sequence so return travel
+        // includes every stop in reverse order:
+        // destination -> last stop -> ... -> first stop -> pickup.
+        const returnLocations = [...locations].reverse();
+
+        const returnRoute = await getRoute(
+          returnLocations,
           env.GEOAPIFY_API_KEY
         );
-        result.distanceKm = Math.round((onwardKm + reverse.onwardKm) * 10) / 10;
-       result.routeNotice =
-        "Round-trip estimate includes the outward journey and estimated return route. No additional 10% round-trip premium is applied.";
+
+        returnKm = returnRoute.onwardKm;
+
+        // Add outward and return distances once each.
+        totalKm = onwardKm + returnKm;
+
+        allRouteLegs = [
+          ...outwardRoute.legs,
+          ...returnRoute.legs
+        ];
       }
 
+      // Calculate the fare only AFTER the full distance is known.
+      const result = calculateOutstationFare(
+        input,
+        vehicle,
+        onwardKm,
+        totalKm
+      );
+
+      result.returnDistanceKm =
+        Math.round(returnKm * 10) / 10;
+
       result.stops = locations.slice(1, -1);
-      result.routeLegs = route.legs;
+      result.routeLegs = allRouteLegs;
+
+      result.routeNotice =
+        input.tripType === "roundtrip"
+          ? "Round-trip distance includes the complete outward route and the return route through all stops. A 5% round-trip extra is included in the fare."
+          : "One-way distance includes the complete outward route through all stops. No return distance or round-trip extra is included.";
 
       return jsonResponse(result, 200, origin);
 
     } catch (error) {
       console.error("Fare estimate failed:", {
-        message: error instanceof Error ? error.message : String(error)
+        message:
+          error instanceof Error
+            ? error.message
+            : String(error)
       });
 
-      return jsonResponse({
-        error: error instanceof Error
-          ? error.message
-          : "Unable to calculate the fare right now. Please contact us."
-      }, 400, origin);
+      return jsonResponse(
+        {
+          error:
+            error instanceof Error
+              ? error.message
+              : "Unable to calculate the fare right now. Please contact us."
+        },
+        400,
+        origin
+      );
     }
   }
 };
