@@ -351,36 +351,84 @@ async function getRoute(locations, apiKey) {
 }
 
 async function distanceFromMangaloreCentre(place, apiKey) {
+  if (!place || !String(place).trim()) {
+    throw new Error("A location is required to check the Mangalore local limit.");
+  }
+
   const centre = await geocode(
     "Mangalore, Karnataka, India",
     apiKey
   );
 
-  const point = await geocode(place, apiKey);
+  const point = await geocode(
+    String(place).trim(),
+    apiKey
+  );
 
-  return getRoadDistanceBetween(centre, point, apiKey);
+  if (
+    !centre ||
+    !Number.isFinite(Number(centre.lat)) ||
+    !Number.isFinite(Number(centre.lon))
+  ) {
+    throw new Error("Could not locate Mangalore city centre.");
+  }
+
+  if (
+    !point ||
+    !Number.isFinite(Number(point.lat)) ||
+    !Number.isFinite(Number(point.lon))
+  ) {
+    throw new Error(
+      `Could not find the location "${place}". Please enter a more specific address.`
+    );
+  }
+
+  const distance = await getRoadDistanceBetween(
+    centre,
+    point,
+    apiKey
+  );
+
+  if (!Number.isFinite(distance) || distance < 0) {
+    throw new Error(
+      `Could not calculate the road distance from Mangalore to "${place}".`
+    );
+  }
+
+  return distance;
 }
 
 async function isWithinMangaloreLocalLimit(place, apiKey) {
-  const distance = await distanceFromMangaloreCentre(place, apiKey);
+  const distance = await distanceFromMangaloreCentre(
+    place,
+    apiKey
+  );
 
   return distance <= LOCAL_MAX_DISTANCE_KM;
 }
 
 async function validateLocalArea(locations, apiKey) {
+  if (!Array.isArray(locations) || locations.length === 0) {
+    throw new Error("Please enter a pickup location and destination.");
+  }
+
   const checked = [];
 
   for (const place of locations) {
-    const distance = await distanceFromMangaloreCentre(place, apiKey);
+    const distance = await distanceFromMangaloreCentre(
+      place,
+      apiKey
+    );
 
     checked.push({
       location: place,
-      distanceFromMangaloreCentreKm: Math.round(distance * 10) / 10
+      distanceFromMangaloreCentreKm:
+        Math.round(distance * 10) / 10
     });
 
     if (distance > LOCAL_MAX_DISTANCE_KM) {
       throw new Error(
-        `"${place}" is outside the 20 km Mangalore local limit. Please choose Outstation for this journey.`
+        `"${place}" is approximately ${Math.round(distance * 10) / 10} km by road from Mangalore city centre, outside the ${LOCAL_MAX_DISTANCE_KM} km local limit. Please choose Outstation for this journey.`
       );
     }
   }
