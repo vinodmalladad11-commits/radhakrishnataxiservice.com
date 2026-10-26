@@ -888,7 +888,10 @@
 
             return;
         }
-        console.log("Full fare service response:", result);
+        console.log(
+            "FARE RESPONSE JSON:",
+            JSON.stringify(result, null, 2)
+        );
         console.log("totalFare:", result.totalFare, typeof result.totalFare);
         console.log("driverBata:", result.driverBata, typeof result.driverBata);
 
