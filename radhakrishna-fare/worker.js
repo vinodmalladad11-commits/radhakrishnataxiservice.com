@@ -512,10 +512,7 @@ function calculateOutstationFare(input, vehicle, onwardKm) {
 
   let baseFare = dailyFare + excessKmFare;
 
-  // Preserve the existing 10% round-trip premium.
-  if (isRoundTrip) {
-    baseFare *= 1.10;
-  }
+ 
 
   const bata = calculateOutstationBata(
     input.date,
