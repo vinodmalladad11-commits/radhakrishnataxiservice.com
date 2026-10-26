@@ -174,13 +174,21 @@ function validateLocations(input) {
   return locations;
 }
 
-async function geocode(place) {
+
+async function geocode(place, apiKey) {
   if (typeof place !== "string" || !place.trim()) {
     throw new Error("Please enter a valid place name.");
   }
 
+  if (!apiKey) {
+    throw new Error(
+      "GEOAPIFY_API_KEY is missing from your Cloudflare Worker."
+    );
+  }
+
   const original = place.trim().replace(/\s+/g, " ");
 
+  // Try the customer's spelling and then add Karnataka/India context.
   const queries = [
     original,
     `${original}, Karnataka, India`,
@@ -188,35 +196,51 @@ async function geocode(place) {
   ];
 
   for (const query of queries) {
-    const url = new URL("https://nominatim.openstreetmap.org/search");
+    const url = new URL(
+      "https://api.geoapify.com/v1/geocode/search"
+    );
 
-    url.searchParams.set("q", query);
-    url.searchParams.set("format", "jsonv2");
+    url.searchParams.set("text", query);
+    url.searchParams.set("format", "json");
     url.searchParams.set("limit", "5");
-    url.searchParams.set("countrycodes", "in");
-    url.searchParams.set("addressdetails", "1");
+    url.searchParams.set("filter", "countrycode:in");
+    url.searchParams.set("lang", "en");
+    url.searchParams.set("apiKey", apiKey);
 
     try {
       const response = await fetch(url.toString(), {
-        headers: {
-          "Accept": "application/json",
-          "Accept-Language": "en"
-        }
+        headers: { "Accept": "application/json" }
       });
 
-      if (!response.ok) continue;
+      if (!response.ok) {
+        if (response.status === 401 || response.status === 403) {
+          throw new Error(
+            "Geoapify rejected the API key. Check GEOAPIFY_API_KEY and its API permissions."
+          );
+        }
 
-      const results = await response.json();
+        if (response.status === 429) {
+          throw new Error(
+            "The place-search request limit was reached. Please try again later."
+          );
+        }
 
-      if (!Array.isArray(results) || results.length === 0) {
         continue;
       }
 
-      const karnatakaResults = results.filter(result =>
-        /karnataka/i.test(JSON.stringify(result.address || {}))
-      );
+      const data = await response.json();
+      const results = Array.isArray(data.results)
+        ? data.results
+        : [];
 
-      const chosen = karnatakaResults[0] || results[0];
+      if (results.length === 0) continue;
+
+      // Prefer Karnataka when several Indian results match.
+      const chosen =
+        results.find(result =>
+          /karnataka/i.test(result.state || "")
+        ) || results[0];
+
       const lat = Number(chosen.lat);
       const lon = Number(chosen.lon);
 
@@ -227,18 +251,29 @@ async function geocode(place) {
       return {
         lat,
         lon,
-        displayName: chosen.name || chosen.display_name || original,
-        fullAddress: chosen.display_name || original
+        displayName: chosen.name || chosen.formatted || original,
+        fullAddress: chosen.formatted || original
       };
     } catch (error) {
-      // Try the next search query.
+      if (
+        error instanceof Error &&
+        (
+          error.message.includes("rejected the API key") ||
+          error.message.includes("request limit was reached")
+        )
+      ) {
+        throw error;
+      }
+
+      // Try the next query variation.
     }
   }
 
   throw new Error(
-    `Could not find "${original}". Please check the spelling or enter a nearby town or landmark.`
+    `Could not find "${original}". Try the correct spelling or add the nearby town or district.`
   );
 }
+
 
 async function getRoadDistanceBetween(start, end, apiKey) {
   if (!apiKey) {
@@ -292,7 +327,7 @@ async function getRoute(locations, apiKey) {
   const coordinates = [];
 
   for (const place of locations) {
-    coordinates.push(await geocode(place));
+    coordinates.push(await geocode(place, apiKey));
   }
 
   let totalKm = 0;
@@ -322,11 +357,14 @@ async function getRoute(locations, apiKey) {
 }
 
 async function validateLocalArea(locations, apiKey) {
-  const centre = await geocode("Mangalore, Karnataka, India");
+  const centre = await geocode(
+    "Mangalore, Karnataka, India",
+    apiKey
+  );
   const checked = [];
 
   for (const place of locations) {
-    const point = await geocode(place);
+    const point = await geocode(place, apiKey);
     const distance = await getRoadDistanceBetween(
       centre,
       point,
