@@ -1,8 +1,10 @@
+
 const ALLOWED_ORIGINS = new Set([
   "https://radhakrishnataxiservice.com",
   "https://www.radhakrishnataxiservice.com"
 ]);
 
+const LOCAL_MAX_DISTANCE_KM = 40;
 
 const VEHICLES = {
   dzire: {
@@ -293,22 +295,16 @@ function calculateDriverBata(input) {
   for (let day = firstDay; day <= lastDay; day++) {
     const dayStart = day * MINUTES_PER_DAY;
 
-    const earlyStart = dayStart;
-    const earlyEnd = dayStart + EARLY_MORNING_END;
-
     if (
-      Math.max(start, earlyStart) <
-      Math.min(end, earlyEnd)
+      Math.max(start, dayStart) <
+      Math.min(end, dayStart + EARLY_MORNING_END)
     ) {
       earlyMorningPeriods++;
     }
 
-    const nightStart = dayStart + LATE_NIGHT_START;
-    const nightEnd = dayStart + MINUTES_PER_DAY;
-
     if (
-      Math.max(start, nightStart) <
-      Math.min(end, nightEnd)
+      Math.max(start, dayStart + LATE_NIGHT_START) <
+      Math.min(end, dayStart + MINUTES_PER_DAY)
     ) {
       lateNightPeriods++;
     }
@@ -321,7 +317,6 @@ function calculateDriverBata(input) {
   };
 }
 
-
 function calculateFare(input, vehicle, distanceKm) {
   const isOneWay = input.tripType === "oneway";
   const isOutstation = input.category === "outstation";
@@ -330,20 +325,21 @@ function calculateFare(input, vehicle, distanceKm) {
   const toll = Number(input.toll || 0);
   const parking = Number(input.parking || 0);
 
-  let fare;
-  let totalKm = distanceKm;
+  let baseFare;
+  let totalKm;
 
   if (isOneWay) {
-    // One-way fare uses the mileage rate and the existing multiplier.
-    fare = distanceKm * vehicle.rate * 2;
+    // One-way uses onward road distance only.
+    totalKm = distanceKm;
+    baseFare = totalKm * vehicle.rate;
   } else {
-    // Round-trip distance estimate.
+    // Round-trip includes onward and return distance.
     totalKm = distanceKm * 2;
 
     if (totalKm > 200) {
-      fare = totalKm * vehicle.rate;
+      baseFare = totalKm * vehicle.rate;
     } else if (totalKm >= 100) {
-      fare = isOutstation
+      baseFare = isOutstation
         ? vehicle.fullOutstation
         : vehicle.fullLocal;
     } else {
@@ -356,33 +352,31 @@ function calculateFare(input, vehicle, distanceKm) {
           );
         }
 
-        fare = vehicle.local4;
-        fare += Math.max(0, totalKm - 40) * vehicle.rate;
+        baseFare = vehicle.local4;
+        baseFare += Math.max(0, totalKm - 40) * vehicle.rate;
 
       } else if (duration === "8") {
-        fare = vehicle.local8;
-        fare += Math.max(0, totalKm - 80) * vehicle.rate;
+        baseFare = vehicle.local8;
+        baseFare += Math.max(0, totalKm - 80) * vehicle.rate;
 
       } else {
-        fare = isOutstation
+        baseFare = isOutstation
           ? vehicle.fullOutstation
           : vehicle.fullLocal;
       }
     }
 
-    // Add existing extra-hour charges.
-    fare += extraHours * vehicle.extraHour;
+    baseFare += extraHours * vehicle.extraHour;
 
-    // Add 10% to the round-trip base fare.
-    fare *= 1.10;
+    // Round-trip premium applies only to the base fare.
+    baseFare *= 1.10;
   }
 
   const bataDetails = calculateDriverBata(input);
+  const totalFare = Math.ceil(
+    baseFare + bataDetails.driverBata + toll + parking
+  );
 
-  // Add bata, toll and parking after the 10% uplift.
-  fare += bataDetails.driverBata + toll + parking;
-
-  const totalFare = Math.ceil(fare);
   const advance = Math.ceil(totalFare * 0.10);
   const balance = totalFare - advance;
 
@@ -394,16 +388,34 @@ function calculateFare(input, vehicle, distanceKm) {
     earlyMorningPeriods: bataDetails.earlyMorningPeriods,
     lateNightPeriods: bataDetails.lateNightPeriods,
     distanceKm: Math.round(totalKm * 10) / 10,
+    onwardDistanceKm: Math.round(distanceKm * 10) / 10,
     vehicleName: vehicle.name,
+    tripType: input.tripType,
+    categoryUsed: input.category,
     quotationRequired: false,
     waitingChargeNotice:
       "Waiting charges, if applicable, are not included. Please confirm them with our team.",
     routeNotice: isOneWay
-      ? "Distance is an estimate for the onward journey."
-      : "Round-trip distance is estimated as twice the onward road distance. Actual routing may differ."
+      ? "Fare is based on the estimated onward road distance."
+      : "Round-trip distance is estimated as twice the onward road distance, with a 10% premium on the base fare. Actual routing may differ."
   };
 }
 
+function isMangaloreLocation(place) {
+  return /\bmangalore\b|\bmangaluru\b/i.test(String(place || ""));
+}
+
+function determineCategory(input, distanceKm) {
+  // Automatically classify only routes starting from Mangalore.
+  if (isMangaloreLocation(input.pickup)) {
+    return distanceKm <= LOCAL_MAX_DISTANCE_KM
+      ? "local"
+      : "outstation";
+  }
+
+  // Preserve the customer's selected category for other pickup cities.
+  return input.category;
+}
 
 export default {
   async fetch(request, env) {
@@ -487,10 +499,11 @@ export default {
       if (
         !validMoney(input.toll) ||
         !validMoney(input.parking) ||
-        !validHours(input.extraHours)
+        !validHours(input.extraHours) ||
+        !validHours(input.waitingHours)
       ) {
         return jsonResponse(
-          { error: "Check your toll, parking and extra-hour values." },
+          { error: "Check your toll, parking, extra-hour and waiting-hour values." },
           400,
           origin
         );
@@ -524,7 +537,13 @@ export default {
         env.GEOAPIFY_API_KEY
       );
 
-      const result = calculateFare(input, vehicle, distanceKm);
+      const categoryUsed = determineCategory(input, distanceKm);
+
+      const result = calculateFare(
+        { ...input, category: categoryUsed },
+        vehicle,
+        distanceKm
+      );
 
       return jsonResponse(result, 200, origin);
 
