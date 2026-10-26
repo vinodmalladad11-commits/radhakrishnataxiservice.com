@@ -93,17 +93,21 @@ function validText(value, maxLength = 150) {
 function validMoney(value) {
   return value === undefined ||
     value === null ||
-    (Number.isFinite(Number(value)) &&
+    (
+      Number.isFinite(Number(value)) &&
       Number(value) >= 0 &&
-      Number(value) <= 1000000);
+      Number(value) <= 1000000
+    );
 }
 
 function validHours(value) {
   return value === undefined ||
     value === null ||
-    (Number.isFinite(Number(value)) &&
+    (
+      Number.isFinite(Number(value)) &&
       Number(value) >= 0 &&
-      Number(value) <= 24);
+      Number(value) <= 24
+    );
 }
 
 async function geocode(place) {
@@ -118,57 +122,137 @@ async function geocode(place) {
 
   const response = await fetch(url.toString(), {
     headers: {
-      "User-Agent": "RadhakrishnaFareCalculator/1.0 (radhakrishnataxiservice.com)",
+      "User-Agent":
+        "RadhakrishnaFareCalculator/1.0 (radhakrishnataxiservice.com)",
       "Accept": "application/json"
     }
   });
 
   if (!response.ok) {
-    throw new Error("Location lookup is temporarily unavailable.");
+    console.error("Geocoding request failed:", {
+      place,
+      status: response.status,
+      statusText: response.statusText
+    });
+
+    throw new Error(
+      `Location lookup is temporarily unavailable (HTTP ${response.status}).`
+    );
   }
 
   const results = await response.json();
 
   if (!Array.isArray(results) || results.length === 0) {
-    throw new Error("We couldn't find one of the locations. Please enter a clearer pickup or destination.");
+    throw new Error(
+      "We couldn't find one of the locations. Please enter a clearer pickup or destination."
+    );
   }
 
-  return {
-    lat: Number(results[0].lat),
-    lon: Number(results[0].lon)
-  };
+  const lat = Number(results[0].lat);
+  const lon = Number(results[0].lon);
+
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
+    throw new Error(
+      "The location service returned invalid coordinates. Please try another location name."
+    );
+  }
+
+  return { lat, lon };
 }
 
 async function getRoadDistanceKm(pickup, destination) {
   const start = await geocode(pickup);
 
-  // Avoid sending consecutive requests too quickly to Nominatim.
+  // Respect the public Nominatim service's request limits.
   await sleep(1100);
 
   const end = await geocode(destination);
 
   const routeUrl =
-    `https://router.project-osrm.org/route/v1/driving/` +
+    "https://router.project-osrm.org/route/v1/driving/" +
     `${start.lon},${start.lat};${end.lon},${end.lat}` +
-    `?overview=false&alternatives=false&steps=false`;
+    "?overview=false&alternatives=false&steps=false";
 
-  const response = await fetch(routeUrl);
+  let response;
 
-  if (!response.ok) {
-    throw new Error("Road-distance service is temporarily unavailable.");
+  try {
+    response = await fetch(routeUrl, {
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+  } catch (error) {
+    console.error("OSRM network request failed:", {
+      message: error instanceof Error
+        ? error.message
+        : String(error)
+    });
+
+    throw new Error(
+      "Unable to connect to the road-distance service. Please try again shortly."
+    );
   }
 
-  const data = await response.json();
+  if (!response.ok) {
+    let errorDetails = "";
+
+    try {
+      errorDetails = await response.text();
+    } catch {
+      errorDetails = "Could not read the upstream error response.";
+    }
+
+    console.error("OSRM request failed:", {
+      status: response.status,
+      statusText: response.statusText,
+      details: errorDetails.slice(0, 500)
+    });
+
+    throw new Error(
+      `Road-distance service is temporarily unavailable (HTTP ${response.status}). Please try again shortly.`
+    );
+  }
+
+  let data;
+
+  try {
+    data = await response.json();
+  } catch (error) {
+    console.error("OSRM returned invalid JSON:", {
+      message: error instanceof Error
+        ? error.message
+        : String(error)
+    });
+
+    throw new Error(
+      "The road-distance service returned an invalid response. Please try again."
+    );
+  }
 
   if (
     data.code !== "Ok" ||
     !Array.isArray(data.routes) ||
     !data.routes.length
   ) {
-    throw new Error("We couldn't calculate a road route for these locations.");
+    console.error("OSRM could not calculate route:", {
+      code: data.code,
+      message: data.message || "No route returned"
+    });
+
+    throw new Error(
+      "We couldn't calculate a road route for these locations. Please check your pickup and destination."
+    );
   }
 
-  return data.routes[0].distance / 1000;
+  const distanceKm = Number(data.routes[0].distance) / 1000;
+
+  if (!Number.isFinite(distanceKm) || distanceKm <= 0) {
+    throw new Error(
+      "The road-distance service returned an invalid distance."
+    );
+  }
+
+  return distanceKm;
 }
 
 function calculateFare(input, vehicle, distanceKm) {
@@ -183,17 +267,15 @@ function calculateFare(input, vehicle, distanceKm) {
   let totalKm = distanceKm;
 
   if (isOneWay) {
-    // One-way fare is 200% of the base per-kilometre rate.
+    // Preserve the existing fare calculation rule.
     fare = distanceKm * vehicle.rate * 2;
   } else {
-    // Estimate the return journey as twice the onward distance.
+    // Estimate the return journey as twice the outward distance.
     totalKm = distanceKm * 2;
 
     if (totalKm > 200) {
-      // Above 200 km, charge the rate for all estimated kilometres.
       fare = totalKm * vehicle.rate;
     } else if (totalKm >= 100) {
-      // Full-day package for round trips of 100–200 km.
       fare = isOutstation
         ? vehicle.fullOutstation
         : vehicle.fullLocal;
@@ -209,9 +291,11 @@ function calculateFare(input, vehicle, distanceKm) {
 
         fare = vehicle.local4;
         fare += Math.max(0, totalKm - 40) * vehicle.rate;
+
       } else if (duration === "8") {
         fare = vehicle.local8;
         fare += Math.max(0, totalKm - 80) * vehicle.rate;
+
       } else {
         fare = isOutstation
           ? vehicle.fullOutstation
@@ -219,7 +303,6 @@ function calculateFare(input, vehicle, distanceKm) {
       }
     }
 
-    // Extra-hour charges apply when extra hours are requested.
     fare += extraHours * vehicle.extraHour;
   }
 
@@ -341,7 +424,8 @@ export default {
         return jsonResponse({
           quotationRequired: true,
           vehicleName: vehicle.name,
-          message: "Please contact Radhakrishna Taxi Service for a Tempo Traveller quotation."
+          message:
+            "Please contact Radhakrishna Taxi Service for a Tempo Traveller quotation."
         }, 200, origin);
       }
 
@@ -355,6 +439,12 @@ export default {
       return jsonResponse(result, 200, origin);
 
     } catch (error) {
+      console.error("Fare estimate failed:", {
+        message: error instanceof Error
+          ? error.message
+          : String(error)
+      });
+
       return jsonResponse(
         {
           error: error instanceof Error
