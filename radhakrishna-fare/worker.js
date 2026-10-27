@@ -205,63 +205,44 @@ async function geocode(place, apiKey) {
     url.searchParams.set("lang", "en");
     url.searchParams.set("apiKey", apiKey);
 
-    try {
-      const response = await fetch(url.toString(), {
-        headers: { "Accept": "application/json" }
-      });
+    const response = await fetch(url.toString(), {
+      headers: { Accept: "application/json" }
+    });
 
-      if (!response.ok) {
-        if (response.status === 401 || response.status === 403) {
-          throw new Error(
-            "Geoapify rejected the API key. Check GEOAPIFY_API_KEY and its API permissions."
-          );
-        }
-
-        if (response.status === 429) {
-          throw new Error(
-            "The place-search request limit was reached. Please try again later."
-          );
-        }
-
-        continue;
-      }
-
-      const data = await response.json();
-      const results = Array.isArray(data.results)
-        ? data.results
-        : [];
-
-      if (results.length === 0) continue;
-
-      const chosen =
-        results.find(result =>
-          /karnataka/i.test(result.state || "")
-        ) || results[0];
-
-      const lat = Number(chosen.lat);
-      const lon = Number(chosen.lon);
-
-      if (!Number.isFinite(lat) || !Number.isFinite(lon)) {
-        continue;
-      }
-
-      return {
-        lat,
-        lon,
-        displayName: chosen.name || chosen.formatted || original,
-        fullAddress: chosen.formatted || original
-      };
-    } catch (error) {
-      if (
-        error instanceof Error &&
-        (
-          error.message.includes("rejected the API key") ||
-          error.message.includes("request limit was reached")
-        )
-      ) {
-        throw error;
-      }
+    if (response.status === 401 || response.status === 403) {
+      throw new Error(
+        "Geoapify rejected the API key. Check GEOAPIFY_API_KEY."
+      );
     }
+
+    if (response.status === 429) {
+      throw new Error(
+        "The Geoapify request limit was reached. Please try again later."
+      );
+    }
+
+    if (!response.ok) continue;
+
+    const data = await response.json();
+    const results = Array.isArray(data.results) ? data.results : [];
+
+    if (results.length === 0) continue;
+
+    const chosen =
+      results.find(result => /karnataka/i.test(result.state || "")) ||
+      results[0];
+
+    const lat = Number(chosen.lat);
+    const lon = Number(chosen.lon);
+
+    if (!Number.isFinite(lat) || !Number.isFinite(lon)) continue;
+
+    return {
+      lat,
+      lon,
+      displayName: chosen.name || chosen.formatted || original,
+      fullAddress: chosen.formatted || original
+    };
   }
 
   throw new Error(
@@ -275,17 +256,10 @@ async function getRoadDistanceBetween(start, end, apiKey) {
     throw new Error("GEOAPIFY_API_KEY is missing.");
   }
 
-  if (
-    !start ||
-    !end ||
-    !Number.isFinite(Number(start.lat)) ||
-    !Number.isFinite(Number(start.lon)) ||
-    !Number.isFinite(Number(end.lat)) ||
-    !Number.isFinite(Number(end.lon))
-  ) {
-    throw new Error(
-      "Invalid coordinates received for road-distance calculation."
-    );
+  const coords = [start?.lat, start?.lon, end?.lat, end?.lon];
+
+  if (!coords.every(value => Number.isFinite(Number(value)))) {
+    throw new Error("Invalid coordinates received for road-distance calculation.");
   }
 
   const url = new URL("https://api.geoapify.com/v1/routing");
@@ -304,150 +278,83 @@ async function getRoadDistanceBetween(start, end, apiKey) {
   });
 
   const responseText = await response.text();
-
   let data;
 
   try {
     data = JSON.parse(responseText);
   } catch {
-    console.error(
-      "Geoapify returned a non-JSON response. HTTP:",
-      response.status
-    );
-
-    throw new Error(
-      "The routing service returned an invalid response. Check Worker logs."
-    );
+    console.error("Geoapify returned non-JSON:", response.status);
+    throw new Error("Geoapify returned an invalid response.");
   }
 
   if (!response.ok) {
     console.error(
-      "Geoapify routing error:",
+      "Geoapify HTTP error:",
       response.status,
       JSON.stringify(data)
     );
 
     throw new Error(
-      `Geoapify routing failed with HTTP ${response.status}. Check the API key and Worker logs.`
+      `Geoapify routing failed with HTTP ${response.status}.`
     );
   }
 
   const route = data.results?.[0] || data.features?.[0] || null;
 
   if (!route) {
-    console.error(
-      "Geoapify returned no route:",
-      JSON.stringify(data)
-    );
-
-    throw new Error(
-      "Geoapify returned no route. Check the pickup and destination addresses in Worker logs."
-    );
+    console.error("Geoapify route missing:", JSON.stringify(data));
+    throw new Error("Geoapify did not return a driving route.");
   }
 
+  // JSON responses put route fields directly on results[0].
+  // GeoJSON responses put them under features[0].properties.
   const properties = route.properties || route;
 
   let distanceMetres = Number(properties.distance);
 
-  if (
-    !Number.isFinite(distanceMetres) ||
-    distanceMetres <= 0
-  ) {
+  // If the overall route distance is unavailable, total its legs.
+  if (!Number.isFinite(distanceMetres) || distanceMetres <= 0) {
     const legs = properties.legs || route.legs;
 
     if (Array.isArray(legs) && legs.length > 0) {
-      distanceMetres = legs.reduce((total, leg) => {
-        const value = Number(leg.distance);
-        return total + (
-          Number.isFinite(value) && value > 0 ? value : 0
+      const legDistances = legs.map(leg => Number(leg.distance));
+
+      if (
+        legDistances.every(
+          distance => Number.isFinite(distance) && distance > 0
+        )
+      ) {
+        distanceMetres = legDistances.reduce(
+          (total, distance) => total + distance,
+          0
         );
-      }, 0);
+      }
     }
   }
 
-  if (
-    !Number.isFinite(distanceMetres) ||
-    distanceMetres <= 0
-  ) {
+  if (!Number.isFinite(distanceMetres) || distanceMetres <= 0) {
     console.error(
-      "Geoapify response has no usable distance:",
+      "Geoapify route has no usable distance:",
       JSON.stringify(data)
     );
 
     throw new Error(
-      "Geoapify returned a route without a usable distance. Check Worker logs."
+      "Geoapify returned no valid road distance. Check Worker logs."
     );
   }
 
+  // Correctly return kilometres for the fare calculator.
   return distanceMetres / 1000;
 }
 
 
-async function getRoute(locations, apiKey) {
-  const coordinates = [];
-
-  for (const place of locations) {
-    coordinates.push(await geocode(place, apiKey));
-  }
-
-  let totalKm = 0;
-  const legs = [];
-
-  for (let i = 0; i < coordinates.length - 1; i++) {
-    const km = await getRoadDistanceBetween(
-      coordinates[i],
-      coordinates[i + 1],
-      apiKey
-    );
-
-    legs.push({
-      from: locations[i],
-      to: locations[i + 1],
-      distanceKm: Math.round(km * 10) / 10
-    });
-
-    totalKm += km;
-  }
-
-  return {
-    coordinates,
-    legs,
-    onwardKm: totalKm
-  };
-}
-
 async function distanceFromMangaloreCentre(place, apiKey) {
-  if (!place || !String(place).trim()) {
-    throw new Error("A location is required to check the Mangalore local limit.");
-  }
-
   const centre = await geocode(
     "Mangalore, Karnataka, India",
     apiKey
   );
 
-  const point = await geocode(
-    String(place).trim(),
-    apiKey
-  );
-
-  if (
-    !centre ||
-    !Number.isFinite(Number(centre.lat)) ||
-    !Number.isFinite(Number(centre.lon))
-  ) {
-    throw new Error("Could not locate Mangalore city centre.");
-  }
-
-  if (
-    !point ||
-    !Number.isFinite(Number(point.lat)) ||
-    !Number.isFinite(Number(point.lon))
-  ) {
-    throw new Error(
-      `Could not find the location "${place}". Please enter a more specific address.`
-    );
-  }
+  const point = await geocode(String(place).trim(), apiKey);
 
   const distance = await getRoadDistanceBetween(
     centre,
@@ -465,11 +372,7 @@ async function distanceFromMangaloreCentre(place, apiKey) {
 }
 
 async function isWithinMangaloreLocalLimit(place, apiKey) {
-  const distance = await distanceFromMangaloreCentre(
-    place,
-    apiKey
-  );
-
+  const distance = await distanceFromMangaloreCentre(place, apiKey);
   return distance <= LOCAL_MAX_DISTANCE_KM;
 }
 
@@ -481,15 +384,11 @@ async function validateLocalArea(locations, apiKey) {
   const checked = [];
 
   for (const place of locations) {
-    const distance = await distanceFromMangaloreCentre(
-      place,
-      apiKey
-    );
+    const distance = await distanceFromMangaloreCentre(place, apiKey);
 
     checked.push({
       location: place,
-      distanceFromMangaloreCentreKm:
-        Math.round(distance * 10) / 10
+      distanceFromMangaloreCentreKm: Math.round(distance * 10) / 10
     });
 
     if (distance > LOCAL_MAX_DISTANCE_KM) {
@@ -566,8 +465,7 @@ function calculateOutstationBata(date, dropDate, time) {
   const chargeableDays = daysApart + 1;
   const earlyMorningSurcharge = Number(time.split(":")[0]) < 6;
   const dailyBata = chargeableDays * DRIVER_BATA;
-  const earlyMorningBata =
-    earlyMorningSurcharge ? DRIVER_BATA : 0;
+  const earlyMorningBata = earlyMorningSurcharge ? DRIVER_BATA : 0;
 
   return {
     chargeableDays,
@@ -615,9 +513,7 @@ function makeFareResult({
     earlyMorningPeriods: advanceBase.earlyMorningPeriods || 0,
     lateNightPeriods: advanceBase.lateNightPeriods || 0,
     chargeableDays: advanceBase.chargeableDays || 0,
-    earlyMorningSurcharge: Boolean(
-      advanceBase.earlyMorningSurcharge
-    ),
+    earlyMorningSurcharge: Boolean(advanceBase.earlyMorningSurcharge),
     routeNotice:
       "This is an estimate. Confirm route, availability and final charges with Radhakrishna Taxi Service."
   };
@@ -690,10 +586,7 @@ function calculateOutstationFare(
     throw new Error("Please enter valid pickup and drop dates.");
   }
 
-  const pickupDate = Date.parse(input.date + "T00:00:00Z");
-  const dropDate = Date.parse(input.dropDate + "T00:00:00Z");
-
-  if (dropDate < pickupDate) {
+  if (dateDifferenceDays(input.date, input.dropDate) < 0) {
     throw new Error("Drop date cannot be earlier than pickup date.");
   }
 
@@ -713,56 +606,70 @@ function calculateOutstationFare(
   let displayDistanceKm;
 
   if (isRoundTrip) {
-    // ROUND TRIP:
-    // Full outstation daily rate plus excess kilometres above
-    // 200 km per chargeable day.
-    if (!vehicle.fullOutstation || vehicle.fullOutstation <= 0) {
+    // Round trip: daily outstation fare + excess kilometres.
+    const dailyFare = vehicle.fullOutstation;
+
+    if (!dailyFare || dailyFare <= 0) {
       throw new Error(
         "The selected vehicle does not have a valid daily outstation rate."
       );
     }
 
-    const dailyFare = vehicle.fullOutstation * days;
     const includedKm = 200 * days;
     const excessKm = Math.max(0, totalKm - includedKm);
-    const excessKmFare = excessKm * vehicle.rate;
 
-    baseFare = dailyFare + excessKmFare;
+    baseFare = dailyFare * days + excessKm * vehicle.rate;
 
-    // Apply the 5% extra once to base fare + driver bata.
-    // Toll and parking are charged separately.
+    // Apply 5% once to base fare + driver bata.
+    // Toll and parking remain separate.
     roundTripExtra =
       (baseFare + bata.driverBata) * ROUND_TRIP_EXTRA_PERCENT;
 
     displayDistanceKm = totalKm;
   } else {
-    // ONE WAY:
-    // 100-200 km: Mangaluru local full-day package.
-    // Over 200 km: actual outward kilometres x per-km rate.
-    // No doubling of the outward distance.
+    /*
+      ONE-WAY PRICING RULES
+
+      Use outward distance x 2 ONLY to choose the fare category.
+
+      Pricing distance 100–200 km:
+        Mangalore Local Full Day package.
+
+      Pricing distance under 100 km:
+        If destination is within Mangalore's 20 km limit,
+        use Local Full Day; otherwise use outward km x rate.
+
+      Pricing distance over 200 km:
+        Use actual outward km x rate.
+        Do NOT double the chargeable distance.
+    */
+
+    const pricingDistanceKm = onwardKm * 2;
+
     if (
-      onwardKm >= 100 &&
-      onwardKm <= 200
+      pricingDistanceKm >= 100 &&
+      pricingDistanceKm <= 200
     ) {
       if (!vehicle.fullLocal || vehicle.fullLocal <= 0) {
         throw new Error(
-          "The selected vehicle does not have a valid Mangaluru local full-day rate."
+          "The selected vehicle does not have a valid Mangalore Local Full Day rate."
         );
       }
 
       baseFare = vehicle.fullLocal;
     } else if (
-      onwardKm < 100 &&
+      pricingDistanceKm < 100 &&
       destinationWithinLocalLimit
     ) {
       if (!vehicle.fullLocal || vehicle.fullLocal <= 0) {
         throw new Error(
-          "The selected vehicle does not have a valid Mangaluru local full-day rate."
+          "The selected vehicle does not have a valid Mangalore Local Full Day rate."
         );
       }
 
       baseFare = vehicle.fullLocal;
     } else {
+      // Charge actual one-way distance, never doubled distance.
       baseFare = onwardKm * vehicle.rate;
     }
 
@@ -856,9 +763,7 @@ export default {
       const input = await request.json();
       const mode = input.mode || input.category;
 
-      if (
-        !["local", "outstation", "airport", "railway"].includes(mode)
-      ) {
+      if (!["local", "outstation", "airport", "railway"].includes(mode)) {
         throw new Error(
           "Please select Local, Outstation, Airport or Railway Station service."
         );
@@ -898,7 +803,7 @@ export default {
 
       const vehicle = VEHICLES[input.vehicle];
 
-      // Preserve existing fixed airport and railway transfer prices.
+      // Preserve existing airport and railway transfer prices.
       if (mode === "airport" || mode === "railway") {
         return jsonResponse(
           calculateTransfer(input, vehicle, mode),
@@ -909,7 +814,7 @@ export default {
 
       const locations = validateLocations(input);
 
-      // Local packages retain the existing 20 km validation and prices.
+      // Local packages retain their existing 20 km validation and prices.
       if (mode === "local") {
         if (!["4", "8", "full"].includes(String(input.duration))) {
           throw new Error("Please select a valid local package duration.");
@@ -958,12 +863,8 @@ export default {
 
       let routeLocations = [...locations];
 
-      // For one-way journeys where both pickup and destination are
-      // outside Mangaluru's 20 km local limit, include Mangaluru
-      // as a waypoint before the final destination.
-      //
-      // If pickup is already within Mangaluru, the route starts
-      // from the pickup and does not add a duplicate waypoint.
+      // For one-way journeys where pickup and destination are both
+      // outside Mangalore's local limit, route via Mangalore.
       if (input.tripType === "oneway") {
         const pickupWithinLocalLimit =
           await isWithinMangaloreLocalLimit(
@@ -981,18 +882,15 @@ export default {
           !pickupWithinLocalLimit &&
           !destinationWithinLocalLimit
         ) {
-          const intermediateLocations = locations.slice(1, -1);
-
           routeLocations = [
             locations[0],
-            ...intermediateLocations,
+            ...locations.slice(1, -1),
             "Mangalore, Karnataka, India",
             locations[locations.length - 1]
           ];
         }
       }
 
-      // Calculate the outward road route.
       const outwardRoute = await getRoute(
         routeLocations,
         env.GEOAPIFY_API_KEY
@@ -1006,10 +904,8 @@ export default {
 
       if (input.tripType === "roundtrip") {
         // Return through the same stops in reverse order.
-        const returnLocations = [...locations].reverse();
-
         const returnRoute = await getRoute(
-          returnLocations,
+          [...locations].reverse(),
           env.GEOAPIFY_API_KEY
         );
 
@@ -1040,33 +936,42 @@ export default {
       result.stops = locations.slice(1, -1);
       result.routeLegs = allRouteLegs;
 
-      result.routeNotice =
-        input.tripType === "roundtrip"
-          ? "Round-trip distance includes the complete outward route and return route through all stops. The outstation daily rate includes 200 km per chargeable day; excess kilometres are charged at the selected vehicle's per-kilometre rate. A 5% round-trip extra is included. Toll and parking are separate."
-          : onwardKm >= 100 && onwardKm <= 200
-            ? "For one-way journeys of 100–200 km, the Mangaluru local Full Day package price applies. The displayed distance is the outward road distance. Toll and parking are separate."
-            : onwardKm > 200
-              ? "For one-way journeys over 200 km, the base fare is the outward road distance multiplied by the selected vehicle's per-kilometre rate. The distance is not doubled. Toll and parking are separate."
-              : destinationWithinLocalLimit
-                ? "For this one-way journey within Mangaluru's 20 km local limit, the local Full Day price applies. Toll and parking are separate."
-                : "The displayed distance is the outward road distance only. The fare uses the selected vehicle's per-kilometre rate. Toll and parking are separate.";
+      if (input.tripType === "roundtrip") {
+        result.routeNotice =
+          "Round-trip distance includes the outward and return routes through all stops. The daily outstation rate includes 200 km per chargeable day; excess kilometres are charged at the selected vehicle's per-kilometre rate. A 5% round-trip extra is included. Toll and parking are separate.";
+      } else {
+        const pricingDistanceKm = onwardKm * 2;
+
+        if (
+          pricingDistanceKm >= 100 &&
+          pricingDistanceKm <= 200
+        ) {
+          result.routeNotice =
+            `One-way outward distance: ${onwardKm.toFixed(1)} km. Pricing category distance: ${pricingDistanceKm.toFixed(1)} km (outward distance x 2). The Mangalore Local Full Day package applies. Toll and parking are separate.`;
+        } else if (pricingDistanceKm < 100 && destinationWithinLocalLimit) {
+          result.routeNotice =
+            "The destination is within Mangalore's 20 km local limit. The local Full Day price applies. Toll and parking are separate.";
+        } else if (pricingDistanceKm > 200) {
+          result.routeNotice =
+            `One-way outward distance: ${onwardKm.toFixed(1)} km. Pricing category distance: ${pricingDistanceKm.toFixed(1)} km. The fare uses the actual outward distance multiplied by the selected vehicle's per-kilometre rate; the distance is not doubled for charging. Toll and parking are separate.`;
+        } else {
+          result.routeNotice =
+            "The displayed distance is the outward road distance. The fare uses the selected vehicle's per-kilometre rate. Toll and parking are separate.";
+        }
+      }
 
       return jsonResponse(result, 200, origin);
 
     } catch (error) {
       console.error("Fare estimate failed:", {
-        message:
-          error instanceof Error
-            ? error.message
-            : String(error)
+        message: error instanceof Error ? error.message : String(error)
       });
 
       return jsonResponse(
         {
-          error:
-            error instanceof Error
-              ? error.message
-              : "Unable to calculate the fare right now. Please contact us."
+          error: error instanceof Error
+            ? error.message
+            : "Unable to calculate the fare right now. Please contact us."
         },
         400,
         origin
