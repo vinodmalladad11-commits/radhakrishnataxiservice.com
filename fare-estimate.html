@@ -4,600 +4,305 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Taxi Fare Estimate | Radhakrishna Taxi Service</title>
-<meta name="description" content="Estimate local taxi, outstation, airport and railway station transfer fares with Radhakrishna Taxi Service in Mangalore.">
-<meta name="theme-color" content="#102d35">
-<link rel="canonical" href="https://radhakrishnataxiservice.com/fare-estimate.html">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<title>Fare Calculator Tea Break | Radhakrishna Taxi Service</title>
+<meta name="description" content="Our fare calculator is taking a tea break. Contact Radhakrishna Taxi Service in Mangalore for a taxi fare estimate.">
 
 <style>
-:root{--primary:#102d35;--primary-light:#19444d;--gold:#d7ad62;--gold-light:#f5dfad;--background:#f5f7f7;--white:#fff;--text:#24353a;--muted:#68777b;--border:#dce5e6;--success:#16794b;--danger:#b42318}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"DM Sans",sans-serif;background:var(--background);color:var(--text);line-height:1.6}
-a{color:inherit;text-decoration:none}
-button,input,select{font:inherit}
-button{cursor:pointer}
-.topbar{background:var(--primary);color:#fff;padding:12px 5%;font-size:13px;text-align:center}
-header{background:#fff;border-bottom:1px solid var(--border)}
-.nav{max-width:1150px;margin:auto;padding:18px 22px;display:flex;justify-content:space-between;align-items:center;gap:18px}
-.brand{font-weight:700;color:var(--primary);font-size:19px;line-height:1.3}
-.brand span{display:block;color:#98702e;font-size:12px;letter-spacing:1.5px;text-transform:uppercase}
-.nav-links{display:flex;gap:20px;align-items:center;font-size:14px;font-weight:600}
-.nav-links a:hover{color:#98702e}
-.hero{background:radial-gradient(circle at 85% 15%,rgba(215,173,98,.18),transparent 30%),linear-gradient(135deg,var(--primary),var(--primary-light));color:#fff;text-align:center;padding:65px 20px 100px}
-.eyebrow{display:inline-block;color:var(--gold-light);font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:14px}
-h1,h2{font-family:"Playfair Display",serif}
-.hero h1{font-size:clamp(32px,5vw,48px);line-height:1.2;margin-bottom:15px}
-.hero p{max-width:680px;margin:auto;color:#e0ebec}
-.calculator-wrap{max-width:1000px;margin:-60px auto 60px;padding:0 18px;position:relative}
-.calculator{background:#fff;border-radius:18px;padding:32px;box-shadow:0 15px 55px rgba(16,45,53,.12);border:1px solid var(--border)}
-.section-title{color:var(--primary);margin-bottom:7px;font-size:25px}
-.section-description{color:var(--muted);font-size:14px;margin-bottom:25px}
-.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.field{min-width:0}
-.field.full{grid-column:1/-1}
-label{display:block;margin-bottom:7px;font-size:13px;font-weight:700;color:var(--primary)}
-input,select{width:100%;padding:13px 14px;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--text);outline:none;min-height:48px}
-input:focus,select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(215,173,98,.15)}
-.field-hint{display:block;color:var(--muted);font-size:12px;margin-top:5px}
-.button-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
-.btn{border:none;border-radius:10px;padding:14px 20px;font-weight:700;min-height:48px}
-.btn-primary{background:var(--gold);color:var(--primary);flex:1}
-.btn-secondary{background:var(--primary);color:#fff}
-.btn-whatsapp{background:#16834a;color:#fff;flex:1}
-.btn:disabled{opacity:.65;cursor:wait}
-.btn-small{padding:8px 12px;min-height:38px;font-size:13px}
-.status{display:none;margin-top:18px;padding:13px 15px;border-radius:10px;font-size:14px;overflow-wrap:anywhere}
-.status.show{display:block}
-.status.info{background:#edf5f7;color:var(--primary-light)}
-.status.error{background:#fff0ef;color:var(--danger)}
-.status.success{background:#eaf7ef;color:var(--success)}
-.notice{margin-top:18px;background:#fffaf0;border:1px solid #f0dfb7;border-radius:10px;padding:14px 16px;font-size:13px}
-.result{display:none;margin-top:28px}
-.result-header{background:var(--primary);color:#fff;border-radius:14px;padding:23px}
-.result-header small{color:#d8e3e4}
-.fare-amount{font:700 clamp(32px,5vw,44px) "Playfair Display",serif;color:var(--gold-light);margin:5px 0}
-.result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-top:15px}
-.result-item{padding:15px;border-bottom:1px solid var(--border)}
-.result-item:nth-child(odd){border-right:1px solid var(--border)}
-.result-item span{display:block;color:var(--muted);font-size:12px}
-.result-item strong{display:block;color:var(--primary);font-size:17px;overflow-wrap:anywhere}
-.fine-print{margin-top:14px;color:var(--muted);font-size:12px}
-.footer{text-align:center;background:var(--primary);color:#e0ebec;padding:26px 18px;font-size:13px}
-.footer a{color:var(--gold-light);font-weight:700}
-.stop-row{display:grid;grid-template-columns:1fr auto;gap:8px;margin-bottom:10px;align-items:center}
-.stop-row input{min-width:0}
-.mode-help{padding:12px 14px;border-radius:10px;background:#edf5f7;color:var(--primary-light);font-size:13px;margin-bottom:20px}
-[hidden]{display:none!important}
-@media(max-width:650px){
-.nav{flex-direction:column;align-items:flex-start}
-.nav-links{flex-wrap:wrap;gap:14px}
-.calculator{padding:20px 16px}
-.form-grid{grid-template-columns:1fr;gap:16px}
-.field.full{grid-column:auto}
-.hero{padding:45px 18px 85px}
-.result-item{padding:12px}
-.result-item strong{font-size:15px}
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #102d35;
+  color: #fff;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg,
+      rgba(5,24,30,.97) 0%,
+      rgba(7,29,35,.88) 42%,
+      rgba(7,29,35,.32) 100%),
+    url("assets/fare-tea-break.jpg") center center / cover no-repeat;
+  animation: cinematic 18s ease-in-out infinite alternate;
+}
+
+.page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(
+    0deg,
+    rgba(4,17,21,.68),
+    transparent 40%,
+    rgba(4,17,21,.18)
+  );
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px clamp(20px, 6vw, 85px);
+  border-bottom: 1px solid #ffffff20;
+}
+
+.logo {
+  width: 190px;
+  max-width: 55vw;
+  max-height: 75px;
+  object-fit: contain;
+  object-position: left center;
+  background: #fff;
+  border-radius: 5px;
+  padding: 4px;
+}
+
+.header-contact {
+  color: #f2cf83;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+main {
+  width: 100%;
+  max-width: 1250px;
+  margin: auto;
+  padding: 60px clamp(20px, 7vw, 95px) 70px;
+}
+
+.content {
+  max-width: 610px;
+  animation: fadein 1s ease both;
+}
+
+.eyebrow {
+  color: #f2c66d;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(42px, 7vw, 78px);
+  line-height: 1.02;
+  letter-spacing: -2px;
+  margin: 23px 0;
+  font-weight: 500;
+}
+
+h1 span { color: #f2c66d; }
+
+.intro {
+  color: #e0e9e9;
+  font-size: clamp(16px, 2vw, 19px);
+  line-height: 1.8;
+  max-width: 510px;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 20px;
+  border: 1px solid #f2c66d;
+  border-radius: 50px;
+  color: #f2c66d;
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  margin: 23px 0;
+}
+
+.cup {
+  font-size: 23px;
+  display: inline-block;
+  animation: cup 3s ease-in-out infinite;
+}
+
+.notice {
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1.6;
+  margin-top: 5px;
+}
+
+.subnotice {
+  color: #d9e3e3;
+  line-height: 1.7;
+  margin-top: 4px;
+}
+
+.whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #20c96a;
+  color: #062a1a;
+  text-decoration: none;
+  padding: 18px 25px;
+  margin-top: 25px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: bold;
+  box-shadow: 0 8px 30px #20c96a30;
+  transition: transform .25s, background .25s;
+}
+
+.whatsapp:hover {
+  transform: translateY(-3px);
+  background: #45e786;
+}
+
+.footer {
+  margin-top: 32px;
+  color: #d7dfe0;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.footer strong {
+  display: block;
+  color: #f2c66d;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cup {
+  0%, 85%, 100% { transform: rotate(0); }
+  90% { transform: rotate(-8deg); }
+  95% { transform: rotate(5deg); }
+}
+
+@keyframes cinematic {
+  from { background-position: center center; }
+  to { background-position: 54% center; }
+}
+
+@media (min-width: 900px) {
+  .content { padding: 10px 0; }
+}
+
+@media (max-width: 600px) {
+  .page::before {
+    background:
+      linear-gradient(180deg,
+        rgba(5,24,30,.83),
+        rgba(5,24,30,.92) 55%,
+        rgba(5,24,30,.97)),
+      url("assets/fare-tea-break.jpg") center / cover no-repeat;
+  }
+
+  header { padding: 18px; }
+  .logo { width: 145px; }
+  .header-contact { font-size: 12px; }
+  main { padding: 55px 22px 45px; }
+  h1 { letter-spacing: -1px; }
+  .status { letter-spacing: 1px; padding: 12px 15px; }
+  .whatsapp { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 </style>
 </head>
+
 <body>
-<div class="topbar">Mangalore Taxi Service | Airport Transfers | Local &amp; Outstation Travel</div>
+<div class="page">
 
 <header>
-<nav class="nav">
-<a class="brand" href="https://radhakrishnataxiservice.com/">Radhakrishna Taxi Service<span>Safe · Comfortable · Reliable</span></a>
-<div class="nav-links">
-<a href="https://radhakrishnataxiservice.com/">Home</a>
-<a href="https://radhakrishnataxiservice.com/blog.html">Blogs</a>
-<a href="https://wa.me/918147771217">Contact</a>
-</div>
-</nav>
+  <a href="/" aria-label="Radhakrishna Taxi Service home">
+    <img
+      class="logo"
+      src="assets/radhakrishna-taxi-logo.png"
+      alt="Radhakrishna Taxi Service"
+    >
+  </a>
+
+  <a class="header-contact"
+     href="https://wa.me/918147771217">
+    WhatsApp: +91 81477 71217
+  </a>
 </header>
 
-<section class="hero">
-<span class="eyebrow">Simple · Transparent · Convenient</span>
-<h1>Taxi Fare Estimate</h1>
-<p>Choose your service, enter your journey details and get an estimated fare from Radhakrishna Taxi Service.</p>
-</section>
+<main>
+  <section class="content">
 
-<main class="calculator-wrap">
-<section class="calculator">
-<h2 class="section-title">Plan Your Journey</h2>
-<p class="section-description">Complete the details below. Your estimate is subject to route, vehicle availability and final confirmation.</p>
+    <div class="eyebrow">Fare Calculator</div>
 
-<form id="fareForm">
-<div class="form-grid">
-<div class="field full">
-<label for="mode">Service Type *</label>
-<select id="mode" name="mode" required>
-<option value="local">Local — Mangalore</option>
-<option value="outstation">Outstation</option>
-<option value="airport">Airport Pickup &amp; Drop</option>
-<option value="railway">Railway Station Pickup &amp; Drop</option>
-</select>
-</div>
+    <h1>
+      Taking a<br>
+      <span>Tea Break!</span>
+    </h1>
 
-<div class="field">
-<label for="pickup">Pickup Location *</label>
-<input id="pickup" name="pickup" maxlength="180" placeholder="Example: Mangalore Airport" required>
-</div>
-<div class="field">
-<label for="destination">Destination *</label>
-<input id="destination" name="destination" maxlength="180" placeholder="Example: Udupi Sri Krishna Matha" required>
-</div>
+    <p class="intro">
+      Our fare calculator has been working too hard
+      calculating kilometres and fares. Now it's taking
+      a little break! 😅
+    </p>
 
-<div class="field full" id="stopsField" hidden>
-<label>Additional Stops</label>
-<div id="stopsContainer"></div>
-<button class="btn btn-secondary btn-small" type="button" id="addStop">+ Add Another Place</button>
-<span class="field-hint">Stops are calculated in the order entered, from pickup to final destination.</span>
-</div>
+    <div class="status">
+      <span class="cup">☕</span>
+      CALCULATOR UNDER MAINTENANCE
+    </div>
 
-<div class="field" id="tripTypeField" hidden>
-<label for="tripType">Outstation Trip *</label>
-<select id="tripType" name="tripType">
-<option value="roundtrip">Round Trip</option>
-<option value="oneway">One-way journey</option>
-</select>
-</div>
+    <div class="notice">
+      Don't worry — our taxis are still on the road! 🚕
+    </div>
 
-<div class="field" id="vehicleField">
-<label for="vehicle">Select Vehicle *</label>
-<select id="vehicle" name="vehicle" required>
-<option value="dzire">Swift Dzire</option>
-<option value="etios">Toyota Etios</option>
-<option value="ertiga">Maruti Ertiga</option>
-<option value="innova">Toyota Innova</option>
-<option value="crysta">Toyota Innova Crysta</option>
-<option value="tempo">Tempo Traveller — quotation</option>
-</select>
-</div>
+    <div class="subnotice">
+      Need a fare estimate? Our team is ready to help.
+    </div>
 
-<div class="field" id="durationField">
-<label for="duration">Local / Short Journey Package *</label>
-<select id="duration" name="duration">
-<option value="4">4 Hours</option>
-<option value="8">8 Hours</option>
-<option value="full" selected>Full Day — 14 Hours</option>
-</select>
-<span class="field-hint">Package availability and distance limits apply.</span>
-</div>
+    <a class="whatsapp"
+       href="https://wa.me/918147771217?text=Hello%2C%20I%20would%20like%20a%20taxi%20fare%20estimate."
+       target="_blank"
+       rel="noopener noreferrer">
+      <span>◉</span>
+      Get Your Fare on WhatsApp
+      <span>→</span>
+    </a>
 
-<div class="field">
-<label for="date">Pickup Date *</label>
-<input type="date" id="date" name="date" required>
-</div>
-<div class="field">
-<label for="time">Pickup Time *</label>
-<input type="time" id="time" name="time" required>
-</div>
+    <div class="footer">
+      Thank you for your patience.
+      <br>
+      We'll be back with better calculations soon. ☕
+      <strong>Radhakrishna Taxi Service · Mangalore</strong>
+    </div>
 
-<div class="field" id="dropDateField" hidden>
-<label for="dropDate">Drop / Return Date *</label>
-<input type="date" id="dropDate" name="dropDate">
-</div>
-<div class="field" id="dropTimeField" hidden>
-<label for="dropTime">Expected Drop Time *</label>
-<input type="time" id="dropTime" name="dropTime">
-</div>
-
-<div class="field" id="extraHoursField">
-<label for="extraHours">Additional Hours</label>
-<input type="number" id="extraHours" name="extraHours" min="0" max="24" step="1" value="0">
-</div>
-<div class="field" id="waitingHoursField">
-<label for="waitingHours">Waiting Hours</label>
-<input type="number" id="waitingHours" name="waitingHours" min="0" max="24" step="1" value="0">
-<span class="field-hint">Waiting charges may need separate confirmation.</span>
-</div>
-
-<div class="field">
-<label for="passengers">Number of Passengers *</label>
-<select id="passengers" name="passengers" required>
-<option value="1">1 Passenger</option>
-<option value="2" selected>2 Passengers</option>
-<option value="3">3 Passengers</option>
-<option value="4">4 Passengers</option>
-<option value="5">5 Passengers</option>
-<option value="6">6 Passengers</option>
-<option value="7">7 Passengers</option>
-<option value="8">8 Passengers</option>
-<option value="9">9 Passengers</option>
-<option value="10">10 Passengers</option>
-<option value="11">11 Passengers</option>
-<option value="12">12 Passengers</option>
-<option value="13">13 Passengers</option>
-<option value="14">14 Passengers</option>
-<option value="15">15 Passengers</option>
-<option value="16">16 Passengers</option>
-<option value="17">17 Passengers</option>
-<option value="18">18 Passengers</option>
-<option value="19">19 Passengers</option>
-<option value="20">20 Passengers</option>
-</select>
-</div>
-
-<div class="field" id="tollField">
-<label for="toll">Estimated Toll Charges (₹)</label>
-<input type="number" id="toll" name="toll" min="0" max="1000000" step="1" value="0">
-<span class="field-hint" id="tollHint">Enter estimated toll if known.</span>
-</div>
-<div class="field">
-<label for="parking">Estimated Parking Charges (₹)</label>
-<input type="number" id="parking" name="parking" min="0" max="1000000" step="1" value="0">
-</div>
-
-<div class="field">
-<label for="customerName">Your Name *</label>
-<input type="text" id="customerName" name="customerName" maxlength="100" required placeholder="Enter your name">
-</div>
-<div class="field">
-<label for="phone">Mobile Number *</label>
-<input type="tel" id="phone" name="phone" maxlength="20" required placeholder="Enter your mobile number">
-</div>
-</div>
-
-<div class="notice" id="policyNote"></div>
-
-<div class="button-row">
-<button type="submit" class="btn btn-primary" id="calculateButton">Calculate Estimated Fare</button>
-<button type="reset" class="btn btn-secondary">Reset</button>
-</div>
-<div id="status" class="status" role="status" aria-live="polite"></div>
-</form>
-
-<section id="result" class="result" aria-live="polite">
-<div class="result-header">
-<small>Estimated total fare</small>
-<div class="fare-amount" id="estimatedFare">₹0</div>
-<div id="journeySummary"></div>
-</div>
-<div class="result-grid">
-<div class="result-item"><span>Estimated Distance</span><strong id="distance">—</strong></div>
-<div class="result-item"><span>Selected Vehicle</span><strong id="vehicleName">—</strong></div>
-<div class="result-item"><span>Estimated Base Fare</span><strong id="baseFare">—</strong></div>
-<div class="result-item"><span>Driver Bata</span><strong id="driverBata">—</strong></div>
-<div class="result-item"><span>Toll and Parking</span><strong id="extras">—</strong></div>
-<div class="result-item"><span>Estimated 10% Advance</span><strong id="advance">—</strong></div>
-<div class="result-item"><span>Remaining Balance</span><strong id="balance">—</strong></div>
-<div class="result-item"><span>Driver Bata Details</span><strong id="bataPeriods">—</strong></div>
-<div class="result-item" id="daysResultItem" hidden><span>Chargeable Days</span><strong id="chargeableDays">—</strong></div>
-</div>
-<p class="fine-print">This is an estimate, not a confirmed booking. Final fare, vehicle availability, route, tolls, parking and other applicable charges must be confirmed with Radhakrishna Taxi Service.</p>
-<div class="button-row">
-<button type="button" class="btn btn-whatsapp" id="whatsappButton">Send Estimate on WhatsApp</button>
-<button type="button" class="btn btn-secondary" id="editButton">Edit Trip</button>
-</div>
-</section>
-</section>
+  </section>
 </main>
-
-<footer class="footer">
-<strong>Radhakrishna Taxi Service</strong><br>
-Mangalore, Karnataka<br>
-Call / WhatsApp: <a href="https://wa.me/918147771217">+91 81477 71217</a><br>
-<a href="https://radhakrishnataxiservice.com/">radhakrishnataxiservice.com</a>
-</footer>
-
-<script>
-"use strict";
-(() => {
-const API_BASE = "https://radhakrishna-fare.radhakrishna-fare.workers.dev";
-const WHATSAPP_NUMBER = "918147771217";
-const form = document.getElementById("fareForm");
-const $ = id => document.getElementById(id);
-const statusBox = $("status");
-const resultBox = $("result");
-const calculateButton = $("calculateButton");
-let latestEstimate = null;
-let stopCount = 0;
-
-const modeNames = {
-local: "Local — Mangalore",
-outstation: "Outstation",
-airport: "Airport Pickup & Drop",
-railway: "Railway Station Pickup & Drop"
-};
-
-function formatINR(value) {
-return new Intl.NumberFormat("en-IN", {
-style: "currency", currency: "INR", maximumFractionDigits: 0
-}).format(Math.ceil(Number(value) || 0));
-}
-function showStatus(message, type) {
-statusBox.textContent = message;
-statusBox.className = "status show " + type;
-}
-function clearStatus() {
-statusBox.textContent = "";
-statusBox.className = "status";
-}
-function addStop(value = "") {
-if (stopCount >= 10) {
-showStatus("You can add a maximum of 10 additional stops.", "error");
-return;
-}
-stopCount++;
-const row = document.createElement("div");
-row.className = "stop-row";
-const input = document.createElement("input");
-input.type = "text";
-input.name = "stops";
-input.maxLength = 180;
-input.placeholder = "Additional stop " + stopCount;
-input.value = value;
-input.required = true;
-input.setAttribute("aria-label", "Additional stop " + stopCount);
-const remove = document.createElement("button");
-remove.type = "button";
-remove.className = "btn btn-secondary btn-small";
-remove.textContent = "Remove";
-remove.addEventListener("click", () => {
-row.remove();
-stopCount--;
-renumberStops();
-});
-row.append(input, remove);
-$("stopsContainer").appendChild(row);
-}
-function renumberStops() {
-[...$("stopsContainer").querySelectorAll("input")].forEach((input, index) => {
-input.placeholder = "Additional stop " + (index + 1);
-input.setAttribute("aria-label", "Additional stop " + (index + 1));
-});
-}
-function updateMode() {
-const mode = $("mode").value;
-const local = mode === "local";
-const outstation = mode === "outstation";
-const transfer = mode === "airport" || mode === "railway";
-
-$("stopsField").hidden = !local && !outstation;
-$("tripTypeField").hidden = !outstation;
-$("dropDateField").hidden = !outstation;
-$("dropTimeField").hidden = !outstation;
-$("durationField").hidden = transfer;
-$("extraHoursField").hidden = !local;
-$("waitingHoursField").hidden = !local;
-$("tollField").hidden = transfer;
-$("tollHint").textContent = mode === "airport"
-? "Airport fixed fare excludes toll charges."
-: "Enter estimated toll charges if known.";
-
-$("dropDate").required = outstation;
-$("dropTime").required = outstation;
-$("duration").required = local || outstation;
-
-if (transfer) {
-$("pickup").placeholder = mode === "airport"
-? "Example: Mangalore Airport"
-: "Example: Mangalore Central Railway Station";
-$("destination").placeholder = mode === "airport"
-? "Enter your Mangalore city destination"
-: "Enter your Mangalore city destination";
-$("policyNote").textContent =
-"Fixed city-transfer fare. Tempo Traveller requires a quotation. Confirm the pickup location and vehicle availability with our team.";
-} else if (local) {
-$("pickup").placeholder = "Example: Mangalore city";
-$("destination").placeholder = "Example: Kadri Manjunath Temple";
-$("policyNote").textContent =
-"Local driver bata: ₹300 for each applicable early-morning period before 6:00 AM and ₹300 for each applicable late-night period from 9:00 PM to midnight, based on the 4-hour, 8-hour or 14-hour package and additional/waiting hours. Local locations must be within 20 km of Mangalore centre by road.";
-} else {
-$("pickup").placeholder = "Example: Mangalore";
-$("destination").placeholder = "Example: Udupi";
-$("policyNote").textContent =
-"Outstation driver bata: ₹300 per chargeable calendar day, plus one additional ₹300 only when the first-day pickup is before 6:00 AM. No separate late-night bata applies. Round-trip estimates include a 10% premium on the base fare.";
-}
-}
-function getFormData() {
-    const data = Object.fromEntries(new FormData(form).entries());
-
-    data.stops = [
-        ...$("stopsContainer").querySelectorAll("input")
-    ]
-    .map(input => input.value.trim())
-    .filter(Boolean);
-
-    data.extraHours = Number(data.extraHours || 0);
-    data.waitingHours = Number(data.waitingHours || 0);
-    data.toll = Number(data.toll || 0);
-    data.parking = Number(data.parking || 0);
-    data.passengers = Number(data.passengers || 1);
-
-    // Keep the selected four-mode service value.
-    data.mode = String(data.mode || "").trim().toLowerCase();
-
-    return data;
-}
-function validateForm(data) {
-if (!data.pickup.trim() || !data.destination.trim()) return "Please enter pickup and destination.";
-if (!data.customerName.trim()) return "Please enter your name.";
-if (!/^[0-9+\s()-]{7,20}$/.test(data.phone || "")) return "Please enter a valid mobile number.";
-if (!data.date || !data.time) return "Please select a valid pickup date and time.";
-if (data.date < $("date").min) return "Pickup date cannot be in the past.";
-if (data.mode === "outstation") {
-if (!data.dropDate || !data.dropTime) return "Please enter the outstation drop date and time.";
-if (data.dropDate < data.date) return "Drop date cannot be earlier than pickup date.";
-}
-if (data.mode === "local" && data.pickup.trim().toLowerCase() === data.destination.trim().toLowerCase()) return "Pickup and destination must be different.";
-if (data.stops.length > 10) return "You can add a maximum of 10 stops.";
-if (data.stops.some(stop => !stop)) return "Please complete or remove empty stop fields.";
-for (const field of ["extraHours", "waitingHours"]) {
-if (!Number.isFinite(data[field]) || data[field] < 0 || data[field] > 24) return "Additional and waiting hours must be between 0 and 24.";
-}
-for (const field of ["toll", "parking"]) {
-if (!Number.isFinite(data[field]) || data[field] < 0 || data[field] > 1000000) return "Toll and parking must be valid amounts.";
-}
-if (!Number.isInteger(data.passengers) || data.passengers < 1 || data.passengers > 20) return "Please select a valid passenger count.";
-return "";
-}
-function displayEstimate(data, result) {
-if (result.quotationRequired) {
-latestEstimate = {...data, ...result};
-resultBox.style.display = "none";
-showStatus(result.message || "Please contact us for a vehicle quotation.", "info");
-return;
-}
-const totalFare = Number(result.totalFare);
-const driverBata = Number(result.driverBata);
-const baseFare = Number(result.baseFare);
-if (![totalFare, driverBata, baseFare].every(Number.isFinite) || totalFare < 0 || driverBata < 0 || baseFare < 0) {
-throw new Error("The fare service returned invalid fare values.");
-}
-$("estimatedFare").textContent = formatINR(totalFare);
-$("journeySummary").textContent = modeNames[data.mode] + ": " + data.pickup + " → " + data.destination;
-$("distance").textContent = data.mode === "airport" || data.mode === "railway" ? "Fixed transfer fare" : Number(result.distanceKm || 0).toFixed(1) + " km";
-$("vehicleName").textContent = result.vehicleName || data.vehicle;
-$("baseFare").textContent = formatINR(baseFare);
-$("driverBata").textContent = formatINR(driverBata);
-$("extras").textContent = formatINR(Number(result.toll || 0) + Number(result.parking || 0));
-$("advance").textContent = formatINR(result.advance);
-$("balance").textContent = formatINR(result.balance);
-if (data.mode === "outstation") {
-$("bataPeriods").textContent =
-"Daily bata: " + formatINR(Number(result.chargeableDays || 0) * 300) +
-(result.earlyMorningSurcharge ? " + ₹300 early pickup" : "");
-$("daysResultItem").hidden = false;
-$("chargeableDays").textContent = String(result.chargeableDays || 0);
-} else if (data.mode === "local") {
-$("bataPeriods").textContent =
-"Early morning: " + Number(result.earlyMorningPeriods || 0) +
-"; Late night: " + Number(result.lateNightPeriods || 0);
-$("daysResultItem").hidden = true;
-} else {
-$("bataPeriods").textContent = "Included in fixed transfer fare";
-$("daysResultItem").hidden = true;
-}
-latestEstimate = {...data, ...result, totalFare, driverBata, baseFare};
-resultBox.style.display = "block";
-showStatus("Your estimated fare has been calculated successfully.", "success");
-resultBox.scrollIntoView({behavior:"smooth", block:"start"});
-}
-form.addEventListener("submit", async event => {
-event.preventDefault();
-clearStatus();
-resultBox.style.display = "none";
-latestEstimate = null;
-const data = getFormData();
-
-console.log("Selected service mode:", data.mode);
-console.log("Request payload:", data);
-
-const error = validateForm(data);
-
-if (error) {
-    showStatus(error, "error");
-    return;
-}
-
-calculateButton.disabled = true;
-calculateButton.textContent = "Calculating Fare...";
-showStatus("Calculating your estimate. Please wait...", "info");
-
-try {
-    const response = await fetch(API_BASE + "/api/estimate", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
-
-    console.log("Worker HTTP status:", response.status);
-let result;
-try { result = await response.json(); }
-catch { throw new Error("The fare service returned an invalid response. Please try again."); }
-if (!response.ok) throw new Error(result.error || "Unable to calculate the fare.");
-displayEstimate(data, result);
-} catch (error) {
-console.error("Fare calculator error:", error);
-showStatus(error.message || "Unable to calculate the fare. Please contact us on WhatsApp.", "error");
-} finally {
-calculateButton.disabled = false;
-calculateButton.textContent = "Calculate Estimated Fare";
-}
-});
-$("addStop").addEventListener("click", () => addStop());
-$("mode").addEventListener("change", updateMode);
-$("whatsappButton").addEventListener("click", () => {
-if (!latestEstimate) {
-showStatus("Please calculate your fare before sending the estimate.", "error");
-return;
-}
-const e = latestEstimate;
-const lines = [
-"Hello Radhakrishna Taxi Service,",
-"",
-"I would like to enquire about this taxi estimate.",
-"Name: " + (e.customerName || ""),
-"Mobile: " + (e.phone || ""),
-"Service: " + (modeNames[e.mode] || e.mode),
-"Pickup: " + e.pickup,
-"Stops: " + (e.stops?.length ? e.stops.join(" → ") : "None"),
-"Destination: " + e.destination,
-"Pickup date/time: " + e.date + " " + e.time,
-...(e.mode === "outstation" ? [
-"Drop date/time: " + e.dropDate + " " + e.dropTime,
-"Trip type: " + e.tripType,
-"Chargeable days: " + (e.chargeableDays || ""),
-"Additional/waiting hours: " + e.extraHours + "/" + e.waitingHours
-] : []),
-"Vehicle: " + (e.vehicleName || e.vehicle),
-"Estimated distance: " + (e.distanceKm ? Number(e.distanceKm).toFixed(1) + " km" : "Fixed transfer fare"),
-"Estimated base fare: " + formatINR(e.baseFare),
-"Driver bata: " + formatINR(e.driverBata),
-"Toll and parking: " + formatINR(Number(e.toll || 0) + Number(e.parking || 0)),
-"Estimated total: " + formatINR(e.totalFare),
-"Estimated advance: " + formatINR(e.advance),
-"Estimated balance: " + formatINR(e.balance),
-"",
-"Please confirm availability and the final fare."
-];
-window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(lines.join("\n")), "_blank", "noopener,noreferrer");
-});
-$("editButton").addEventListener("click", () => {
-resultBox.style.display = "none";
-$("pickup").focus();
-window.scrollTo({top:form.getBoundingClientRect().top + window.scrollY - 30, behavior:"smooth"});
-});
-form.addEventListener("reset", () => {
-latestEstimate = null;
-window.setTimeout(() => {
-$("stopsContainer").replaceChildren();
-stopCount = 0;
-$("mode").value = "local";
-$("duration").value = "full";
-$("tripType").value = "roundtrip";
-$("extraHours").value = "0";
-$("waitingHours").value = "0";
-$("toll").value = "0";
-$("parking").value = "0";
-$("passengers").value = "2";
-resultBox.style.display = "none";
-clearStatus();
-setMinimumDate();
-updateMode();
-}, 0);
-});
-function setMinimumDate() {
-const now = new Date();
-const today = now.getFullYear() + "-" +
-String(now.getMonth()+1).padStart(2,"0") + "-" +
-String(now.getDate()).padStart(2,"0");
-$("date").min = today;
-$("dropDate").min = today;
-if (!$("date").value || $("date").value < today) $("date").value = today;
-if (!$("dropDate").value || $("dropDate").value < today) $("dropDate").value = today;
-}
-$("date").addEventListener("change", () => {
-$("dropDate").min = $("date").value;
-if ($("dropDate").value < $("date").value) $("dropDate").value = $("date").value;
-});
-setMinimumDate();
-updateMode();
-})();
-</script>
+</div>
 </body>
 </html>
