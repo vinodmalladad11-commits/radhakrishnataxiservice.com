@@ -7,47 +7,42 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* ================= MOBILE MENU ================= */
 
-    const menuToggle =
-        document.getElementById("menuToggle");
+const menuToggle = document.getElementById("menuToggle");
+const mainNav = document.getElementById("mainNav");
 
-    const mainNav =
-        document.getElementById("mainNav");
+if (menuToggle && mainNav) {
 
+    menuToggle.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
 
-    if (menuToggle && mainNav) {
+        const isOpen = mainNav.classList.toggle("open");
 
-        menuToggle.addEventListener("click", function () {
+        menuToggle.setAttribute("aria-expanded", String(isOpen));
+        menuToggle.classList.toggle("active", isOpen);
+    });
 
-            const isOpen =
-                mainNav.classList.toggle("open");
-
-            menuToggle.setAttribute(
-                "aria-expanded",
-                isOpen ? "true" : "false"
-            );
-
+    mainNav.querySelectorAll("a").forEach(function (link) {
+        link.addEventListener("click", function () {
+            mainNav.classList.remove("open");
+            menuToggle.classList.remove("active");
+            menuToggle.setAttribute("aria-expanded", "false");
         });
+    });
 
+    document.addEventListener("click", function (event) {
+        if (
+            window.innerWidth <= 820 &&
+            !mainNav.contains(event.target) &&
+            !menuToggle.contains(event.target)
+        ) {
+            mainNav.classList.remove("open");
+            menuToggle.classList.remove("active");
+            menuToggle.setAttribute("aria-expanded", "false");
+        }
+    });
 
-        mainNav
-            .querySelectorAll("a")
-            .forEach(function (link) {
-
-                link.addEventListener("click", function () {
-
-                    mainNav.classList.remove("open");
-
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                });
-
-            });
-
-    }
-
+}
 
     /* ================= PACKAGE DROPDOWN MOBILE ================= */
 

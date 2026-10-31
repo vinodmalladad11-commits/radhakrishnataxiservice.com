@@ -1722,3 +1722,24 @@ button {
     transform: translateY(-3px);
     box-shadow: 0 9px 22px rgba(16, 45, 53, 0.25);
 }
+
+@media (max-width: 820px) {
+
+    #mainNav {
+        display: none;
+    }
+
+    #mainNav.open {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #menuToggle {
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        z-index: 1001;
+    }
+
+}
