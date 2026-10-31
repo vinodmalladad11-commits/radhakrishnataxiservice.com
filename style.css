@@ -1697,3 +1697,28 @@ button {
     display: block;
     object-fit: contain;
 }
+
+.more-blogs-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 13px 28px;
+    background: linear-gradient(135deg, #102d35, #168b87);
+    color: #ffffff !important;
+    border: 2px solid #168b87;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none !important;
+    box-shadow: 0 6px 18px rgba(16, 45, 53, 0.22);
+    transition: all 0.3s ease;
+}
+
+.more-blogs-btn:hover {
+    background: #d9ad60;
+    color: #102d35 !important;
+    border-color: #d9ad60;
+    transform: translateY(-3px);
+    box-shadow: 0 9px 22px rgba(16, 45, 53, 0.25);
+}
