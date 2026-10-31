@@ -1,0 +1,732 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Terms & Conditions | Radhakrishna Taxi Service</title>
+    <meta name="description" content="Read the booking terms, payment conditions, cancellation charges and refund policy of Radhakrishna Taxi Service in Mangalore, Karnataka.">
+
+    <link rel="canonical" href="https://radhakrishnataxiservice.com/terms-and-conditions.html">
+    <meta name="theme-color" content="#102d35">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --navy: #102d35;
+            --navy-dark: #0a2027;
+            --teal: #168b87;
+            --gold: #d9ad60;
+            --light: #f4f8f8;
+            --text: #26383c;
+            --muted: #68797c;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background: #f7f9f9;
+            line-height: 1.75;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .topbar {
+            background: var(--navy-dark);
+            color: white;
+            text-align: center;
+            padding: 9px 15px;
+            font-size: 13px;
+        }
+
+        header {
+            background: white;
+            box-shadow: 0 3px 15px rgba(0,0,0,.06);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .nav {
+            max-width: 1150px;
+            margin: auto;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            color: var(--navy);
+            font-size: 17px;
+        }
+
+        .brand img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--teal);
+        }
+
+        .hero {
+            background: linear-gradient(120deg, #102d35, #174e54);
+            color: white;
+            text-align: center;
+            padding: 75px 20px 85px;
+        }
+
+        .hero small {
+            color: var(--gold);
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(32px, 5vw, 48px);
+            margin: 12px 0;
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: #d7e6e6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: -35px auto 60px;
+            padding: 0 18px;
+            position: relative;
+        }
+
+        .intro, .policy-card, .content-card {
+            background: white;
+            padding: 28px;
+            border-radius: 14px;
+            margin-bottom: 22px;
+            box-shadow: 0 5px 25px rgba(16,45,53,.06);
+        }
+
+        .intro {
+            border-top: 4px solid var(--gold);
+        }
+
+        .intro h2, .content-card h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--navy);
+            margin-bottom: 12px;
+            font-size: 23px;
+        }
+
+        .content-card h3 {
+            color: var(--navy);
+            font-size: 17px;
+            margin: 17px 0 7px;
+        }
+
+        .content-card p {
+            margin-bottom: 10px;
+        }
+
+        .content-card ul {
+            padding-left: 22px;
+            margin: 10px 0;
+        }
+
+        .content-card li {
+            margin-bottom: 7px;
+        }
+
+        .policy-card {
+            border: 1px solid #dce9e8;
+        }
+
+        .policy-heading {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+
+        .policy-heading h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--navy);
+            font-size: 27px;
+        }
+
+        .policy-heading p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .policy-button {
+            width: 100%;
+            background: var(--navy);
+            color: white;
+            border: 0;
+            padding: 17px 20px;
+            border-radius: 9px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            transition: .25s;
+        }
+
+        .policy-button:hover {
+            background: var(--teal);
+        }
+
+        .policy-content {
+            display: none;
+            padding-top: 25px;
+        }
+
+        .policy-content.show {
+            display: block;
+            animation: appear .3s ease;
+        }
+
+        @keyframes appear {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .policy-section {
+            margin-bottom: 27px;
+        }
+
+        .policy-section h3 {
+            color: var(--navy);
+            font-size: 19px;
+            margin-bottom: 12px;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            border: 1px solid #e1e9e9;
+            border-radius: 9px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 390px;
+        }
+
+        th {
+            background: var(--navy);
+            color: white;
+            padding: 13px;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #e8eeee;
+            font-size: 14px;
+        }
+
+        tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .free {
+            color: #13804e;
+            font-weight: 800;
+        }
+
+        .charge {
+            color: #b66b18;
+            font-weight: 800;
+        }
+
+        .notice {
+            background: #edf7f6;
+            border-left: 4px solid var(--teal);
+            padding: 16px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        .important {
+            background: #fff8eb;
+            border-left: 4px solid var(--gold);
+            padding: 16px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+
+        .contact-box {
+            background: var(--navy);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 14px;
+        }
+
+        .contact-box h2 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 10px;
+        }
+
+        .contact-box p {
+            color: #d8e6e6;
+            margin-bottom: 8px;
+        }
+
+        .contact-box a {
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        footer {
+            background: var(--navy-dark);
+            color: #d2dede;
+            text-align: center;
+            padding: 25px 15px;
+            font-size: 13px;
+        }
+
+        footer a {
+            color: var(--gold);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 15px;
+        }
+
+        @media(max-width: 700px) {
+            .nav {
+                flex-wrap: wrap;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                gap: 15px;
+                flex-wrap: wrap;
+                font-size: 12px;
+            }
+
+            .hero {
+                padding: 55px 18px 75px;
+            }
+
+            .intro, .policy-card, .content-card {
+                padding: 20px;
+            }
+
+            .policy-heading h2 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="topbar">
+    Mangalore's Trusted Taxi Service | Call: +91 81477 71217
+</div>
+
+<header>
+    <nav class="nav">
+        <a href="index.html" class="brand">
+            <img src="assets/radhakrishna-taxi-logo.png"
+                 alt="Radhakrishna Taxi Service Logo">
+            <span>Radhakrishna Taxi Service</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="services.html">Services</a>
+            <a href="packages.html">Packages</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+</header>
+
+<section class="hero">
+    <small>Customer Information</small>
+    <h1>Terms & Conditions</h1>
+    <p>Please read our booking, payment, cancellation and refund policies before confirming your taxi reservation.</p>
+</section>
+
+<main class="container">
+
+    <section class="intro">
+        <h2>Welcome to Radhakrishna Taxi Service</h2>
+        <p>
+            These Terms & Conditions apply to taxi bookings and services
+            provided by Radhakrishna Taxi Service, Mangalore, Karnataka.
+            By confirming a booking, customers acknowledge these conditions.
+        </p>
+    </section>
+
+    <!-- CANCELLATION POLICY -->
+
+    <section class="policy-card">
+
+        <div class="policy-heading">
+            <h2>Cancellation & Refund Policy</h2>
+            <p>Transparent cancellation charges and refund conditions.</p>
+        </div>
+
+        <button class="policy-button"
+                id="policyToggle"
+                aria-expanded="false"
+                aria-controls="policyContent">
+
+            <span>View Cancellation Charges & Refunds</span>
+            <span id="toggleIcon">＋</span>
+
+        </button>
+
+        <div class="policy-content" id="policyContent">
+
+            <div class="policy-section">
+
+                <h3>1. Local Bookings – Mangalore Pickup</h3>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cancellation Before Pickup</th>
+                                <th>Cancellation Charge</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>12 hours or more</td>
+                                <td class="free">0% – Full Refund</td>
+                            </tr>
+                            <tr>
+                                <td>6 hours to less than 12 hours</td>
+                                <td class="charge">2.5%</td>
+                            </tr>
+                            <tr>
+                                <td>3 hours to less than 6 hours</td>
+                                <td class="charge">5%</td>
+                            </tr>
+                            <tr>
+                                <td>Less than 3 hours</td>
+                                <td class="charge">10%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="policy-section">
+
+                <h3>2. Outstation Bookings</h3>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cancellation Before Pickup</th>
+                                <th>Cancellation Charge</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>48 hours or more</td>
+                                <td class="free">0% – Full Refund</td>
+                            </tr>
+                            <tr>
+                                <td>24 hours to less than 48 hours</td>
+                                <td class="charge">2.5%</td>
+                            </tr>
+                            <tr>
+                                <td>12 hours to less than 24 hours</td>
+                                <td class="charge">5%</td>
+                            </tr>
+                            <tr>
+                                <td>Less than 12 hours</td>
+                                <td class="charge">10%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="policy-section">
+
+                <h3>3. How Cancellation Charges Are Calculated</h3>
+
+                <ul>
+                    <li>Cancellation charges are calculated as a percentage of the total confirmed trip fare.</li>
+                    <li>The calculation is not based only on the advance payment.</li>
+                    <li>Our usual booking advance is 10% of the total trip fare.</li>
+                    <li>If the customer has paid more than the cancellation charge, the eligible remaining amount will be refunded.</li>
+                    <li>If the full fare has been paid in advance, the applicable cancellation charge will still be calculated using the same percentage.</li>
+                </ul>
+
+                <div class="notice">
+                    <strong>Example:</strong><br>
+                    Total trip fare: ₹5,000<br>
+                    Amount paid: ₹2,000<br>
+                    Cancellation charge at 5%: ₹250<br>
+                    <strong>Eligible refund: ₹1,750</strong>
+                </div>
+
+            </div>
+
+            <div class="policy-section">
+
+                <h3>4. Flight or Train Cancellation</h3>
+
+                <p>
+                    If a customer cannot reach the scheduled pickup location
+                    because their flight or train has been cancelled:
+                </p>
+
+                <ul>
+                    <li>A full refund will be provided if the cancellation is reported at least 2 hours before the scheduled pickup time.</li>
+                    <li>Valid flight or train cancellation proof must be submitted.</li>
+                    <li>This special full-refund provision applies irrespective of the regular cancellation schedule.</li>
+                </ul>
+
+            </div>
+
+            <div class="policy-section">
+
+                <h3>5. Late Arrival and Waiting Charges</h3>
+
+                <p>
+                    If a customer is delayed at the pickup location, we will
+                    make reasonable efforts to provide the booked taxi service,
+                    subject to vehicle and driver availability.
+                </p>
+
+                <p>
+                    Additional waiting charges may apply depending on the
+                    waiting time and applicable booking conditions.
+                </p>
+
+            </div>
+
+            <div class="policy-section">
+
+                <h3>6. Refund Processing Time</h3>
+
+                <div class="notice">
+                    Approved eligible refunds will be processed within
+                    <strong>2 working days</strong> after cancellation approval.
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- GENERAL TERMS -->
+
+    <section class="content-card">
+
+        <h2>7. Booking & Confirmation</h2>
+
+        <ul>
+            <li>All bookings are subject to vehicle and driver availability.</li>
+            <li>A booking is confirmed only after receiving confirmation from Radhakrishna Taxi Service.</li>
+            <li>Customers should provide accurate pickup locations, destinations, travel dates, contact numbers and passenger details.</li>
+            <li>Any changes to the booking must be communicated in advance and are subject to availability.</li>
+        </ul>
+
+    </section>
+
+    <section class="content-card">
+
+        <h2>8. Advance Payment & Fare</h2>
+
+        <ul>
+            <li>Customers may be required to pay an advance to confirm their booking.</li>
+            <li>The normal advance payment is 10% of the confirmed trip fare, unless otherwise communicated.</li>
+            <li>The remaining balance must be paid as agreed during booking confirmation.</li>
+            <li>The final fare will be based on the confirmed trip details and applicable booking terms.</li>
+        </ul>
+
+    </section>
+
+    <section class="content-card">
+
+        <h2>9. Additional Expenses</h2>
+
+        <p>
+            Tolls, parking charges and other applicable trip-related
+            expenses are additional unless specifically included
+            in the confirmed quotation.
+        </p>
+
+    </section>
+
+    <section class="content-card">
+
+        <h2>10. Passenger Responsibilities</h2>
+
+        <ul>
+            <li>Passengers must be present at the agreed pickup location and time.</li>
+            <li>Customers should provide correct contact details and remain reachable during pickup.</li>
+            <li>Passengers must maintain proper conduct and respect the driver and vehicle.</li>
+            <li>Passengers are responsible for their personal belongings and luggage.</li>
+            <li>Any damage caused to the vehicle due to passenger negligence may result in applicable recovery charges.</li>
+        </ul>
+
+    </section>
+
+    <section class="content-card">
+
+        <h2>11. Delays & Unforeseen Circumstances</h2>
+
+        <p>
+            Traffic congestion, road closures, adverse weather,
+            government restrictions, vehicle breakdowns and other
+            unforeseen circumstances may affect travel schedules.
+        </p>
+
+        <p>
+            We will make reasonable efforts to communicate significant
+            delays and arrange suitable alternatives where possible.
+        </p>
+
+    </section>
+
+    <section class="content-card">
+
+        <h2>12. Changes to Terms & Conditions</h2>
+
+        <p>
+            Radhakrishna Taxi Service reserves the right to update
+            these Terms & Conditions when required. The applicable
+            booking conditions will be communicated to customers
+            at the time of confirmation.
+        </p>
+
+    </section>
+
+    <!-- CONTACT -->
+
+    <section class="contact-box">
+
+        <h2>Need Help With Your Booking?</h2>
+
+        <p>Contact our team for booking, cancellation or refund assistance.</p>
+
+        <p>
+            Phone / WhatsApp:
+            <a href="https://wa.me/918147771217">
+                +91 81477 71217
+            </a>
+        </p>
+
+        <p>
+            Email:
+            <a href="mailto:radhakrishnataximangalore@gmail.com">
+                radhakrishnataximangalore@gmail.com
+            </a>
+        </p>
+
+        <p>
+            Website:
+            <a href="https://radhakrishnataxiservice.com/">
+                radhakrishnataxiservice.com
+            </a>
+        </p>
+
+    </section>
+
+</main>
+
+<footer>
+
+    <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="services.html">Services</a>
+        <a href="packages.html">Packages</a>
+        <a href="contact.html">Contact</a>
+        <a href="terms-and-conditions.html">Terms & Conditions</a>
+    </div>
+
+    <p>
+        © <span id="currentYear"></span>
+        Radhakrishna Taxi Service. All Rights Reserved.
+    </p>
+
+    <p style="margin-top:7px;">
+        Mangalore, Karnataka, India
+    </p>
+
+</footer>
+
+<script>
+    const policyToggle = document.getElementById('policyToggle');
+    const policyContent = document.getElementById('policyContent');
+    const toggleIcon = document.getElementById('toggleIcon');
+
+    policyToggle.addEventListener('click', function () {
+
+        const isOpen = policyContent.classList.toggle('show');
+
+        policyToggle.setAttribute('aria-expanded', isOpen);
+
+        toggleIcon.textContent = isOpen ? '−' : '＋';
+
+        policyToggle.querySelector('span:first-child').textContent =
+            isOpen
+                ? 'Hide Cancellation Charges & Refunds'
+                : 'View Cancellation Charges & Refunds';
+
+    });
+
+    document.getElementById('currentYear').textContent =
+        new Date().getFullYear();
+</script>
+
+</body>
+</html>
