@@ -199,8 +199,10 @@
   <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-aihole-pattadakal.html</loc></url>
   <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-kolhapur-mahalaxmi.html</loc></url>
   <url><loc>https://radhakrishnataxiservice.com/routes/mangalore-to-shirdi.html</loc></url>
-  
-</urlset>
+
   <url>
-      <loc>https://radhakrishnataxiservice.com/terms-and-conditions.html</loc>
+    <loc>https://radhakrishnataxiservice.com/terms-and-conditions.html</loc>
+    <priority>0.6</priority>
   </url>
+</urlset>
+ 
